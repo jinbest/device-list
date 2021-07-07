@@ -1,0 +1,169 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  .header-brand {
+    background: $brand-bg;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px;
+    p {
+      font-size: 14px;
+      line-height: 17px;
+      margin-left: 15px;
+      color: black;
+      font-weight: 500;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .brand-login {
+      color: $main-blue;
+    }
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+  .header-content-1 {
+    background: $grey-1;
+    height: 65px;
+    padding: 0 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .search-container-desktop {
+      flex-grow: 1;
+      display: flex;
+      @media (max-width: 960px) {
+        display: none;
+      }
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      a {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 17px;
+        color: black;
+        margin-left: 20px;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      img {
+        margin-left: 20px;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.7;
+        }
+        @media (max-width: 425px) {
+          width: 25px;
+          margin-left: 15px;
+        }
+        @media (max-width: 360px) {
+          width: 20px;
+          margin-left: 12px;
+        }
+      }
+      #menu {
+        display: none;
+        @media (max-width: 768px) {
+          display: block;
+        }
+      }
+    }
+    @media (max-width: 768px) {
+      height: 90px;
+      .logo img {
+        height: 50px;
+      }
+    }
+    @media (max-width: 360px) {
+      height: 70px;
+      .logo img {
+        height: 40px;
+      }
+    }
+  }
+  .search-container-mobile {
+    display: none;
+    width: 100%;
+    background: $grey-1;
+    padding: 0 20px;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 960px) {
+      display: flex;
+    }
+    @media (max-width: 360px) {
+      padding-bottom: 15px;
+    }
+  }
+  .header-content-2 {
+    background: $grey-1;
+    height: 45px;
+    padding: 5px 30px;
+    width: 100%;
+    display: flex;
+    @media (max-width: 768px) {
+      height: 55px;
+    }
+    @media (max-width: 360px) {
+      display: none;
+    }
+    & > div {
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow-y: hidden;
+      overflow-x: scroll;
+      &::-webkit-scrollbar {
+        height: 3px;
+        cursor: pointer;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background: transparent;
+      }
+      p {
+        cursor: pointer;
+        font-size: 16px;
+        white-space: nowrap;
+        margin: 5px 15px;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
