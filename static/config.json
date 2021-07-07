@@ -2,6 +2,91 @@
   "headerData": {
     "title": "DeviceList Website",
     "description": "Device List Website",
-    "favicon": "/img/header/favicon.ico"
+    "favicon": "/img/head/favicon.ico",
+    "navData": {
+      "primary": {
+        "logo": "img/head/logo.svg",
+        "nav": [
+          {
+            "name": "Insure",
+            "link": "/insure"
+          },
+          {
+            "name": "Shop",
+            "link": "/shop"
+          },
+          {
+            "name": "Trade",
+            "link": "/trade"
+          },
+          {
+            "name": "Services",
+            "link": "/services"
+          }
+        ]
+      },
+      "secondary": [
+        {
+          "name": "Flash Sale!",
+          "type": "flashSale"
+        },
+        {
+          "name": "iPhone",
+          "type": "iPhone"
+        },
+        {
+          "name": "MacBook",
+          "type": "macBook"
+        },
+        {
+          "name": "iPhone XR",
+          "type": "iPhoneXR"
+        },
+        {
+          "name": "iPhone 11",
+          "type": "iPhone11"
+        },
+        {
+          "name": "iPad",
+          "type": "iPad"
+        },
+        {
+          "name": "iMac",
+          "type": "iMac"
+        },
+        {
+          "name": "iPhone 8",
+          "type": "iPhone8"
+        },
+        {
+          "name": "Laptops",
+          "type": "laptops"
+        },
+        {
+          "name": "Monitors",
+          "type": "monitors"
+        },
+        {
+          "name": "Tablet",
+          "type": "tablet"
+        },
+        {
+          "name": "Audio",
+          "type": "audio"
+        },
+        {
+          "name": "Gaming Laptop",
+          "type": "gamingLaptop"
+        },
+        {
+          "name": "Samsung Galaxy",
+          "type": "samsungGalaxy"
+        },
+        {
+          "name": "iPhone 12",
+          "type": "iphone12"
+        }
+      ]
+    }
   }
 }

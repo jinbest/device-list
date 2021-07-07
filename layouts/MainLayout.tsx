@@ -10,7 +10,7 @@ const MainLayout = ({ children }: Props) => {
   return (
     <div>
       <Header />
-      {children}
+      <div style={{ marginTop: "500px" }}>{children}</div>
       <Footer />
     </div>
   )
