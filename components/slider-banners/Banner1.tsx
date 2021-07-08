@@ -1,21 +1,24 @@
 import React from "react"
 import { BannerDataParam } from "../../models/banners-param"
 import Link from "next/link"
+import { useTranslation } from "react-i18next"
 
 type Props = {
   data: BannerDataParam
 }
 
 const Banner1 = ({ data }: Props) => {
+  const [t] = useTranslation()
+
   return (
     <div className="slider-banner">
       <div className="slider-contents">
-        <h1>{data.title}</h1>
-        {data.content && <p>{data.content}</p>}
+        <h1>{t(data.title)}</h1>
+        {data.content && <p>{t(data.content)}</p>}
         {data.button.visible && (
           <Link href={data.button.link}>
             <a>
-              <button>{data.button.text}</button>
+              <button>{t(data.button.text)}</button>
             </a>
           </Link>
         )}

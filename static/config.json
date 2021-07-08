@@ -18,10 +18,6 @@
           {
             "name": "Trade",
             "link": "/trade"
-          },
-          {
-            "name": "Services",
-            "link": "/services"
           }
         ]
       },
@@ -356,6 +352,66 @@
         "link": "#",
         "order": 4,
         "visible": true
+      }
+    ]
+  },
+  "megaData": {
+    "contents": [
+      {
+        "text": "Become an Authorized Dealer",
+        "link": "#"
+      },
+      {
+        "text": "Our quality Standards",
+        "link": "#"
+      },
+      {
+        "text": "Customer Reviews",
+        "link": "#"
+      }
+    ],
+    "data": [
+      {
+        "name": "Phones",
+        "banner": {
+          "title": "Cellphones",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/phones.png",
+          "bgCol": "#CBBBFA"
+        },
+        "child": [
+          {
+            "name": "iPhone",
+            "data": ["All iPhones", "iPhone XS", "iPhone 6"]
+          },
+          {
+            "name": "Samsung",
+            "data": ["All Galaxy", "Galaxy S8", "Galaxy S4"]
+          },
+          {
+            "name": "Google",
+            "data": ["All Pixel", "Pixel 3", "Pixel 2XL"]
+          },
+          {
+            "name": "LG",
+            "data": ["All LG", "LG Stylo 5", "LG G Stylo"]
+          }
+        ]
+      },
+      {
+        "name": "Computers",
+        "banner": {
+          "title": "Computers",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/computers.png",
+          "bgCol": "#A0E744"
+        },
+        "child": [
+          {
+            "name": "MacBook",
+            "data": []
+          }
+        ]
       }
     ]
   }

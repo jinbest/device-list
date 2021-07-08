@@ -1,5 +1,6 @@
 import { isEmpty } from "lodash"
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 type Props = {
   placeholder?: string
@@ -11,6 +12,8 @@ type Props = {
 }
 
 const Search = ({ value, placeholder, handleChange, handleIconClick, style, className }: Props) => {
+  const [t] = useTranslation()
+
   return (
     <div
       className={className ? `search ${className}` : "search"}
@@ -19,7 +22,7 @@ const Search = ({ value, placeholder, handleChange, handleIconClick, style, clas
       <input
         value={value ?? ""}
         onChange={(e) => handleChange(e.target.value)}
-        placeholder={placeholder ?? "Stores, devices, services ..."}
+        placeholder={placeholder ? t(placeholder) : t("Stores, devices, services ...")}
       />
       <span>
         <img src="/img/icons/search.png" alt="search-icon" onClick={handleIconClick} />

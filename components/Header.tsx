@@ -5,8 +5,15 @@ import Search from "./Search"
 import { NavParams, SecondaryNavParams, SecondaryNavType } from "../models/nav-params"
 import config from "../static/config.json"
 import _ from "lodash"
+import LangDropdown from "./LangDropdown"
+import { useTranslation } from "react-i18next"
+import FindStoreMenu from "./FindStoreMenu"
+import HeaderDrawer from "./HeaderDrawer"
+import MegaMenu from "./MegaMenu"
 
 const Header = () => {
+  const [t] = useTranslation()
+
   const router = useRouter()
   const thisPage = _.cloneDeep(config.headerData.navData)
   const secondaryNav = [] as SecondaryNavParams[]
@@ -34,14 +41,9 @@ const Header = () => {
   return (
     <div className="header">
       <div className="header-brand">
-        <p>Find a Store</p>
-        <p>
-          EN
-          <span>
-            <img src="img/icons/arrow-down.png" alt="arrow-down" style={{ marginLeft: "5px" }} />
-          </span>
-        </p>
-        <p className="brand-login">Log In</p>
+        <FindStoreMenu />
+        <LangDropdown />
+        <p className="brand-login">{t("Log In")}</p>
       </div>
       <div className="header-content-1">
         <div className="logo">
@@ -66,16 +68,17 @@ const Header = () => {
               return (
                 <React.Fragment key={index}>
                   <Link href={item.link}>
-                    <a style={{ color: item.link === path ? "#4360fa" : "" }}>{item.name}</a>
+                    <a style={{ color: item.link === path ? "#4360fa" : "" }}>{t(item.name)}</a>
                   </Link>
                 </React.Fragment>
               )
             })}
+            <MegaMenu />
           </div>
           <div className="nav-buttons">
             <img src="img/icons/heart.png" alt="heart-icon" />
             <img src="img/icons/shop.png" alt="shop-icon" />
-            <img id="menu" src="img/icons/menu.png" alt="shop-icon" />
+            <HeaderDrawer />
           </div>
         </div>
       </div>
@@ -99,7 +102,7 @@ const Header = () => {
                   setFilter(item.type)
                 }}
               >
-                {item.name}
+                {t(item.name)}
               </p>
             )
           })}

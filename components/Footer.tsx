@@ -8,8 +8,11 @@ import {
   SocialsParam,
 } from "../models/footer-params"
 import Link from "next/link"
+import { useTranslation } from "react-i18next"
 
 const Footer = () => {
+  const [t] = useTranslation()
+
   const thisData = _.cloneDeep(config.footer)
   const footerLinksData = _.sortBy(thisData.linkData, (o) => o.order)
   const payments = _.sortBy(thisData.payments, (o) => o.order)
@@ -21,7 +24,7 @@ const Footer = () => {
     <div className="footer">
       <div className="footer-container">
         <div className="flex align-center justify-between">
-          <p className="copyright">{thisData.reserved}</p>
+          <p className="copyright">{t(thisData.reserved)}</p>
           <div
             onClick={() => {
               setExpand(!expand)
@@ -35,11 +38,11 @@ const Footer = () => {
             )}
           </div>
         </div>
-        <p className="copyright">{thisData.copyright}</p>
+        <p className="copyright">{t(thisData.copyright)}</p>
         {expand && (
           <div className="footer-contents-container">
             <div className="footer-infos">
-              <p>{thisData.companyName}</p>
+              <p>{t(thisData.companyName)}</p>
               <div className="flex align-center flex-wrap">
                 <a className="no-wrap" href={`tel:${thisData.phoneNumber}`}>
                   {thisData.phoneNumber}
@@ -57,14 +60,14 @@ const Footer = () => {
                   <React.Fragment key={index}>
                     {item.visible && (
                       <div>
-                        <p style={{ fontWeight: 600 }}>{item.title}</p>
+                        <p style={{ fontWeight: 600 }}>{t(item.title)}</p>
                         {_.sortBy(item.child, (o) => o.order).map(
                           (it: LinkDataChildParam, idx: number) => {
                             return (
                               <React.Fragment key={`${index}-${idx}`}>
                                 {it.visible && (
                                   <Link href={it.link}>
-                                    <a>{it.name}</a>
+                                    <a>{t(it.name)}</a>
                                   </Link>
                                 )}
                               </React.Fragment>
@@ -79,7 +82,7 @@ const Footer = () => {
             </div>
             <div className="footer-logos">
               <div>
-                <p>Payments 100% secured</p>
+                <p>{t("Payments 100% secured")}</p>
                 <div className="flex flex-wrap align-center">
                   {payments.map((item: PaymentsParam, index: number) => {
                     return (

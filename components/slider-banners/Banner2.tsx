@@ -1,22 +1,25 @@
 import React from "react"
 import { BannerDataParam } from "../../models/banners-param"
 import Link from "next/link"
+import { useTranslation } from "react-i18next"
 
 type Props = {
   data: BannerDataParam
 }
 
 const Banner2 = ({ data }: Props) => {
+  const [t] = useTranslation()
+
   return (
     <div className="slider-banner">
       <div className="slider-contents">
         <div className="banner-2-slider-contents">
-          <h1>{data.title}</h1>
-          {data.content && <p>{data.content}</p>}
+          <h1>{t(data.title)}</h1>
+          {data.content && <p>{t(data.content)}</p>}
           {data.button.visible && (
             <Link href={data.button.link}>
               <a>
-                <button>{data.button.text}</button>
+                <button>{t(data.button.text)}</button>
               </a>
             </Link>
           )}
@@ -30,8 +33,8 @@ const Banner2 = ({ data }: Props) => {
             src="img/home/banners/laptop.png"
             alt="banner-2-laptop"
           />
-          <p className="banner-2-card-title">Microsoft Surface 3</p>
-          <p className="banner-2-card-content">starting at $750</p>
+          <p className="banner-2-card-title">{t("Microsoft Surface 3")}</p>
+          <p className="banner-2-card-content">{t("starting at $750")}</p>
         </div>
       </div>
     </div>
