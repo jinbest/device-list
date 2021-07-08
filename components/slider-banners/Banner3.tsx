@@ -6,7 +6,7 @@ type Props = {
   data: BannerDataParam
 }
 
-const Banner1 = ({ data }: Props) => {
+const Banner3 = ({ data }: Props) => {
   return (
     <div className="slider-banner">
       <div className="slider-contents">
@@ -20,11 +20,20 @@ const Banner1 = ({ data }: Props) => {
           </Link>
         )}
       </div>
-      <div className="slider-banner-img">
-        <img className="banner-1-img" src="img/home/banners/banner1.png" alt="banner-1" />
+      <div className="slider-banner-img banner-dell-container">
+        <img
+          className="banner-dell-img comb-dell-img"
+          src="img/home/banners/comb-dell.png"
+          alt="banner-dell"
+        />
+        <img
+          className="banner-dell-img individual-dell"
+          src="img/home/banners/dell.png"
+          alt="banner-dell"
+        />
       </div>
     </div>
   )
 }
 
-export default Banner1
+export default Banner3
