@@ -6,16 +6,21 @@ import LookingForCard from "../../components/LookingForCard"
 
 const Section2 = () => {
   const thisData = _.cloneDeep(config.home.lookingFor)
+  const lookingData = _.sortBy(thisData, (o) => o.order)
 
   return (
     <div className="looking-for-container">
       <h3>Find what you&apos;re loking for</h3>
       <div className="looking-for-cards">
-        {thisData.map((item: LookingForCardParam, index: number) => {
+        {lookingData.map((item: LookingForCardParam, index: number) => {
           return (
-            <div key={index} style={{ width: item.vertical ? "32%" : "49%" }}>
-              <LookingForCard data={item} />
-            </div>
+            <React.Fragment key={index}>
+              {item.visible && (
+                <div className={item.vertical ? "looking-vertical" : "looking-horizontal"}>
+                  <LookingForCard data={item} />
+                </div>
+              )}
+            </React.Fragment>
           )
         })}
       </div>
