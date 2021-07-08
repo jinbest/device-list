@@ -1,0 +1,40 @@
+.looking-for-card {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: -14.2286px -14.2286px 42.6857px #ffffff,
+    14.2286px 14.2286px 42.6857px rgba(174, 174, 192, 0.4);
+  border-radius: 14.2286px;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  img {
+    width: 250px;
+  }
+  .looking-for-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    color: #000000;
+    padding-bottom: 20px;
+  }
+  .looking-for-content {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 28px;
+    color: #000000;
+  }
+}
+
+.looking-for-vertical {
+  flex-direction: column;
+  & > div p {
+    text-align: center;
+  }
+  .looking-for-title {
+    margin-top: 20px;
+  }
+}
