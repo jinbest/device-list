@@ -3,14 +3,17 @@ import { LookingForCardParam } from "../../models/looking-for-card-param"
 import config from "../../static/config.json"
 import _ from "lodash"
 import LookingForCard from "../../components/LookingForCard"
+import { useTranslation } from "react-i18next"
 
 const Section2 = () => {
+  const [t] = useTranslation()
+
   const thisData = _.cloneDeep(config.home.lookingFor)
   const lookingData = _.sortBy(thisData, (o) => o.order)
 
   return (
     <div className="looking-for-container">
-      <h3>Find what you&apos;re loking for</h3>
+      <h3>{t("Find What You’re Looking For")}</h3>
       <div className="looking-for-cards">
         {lookingData.map((item: LookingForCardParam, index: number) => {
           return (
