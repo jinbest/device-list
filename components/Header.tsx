@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next"
 import FindStoreMenu from "./FindStoreMenu"
 import HeaderDrawer from "./HeaderDrawer"
 import MegaMenu from "./MegaMenu"
+import ServiceMenu from "./ServiceMenu"
 
 const Header = () => {
   const [t] = useTranslation()
@@ -64,16 +65,11 @@ const Header = () => {
         </div>
         <div className="flex">
           <div className="nav-link">
-            {thisPage.primary.nav.map((item: NavParams, index: number) => {
-              return (
-                <React.Fragment key={index}>
-                  <Link href={item.link}>
-                    <a style={{ color: item.link === path ? "#4360fa" : "" }}>{t(item.name)}</a>
-                  </Link>
-                </React.Fragment>
-              )
-            })}
             <MegaMenu />
+            <Link href="/trade">
+              <a style={{ color: path === "/trade" ? "#4360fa" : "" }}>{t("Trade")}</a>
+            </Link>
+            <ServiceMenu />
           </div>
           <div className="nav-buttons">
             <img src="img/icons/heart.png" alt="heart-icon" />

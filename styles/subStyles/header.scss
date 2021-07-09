@@ -253,6 +253,7 @@
   & > form {
     background: white;
     border-radius: 5px;
+    outline: none;
   }
 }
 
@@ -336,15 +337,26 @@
   }
   .drawer-nav-item {
     padding: 10px 0;
-    border-bottom: 1px solid $grey-2;
+    // border-bottom: 1px solid $grey-2;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     p {
       font-size: 16px;
       font-family: "Montserrat";
       font-weight: 500;
     }
+    img {
+      width: 6px;
+      height: 10px;
+    }
     &:hover {
       opacity: 0.7;
     }
+  }
+  .dynamic-contents-container {
+    max-height: calc(100vh - 200px);
+    overflow: scroll;
   }
 }

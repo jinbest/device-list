@@ -2,7 +2,8 @@ import Homepage from "../views/homepage"
 import Insure from "../views/insure"
 import Shop from "../views/shop"
 import Trade from "../views/trade"
-import Services from "../views/services"
+import Plans from "../views/plans"
+import Repair from "../views/repair"
 
 const pageRoutes = [
   {
@@ -12,9 +13,21 @@ const pageRoutes = [
     visible: false,
   },
   {
+    path: "/repair",
+    name: "Repair",
+    component: () => <Repair />,
+    visible: true,
+  },
+  {
     path: "/insure",
     name: "Insure",
     component: () => <Insure />,
+    visible: true,
+  },
+  {
+    path: "/plans",
+    name: "Plans",
+    component: () => <Plans />,
     visible: true,
   },
   {
@@ -27,12 +40,6 @@ const pageRoutes = [
     path: "/trade",
     name: "Trade",
     component: () => <Trade />,
-    visible: true,
-  },
-  {
-    path: "/services",
-    name: "Services",
-    component: () => <Services />,
     visible: true,
   },
 ]

@@ -8,16 +8,24 @@
         "logo": "img/head/logo.svg",
         "nav": [
           {
+            "name": "Repair",
+            "link": "/repair"
+          },
+          {
             "name": "Insure",
             "link": "/insure"
           },
           {
-            "name": "Shop",
-            "link": "/shop"
+            "name": "Plans",
+            "link": "/plans"
           },
           {
-            "name": "Trade",
-            "link": "/trade"
+            "name": "Finance",
+            "link": "/finance"
+          },
+          {
+            "name": "Corporate",
+            "link": "/corporate"
           }
         ]
       },
