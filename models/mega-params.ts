@@ -7,6 +7,7 @@ export interface MegaDataParam {
   name: string
   banner: MegaDataBannerParam
   child: MegaDataChildParam[]
+  split: number
 }
 
 export interface MegaDataBannerParam {

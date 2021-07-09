@@ -3,12 +3,7 @@ import Drawer from "@material-ui/core/Drawer"
 import { useTranslation } from "react-i18next"
 import config from "../static/config.json"
 import _ from "lodash"
-import {
-  MegaContentParam,
-  MegaDataParam,
-  // MegaDataBannerParam,
-  // MegaDataChildParam,
-} from "../models/mega-params"
+import { MegaContentParam, MegaDataParam, MegaDataChildParam } from "../models/mega-params"
 import Link from "next/link"
 
 type Anchor = "top" | "left" | "bottom" | "right"
@@ -67,6 +62,36 @@ const MegaMenu = () => {
               <button>{t("View All")}</button>
             </div>
             <img src={data[dataIndex].banner.logo} alt={`mega-banner-${dataIndex}`} />
+          </div>
+          <div className="mega-details-container custom-scroll-bar">
+            {data[dataIndex].child.map((item: MegaDataChildParam, index: number) => {
+              return (
+                <div key={index}>
+                  <div className="mega-child-name">
+                    <p>{item.name}</p>
+                    <p className="mega-see-all">see all &gt;</p>
+                  </div>
+                  <div
+                    className="mega-child-contents"
+                    style={{
+                      borderBottom:
+                        index < data[dataIndex].child.length - 1 ? "1px solid #b5b5b5" : "",
+                    }}
+                  >
+                    {item.data.map((it: string, idx: number) => {
+                      return (
+                        <p
+                          key={`${index}-${idx}`}
+                          style={{ width: `${100 / data[dataIndex].split}%` }}
+                        >
+                          {it}
+                        </p>
+                      )
+                    })}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
         <div className="mega-nav-container">

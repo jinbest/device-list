@@ -66,6 +66,14 @@ h3 {
   text-decoration: underline;
 }
 
+.thin {
+  font-weight: normal !important;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .custom-scroll-bar {
   &::-webkit-scrollbar {
     width: 3px;

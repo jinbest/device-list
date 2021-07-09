@@ -22,7 +22,7 @@
       justify-content: space-between;
       align-items: center;
       & > div {
-        padding: 0 15px;
+        padding: 0 0 0 15px;
       }
       img {
         height: 100%;
@@ -40,6 +40,7 @@
         font-size: 50px;
         line-height: 60px;
         font-weight: 600;
+        white-space: nowrap;
         @media (max-width: 960px) {
           font-size: 35px;
         }
@@ -62,6 +63,48 @@
         }
       }
     }
+    .mega-details-container {
+      padding: 15px;
+      height: calc(100% - 150px);
+      overflow: scroll;
+      & > div {
+        padding: 10px 0 0;
+        display: flex;
+        width: 100%;
+        .mega-child-name {
+          width: 120px;
+          p {
+            font-size: 15px;
+            line-height: 20px;
+            font-weight: 600;
+            margin-top: 5px;
+          }
+          .mega-see-all {
+            font-weight: normal;
+            cursor: pointer;
+            text-decoration: underline;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+        .mega-child-contents {
+          width: calc(100% - 120px);
+          padding: 0 5px 10px;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          p {
+            // width: 33%;
+            font-size: 15px;
+            line-height: 20px;
+            font-weight: normal;
+            text-align: left;
+            padding: 5px 0;
+          }
+        }
+      }
+    }
   }
   .mega-nav-container {
     width: 250px;
@@ -71,10 +114,16 @@
       a,
       p {
         font-size: 14px;
+        font-weight: 600;
+        color: black;
         cursor: pointer;
         &:hover {
           opacity: 0.7;
         }
+      }
+      a {
+        color: $grey-3;
+        font-weight: 500;
       }
     }
   }
