@@ -3,13 +3,13 @@ import Swiper from "react-id-swiper"
 import Banner1 from "../../components/slider-banners/Banner1"
 import Banner2 from "../../components/slider-banners/Banner2"
 import Banner3 from "../../components/slider-banners/Banner3"
-import config from "../../static/config.json"
 import _ from "lodash"
+import { bannerData } from "../../static/mock-data"
 
 const sliderBG = ["#cbbbfa", "#4360fa", "#fc6530"]
 
 const Section1 = () => {
-  const thisData = _.cloneDeep(config.home.banners)
+  const thisData = _.cloneDeep(bannerData)
 
   const ref = useRef<any>(null)
   const [step, setStep] = useState(0)

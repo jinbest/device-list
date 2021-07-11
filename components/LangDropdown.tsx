@@ -15,21 +15,12 @@ const LangDropdown = () => {
     setState(la)
     cntLang = la === "EN" ? "en" : "fr"
     i18n.changeLanguage(la === "EN" ? "en" : "fr")
-    if (
-      typeof window !== "undefined" &&
-      window.localStorage !== null &&
-      typeof window.localStorage !== "undefined"
-    )
-      window.localStorage.setItem("cntLang", cntLang)
+    if (typeof window !== "undefined") window.localStorage.setItem("cntLang", cntLang)
   }
 
   useEffect(() => {
     const cntLang =
-      typeof window !== "undefined" &&
-      window.localStorage !== null &&
-      typeof window.localStorage !== "undefined"
-        ? window.localStorage.getItem("cntLang") || "en"
-        : "en"
+      typeof window !== "undefined" ? window.localStorage.getItem("cntLang") || "en" : "en"
     cntLang === "en" ? setState(options[0]) : setState(options[1])
     i18n.changeLanguage(cntLang)
   }, [])

@@ -1,14 +1,14 @@
 import React from "react"
 import { LookingForCardParam } from "../../models/looking-for-card-param"
-import config from "../../static/config.json"
 import _ from "lodash"
 import LookingForCard from "../../components/LookingForCard"
 import { useTranslation } from "react-i18next"
+import { lookingFor } from "../../static/mock-data"
 
 const Section2 = () => {
   const [t] = useTranslation()
 
-  const thisData = _.cloneDeep(config.home.lookingFor)
+  const thisData = _.cloneDeep(lookingFor)
   const lookingData = _.sortBy(thisData, (o) => o.order)
 
   return (

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import Search from "./Search"
-import { NavParams, SecondaryNavParams, SecondaryNavType } from "../models/nav-params"
 import config from "../static/config.json"
 import _ from "lodash"
 import LangDropdown from "./LangDropdown"
@@ -10,23 +9,18 @@ import { useTranslation } from "react-i18next"
 import FindStoreMenu from "./FindStoreMenu"
 import HeaderDrawer from "./HeaderDrawer"
 import MegaMenu from "./MegaMenu"
+import ServiceMenu from "./ServiceMenu"
 
 const Header = () => {
   const [t] = useTranslation()
 
   const router = useRouter()
   const thisPage = _.cloneDeep(config.headerData.navData)
-  const secondaryNav = [] as SecondaryNavParams[]
-  thisPage.secondary.forEach((item) => {
-    secondaryNav.push({
-      name: item.name,
-      type: item.type as SecondaryNavType,
-    })
-  })
+  const secondaryNav = thisPage.secondary
 
   const [path, setPath] = useState("/")
   const [searchKey, setSearchKey] = useState("")
-  const [filter, setFilter] = useState<SecondaryNavType>("flashSale")
+  const [filter, setFilter] = useState("Flash Sale!")
 
   const handleIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault()
@@ -64,16 +58,11 @@ const Header = () => {
         </div>
         <div className="flex">
           <div className="nav-link">
-            {thisPage.primary.nav.map((item: NavParams, index: number) => {
-              return (
-                <React.Fragment key={index}>
-                  <Link href={item.link}>
-                    <a style={{ color: item.link === path ? "#4360fa" : "" }}>{t(item.name)}</a>
-                  </Link>
-                </React.Fragment>
-              )
-            })}
             <MegaMenu />
+            <Link href="/trade">
+              <a style={{ color: path === "/trade" ? "#4360fa" : "" }}>{t("Trade")}</a>
+            </Link>
+            <ServiceMenu />
           </div>
           <div className="nav-buttons">
             <img src="img/icons/heart.png" alt="heart-icon" />
@@ -93,16 +82,16 @@ const Header = () => {
       </div>
       <div className="header-content-2">
         <div>
-          {secondaryNav.map((item: SecondaryNavParams, index: number) => {
+          {secondaryNav.map((item: string, index: number) => {
             return (
               <p
                 key={index}
-                style={{ color: item.type === filter ? "#4360fa" : "" }}
+                style={{ color: item === filter ? "#4360fa" : "" }}
                 onClick={() => {
-                  setFilter(item.type)
+                  setFilter(item)
                 }}
               >
-                {t(item.name)}
+                {t(item)}
               </p>
             )
           })}

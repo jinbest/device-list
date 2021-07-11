@@ -18,10 +18,10 @@ const Footer = () => {
   const payments = _.sortBy(thisData.payments, (o) => o.order)
   const socials = _.sortBy(thisData.socials, (o) => o.order)
 
-  const [expand, setExpand] = useState(true)
+  const [expand, setExpand] = useState(false)
 
   return (
-    <div className="footer">
+    <div className="footer" style={{ position: expand ? "inherit" : "fixed" }}>
       <div className="footer-container">
         <div className="flex align-center justify-between">
           <p className="copyright">{t(thisData.reserved)}</p>

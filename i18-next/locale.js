@@ -76,6 +76,34 @@ const en = {
   "Our quality Standards": "Our quality Standards",
   "Customer Reviews": "Customer Reviews",
   "New or refurbished, you'll find your fit.": "New or refurbished, you'll find your fit.",
+  "Use Your Phone Fearlessly": "Use Your Phone Fearlessly",
+  "Screen replacement plans for as low as $39/year with Bounce.":
+    "Screen replacement plans for as low as $39/year with Bounce.",
+  "Insure My Device": "Insure My Device",
+  "Screen Replacement Plans": "Screen Replacement Plans",
+  "Prime Protection": "Prime Protection",
+  "Premium Protection": "Premium Protection",
+  "Elite Protection": "Elite Protection",
+  "Why protect your phone with Bounce?": "Why protect your phone with Bounce?",
+  "No more having to deal with your carrier, expired warranties, or paying crazy amounts just to fix a phone screen.":
+    "No more having to deal with your carrier, expired warranties, or paying crazy amounts just to fix a phone screen.",
+  "Fix-it Anywhere": "Fix-it Anywhere",
+  "24 Hour Refunds*": "24 Hour Refunds*",
+  "No Deductible": "No Deductible",
+  "New and Used Phones": "New and Used Phones",
+  "File a Claim": "File a Claim",
+  "Insure my Device": "Insure my Device",
+  "Bounce vs The Other Guys": "Bounce vs The Other Guys",
+  "See how Bounce stacks up against other phone screen protection plans.":
+    "See how Bounce stacks up against other phone screen protection plans.",
+  Deductible: "Deductible",
+  "Repair Anywhere": "Repair Anywhere",
+  "New Phone Coverage": "New Phone Coverage",
+  "Use Phone Coverage": "Use Phone Coverage",
+  Cost: "Cost",
+  Bounce: "Bounce",
+  "Applecare+": "Applecare+",
+  Carriers: "Carriers",
 }
 
 const fr = {
@@ -157,6 +185,34 @@ const fr = {
   "Customer Reviews": "Avis des clients",
   "New or refurbished, you'll find your fit.":
     "Neuf ou reconditionné, vous trouverez votre bonheur.",
+  "Use Your Phone Fearlessly": "Utilisez votre téléphone sans crainte",
+  "Screen replacement plans for as low as $39/year with Bounce.":
+    "Plans de remplacement d'écran pour aussi peu que 39 $/an avec Bounce.",
+  "Insure My Device": "Assurer mon appareil",
+  "Screen Replacement Plans": "Plans de remplacement d'écran",
+  "Prime Protection": "Protection de premier ordre",
+  "Premium Protection": "Protection Premium",
+  "Elite Protection": "Protection Élite",
+  "Why protect your phone with Bounce?": "Pourquoi protéger votre téléphone avec Bounce ?",
+  "No more having to deal with your carrier, expired warranties, or paying crazy amounts just to fix a phone screen.":
+    "Plus besoin de faire face à votre opérateur, de garanties expirées ou de payer des sommes folles juste pour réparer un écran de téléphone.",
+  "Fix-it Anywhere": "Réparez-le n'importe où",
+  "24 Hour Refunds*": "Remboursements en 24 heures*",
+  "No Deductible": "Non déductible",
+  "New and Used Phones": "Téléphones neufs et d'occasion",
+  "File a Claim": "Déposer une plainte",
+  "Insure my Device": "Assurer mon appareil",
+  "Bounce vs The Other Guys": "Rebondir contre les autres gars",
+  "See how Bounce stacks up against other phone screen protection plans.":
+    "Découvrez comment Bounce se compare aux autres plans de protection d'écran de téléphone.",
+  Deductible: "Déductible",
+  "Repair Anywhere": "Réparez n'importe où",
+  "New Phone Coverage": "Nouvelle couverture téléphonique",
+  "Use Phone Coverage": "Utiliser la couverture téléphonique",
+  Cost: "Coût",
+  Bounce: "Rebondir",
+  "Applecare+": "Applecare+",
+  Carriers: "Transporteurs",
 }
 
 export { en, fr }

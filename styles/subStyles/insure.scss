@@ -1,0 +1,504 @@
+.insure {
+  width: 100%;
+  .insure-section1 {
+    background: $light-blue;
+    width: 100%;
+    overflow: hidden;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      display: flex;
+      padding-top: 100px;
+      justify-content: space-between;
+      @media (max-width: 960px) {
+        padding-top: 60px;
+      }
+      @media (max-width: 735px) {
+        padding: 60px 0;
+      }
+      .contents-container {
+        padding-top: 50px;
+        width: 800px;
+        h1 {
+          font-family: "Montserrat";
+          font-weight: bold;
+          font-size: 60px;
+          line-height: 73px;
+          color: white;
+          white-space: nowrap;
+        }
+        p {
+          font-family: "Montserrat";
+          font-weight: normal;
+          font-size: 38px;
+          line-height: 54px;
+          color: white;
+        }
+        button {
+          background: $dark-orange;
+          outline: none;
+          border: none;
+          color: white;
+          width: 289px;
+          height: 61px;
+          border-radius: 57px;
+          font-size: 24px;
+          line-height: 29px;
+          font-family: "Montserrat";
+          font-weight: bold;
+          cursor: pointer;
+          margin-top: 30px;
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+        @media (max-width: 1440px) {
+          padding-top: 0;
+        }
+        @media (max-width: 1200px) {
+          width: 660px;
+          h1 {
+            font-size: 50px;
+          }
+          p {
+            font-size: 28px;
+            line-height: 40px;
+          }
+          button {
+            font-size: 20px;
+            height: 50px;
+            width: 240px;
+          }
+        }
+        @media (max-width: 960px) {
+          width: 470px;
+          h1 {
+            font-size: 36px;
+          }
+          p {
+            font-size: 24px;
+            line-height: 30px;
+          }
+          button {
+            font-size: 18px;
+            line-height: 22px;
+            height: 40px;
+            width: 220px;
+          }
+        }
+        @media (max-width: 768px) {
+          width: 410px;
+          h1 {
+            font-size: 34px;
+            line-height: 41px;
+          }
+          p {
+            font-size: 21px;
+            line-height: 26px;
+            margin-top: 20px;
+          }
+        }
+        @media (max-width: 735px) {
+          width: 100%;
+          text-align: center;
+        }
+        @media (max-width: 600px) {
+          h1 {
+            font-size: 24px;
+            line-height: 30px;
+          }
+          p {
+            font-size: 18px;
+            line-height: 24px;
+            margin-top: 15px;
+          }
+          button {
+            margin-top: 15px;
+            font-size: 18px;
+          }
+        }
+        @media (max-width: 360px) {
+          h1 {
+            font-size: 20px;
+            line-height: 24px;
+          }
+          p {
+            font-size: 16px;
+            line-height: 20px;
+          }
+          button {
+            font-size: 16px;
+          }
+        }
+      }
+      .img-container {
+        position: relative;
+        height: 484px;
+        img {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+        }
+        @media (max-width: 1200px) {
+          height: 400px;
+          img {
+            bottom: -100px;
+          }
+        }
+        @media (max-width: 960px) {
+          height: 320px;
+          img {
+            width: 400px;
+          }
+        }
+        @media (max-width: 768px) {
+          height: 270px;
+          img {
+            bottom: -140px;
+          }
+        }
+        @media (max-width: 735px) {
+          display: none;
+        }
+      }
+    }
+  }
+  .insure-section2 {
+    width: 100%;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      padding: 100px 0;
+      @media (max-width: 960px) {
+        padding: 70px 0;
+      }
+      @media (max-width: 500px) {
+        padding: 40px 0;
+      }
+      h1 {
+        text-align: center;
+        font-size: 28px;
+        line-height: 34px;
+        font-weight: 600;
+        font-family: "Montserrat";
+        color: black;
+        @media (max-width: 500px) {
+          font-size: 18px;
+          line-height: 22px;
+        }
+      }
+      .data-contents {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+        padding-top: 30px;
+        @media (max-width: 500px) {
+          padding-top: 0;
+        }
+        & > div {
+          text-align: center;
+          width: 33%;
+          p {
+            font-family: "Montserrat";
+            font-weight: 600;
+          }
+          .bounce-title {
+            font-size: 21px;
+            line-height: 26px;
+            color: black;
+            padding: 10px 0;
+          }
+          .bounce-price {
+            font-size: 28px;
+            line-height: 28px;
+            color: $bounce-price;
+          }
+          @media (max-width: 960px) {
+            img {
+              width: 200px;
+            }
+            .bounce-title,
+            .bounce-price {
+              font-size: 18px;
+              line-height: 20px;
+            }
+          }
+          @media (max-width: 768px) {
+            img {
+              width: 140px;
+            }
+            .bounce-title,
+            .bounce-price {
+              font-size: 16px;
+              line-height: 20px;
+            }
+          }
+          @media (max-width: 500px) {
+            width: 100%;
+            margin-top: 20px;
+            .bounce-title,
+            .bounce-price {
+              font-size: 14px;
+              line-height: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .insure-section3 {
+    width: 100%;
+    background: $grey-1;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      padding: 100px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @media (max-width: 600px) {
+        padding: 60px 0;
+      }
+      & > div {
+        width: 50%;
+        @media (max-width: 960px) {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        h1 {
+          font-size: 48px;
+          line-height: 59px;
+          font-family: "Montserrat";
+          font-weight: bold;
+          @media (max-width: 1200px) {
+            font-size: 40px;
+          }
+          @media (max-width: 600px) {
+            text-align: center;
+            font-size: 30px;
+            line-height: 40px;
+          }
+          @media (max-width: 360px) {
+            font-size: 18px;
+            line-height: 20px;
+          }
+        }
+        .content {
+          font-size: 24px;
+          line-height: 30px;
+          font-family: "Montserrat";
+          font-weight: normal;
+          color: black;
+          margin-top: 20px;
+          @media (max-width: 1200px) {
+            font-size: 20px;
+          }
+          @media (max-width: 600px) {
+            text-align: center;
+            font-size: 18px;
+            line-height: 20px;
+          }
+          @media (max-width: 360px) {
+            font-size: 16px;
+            line-height: 18px;
+          }
+        }
+        .data-container {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          & > div {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            .each-data {
+              width: 50%;
+              align-items: center;
+              display: flex;
+              margin: 10px 0;
+              p {
+                font-size: 21px;
+                line-height: 26px;
+                font-weight: 600;
+                font-family: "Montserrat";
+                margin-left: 10px;
+                @media (max-width: 1200px) {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+          .awesome-mobile {
+            display: none;
+          }
+          @media (max-width: 960px) {
+            & > div {
+              width: calc(100% - 350px);
+              .each-data {
+                width: 100%;
+              }
+            }
+            .awesome-mobile {
+              display: flex;
+              align-items: center;
+              text-align: right;
+              width: 350px;
+              img {
+                width: 350px;
+              }
+            }
+          }
+          @media (max-width: 735px) {
+            & > div {
+              width: calc(100% - 250px);
+            }
+            .awesome-mobile {
+              width: 250px;
+              img {
+                width: 250px;
+              }
+            }
+          }
+          @media (max-width: 600px) {
+            & > div {
+              width: 100%;
+              .each-data {
+                display: block;
+                text-align: center;
+              }
+            }
+            .awesome-mobile {
+              width: 100%;
+              text-align: center;
+              img {
+                width: 250px;
+                margin: auto;
+              }
+            }
+          }
+          @media (max-width: 600px) {
+            & > div {
+              .each-data p {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+        .buttons-container {
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 10px;
+          button {
+            width: 255px;
+            height: 52px;
+            background: $dark-orange;
+            border-radius: 57px;
+            color: white;
+            font-size: 16px;
+            font-family: "Montserrat";
+            font-weight: bold;
+            margin: 10px 25px 0 0;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+          @media (max-width: 960px) {
+            margin: 10px auto;
+            button {
+              margin: 10px;
+            }
+          }
+          @media (max-width: 735px) {
+            button {
+              width: 230px;
+              height: 40px;
+            }
+          }
+          @media (max-width: 600px) {
+            flex-direction: column;
+            button {
+              margin: 5px auto;
+            }
+          }
+          @media (max-width: 360px) {
+            button {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      .awesome {
+        text-align: right;
+        img {
+          width: 450px;
+        }
+        @media (max-width: 960px) {
+          display: none;
+        }
+      }
+    }
+  }
+  .insure-section4 {
+    width: 100%;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      padding: 50px 0;
+      h1 {
+        text-align: center;
+        font-size: 28px;
+        line-height: 34px;
+        font-weight: 600;
+        font-family: "Montserrat";
+        color: black;
+        @media (max-width: 500px) {
+          font-size: 18px;
+          line-height: 22px;
+        }
+      }
+      .content {
+        text-align: center;
+        font-size: 24px;
+        line-height: 29px;
+        font-weight: normal;
+        font-family: "Montserrat";
+        color: black;
+        margin: 10px 0 25px;
+        @media (max-width: 500px) {
+          font-size: 16px;
+          line-height: 18px;
+        }
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: "Montserrat";
+        td {
+          border: 1px solid $light-blue;
+          padding: 10px;
+          width: 25%;
+          text-align: center;
+        }
+        .no-border {
+          border: none;
+        }
+        .text-left {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

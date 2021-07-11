@@ -8,160 +8,45 @@
         "logo": "img/head/logo.svg",
         "nav": [
           {
+            "name": "Service",
+            "link": "/service"
+          },
+          {
             "name": "Insure",
             "link": "/insure"
           },
           {
-            "name": "Shop",
-            "link": "/shop"
+            "name": "Plans",
+            "link": "/plans"
           },
           {
-            "name": "Trade",
-            "link": "/trade"
+            "name": "Finance",
+            "link": "/finance"
+          },
+          {
+            "name": "Corporate",
+            "link": "/corporate"
           }
         ]
       },
       "secondary": [
-        {
-          "name": "Flash Sale!",
-          "type": "flashSale"
-        },
-        {
-          "name": "iPhone",
-          "type": "iPhone"
-        },
-        {
-          "name": "MacBook",
-          "type": "macBook"
-        },
-        {
-          "name": "iPhone XR",
-          "type": "iPhoneXR"
-        },
-        {
-          "name": "iPhone 11",
-          "type": "iPhone11"
-        },
-        {
-          "name": "iPad",
-          "type": "iPad"
-        },
-        {
-          "name": "iMac",
-          "type": "iMac"
-        },
-        {
-          "name": "iPhone 8",
-          "type": "iPhone8"
-        },
-        {
-          "name": "Laptops",
-          "type": "laptops"
-        },
-        {
-          "name": "Monitors",
-          "type": "monitors"
-        },
-        {
-          "name": "Tablet",
-          "type": "tablet"
-        },
-        {
-          "name": "Audio",
-          "type": "audio"
-        },
-        {
-          "name": "Gaming Laptop",
-          "type": "gamingLaptop"
-        },
-        {
-          "name": "Samsung Galaxy",
-          "type": "samsungGalaxy"
-        },
-        {
-          "name": "iPhone 12",
-          "type": "iphone12"
-        }
+        "Flash Sale!",
+        "iPhone",
+        "MacBook",
+        "iPhone XR",
+        "iPhone 11",
+        "iPad",
+        "iMac",
+        "iPhone 8",
+        "Laptops",
+        "Monitors",
+        "Tablet",
+        "Audio",
+        "Gaming Laptop",
+        "Samsung Galaxy",
+        "iPhone 12"
       ]
     }
-  },
-  "home": {
-    "banners": [
-      {
-        "title": "Give your old phone a new home.",
-        "content": "Set a price, list a device and make bank. Join Canada’s go-to marketplace for used devices.",
-        "button": {
-          "text": "",
-          "link": "",
-          "visible": false
-        }
-      },
-      {
-        "title": "Chromebooks & Laptops",
-        "content": "Premium laptops without the premium prices.",
-        "button": {
-          "text": "",
-          "link": "",
-          "visible": false
-        }
-      },
-      {
-        "title": "All you need for a home office.",
-        "content": "",
-        "button": {
-          "text": "Shop Now",
-          "link": "/shop",
-          "visible": true
-        }
-      }
-    ],
-    "lookingFor": [
-      {
-        "title": "Phones",
-        "content": "Lorem ipsum dolor sit amet, consectetur.",
-        "img_src": "img/home/devices/phones.png",
-        "alt": "phones",
-        "visible": true,
-        "order": 1,
-        "vertical": true
-      },
-      {
-        "title": "Laptops",
-        "content": "Lorem ipsum dolor sit amet, consectetur.",
-        "img_src": "img/home/devices/laptops.png",
-        "alt": "laptops",
-        "visible": true,
-        "order": 2,
-        "vertical": true
-      },
-      {
-        "title": "Wearables",
-        "content": "Lorem ipsum dolor sit amet, consectetur.",
-        "img_src": "img/home/devices/wearables.png",
-        "alt": "wearables",
-        "visible": true,
-        "order": 3,
-        "vertical": true
-      },
-      {
-        "title": "Tablets",
-        "content": "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur.",
-        "img_src": "img/home/devices/tablets.png",
-        "alt": "tablets",
-        "visible": true,
-        "order": 4,
-        "vertical": false
-      },
-      {
-        "title": "Accessories",
-        "content": "Lorem ipsum dolor sit amet, consectetur. Lorem ipsum dolor sit amet, consectetur.",
-        "img_src": "img/home/devices/accessories.png",
-        "alt": "accessories",
-        "visible": true,
-        "order": 5,
-        "vertical": false
-      }
-    ]
   },
   "footer": {
     "companyName": "Canada’s mobile device marketplace",
@@ -382,21 +267,102 @@
         "child": [
           {
             "name": "iPhone",
-            "data": ["All iPhones", "iPhone XS", "iPhone 6"]
+            "data": [
+              "All iPhones",
+              "iPhone XS",
+              "iPhone 6",
+              "Latest iPhones",
+              "iPhone XS Max",
+              "iPhone 6 Plus",
+              "Unlocked iPhones",
+              "iPhone X",
+              "iPhone 5C",
+              "iPhone 12",
+              "iPhone 8",
+              "iPhone 5s",
+              "iPhone 12 Mini",
+              "iPhone 8 Plus",
+              "iPhone 5",
+              "iPhone SE (2020)",
+              "iPhone 7",
+              "iPhone 4s",
+              "iPhone 11",
+              "iPhone 7 Plus",
+              "iPhone under $200",
+              "iPhone 11 Pro",
+              "iPhone SE",
+              "iPhone cases",
+              "iPhone 11 Pro Max",
+              "iPhone 6s",
+              "iPhone XR",
+              "iPhone 6s Plus"
+            ]
           },
           {
             "name": "Samsung",
-            "data": ["All Galaxy", "Galaxy S8", "Galaxy S4"]
+            "data": [
+              "All Galaxy",
+              "Galaxy S8",
+              "Galaxy S4",
+              "Galaxy Z Flip",
+              "Galaxy S8+",
+              "Galaxy Note10",
+              "Galaxy S20",
+              "Galaxy S8 Active",
+              "Galaxy Note 10+",
+              "Galaxy S20+",
+              "Galaxy S7",
+              "Galaxy Note9",
+              "Galaxy S20 Ultra",
+              "Galaxy S7 Edge",
+              "Galaxy Note8",
+              "Galaxy S10",
+              "Galaxy S6",
+              "Galaxy Note5",
+              "Galaxy S10+",
+              "Galaxy S6 Edge",
+              "Galaxy Note4",
+              "Galaxy S10e",
+              "Galaxy S6 Active",
+              "Galaxy J7"
+            ]
           },
           {
             "name": "Google",
-            "data": ["All Pixel", "Pixel 3", "Pixel 2XL"]
+            "data": [
+              "All Pixel",
+              "Pixel 3",
+              "Pixel 2XL",
+              "Pixel 4XL",
+              "Pixel 3XL",
+              "Pixel",
+              "Pixel 4",
+              "Pixel 3a XL",
+              "Pixel XL",
+              "Pixel 3a",
+              "Pixel 2",
+              ""
+            ]
           },
           {
             "name": "LG",
-            "data": ["All LG", "LG Stylo 5", "LG G Stylo"]
+            "data": [
+              "All LG",
+              "LG Stylo 5",
+              "LG G Stylo",
+              "LG G8 ThinQ",
+              "LG V20",
+              "LG K30",
+              "LG G7 ThinQ",
+              "LG G6",
+              "LGNexus 5X",
+              "LG V40 ThinQ",
+              "LG G5",
+              ""
+            ]
           }
-        ]
+        ],
+        "split": 3
       },
       {
         "name": "Computers",
@@ -409,10 +375,430 @@
         "child": [
           {
             "name": "MacBook",
-            "data": []
+            "data": [
+              "All MacBook",
+              "MacBook",
+              "MacBook Pro",
+              "MacBook Retina",
+              "MacBook Air",
+              "MacBook under $400"
+            ]
+          },
+          {
+            "name": "PC Laptop",
+            "data": [
+              "All Laptops",
+              "Lenovo",
+              "Samsung",
+              "Asus",
+              "Dell",
+              "Microsoft",
+              "HP",
+              "2 in 1",
+              "Acer",
+              "Toshiba"
+            ]
+          },
+          {
+            "name": "ChromeBook",
+            "data": [
+              "All ChromeBooks",
+              "Lenovo",
+              "Samsung",
+              "Asus",
+              "Dell",
+              "Microsoft",
+              "HP",
+              "2 in 1",
+              "Acer",
+              "Toshiba"
+            ]
+          },
+          {
+            "name": "Desktop",
+            "data": [
+              "All Desktop Computers",
+              "Mac Pro",
+              "Apple",
+              "Acer",
+              "PC",
+              "Dell",
+              "All-in-one",
+              "HP",
+              "iMac",
+              "Lenovo",
+              "Mac mini"
+            ]
+          },
+          {
+            "name": "Monitors",
+            "data": ["All Monitors", "Dell", "Acer", "HP", "Samsung", "Lenovo", "LG"]
+          }
+        ],
+        "split": 2
+      },
+      {
+        "name": "Tablets",
+        "banner": {
+          "title": "Tablets",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/tablets.png",
+          "bgCol": "#4360FA"
+        },
+        "child": [
+          {
+            "name": "iPad",
+            "data": [
+              "All iPad",
+              "iPad Air 3",
+              "iPad 4",
+              "iPad Pro",
+              "iPad Air 2",
+              "iPad 3",
+              "iPad Mini 5",
+              "iPad Air",
+              "iPad 2",
+              "iPad Mini 4",
+              "iPad 7",
+              "",
+              "iPad Mini 3",
+              "iPad 6",
+              "",
+              "iPad Mini 2",
+              "iPad 5",
+              ""
+            ]
+          },
+          {
+            "name": "Samsung",
+            "data": [
+              "All Galaxy Tab",
+              "Galaxy Tab S6",
+              "Galaxy Tab A",
+              "Galaxy Tab 4",
+              "Galaxy Tab S5e",
+              "Galaxy Tab E",
+              "Galaxy Tab 3",
+              "Galaxy Tab S4",
+              "",
+              "Galaxy Tab 2",
+              "Galaxy Tab S2",
+              ""
+            ]
+          },
+          {
+            "name": "Microsoft",
+            "data": ["All Surface", "Surface 3", "Surface Pro 3", "Surface Go", "Surface Pro 4", ""]
+          },
+          {
+            "name": "Asus",
+            "data": ["All Asus", "", "", "MeMo Pad FhD"]
+          },
+          {
+            "name": "Lenovo",
+            "data": [
+              "All Lenovo",
+              "Smart Tab M8",
+              "IdeaPad Duet",
+              "Smart Tab M10",
+              "Tab M7",
+              "Yoga Smart Tab",
+              "Smart Tab P11",
+              "Tab MB",
+              "P10"
+            ]
+          },
+          {
+            "name": "E-Book",
+            "data": ["All E-Book", "Kobo", "", "Amazon Kindle"]
+          }
+        ],
+        "split": 3
+      },
+      {
+        "name": "Gaming",
+        "banner": {
+          "title": "Gaming",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/gaming.png",
+          "bgCol": "#FC6530"
+        },
+        "child": [
+          {
+            "name": "Consoles",
+            "data": ["PlayStation", "Other", "Xbox", "Nintendo"]
+          }
+        ],
+        "split": 2
+      },
+      {
+        "name": "Wearables",
+        "banner": {
+          "title": "Wearables",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/wearables.png",
+          "bgCol": "#CBBBFA"
+        },
+        "child": [
+          {
+            "name": "Apple Watch",
+            "data": [
+              "All Apple Watches",
+              "Series 3",
+              "Series 5",
+              "Series 2",
+              "Series 4",
+              "Series 1"
+            ]
+          },
+          {
+            "name": "Fitbit",
+            "data": [
+              "All Fitbit",
+              "Fitbit Charge 2",
+              "Fitbit Versa",
+              "Fitbit Ionic",
+              "Fitbit Surge"
+            ]
+          },
+          {
+            "name": "Garmin",
+            "data": ["All Garmin", "Vivosmart", "Forerunner", "Fenix", "Vivoactive"]
+          },
+          {
+            "name": "Samsung",
+            "data": ["All Samsung", "Galaxy Gear", "Galaxy Active2"]
+          }
+        ],
+        "split": 2
+      },
+      {
+        "name": "Audio",
+        "banner": {
+          "title": "Audio",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/audio.png",
+          "bgCol": "#A0E744"
+        },
+        "child": [
+          {
+            "name": "Headphones",
+            "data": [
+              "All Headphones",
+              "LG",
+              "Wireless Headphones",
+              "Jabra",
+              "Sennheiser",
+              "JBL",
+              "Betas by Dre",
+              "Sony",
+              "Plantronics"
+            ]
+          },
+          {
+            "name": "Earphones",
+            "data": [
+              "All Earphones",
+              "Jabra",
+              "Wireless Earphones",
+              "Plantronics",
+              "Apple AirPods",
+              "Woozik",
+              "Beats by Dre",
+              "Bose",
+              "Samsung",
+              "Sony"
+            ]
+          },
+          {
+            "name": "MP3 & MP4 Players",
+            "data": ["MP3 & MP4 Players", "iPod Nano", "iPod Touch", "SanDisk MP3 Player"]
+          }
+        ],
+        "split": 2
+      },
+      {
+        "name": "Smart Home",
+        "banner": {
+          "title": "Smart Home",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/smart-home.png",
+          "bgCol": "#4360FA"
+        },
+        "child": [
+          {
+            "name": "Speakers & Displays",
+            "data": ["All Speakers & Displays", "Amazon", "Google", "Sonos One", "Apple"]
+          },
+          {
+            "name": "Streaming",
+            "data": ["All Streaming", "Roku", "ChromeCast", "Apple"]
+          },
+          {
+            "name": "Safety & Security",
+            "data": [
+              "All Safety & Security",
+              "SimpliSafe",
+              "Google",
+              "Vivint Smart Home",
+              "Ring",
+              "",
+              "Arlo"
+            ]
+          },
+          {
+            "name": "Around the Home",
+            "data": [
+              "All Home Gadgets",
+              "Appliances",
+              "Lightbulbs",
+              "Vaccums",
+              "Plugs",
+              "",
+              "Thermostats"
+            ]
+          }
+        ],
+        "split": 2
+      },
+      {
+        "name": "Accessories",
+        "banner": {
+          "title": "Accessories",
+          "content": "New or refurbished, you'll find your fit.",
+          "logo": "img/mega/accessories.png",
+          "bgCol": "#FC6530"
+        },
+        "child": [
+          {
+            "name": "Computer",
+            "data": ["All Computer Accessories", "Cables", "Mouse & Keyboard", "", "Speakers"]
+          },
+          {
+            "name": "Tablet",
+            "data": ["All Tablet Accessories", "Stylus & Pens", "Cases", "", "Screen Protectors"]
+          },
+          {
+            "name": "Phone",
+            "data": ["All Phone Accessories", "Chargers", "Cases", "", "Screen Protectors"]
+          },
+          {
+            "name": "Gaming",
+            "data": ["All Gaming Accessories", "Chargers", "Cases", "Adapters", "Controllers"]
+          }
+        ],
+        "split": 2
+      }
+    ]
+  },
+  "insure": {
+    "section1": {
+      "title": "Use Your Phone Fearlessly",
+      "content": "Screen replacement plans for as low as $39/year with Bounce.",
+      "button": {
+        "title": "Insure My Device"
+      },
+      "img_src": "/img/insure/section1/insure.png"
+    },
+    "section2": {
+      "title": "Screen Replacement Plans",
+      "data": [
+        {
+          "title": "Prime Protection",
+          "price": "$39.00",
+          "img_src": "/img/insure/section2/bounce1.png"
+        },
+        {
+          "title": "Premium Protection",
+          "price": "$59.00",
+          "img_src": "/img/insure/section2/bounce2.png"
+        },
+        {
+          "title": "Elite Protection",
+          "price": "$89.00",
+          "img_src": "/img/insure/section2/bounce3.png"
+        }
+      ]
+    },
+    "section3": {
+      "title": "Why protect your phone with Bounce?",
+      "content": "No more having to deal with your carrier, expired warranties, or paying crazy amounts just to fix a phone screen.",
+      "data": [
+        {
+          "title": "Fix-it Anywhere",
+          "img_src": "/img/insure/section3/anywhere.png"
+        },
+        {
+          "title": "24 Hour Refunds*",
+          "img_src": "/img/insure/section3/hour-refund.png"
+        },
+        {
+          "title": "No Deductible",
+          "img_src": "/img/insure/section3/no-deductible.png"
+        },
+        {
+          "title": "New and Used Phones",
+          "img_src": "/img/insure/section3/new-phone.png"
+        }
+      ],
+      "buttons": [
+        {
+          "title": "File a Claim",
+          "order": 1,
+          "visible": true
+        },
+        {
+          "title": "Insure my Device",
+          "order": 2,
+          "visible": true
+        }
+      ],
+      "awesome": {
+        "img_src": "/img/insure/section3/awesome.png"
+      }
+    },
+    "section4": {
+      "title": "Bounce vs The Other Guys",
+      "content": "See how Bounce stacks up against other phone screen protection plans.",
+      "tableData": {
+        "header": {
+          "bounce": "Bounce",
+          "applecare": "Applecare+",
+          "carriers": "Carriers"
+        },
+        "child": [
+          {
+            "header": "Deductible",
+            "bounce": "$0",
+            "applecare": "$39",
+            "carriers": "$200-475"
+          },
+          {
+            "header": "Repair Anywhere",
+            "bounce": true,
+            "applecare": "Authorized Apple Stores",
+            "carriers": "Mail It In"
+          },
+          {
+            "header": "New Phone Coverage",
+            "bounce": true,
+            "applecare": true,
+            "carriers": true
+          },
+          {
+            "header": "Use Phone Coverage",
+            "bounce": true,
+            "applecare": false,
+            "carriers": false
+          },
+          {
+            "header": "Cost",
+            "bounce": "$39-89",
+            "applecare": "$250+",
+            "carriers": "$350+"
           }
         ]
       }
-    ]
+    }
   }
 }

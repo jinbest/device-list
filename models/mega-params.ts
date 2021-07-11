@@ -7,6 +7,7 @@ export interface MegaDataParam {
   name: string
   banner: MegaDataBannerParam
   child: MegaDataChildParam[]
+  split: number
 }
 
 export interface MegaDataBannerParam {
@@ -20,3 +21,5 @@ export interface MegaDataChildParam {
   name: string
   data: string[]
 }
+
+export type AnchorType = "top" | "left" | "bottom" | "right"
