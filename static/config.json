@@ -690,5 +690,115 @@
         "split": 2
       }
     ]
+  },
+  "insure": {
+    "section1": {
+      "title": "Use Your Phone Fearlessly",
+      "content": "Screen replacement plans for as low as $39/year with Bounce.",
+      "button": {
+        "title": "Insure My Device"
+      },
+      "img_src": "/img/insure/section1/insure.png"
+    },
+    "section2": {
+      "title": "Screen Replacement Plans",
+      "data": [
+        {
+          "title": "Prime Protection",
+          "price": "$39.00",
+          "img_src": "/img/insure/section2/bounce1.png"
+        },
+        {
+          "title": "Premium Protection",
+          "price": "$59.00",
+          "img_src": "/img/insure/section2/bounce2.png"
+        },
+        {
+          "title": "Elite Protection",
+          "price": "$89.00",
+          "img_src": "/img/insure/section2/bounce3.png"
+        }
+      ]
+    },
+    "section3": {
+      "title": "Why protect your phone with Bounce?",
+      "content": "No more having to deal with your carrier, expired warranties, or paying crazy amounts just to fix a phone screen.",
+      "data": [
+        {
+          "title": "Fix-it Anywhere",
+          "img_src": "/img/insure/section3/anywhere.png"
+        },
+        {
+          "title": "24 Hour Refunds*",
+          "img_src": "/img/insure/section3/hour-refund.png"
+        },
+        {
+          "title": "No Deductible",
+          "img_src": "/img/insure/section3/no-deductible.png"
+        },
+        {
+          "title": "New and Used Phones",
+          "img_src": "/img/insure/section3/new-phone.png"
+        }
+      ],
+      "buttons": [
+        {
+          "title": "File a Claim",
+          "order": 1,
+          "visible": true
+        },
+        {
+          "title": "Insure my Device",
+          "order": 2,
+          "visible": true
+        }
+      ],
+      "awesome": {
+        "img_src": "/img/insure/section3/awesome.png"
+      }
+    },
+    "section4": {
+      "title": "Bounce vs The Other Guys",
+      "content": "See how Bounce stacks up against other phone screen protection plans.",
+      "tableData": {
+        "header": {
+          "bounce": "Bounce",
+          "applecare": "Applecare+",
+          "carriers": "Carriers"
+        },
+        "child": [
+          {
+            "header": "Deductible",
+            "bounce": "$0",
+            "applecare": "$39",
+            "carriers": "$200-475"
+          },
+          {
+            "header": "Repair Anywhere",
+            "bounce": true,
+            "applecare": "Authorized Apple Stores",
+            "carriers": "Mail It In"
+          },
+          {
+            "header": "New Phone Coverage",
+            "bounce": true,
+            "applecare": true,
+            "carriers": true
+          },
+          {
+            "header": "Use Phone Coverage",
+            "bounce": true,
+            "applecare": false,
+            "carriers": false
+          },
+          {
+            "header": "Cost",
+            "bounce": "$39-89",
+            "applecare": "$250+",
+            "carriers": "$350+"
+          }
+        ]
+      }
+    }
   }
 }
