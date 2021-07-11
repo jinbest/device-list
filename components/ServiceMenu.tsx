@@ -5,8 +5,7 @@ import config from "../static/config.json"
 import _ from "lodash"
 import { NavParams } from "../models/nav-params"
 import { useRouter } from "next/router"
-
-type Anchor = "top" | "left" | "bottom" | "right"
+import { AnchorType } from "../models/mega-params"
 
 const ServiceMenu = () => {
   const [t] = useTranslation()
@@ -18,7 +17,7 @@ const ServiceMenu = () => {
   })
 
   const toggleDrawer =
-    (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    (anchor: AnchorType, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event.type === "keydown" &&
         ((event as React.KeyboardEvent).key === "Tab" ||

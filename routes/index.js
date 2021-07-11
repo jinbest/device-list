@@ -3,7 +3,7 @@ import Insure from "../views/insure"
 import Shop from "../views/shop"
 import Trade from "../views/trade"
 import Plans from "../views/plans"
-import Repair from "../views/repair"
+import Service from "../views/service"
 
 const pageRoutes = [
   {
@@ -13,9 +13,9 @@ const pageRoutes = [
     visible: false,
   },
   {
-    path: "/repair",
-    name: "Repair",
-    component: () => <Repair />,
+    path: "/service",
+    name: "Service",
+    component: () => <Service />,
     visible: true,
   },
   {

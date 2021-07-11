@@ -3,10 +3,13 @@ import Drawer from "@material-ui/core/Drawer"
 import { useTranslation } from "react-i18next"
 import config from "../static/config.json"
 import _ from "lodash"
-import { MegaContentParam, MegaDataParam, MegaDataChildParam } from "../models/mega-params"
+import {
+  MegaContentParam,
+  MegaDataParam,
+  MegaDataChildParam,
+  AnchorType,
+} from "../models/mega-params"
 import Link from "next/link"
-
-type Anchor = "top" | "left" | "bottom" | "right"
 
 const MegaMenu = () => {
   const [t] = useTranslation()
@@ -20,7 +23,7 @@ const MegaMenu = () => {
   const [dataIndex, setDataIndex] = useState(-1)
 
   const toggleDrawer =
-    (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    (anchor: AnchorType, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event.type === "keydown" &&
         ((event as React.KeyboardEvent).key === "Tab" ||

@@ -21,3 +21,5 @@ export interface MegaDataChildParam {
   name: string
   data: string[]
 }
+
+export type AnchorType = "top" | "left" | "bottom" | "right"

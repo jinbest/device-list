@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import Search from "./Search"
-import { NavParams, SecondaryNavParams, SecondaryNavType } from "../models/nav-params"
 import config from "../static/config.json"
 import _ from "lodash"
 import LangDropdown from "./LangDropdown"
@@ -17,17 +16,11 @@ const Header = () => {
 
   const router = useRouter()
   const thisPage = _.cloneDeep(config.headerData.navData)
-  const secondaryNav = [] as SecondaryNavParams[]
-  thisPage.secondary.forEach((item) => {
-    secondaryNav.push({
-      name: item.name,
-      type: item.type as SecondaryNavType,
-    })
-  })
+  const secondaryNav = thisPage.secondary
 
   const [path, setPath] = useState("/")
   const [searchKey, setSearchKey] = useState("")
-  const [filter, setFilter] = useState<SecondaryNavType>("flashSale")
+  const [filter, setFilter] = useState("Flash Sale!")
 
   const handleIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault()
@@ -89,16 +82,16 @@ const Header = () => {
       </div>
       <div className="header-content-2">
         <div>
-          {secondaryNav.map((item: SecondaryNavParams, index: number) => {
+          {secondaryNav.map((item: string, index: number) => {
             return (
               <p
                 key={index}
-                style={{ color: item.type === filter ? "#4360fa" : "" }}
+                style={{ color: item === filter ? "#4360fa" : "" }}
                 onClick={() => {
-                  setFilter(item.type)
+                  setFilter(item)
                 }}
               >
-                {t(item.name)}
+                {t(item)}
               </p>
             )
           })}
