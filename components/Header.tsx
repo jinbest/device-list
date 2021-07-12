@@ -10,6 +10,7 @@ import FindStoreMenu from "./FindStoreMenu"
 import HeaderDrawer from "./HeaderDrawer"
 import MegaMenu from "./MegaMenu"
 import ServiceMenu from "./ServiceMenu"
+import SignModal from "./sign-modal/SignModal"
 
 const Header = () => {
   const [t] = useTranslation()
@@ -21,6 +22,7 @@ const Header = () => {
   const [path, setPath] = useState("/")
   const [searchKey, setSearchKey] = useState("")
   const [filter, setFilter] = useState("Flash Sale!")
+  const [openSignModal, setOpenSignModal] = useState(false)
 
   const handleIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault()
@@ -37,7 +39,14 @@ const Header = () => {
       <div className="header-brand">
         <FindStoreMenu />
         <LangDropdown />
-        <p className="brand-login">{t("Log In")}</p>
+        <p
+          className="brand-login"
+          onClick={() => {
+            setOpenSignModal(true)
+          }}
+        >
+          {t("Log In")}
+        </p>
       </div>
       <div className="header-content-1">
         <div className="logo">
@@ -97,6 +106,7 @@ const Header = () => {
           })}
         </div>
       </div>
+      <SignModal open={openSignModal} setOpen={setOpenSignModal} />
     </div>
   )
 }

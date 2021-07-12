@@ -9,6 +9,7 @@ import FindStoreModal from "./FindStoreModal"
 import { DrawerItemType } from "../models/header-drawer-params"
 import { NavParams } from "../models/nav-params"
 import { MegaDataParam, MegaDataChildParam, AnchorType } from "../models/mega-params"
+import SignModal from "./sign-modal/SignModal"
 
 const HeaderDrawer = () => {
   const [t] = useTranslation()
@@ -26,6 +27,7 @@ const HeaderDrawer = () => {
   const [itemType, setItemType] = useState<DrawerItemType>("popular")
   const [shopIndex, setShopIndex] = useState(0)
   const [shopChildIndex, setShopChildIndex] = useState(0)
+  const [openSignModal, setOpenSignModal] = useState(false)
 
   const toggleDrawer =
     (anchor: AnchorType, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -282,6 +284,7 @@ const HeaderDrawer = () => {
                 className="drawer-nav-item"
                 onClick={() => {
                   setState({ right: false })
+                  setOpenSignModal(true)
                 }}
                 style={{ color: "#4360FA" }}
               >
@@ -297,6 +300,7 @@ const HeaderDrawer = () => {
         </div>
       </Drawer>
       <FindStoreModal open={openModal} setOpen={setOpenModal} />
+      <SignModal open={openSignModal} setOpen={setOpenSignModal} />
     </div>
   )
 }
