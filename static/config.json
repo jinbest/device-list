@@ -800,5 +800,55 @@
         ]
       }
     }
+  },
+  "corporate": {
+    "section1": {
+      "title": {
+        "main": "Complete end-to-end mobile device lifecycle management for",
+        "span": "Business"
+      },
+      "img_src": "/img/corporate/section1/lifecycle.png"
+    },
+    "section2": {
+      "title": "Why Choose Us?",
+      "data": [
+        {
+          "title": "Custom dashboard",
+          "img_src": "/img/corporate/section2/dashboard.png",
+          "order": 1,
+          "visible": true
+        },
+        {
+          "title": "Coast to coast service",
+          "img_src": "/img/corporate/section2/coast.png",
+          "order": 2,
+          "visible": true
+        },
+        {
+          "title": "Flexible payment terms",
+          "img_src": "/img/corporate/section2/payment.png",
+          "order": 3,
+          "visible": true
+        },
+        {
+          "title": "Dedicated suppport channels",
+          "img_src": "/img/corporate/section2/channel.png",
+          "order": 4,
+          "visible": true
+        },
+        {
+          "title": "Bulk discounts",
+          "img_src": "/img/corporate/section2/bulk.png",
+          "order": 5,
+          "visible": true
+        },
+        {
+          "title": "Dedicated advanced technicians",
+          "img_src": "/img/corporate/section2/technicians.png",
+          "order": 6,
+          "visible": true
+        }
+      ]
+    }
   }
 }

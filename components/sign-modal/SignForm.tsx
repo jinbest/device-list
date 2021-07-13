@@ -1,16 +1,38 @@
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { Form, Formik, FormikHelpers, yupToFormErrors } from "formik"
-import { Checkbox, FormControlLabel, FormGroup, FormControl } from "@material-ui/core"
+import { Form, Formik, FormikHelpers } from "formik"
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  FormControl,
+  TextField,
+  InputAdornment,
+} from "@material-ui/core"
 import { SignParam } from "../../models/sign-params"
+import * as Yup from "yup"
+import Loading from "../Loading"
+import { CheckConfPass } from "../../service/hepler"
+
+type SignFormParam = {
+  email: string
+  password: string
+  confPass: string
+  first_name: string
+  last_name: string
+  receive_email: boolean
+  agree_policy: boolean
+}
 
 type Props = {
   signKey: SignParam
   setSignKey: (val: SignParam) => void
+  onCloseModal: () => void
 }
 
-const SignForm = ({ signKey, setSignKey }: Props) => {
+const SignForm = ({ signKey, setSignKey, onCloseModal }: Props) => {
   const [t] = useTranslation()
+  const delayTime = 2000
 
   const initialValues = {
     email: "",
@@ -20,18 +42,63 @@ const SignForm = ({ signKey, setSignKey }: Props) => {
     last_name: "",
     receive_email: false,
     agree_policy: false,
-  }
+  } as SignFormParam
 
   const [passType, setPassType] = useState(true)
   const [confPassType, setConfPassType] = useState(true)
+  const [errFname, setErrFname] = useState("")
+  const [errLname, setErrLname] = useState("")
+  const [errConfPass, setErrConfPass] = useState("")
 
   const onSave = (values: any, actions: FormikHelpers<any>) => {
+    if (signKey === "signup" && !validateForm(values)) {
+      actions.setSubmitting(false)
+      return
+    }
+
     actions.setSubmitting(true)
 
     console.log("values", values)
 
-    actions.setSubmitting(false)
+    setTimeout(() => {
+      actions.setSubmitting(false)
+      onCloseModal()
+    }, delayTime)
   }
+
+  const clearError = () => {
+    setErrFname("")
+    setErrLname("")
+    setErrConfPass("")
+  }
+
+  const validateForm = (val: SignFormParam) => {
+    let result = true
+    if (!val.first_name) {
+      setErrFname(t("First Name is required."))
+      result = false
+    }
+    if (!val.last_name) {
+      setErrLname(t("Last Name is required."))
+      result = false
+    }
+    if (!CheckConfPass(val.confPass, val.password)) {
+      setErrConfPass(t("Confirm Password is not matched with the password."))
+      result = false
+    }
+    setTimeout(() => {
+      clearError()
+    }, delayTime)
+    return result
+  }
+
+  const loginSchema = Yup.object().shape({
+    email: Yup.string().email(t("Invalid email.")).required(t("Email is required.")),
+    password: Yup.string()
+      .required(t("Password is required."))
+      .min(8, t("Must be at least 8 characters."))
+      .max(32, t("Must be 32 characters or less.")),
+  })
 
   return (
     <Formik
@@ -39,33 +106,33 @@ const SignForm = ({ signKey, setSignKey }: Props) => {
       onSubmit={(values, actions) => {
         onSave(values, actions)
       }}
-      validate={() => {
-        try {
-          // EMPTY
-        } catch (error) {
-          return yupToFormErrors(error)
-        }
-        return {}
-      }}
+      validationSchema={loginSchema}
     >
-      {({ values, handleChange, setFieldValue }) => (
+      {({ values, handleChange, setFieldValue, errors, touched, isSubmitting }) => (
         <Form className="sign-form">
           <label className="sign-label" htmlFor="email">
             {t("Email Address")}
             <span style={{ color: "red" }}>*</span>
           </label>
-          <input
-            className="sign-input"
-            id="email"
-            value={values.email}
-            placeholder={t("Enter your email address...")}
-            onChange={(e) => {
-              if (e.target.value.length >= 0) {
+          <FormGroup className="form-group">
+            <TextField
+              id="email"
+              name="email"
+              InputLabelProps={{ required: false }}
+              value={values.email}
+              error={!!(errors.email && touched.email)}
+              className="form-control"
+              onChange={(e) => {
                 setFieldValue("email", e.target.value)
                 handleChange(e)
-              }
-            }}
-          />
+              }}
+              placeholder={t("Enter your email address...")}
+              type="email"
+              variant="outlined"
+              margin="dense"
+              helperText={errors.email && touched.email && errors.email}
+            />
+          </FormGroup>
           {signKey === "login" && (
             <button type="button" className="forgot-button">
               {t("Forgot Username?")}
@@ -79,36 +146,50 @@ const SignForm = ({ signKey, setSignKey }: Props) => {
                   {t("First Name")}
                   <span style={{ color: "red" }}>*</span>
                 </label>
-                <input
-                  className="sign-input"
-                  id="first_name"
-                  value={values.first_name}
-                  placeholder={t("Enter your first name...")}
-                  onChange={(e) => {
-                    if (e.target.value.length >= 0) {
+                <FormGroup className="form-group">
+                  <TextField
+                    id="first_name"
+                    name="first_name"
+                    InputLabelProps={{ required: false }}
+                    value={values.first_name}
+                    error={!!(errors.first_name && touched.first_name)}
+                    className="form-control"
+                    onChange={(e) => {
                       setFieldValue("first_name", e.target.value)
                       handleChange(e)
-                    }
-                  }}
-                />
+                    }}
+                    placeholder={t("Enter your first name...")}
+                    variant="outlined"
+                    margin="dense"
+                    helperText={errors.first_name && touched.first_name && errors.first_name}
+                  />
+                </FormGroup>
+                {errFname && <p className="err-span">{errFname}</p>}
               </div>
               <div>
                 <label className="sign-label" htmlFor="last_name">
                   {t("Last Name")}
                   <span style={{ color: "red" }}>*</span>
                 </label>
-                <input
-                  className="sign-input"
-                  id="last_name"
-                  value={values.last_name}
-                  placeholder={t("Enter your last name...")}
-                  onChange={(e) => {
-                    if (e.target.value.length >= 0) {
+                <FormGroup className="form-group">
+                  <TextField
+                    id="last_name"
+                    name="last_name"
+                    InputLabelProps={{ required: false }}
+                    value={values.last_name}
+                    error={!!(errors.last_name && touched.last_name)}
+                    className="form-control"
+                    onChange={(e) => {
                       setFieldValue("last_name", e.target.value)
                       handleChange(e)
-                    }
-                  }}
-                />
+                    }}
+                    placeholder={t("Enter your last name...")}
+                    variant="outlined"
+                    margin="dense"
+                    helperText={errors.last_name && touched.last_name && errors.last_name}
+                  />
+                </FormGroup>
+                {errLname && <p className="err-span">{errLname}</p>}
               </div>
             </div>
           )}
@@ -117,27 +198,40 @@ const SignForm = ({ signKey, setSignKey }: Props) => {
             {t("Password")}
             <span style={{ color: "red" }}>*</span>
           </label>
-          <div className="sign-input">
-            <input
+          <FormGroup className="form-group">
+            <TextField
               id="password"
-              type={passType ? "password" : "text"}
+              name="password"
+              InputLabelProps={{ required: false }}
               value={values.password}
-              placeholder={t("Enter your password...")}
+              error={!!(errors.password && touched.password)}
+              className="form-control"
               onChange={(e) => {
-                if (e.target.value.length >= 0) {
-                  setFieldValue("password", e.target.value)
-                  handleChange(e)
-                }
+                setFieldValue("password", e.target.value)
+                handleChange(e)
+              }}
+              placeholder={t("Enter your password...")}
+              type={passType ? "password" : "text"}
+              variant="outlined"
+              margin="dense"
+              helperText={errors.password && touched.password && errors.password}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment
+                    position="end"
+                    onClick={() => {
+                      setPassType(!passType)
+                    }}
+                    onMouseDown={(e) => {
+                      e.preventDefault()
+                    }}
+                  >
+                    <span>{passType ? t("show") : t("hide")}</span>
+                  </InputAdornment>
+                ),
               }}
             />
-            <span
-              onClick={() => {
-                setPassType(!passType)
-              }}
-            >
-              {passType ? t("show") : t("hide")}
-            </span>
-          </div>
+          </FormGroup>
 
           {signKey === "signup" ? (
             <span className="form-description">
@@ -157,27 +251,41 @@ const SignForm = ({ signKey, setSignKey }: Props) => {
                 {t("Confirm Password")}
                 <span style={{ color: "red" }}>*</span>
               </label>
-              <div className="sign-input">
-                <input
+              <FormGroup className="form-group">
+                <TextField
                   id="confPass"
-                  type={confPassType ? "password" : "text"}
+                  name="confPass"
+                  InputLabelProps={{ required: false }}
                   value={values.confPass}
-                  placeholder={t("Re-enter your password...")}
+                  error={!!(errors.confPass && touched.confPass)}
+                  className="form-control"
                   onChange={(e) => {
-                    if (e.target.value.length >= 0) {
-                      setFieldValue("confPass", e.target.value)
-                      handleChange(e)
-                    }
+                    setFieldValue("confPass", e.target.value)
+                    handleChange(e)
+                  }}
+                  placeholder={t("Re-enter your password...")}
+                  type={confPassType ? "password" : "text"}
+                  variant="outlined"
+                  margin="dense"
+                  helperText={errors.confPass && touched.confPass && errors.confPass}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment
+                        position="end"
+                        onClick={() => {
+                          setConfPassType(!confPassType)
+                        }}
+                        onMouseDown={(e) => {
+                          e.preventDefault()
+                        }}
+                      >
+                        <span>{confPassType ? t("show") : t("hide")}</span>
+                      </InputAdornment>
+                    ),
                   }}
                 />
-                <span
-                  onClick={() => {
-                    setConfPassType(!confPassType)
-                  }}
-                >
-                  {confPassType ? t("show") : t("hide")}
-                </span>
-              </div>
+              </FormGroup>
+              {errConfPass && <p className="err-span">{errConfPass}</p>}
             </>
           )}
 
@@ -221,8 +329,14 @@ const SignForm = ({ signKey, setSignKey }: Props) => {
               </FormGroup>
             </FormControl>
           )}
-          <button className="sign-submit" type="submit">
-            {signKey === "signup" ? t("Create Customer Account") : t("Log In")}
+          <button className="sign-submit" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <span>
+                <Loading />
+              </span>
+            ) : (
+              <>{signKey === "signup" ? t("Create Customer Account") : t("Log In")}</>
+            )}
           </button>
           {signKey === "login" && (
             <button

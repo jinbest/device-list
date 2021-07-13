@@ -275,6 +275,75 @@
       }
     }
   }
+
+  .form-group {
+    width: 100%;
+    margin: 5px 0;
+    .MuiFormControl-marginDense {
+      margin: 0px;
+    }
+  }
+
+  .login-error-red {
+    color: red;
+  }
+
+  .login-error {
+    font-size: 0.625rem;
+    margin-top: -16px;
+    margin-bottom: 8px;
+  }
+
+  .form-control {
+    .MuiInputBase-root {
+      font-size: 13px;
+      fieldset {
+        border: none;
+      }
+    }
+    .MuiOutlinedInput-inputMarginDense {
+      padding: 0 10px;
+      height: 100%;
+    }
+    .MuiOutlinedInput-root {
+      border-radius: 8px;
+      border: 2px solid #e1e1e1;
+    }
+    .MuiFormHelperText-marginDense {
+      margin-top: 0;
+    }
+    .MuiFormHelperText-contained {
+      margin: 0 10px;
+    }
+    .MuiInputAdornment-root {
+      span {
+        font-size: 14px;
+        color: $grey-2;
+        font-family: "Montserrat";
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        @media (max-width: 600px) {
+          font-size: 12px;
+        }
+      }
+    }
+
+    input {
+      height: 10px;
+      font-size: 14px;
+      font-family: "Montserrat";
+    }
+
+    label {
+      font-size: 13px;
+    }
+
+    .MuiInputBase-formControl {
+      height: 50px;
+      margin-top: 0;
+    }
+  }
 }
 
 .sign-with-social {
@@ -341,4 +410,10 @@
   a:hover {
     opacity: 0.7;
   }
+}
+
+.err-span {
+  color: red;
+  font-size: 10px;
+  margin: -2px 0 0 5px;
 }
