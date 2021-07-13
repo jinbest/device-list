@@ -17,3 +17,13 @@
   advance-override: 10;
   font-display: fallback;
 }
+
+@font-face {
+  font-family: "Zoom Pro";
+  src: url("../public/fonts/zoom-pro/FontsFree-Net-ZoomProBrutalRegular.ttf") format("truetype");
+  ascent-override: 100%;
+  descent-override: 20%;
+  line-gap-override: normal;
+  advance-override: 10;
+  font-display: fallback;
+}
