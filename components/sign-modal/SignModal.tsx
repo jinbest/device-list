@@ -97,7 +97,7 @@ const SignModal = ({ open, setOpen }: Props) => {
           className="custom-swipeable-views custom-scroll-bar"
         >
           <TabPanel value={tabValue} index={0} dir={theme.direction}>
-            <SignForm signKey={signKey} setSignKey={setSignKey} />
+            <SignForm signKey={signKey} setSignKey={setSignKey} onCloseModal={handleClose} />
             <HorizontalLiner />
             <div className="sign-with-social">
               <FaceBookOauth signKey={signKey} />

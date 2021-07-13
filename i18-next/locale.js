@@ -138,6 +138,15 @@ const en = {
   "I agree to the DeviceList": "I agree to the DeviceList",
   "Create Customer Account": "Create Customer Account",
   "Sign Up": "Sign Up",
+  "First Name is required.": "First Name is required.",
+  "Last Name is required.": "Last Name is required.",
+  "Confirm Password is not matched with the password.":
+    "Confirm Password is not matched with the password.",
+  "Invalid email.": "Invalid email.",
+  "Email is required.": "Email is required.",
+  "Password is required.": "Password is required.",
+  "Must be at least 8 characters.": "Must be at least 8 characters.",
+  "Must be 32 characters or less.": "Must be 32 characters or less.",
 }
 
 const fr = {
@@ -282,6 +291,15 @@ const fr = {
   "I agree to the DeviceList": "J'accepte la DeviceList",
   "Create Customer Account": "Créer un compte client",
   "Sign Up": "S'inscrire",
+  "First Name is required.": "Le prénom est requis.",
+  "Last Name is required.": "Le nom de famille est requis.",
+  "Confirm Password is not matched with the password.":
+    "Confirmer le mot de passe ne correspond pas au mot de passe.",
+  "Invalid email.": "Email invalide.",
+  "Email is required.": "L'e-mail est requis.",
+  "Password is required.": "Mot de passe requis.",
+  "Must be at least 8 characters.": "Doit comporter au moins 8 caractères.",
+  "Must be 32 characters or less.": "Doit comporter 32 caractères ou moins.",
 }
 
 export { en, fr }
