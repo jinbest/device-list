@@ -7,9 +7,6 @@ import { SignParam } from "../../models/sign-params"
 import SwipeableViews from "react-swipeable-views"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import SignForm from "./SignForm"
-import HorizontalLiner from "./HorizontalLiner"
-import GoogleOauth from "./GoogleOauth"
-import FaceBookOauth from "./FaceBookOauth"
 import CloseIcon from "@material-ui/icons/Close"
 
 interface TabPanelProps {
@@ -98,11 +95,6 @@ const SignModal = ({ open, setOpen }: Props) => {
         >
           <TabPanel value={tabValue} index={0} dir={theme.direction}>
             <SignForm signKey={signKey} setSignKey={setSignKey} onCloseModal={handleClose} />
-            <HorizontalLiner />
-            <div className="sign-with-social">
-              <FaceBookOauth signKey={signKey} />
-              <GoogleOauth signKey={signKey} />
-            </div>
             <div className="sign-footer">
               <p>
                 {t("© 2021 DeviceList 1.0.2. All Rights Reserved.")}{" "}
