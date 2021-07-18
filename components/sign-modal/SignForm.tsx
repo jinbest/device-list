@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Form, Formik, FormikHelpers } from "formik"
 import {
@@ -33,6 +33,7 @@ type Props = {
 const SignForm = ({ signKey, setSignKey, onCloseModal }: Props) => {
   const [t] = useTranslation()
   const delayTime = 2000
+  const formikRef = useRef<any>()
 
   const initialValues = {
     email: "",
@@ -49,6 +50,23 @@ const SignForm = ({ signKey, setSignKey, onCloseModal }: Props) => {
   const [errFname, setErrFname] = useState("")
   const [errLname, setErrLname] = useState("")
   const [errConfPass, setErrConfPass] = useState("")
+
+  useEffect(() => {
+    if (formikRef.current) {
+      formikRef.current.resetForm({
+        values: {
+          email: "",
+          password: "",
+          confPass: "",
+          first_name: "",
+          last_name: "",
+          receive_email: false,
+          agree_policy: false,
+        },
+        error: {},
+      })
+    }
+  }, [signKey])
 
   const onSave = (values: any, actions: FormikHelpers<any>) => {
     if (signKey === "signup" && !validateForm(values)) {
@@ -107,6 +125,7 @@ const SignForm = ({ signKey, setSignKey, onCloseModal }: Props) => {
         onSave(values, actions)
       }}
       validationSchema={loginSchema}
+      innerRef={formikRef}
     >
       {({ values, handleChange, setFieldValue, errors, touched, isSubmitting }) => (
         <Form className="sign-form">
