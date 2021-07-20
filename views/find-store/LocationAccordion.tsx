@@ -12,6 +12,7 @@ import _ from "lodash"
 import LeftArrow from "../../components/svg/LeftArrow"
 import RightArrow from "../../components/svg/RightArrow"
 import { LocationParam } from "../../models/location-param"
+import HoursViewer from "./HoursViewer"
 
 type Props = {
   location_id: number
@@ -143,6 +144,7 @@ const LocationsAccordion = ({ handleLocationID, location_id }: Props) => {
                   <button>{t("Book Appointment")}</button>
                   <button>{t("Make my store")}</button>
                 </div>
+                <HoursViewer location={element} />
               </AccordionDetails>
             </Accordion>
           )
@@ -163,7 +165,8 @@ const useStyles = makeStyles(() =>
       maxWidth: "450px",
       boxShadow: "0px 5px 8px 3px rgb(0 0 0 / 20%)",
       ["@media (max-width:960px)"]: {
-        display: "none",
+        margin: "auto",
+        maxWidth: "768px",
       },
     },
     banner: {

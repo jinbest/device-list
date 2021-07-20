@@ -1,5 +1,6 @@
 import { CheckPassParam } from "../models/check-pass-params"
 import { LocationParam } from "../models/location-param"
+import moment from "moment-timezone"
 
 export function ValidateEmail(e: string) {
   const re =
@@ -144,4 +145,41 @@ export function isPassedTime(hourStr: string) {
   const cntStamp = new Date(y, m, d, h, min).getTime()
 
   return cntStamp < new Date().getTime()
+}
+
+const formatHHMM = (val: number) => {
+  if (val < 10) {
+    return `0${val}`
+  } else {
+    return val.toString()
+  }
+}
+
+export function getConvertHourType(
+  hour: string,
+  defaultTz: string | undefined,
+  convertTz: string | null
+) {
+  if (!defaultTz || !convertTz || !hour) {
+    return getHourType(hour)
+  }
+  const defaultOffset = moment().tz(defaultTz).utcOffset() / 60,
+    convertOffset = moment().tz(convertTz).utcOffset() / 60,
+    diff = convertOffset - defaultOffset,
+    ptr = hour.split(":"),
+    convertedMin = (diff + Number(ptr[0])) * 60 + Number(ptr[1])
+  if (convertedMin <= 0 || convertedMin >= 1440) {
+    return getHourType(hour)
+  }
+  const newHour = `${formatHHMM(Math.floor(convertedMin / 60))}:${formatHHMM(convertedMin % 60)}`
+  return getHourType(newHour)
+}
+
+export function getRegularHours(hours: any[]) {
+  return hours
+    .map((v) => v)
+    .filter((p) => {
+      return p.type == "REGULAR"
+    })
+    .sort((d) => d.day)
 }

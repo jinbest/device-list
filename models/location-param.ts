@@ -21,6 +21,7 @@ export interface LocationParam {
   timezone: string
   locHour: LocationHourParam
   locAvailability: string[]
+  location_hours?: any[]
 }
 
 export interface LocationHourParam {
