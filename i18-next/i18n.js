@@ -3,7 +3,9 @@ import detector from "i18next-browser-languagedetector"
 import { initReactI18next } from "react-i18next"
 // import Config from "../config/config"
 import HttpBackend from "i18next-http-backend"
-import { en, fr } from "./locale"
+// import { en, fr } from "./locale"
+import en from "./en.json"
+import fr from "./fr.json"
 
 const resources = {
   en: {

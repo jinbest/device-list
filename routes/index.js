@@ -4,6 +4,7 @@ import Shop from "../views/shop"
 import Trade from "../views/trade"
 import Plans from "../views/plans"
 import Service from "../views/service"
+import MyAccount from "../views/account"
 
 const pageRoutes = [
   {
@@ -41,6 +42,12 @@ const pageRoutes = [
     name: "Trade",
     component: () => <Trade />,
     visible: true,
+  },
+  {
+    path: "/account",
+    name: "My Account",
+    component: () => <MyAccount />,
+    visible: false,
   },
 ]
 

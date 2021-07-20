@@ -9,10 +9,14 @@ import {
   TextField,
   InputAdornment,
 } from "@material-ui/core"
-import { SignParam } from "../../models/sign-params"
+import { SignParam, MockCredentialParam } from "../../models/sign-params"
 import * as Yup from "yup"
 import Loading from "../Loading"
 import { CheckConfPass } from "../../service/hepler"
+import { observer } from "mobx-react"
+import { authStore } from "../../store"
+import { ToastMsgParams } from "../toast/toast-msg-params"
+import { useRouter } from "next/router"
 
 type SignFormParam = {
   email: string
@@ -28,12 +32,14 @@ type Props = {
   signKey: SignParam
   setSignKey: (val: SignParam) => void
   onCloseModal: () => void
+  setToastParams: (val: ToastMsgParams) => void
 }
 
-const SignForm = ({ signKey, setSignKey, onCloseModal }: Props) => {
+const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) => {
   const [t] = useTranslation()
   const delayTime = 2000
   const formikRef = useRef<any>()
+  const router = useRouter()
 
   const initialValues = {
     email: "",
@@ -76,10 +82,57 @@ const SignForm = ({ signKey, setSignKey, onCloseModal }: Props) => {
 
     actions.setSubmitting(true)
 
-    console.log("values", values)
+    handleSign(
+      {
+        first_name: values.first_name,
+        last_name: values.last_name,
+        email: values.email,
+        password: values.password,
+      },
+      actions
+    )
+  }
+
+  const handleSign = (val: MockCredentialParam, actions: FormikHelpers<any>) => {
+    const authCrendential = authStore.mockCredential
+    let msg =
+        signKey === "signup"
+          ? t("You have been registered successfully.")
+          : t("You've logged in successfully."),
+      isWarning = false
+
+    if (signKey === "signup" && val.email === authCrendential.email) {
+      msg = t("This user has been registered already.")
+      isWarning = true
+    } else if (
+      signKey === "login" &&
+      (val.email !== authCrendential.email || val.password !== authCrendential.password)
+    ) {
+      msg = t("Email or Password does not matched.")
+      isWarning = true
+    }
+
+    if (isWarning) {
+      setToastParams({
+        msg,
+        isSuccess: !isWarning,
+        isWarning: isWarning,
+      })
+      actions.setSubmitting(false)
+      return
+    }
 
     setTimeout(() => {
-      actions.setSubmitting(false)
+      if (signKey === "signup") {
+        authStore.setMockCredential(val)
+      }
+      authStore.setAuthUser(val.email)
+      setToastParams({
+        msg,
+        isSuccess: !isWarning,
+        isWarning: isWarning,
+      })
+      router.push("/account")
       onCloseModal()
     }, delayTime)
   }
@@ -374,4 +427,4 @@ const SignForm = ({ signKey, setSignKey, onCloseModal }: Props) => {
   )
 }
 
-export default SignForm
+export default observer(SignForm)
