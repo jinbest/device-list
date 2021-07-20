@@ -1,4 +1,5 @@
 import { CheckPassParam } from "../models/check-pass-params"
+import { LocationParam } from "../models/location-param"
 
 export function ValidateEmail(e: string) {
   const re =
@@ -65,4 +66,82 @@ export function CheckPassword(pass: string) {
     }
   }
   return result
+}
+
+export function getAddress(location: LocationParam) {
+  if (!location) return ""
+  return `${location.address_1}, ${location.address_2 ? location.address_2 + ", " : ""}${
+    location.city ? location.city + ", " : ""
+  } ${location.state ? location.state + " " : ""} ${
+    location.postcode
+      ? location.postcode.substring(0, 3) +
+        " " +
+        location.postcode.substring(3, location.postcode.length)
+      : ""
+  }`
+}
+
+export function phoneFormatString(phnumber: string) {
+  let formatPhnumber: string = phnumber,
+    countrycode = "",
+    Areacode = "",
+    number = ""
+  if (phnumber.length <= 10 && phnumber.length > 6) {
+    countrycode = phnumber.substring(0, 3)
+    Areacode = phnumber.substring(3, 6)
+    number = phnumber.substring(6, phnumber.length)
+    formatPhnumber = "(" + countrycode + ") " + Areacode + "-" + number
+  } else if (phnumber.length > 10) {
+    countrycode = phnumber.substring(phnumber.length - 10, phnumber.length - 7)
+    Areacode = phnumber.substring(phnumber.length - 7, phnumber.length - 4)
+    number = phnumber.substring(phnumber.length - 4, phnumber.length)
+    formatPhnumber =
+      phnumber.substring(0, phnumber.length - 10) +
+      " (" +
+      countrycode +
+      ") " +
+      Areacode +
+      "-" +
+      number
+  }
+  return formatPhnumber
+}
+
+export function getHourType(hourStr: string) {
+  if (!hourStr) return "12:00 a.m"
+  const ptr = hourStr.split(":")
+  let hour = 12,
+    minute = "00",
+    AP = "a.m."
+  if (ptr.length > 0) {
+    hour = parseInt(ptr[0])
+    if (hour >= 12) {
+      AP = "p.m."
+    } else {
+      AP = "a.m."
+    }
+  }
+  if (ptr.length > 1) {
+    minute = ptr[1]
+  }
+  return `${hour % 12 === 0 ? 12 : hour % 12}:${minute} ${AP}`
+}
+
+export function isPassedTime(hourStr: string) {
+  if (!hourStr) return true
+
+  const today = new Date(),
+    y = today.getFullYear(),
+    m = today.getMonth(),
+    d = today.getDate()
+  const ptr = hourStr.split(":")
+
+  let h = 12,
+    min = 0
+  if (ptr.length > 0) h = Number(ptr[0])
+  if (ptr.length > 1) min = Number(ptr[1])
+
+  const cntStamp = new Date(y, m, d, h, min).getTime()
+
+  return cntStamp < new Date().getTime()
 }

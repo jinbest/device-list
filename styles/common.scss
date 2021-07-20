@@ -118,3 +118,34 @@ h3 {
 .no-wrap {
   white-space: nowrap;
 }
+
+/* Customize library Class */
+.leaflet-marker-icon {
+  margin-left: -25px;
+  margin-top: -5px;
+  width: 50px;
+}
+
+.accordion-container {
+  @media (min-width: 960px) {
+    max-height: calc(100vh - 465px);
+    overflow-y: scroll !important;
+    &::-webkit-scrollbar {
+      width: 3px;
+      cursor: pointer;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #4360fa;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #4360fa;
+    }
+  }
+  @media (max-width: 960px) {
+    max-height: inherit;
+    overflow-y: inherit;
+  }
+}
