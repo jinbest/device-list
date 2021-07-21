@@ -166,5 +166,16 @@
   "Wednesday": "Mercredi",
   "Thursday": "jeudi",
   "Friday": "Vendredi",
-  "Saturday": "samedi"
+  "Saturday": "samedi",
+  "My Details": "Mes Details",
+  "Feel free to edit any of your information so your account is up to date.": "N'hésitez pas à modifier vos informations afin que votre compte soit à jour.",
+  "Address Book": "Carnet d'adresses",
+  "Billing Address": "adresse de facturation",
+  "Delivery Address": "Adresse de livraison",
+  "My Orders": "Mes commandes",
+  "My Returns": "Mes retours",
+  "Payment Methods": "méthodes de payement",
+  "Contact Preferences": "Préférences de contact",
+  "Need Help?": "Besoin d'aide?",
+  "Sign Out": "Se déconnecter"
 }

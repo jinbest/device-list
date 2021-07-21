@@ -1,5 +1,7 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { MockCredentialParam } from "../models/sign-params"
+import { accountData } from "../static/mock-data"
+import _ from "lodash"
 
 configure({ enforceActions: "always" })
 
@@ -11,6 +13,7 @@ export class AuthStore {
     email: "",
     password: "",
   } as MockCredentialParam
+  @observable accountData = _.cloneDeep(accountData)
 
   constructor() {
     this.load()
@@ -25,6 +28,7 @@ export class AuthStore {
         JSON.stringify({
           authUser: this.authUser,
           mockCredential: this.mockCredential,
+          accountData: this.accountData,
         })
       )
     }
@@ -54,6 +58,12 @@ export class AuthStore {
   }
 
   @action
+  setAccountData = (data: any) => {
+    this.accountData = data
+    this.save()
+  }
+
+  @action
   init = () => {
     this.setAuthUser("")
     this.setMockCredential({
@@ -62,6 +72,7 @@ export class AuthStore {
       email: "",
       password: "",
     })
+    this.setAccountData({})
     this.save()
   }
 }

@@ -17,6 +17,7 @@ import { observer } from "mobx-react"
 import { authStore } from "../../store"
 import { ToastMsgParams } from "../toast/toast-msg-params"
 import { useRouter } from "next/router"
+import _ from "lodash"
 
 type SignFormParam = {
   email: string
@@ -125,6 +126,7 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
     setTimeout(() => {
       if (signKey === "signup") {
         authStore.setMockCredential(val)
+        handleUpdateAccountData(val)
       }
       authStore.setAuthUser(val.email)
       setToastParams({
@@ -135,6 +137,20 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
       router.push("/account")
       onCloseModal()
     }, delayTime)
+  }
+
+  const handleUpdateAccountData = (val: MockCredentialParam) => {
+    const cntAccountData = _.cloneDeep(authStore.accountData)
+    cntAccountData.myDetails.info = {
+      first_name: val.first_name,
+      last_name: val.last_name,
+      email: val.email,
+      phone: "",
+    }
+    cntAccountData.addressBook.address.forEach((item) => {
+      item.info.name = `${val.first_name} ${val.last_name}`
+    })
+    authStore.setAccountData(cntAccountData)
   }
 
   const clearError = () => {

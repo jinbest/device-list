@@ -166,5 +166,16 @@
   "Wednesday": "Wednesday",
   "Thursday": "Thursday",
   "Friday": "Friday",
-  "Saturday": "Saturday"
+  "Saturday": "Saturday",
+  "My Details": "My Details",
+  "Feel free to edit any of your information so your account is up to date.": "Feel free to edit any of your information so your account is up to date.",
+  "Address Book": "Address Book",
+  "Billing Address": "Billing Address",
+  "Delivery Address": "Delivery Address",
+  "My Orders": "My Orders",
+  "My Returns": "My Returns",
+  "Payment Methods": "Payment Methods",
+  "Contact Preferences": "Contact Preferences",
+  "Need Help?": "Need Help?",
+  "Sign Out": "Sign Out"
 }

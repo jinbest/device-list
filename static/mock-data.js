@@ -874,4 +874,57 @@ const locationsData = [
   },
 ]
 
-export { bannerData, lookingFor, locationsData }
+const accountData = {
+  myDetails: {
+    title: "My Details",
+    content: "Feel free to edit any of your information so your account is up to date.",
+    info: {
+      first_name: "John",
+      last_name: "Smith",
+      email: "johmsmith@gmail.com",
+      phone: "12041234567",
+    },
+  },
+  addressBook: {
+    title: "Address Book",
+    address: [
+      {
+        title: "Billing Address",
+        info: {
+          name: "John Smith",
+          address_1: "123 Main Street",
+          city: "Winnipeg",
+          state: "MB",
+          postcode: "R1R1R1",
+        },
+      },
+      {
+        title: "Delivery Address",
+        info: {
+          name: "John Smith",
+          address_1: "123 Main Street",
+          city: "Winnipeg",
+          state: "MB",
+          postcode: "R1R1R1",
+        },
+      },
+    ],
+  },
+  myOrders: {
+    title: "My Orders",
+  },
+  myReturns: {
+    title: "My Returns",
+  },
+  paymentMethods: {
+    title: "Payment Methods",
+  },
+  contantPreferences: {
+    title: "Contact Preferences",
+  },
+  needHelp: {
+    title: "Need Help?",
+  },
+}
+
+export { bannerData, lookingFor, locationsData, accountData }
