@@ -1,30 +1,38 @@
-export interface LocationParam {
-  address_1: string
-  address_2: string | null
-  address_3: string | null
-  business_page_link: string | null
-  city: string
-  country: string
-  description: string | null
-  email: string
+import { Base } from "./base"
+
+export interface LocationParam extends Base {
   id: number
-  image_url: string | null
-  is_main: boolean
-  is_voided: boolean
-  latitude: number
+  vendor_id: number
   location_name: string
-  longitude: number
-  phone: string | null
-  postcode: string
+  is_main: boolean
+  description: string
+  address_1: string
+  address_2: string
+  address_3: string
+  country: string
+  city: string
   state: string
-  store_id: number
+  postcode: string
+  email: string
+  phone: string
   timezone: string
-  locHour: LocationHourParam
-  locAvailability: string[]
-  location_hours?: any[]
+  latitude: number
+  longitude: number
+  distance: number
+  business_page_link: string
+  is_voided: boolean
+  hours: any[]
+  locAvailability?: string[]
 }
 
-export interface LocationHourParam {
+export interface LocationHoursParam extends Base {
+  id: number
+  location_id: number
+  vendor_id: number
+  day: number
   open: string
   close: string
+  type: string
+  by_appointment_only: boolean
+  is_voided: boolean
 }

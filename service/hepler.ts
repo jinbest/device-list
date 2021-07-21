@@ -1,5 +1,5 @@
 import { CheckPassParam } from "../models/check-pass-params"
-import { LocationParam } from "../models/location-param"
+import { LocationParam, LocationHoursParam } from "../models/location-param"
 import moment from "moment-timezone"
 
 export function ValidateEmail(e: string) {
@@ -175,11 +175,39 @@ export function getConvertHourType(
   return getHourType(newHour)
 }
 
-export function getRegularHours(hours: any[]) {
+export function getRegularHours(hours: LocationHoursParam[]) {
   return hours
     .map((v) => v)
     .filter((p) => {
       return p.type == "REGULAR"
     })
     .sort((d) => d.day)
+}
+
+export function getCloseTime(hours: LocationHoursParam[], type: string) {
+  let closeTime = ""
+
+  for (let i = 0; i < hours.length; i++) {
+    if (hours[i].type === type && hours[i].close && hours[i].open) {
+      closeTime = hours[i].close
+      break
+    }
+  }
+
+  hours.forEach((item) => {
+    if (item.type === "REGULAR" && item.close && item.open && compareTimes(closeTime, item.close)) {
+      closeTime = item.close
+    }
+  })
+  return closeTime
+}
+
+function compareTimes(time1: string, time2: string) {
+  if (!time1 || !time2) return false
+  const regex = new RegExp(":", "g")
+  if (parseInt(time1.replace(regex, ""), 10) < parseInt(time2.replace(regex, ""), 10)) {
+    return true
+  } else {
+    return false
+  }
 }

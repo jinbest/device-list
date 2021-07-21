@@ -6,7 +6,13 @@ import PhoneEnabledOutlinedIcon from "@material-ui/icons/PhoneEnabledOutlined"
 import CallSplitIcon from "@material-ui/icons/CallSplit"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import BlockIcon from "@material-ui/icons/Block"
-import { getAddress, phoneFormatString, getHourType, isPassedTime } from "../../service/hepler"
+import {
+  getAddress,
+  phoneFormatString,
+  getHourType,
+  isPassedTime,
+  getCloseTime,
+} from "../../service/hepler"
 import { locationsData } from "../../static/mock-data"
 import _ from "lodash"
 import LeftArrow from "../../components/svg/LeftArrow"
@@ -58,6 +64,7 @@ const LocationsAccordion = ({ handleLocationID, location_id }: Props) => {
       </div>
       <div className="accordion-container">
         {locations.map((element: LocationParam, index: number) => {
+          const closeTime = getCloseTime(element.hours, "REGULAR")
           return (
             <Accordion
               key={index}
@@ -115,28 +122,26 @@ const LocationsAccordion = ({ handleLocationID, location_id }: Props) => {
                   </a>
                 </div>
                 <div className={classes.locationHour}>
-                  {isPassedTime(element.locHour.close) ? (
+                  {isPassedTime(closeTime) ? (
                     <p>
                       <span>
                         <BlockIcon style={{ color: "#FC6530" }} />
                       </span>
-                      <span>{t("Closed")}</span>{" "}
-                      {`${t("opens at")} ${getHourType(element.locHour.close)}`}
+                      <span>{t("Closed")}</span> {`${t("opens at")} ${getHourType(closeTime)}`}
                     </p>
                   ) : (
                     <p>
                       <span>
                         <CheckCircleIcon style={{ color: "#A0E744" }} />
                       </span>
-                      <span>{t("Open")}</span>{" "}
-                      {`${t("until")} ${getHourType(element.locHour.close)}`}
+                      <span>{t("Open")}</span> {`${t("until")} ${getHourType(closeTime)}`}
                     </p>
                   )}
                 </div>
               </AccordionSummary>
               <AccordionDetails className={classes.accordionDetails}>
                 <div className={classes.locationAvailability}>
-                  {element.locAvailability.map((item: string, index: number) => {
+                  {element.locAvailability?.map((item: string, index: number) => {
                     return <p key={index}>{t(item)}</p>
                   })}
                 </div>
