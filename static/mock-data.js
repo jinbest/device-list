@@ -890,22 +890,28 @@ const accountData = {
     address: [
       {
         title: "Billing Address",
+        type: "billing",
         info: {
           name: "John Smith",
           address_1: "123 Main Street",
+          address_2: "",
           city: "Winnipeg",
           state: "MB",
           postcode: "R1R1R1",
+          country: "Canada",
         },
       },
       {
         title: "Delivery Address",
+        type: "delivery",
         info: {
           name: "John Smith",
           address_1: "123 Main Street",
+          address_2: "",
           city: "Winnipeg",
           state: "MB",
           postcode: "R1R1R1",
+          country: "Canada",
         },
       },
     ],

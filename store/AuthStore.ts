@@ -64,6 +64,11 @@ export class AuthStore {
   }
 
   @action
+  setAccountDataInitialize = () => {
+    this.setAccountData(accountData)
+  }
+
+  @action
   init = () => {
     this.setAuthUser("")
     this.setMockCredential({
@@ -72,7 +77,7 @@ export class AuthStore {
       email: "",
       password: "",
     })
-    this.setAccountData({})
+    this.setAccountData(accountData)
     this.save()
   }
 }

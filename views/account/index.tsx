@@ -4,6 +4,13 @@ import { authStore } from "../../store"
 import { useRouter } from "next/router"
 import { useTranslation } from "react-i18next"
 import { isEmpty } from "lodash"
+import MyDetails from "./compo/MyDetails"
+import AddressBook from "./compo/AddressBook"
+import MyOrders from "./compo/MyOrders"
+import MyReturns from "./compo/MyReturns"
+import PaymentMethods from "./compo/PaymentMethods"
+import ContactPreferences from "./compo/ContactPreferences"
+import NeedHelp from "./compo/NeedHelp"
 
 const MyAccount = () => {
   const router = useRouter()
@@ -11,8 +18,6 @@ const MyAccount = () => {
   const keys = Object.keys(authStore.accountData)
 
   const [tab, setTab] = useState(0)
-  const [detailsTitle, setDetailsTitle] = useState("")
-  const [detailsContent, setDetailsContent] = useState("")
 
   useEffect(() => {
     if (!authStore.authUser) {
@@ -20,24 +25,12 @@ const MyAccount = () => {
     }
   }, [authStore.authUser])
 
-  useEffect(() => {
-    const title = _getTitle_(keys[tab], authStore.accountData),
-      content = _getContent_(keys[tab], authStore.accountData)
-    setDetailsTitle(title)
-    setDetailsContent(content)
-  }, [tab])
-
   const handleSignOut = () => {
     authStore.setAuthUser("")
   }
 
   const _getTitle_ = (key: string, obj: Record<string, any>) => {
     return obj[key].title
-  }
-
-  const _getContent_ = (key: string, obj: Record<string, any>) => {
-    if (!obj[key].content) return ""
-    return obj[key].content
   }
 
   return (
@@ -67,10 +60,13 @@ const MyAccount = () => {
             </p>
           </div>
         </div>
-        <div className="account-details">
-          <p className="details-title">{t(detailsTitle)}</p>
-          {detailsContent && <p className="details-content">{t(detailsContent)}</p>}
-        </div>
+        {tab === 0 && <MyDetails />}
+        {tab === 1 && <AddressBook />}
+        {tab === 2 && <MyOrders />}
+        {tab === 3 && <MyReturns />}
+        {tab === 4 && <PaymentMethods />}
+        {tab === 5 && <ContactPreferences />}
+        {tab === 6 && <NeedHelp />}
       </div>
     </div>
   )
