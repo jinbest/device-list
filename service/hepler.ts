@@ -1,4 +1,6 @@
 import { CheckPassParam } from "../models/check-pass-params"
+import { LocationParam, LocationHoursParam } from "../models/location-param"
+import moment from "moment-timezone"
 
 export function ValidateEmail(e: string) {
   const re =
@@ -65,4 +67,157 @@ export function CheckPassword(pass: string) {
     }
   }
   return result
+}
+
+export function getAddress(location: LocationParam) {
+  if (!location) return ""
+  return `${location.address_1}, ${location.address_2 ? location.address_2 + ", " : ""}${
+    location.city ? location.city + ", " : ""
+  } ${location.state ? location.state + " " : ""} ${
+    location.postcode
+      ? location.postcode.substring(0, 3) +
+        " " +
+        location.postcode.substring(3, location.postcode.length)
+      : ""
+  }`
+}
+
+export function phoneFormatString(phnumber: string) {
+  let formatPhnumber: string = phnumber,
+    countrycode = "",
+    Areacode = "",
+    number = ""
+  if (phnumber.length <= 10 && phnumber.length > 6) {
+    countrycode = phnumber.substring(0, 3)
+    Areacode = phnumber.substring(3, 6)
+    number = phnumber.substring(6, phnumber.length)
+    formatPhnumber = "(" + countrycode + ") " + Areacode + "-" + number
+  } else if (phnumber.length > 10) {
+    countrycode = phnumber.substring(phnumber.length - 10, phnumber.length - 7)
+    Areacode = phnumber.substring(phnumber.length - 7, phnumber.length - 4)
+    number = phnumber.substring(phnumber.length - 4, phnumber.length)
+    formatPhnumber =
+      phnumber.substring(0, phnumber.length - 10) +
+      " (" +
+      countrycode +
+      ") " +
+      Areacode +
+      "-" +
+      number
+  }
+  return formatPhnumber
+}
+
+export function getHourType(hourStr: string) {
+  if (!hourStr) return "12:00 a.m"
+  const ptr = hourStr.split(":")
+  let hour = 12,
+    minute = "00",
+    AP = "a.m."
+  if (ptr.length > 0) {
+    hour = parseInt(ptr[0])
+    if (hour >= 12) {
+      AP = "p.m."
+    } else {
+      AP = "a.m."
+    }
+  }
+  if (ptr.length > 1) {
+    minute = ptr[1]
+  }
+  return `${hour % 12 === 0 ? 12 : hour % 12}:${minute} ${AP}`
+}
+
+export function isPassedTime(hourStr: string) {
+  if (!hourStr) return true
+
+  const today = new Date(),
+    y = today.getFullYear(),
+    m = today.getMonth(),
+    d = today.getDate()
+  const ptr = hourStr.split(":")
+
+  let h = 12,
+    min = 0
+  if (ptr.length > 0) h = Number(ptr[0])
+  if (ptr.length > 1) min = Number(ptr[1])
+
+  const cntStamp = new Date(y, m, d, h, min).getTime()
+
+  return cntStamp < new Date().getTime()
+}
+
+const formatHHMM = (val: number) => {
+  if (val < 10) {
+    return `0${val}`
+  } else {
+    return val.toString()
+  }
+}
+
+export function getConvertHourType(
+  hour: string,
+  defaultTz: string | undefined,
+  convertTz: string | null
+) {
+  if (!defaultTz || !convertTz || !hour) {
+    return getHourType(hour)
+  }
+  const defaultOffset = moment().tz(defaultTz).utcOffset() / 60,
+    convertOffset = moment().tz(convertTz).utcOffset() / 60,
+    diff = convertOffset - defaultOffset,
+    ptr = hour.split(":"),
+    convertedMin = (diff + Number(ptr[0])) * 60 + Number(ptr[1])
+  if (convertedMin <= 0 || convertedMin >= 1440) {
+    return getHourType(hour)
+  }
+  const newHour = `${formatHHMM(Math.floor(convertedMin / 60))}:${formatHHMM(convertedMin % 60)}`
+  return getHourType(newHour)
+}
+
+export function getRegularHours(hours: LocationHoursParam[]) {
+  return hours
+    .map((v) => v)
+    .filter((p) => {
+      return p.type == "REGULAR"
+    })
+    .sort((d) => d.day)
+}
+
+export function getCloseTime(hours: LocationHoursParam[], type: string) {
+  let closeTime = ""
+
+  for (let i = 0; i < hours.length; i++) {
+    if (hours[i].type === type && hours[i].close && hours[i].open) {
+      closeTime = hours[i].close
+      break
+    }
+  }
+
+  hours.forEach((item) => {
+    if (item.type === "REGULAR" && item.close && item.open && compareTimes(closeTime, item.close)) {
+      closeTime = item.close
+    }
+  })
+  return closeTime
+}
+
+function compareTimes(time1: string, time2: string) {
+  if (!time1 || !time2) return false
+  const regex = new RegExp(":", "g")
+  if (parseInt(time1.replace(regex, ""), 10) < parseInt(time2.replace(regex, ""), 10)) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function formatCountryName(countryCode: string) {
+  if (countryCode === "CA") {
+    return "Canada"
+  } else if (countryCode === "US") {
+    return "United States"
+  } else {
+    return ""
+  }
 }

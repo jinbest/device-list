@@ -19,6 +19,8 @@ module.exports = {
     "@typescript-eslint/no-floating-promises": "off",
     "no-useless-escape": "off",
     "@typescript-eslint/prefer-regexp-exec": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
   },
   parserOptions: {
     project: "./tsconfig.json",

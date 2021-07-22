@@ -11,6 +11,10 @@ import HeaderDrawer from "./HeaderDrawer"
 import MegaMenu from "./MegaMenu"
 import ServiceMenu from "./ServiceMenu"
 import SignModal from "./sign-modal/SignModal"
+import { observer } from "mobx-react"
+import { authStore } from "../store"
+import { ToastMsgParams } from "./toast/toast-msg-params"
+import Toast from "./toast/toast"
 
 const Header = () => {
   const [t] = useTranslation()
@@ -23,6 +27,7 @@ const Header = () => {
   const [searchKey, setSearchKey] = useState("")
   const [filter, setFilter] = useState("Flash Sale!")
   const [openSignModal, setOpenSignModal] = useState(false)
+  const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
 
   const handleIconClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault()
@@ -34,6 +39,24 @@ const Header = () => {
     setPath(router.asPath)
   }, [router])
 
+  const resetStatuses = () => {
+    setToastParams({
+      msg: "",
+      isError: false,
+      isWarning: false,
+      isInfo: false,
+      isSuccess: false,
+    })
+  }
+
+  const handleMyAccount = () => {
+    if (!authStore.authUser) {
+      return t("Log In")
+    } else {
+      return t("My Account")
+    }
+  }
+
   return (
     <div className="header">
       <div className="header-brand">
@@ -42,10 +65,15 @@ const Header = () => {
         <p
           className="brand-login"
           onClick={() => {
-            setOpenSignModal(true)
+            if (!authStore.authUser) {
+              setOpenSignModal(true)
+            } else {
+              router.push("/account")
+            }
           }}
+          suppressHydrationWarning
         >
-          {t("Log In")}
+          {handleMyAccount()}
         </p>
       </div>
       <div className="header-content-1">
@@ -106,9 +134,10 @@ const Header = () => {
           })}
         </div>
       </div>
-      <SignModal open={openSignModal} setOpen={setOpenSignModal} />
+      <SignModal open={openSignModal} setOpen={setOpenSignModal} setToastParams={setToastParams} />
+      <Toast params={toastParams} resetStatuses={resetStatuses} />
     </div>
   )
 }
 
-export default Header
+export default observer(Header)

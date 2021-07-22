@@ -8,6 +8,7 @@ import SwipeableViews from "react-swipeable-views"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import SignForm from "./SignForm"
 import CloseIcon from "@material-ui/icons/Close"
+import { ToastMsgParams } from "../toast/toast-msg-params"
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -35,9 +36,10 @@ function TabPanel(props: TabPanelProps) {
 type Props = {
   open: boolean
   setOpen: (val: boolean) => void
+  setToastParams: (val: ToastMsgParams) => void
 }
 
-const SignModal = ({ open, setOpen }: Props) => {
+const SignModal = ({ open, setOpen, setToastParams }: Props) => {
   const theme = useTheme()
   const [t] = useTranslation()
 
@@ -94,7 +96,12 @@ const SignModal = ({ open, setOpen }: Props) => {
           className="custom-swipeable-views custom-scroll-bar"
         >
           <TabPanel value={tabValue} index={0} dir={theme.direction}>
-            <SignForm signKey={signKey} setSignKey={setSignKey} onCloseModal={handleClose} />
+            <SignForm
+              signKey={signKey}
+              setSignKey={setSignKey}
+              onCloseModal={handleClose}
+              setToastParams={setToastParams}
+            />
             <div className="sign-footer">
               <p>
                 {t("© 2021 DeviceList 1.0.2. All Rights Reserved.")}{" "}

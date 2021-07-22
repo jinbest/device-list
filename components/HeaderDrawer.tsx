@@ -10,6 +10,10 @@ import { DrawerItemType } from "../models/header-drawer-params"
 import { NavParams } from "../models/nav-params"
 import { MegaDataParam, MegaDataChildParam, AnchorType } from "../models/mega-params"
 import SignModal from "./sign-modal/SignModal"
+import { ToastMsgParams } from "./toast/toast-msg-params"
+import Toast from "./toast/toast"
+import { observer } from "mobx-react"
+import { authStore } from "../store"
 
 const HeaderDrawer = () => {
   const [t] = useTranslation()
@@ -28,6 +32,7 @@ const HeaderDrawer = () => {
   const [shopIndex, setShopIndex] = useState(0)
   const [shopChildIndex, setShopChildIndex] = useState(0)
   const [openSignModal, setOpenSignModal] = useState(false)
+  const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
 
   const toggleDrawer =
     (anchor: AnchorType, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -48,6 +53,16 @@ const HeaderDrawer = () => {
       setItemType("popular")
     }
   }, [state])
+
+  const resetStatuses = () => {
+    setToastParams({
+      msg: "",
+      isError: false,
+      isWarning: false,
+      isInfo: false,
+      isSuccess: false,
+    })
+  }
 
   return (
     <div id="menu">
@@ -129,6 +144,17 @@ const HeaderDrawer = () => {
                       <img src="img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
                     )}
                   </div>
+                  {authStore.authUser && (
+                    <div
+                      className="drawer-nav-item"
+                      onClick={() => {
+                        router.push("/account")
+                        setState({ right: false })
+                      }}
+                    >
+                      <p>{t("My Account")}</p>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -284,11 +310,15 @@ const HeaderDrawer = () => {
                 className="drawer-nav-item"
                 onClick={() => {
                   setState({ right: false })
-                  setOpenSignModal(true)
+                  if (authStore.authUser) {
+                    authStore.setAuthUser("")
+                  } else {
+                    setOpenSignModal(true)
+                  }
                 }}
                 style={{ color: "#4360FA" }}
               >
-                <p>{t("Log In")}</p>
+                <p>{authStore.authUser ? t("Log Out") : t("Log In")}</p>
               </div>
             </div>
           )}
@@ -300,9 +330,10 @@ const HeaderDrawer = () => {
         </div>
       </Drawer>
       <FindStoreModal open={openModal} setOpen={setOpenModal} />
-      <SignModal open={openSignModal} setOpen={setOpenSignModal} />
+      <SignModal open={openSignModal} setOpen={setOpenSignModal} setToastParams={setToastParams} />
+      <Toast params={toastParams} resetStatuses={resetStatuses} />
     </div>
   )
 }
 
-export default HeaderDrawer
+export default observer(HeaderDrawer)
