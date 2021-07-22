@@ -198,5 +198,13 @@
   "Are you sure you want to delete the following": "Are you sure you want to delete the following",
   "The following": "The following",
   "has been deleted from your account": "has been deleted from your account",
-  "Yes, Delete": "Yes, Delete"
+  "Yes, Delete": "Yes, Delete",
+  "Street Address": "Street Address",
+  "Enter your street address": "Enter your street address",
+  "Second Address": "Second Address",
+  "optional": "optional",
+  "City": "City",
+  "Province": "Province",
+  "Country": "Country",
+  "Postal Code": "Postal Code"
 }

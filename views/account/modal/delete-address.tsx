@@ -8,15 +8,17 @@ import { authStore } from "../../../store"
 import Loading from "../../../components/Loading"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import _ from "lodash"
+import { formatCountryName } from "../../../service/hepler"
 
 type Props = {
   open: boolean
   setOpen: (val: boolean) => void
   deleteIndex: number
   deleteTitle: string
+  deleteInfo: any
 }
 
-const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle }: Props) => {
+const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle, deleteInfo }: Props) => {
   const [t] = useTranslation()
   const delayTime = 2000
 
@@ -61,16 +63,26 @@ const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle }: Props) => {
         )}
         {!deleted ? (
           <>
-            <p className="account-modal-content" style={{ margin: "20px 0" }}>
+            <p className="account-modal-content" style={{ margin: "25px 0" }}>
               {`${t("Are you sure you want to delete the following")} ${t(deleteTitle)}?`}
+            </p>
+            <p className="account-modal-content">{deleteInfo.name}</p>
+            <p className="account-modal-content">{deleteInfo.address_1}</p>
+            <p className="account-modal-content">{`${deleteInfo.city}, ${deleteInfo.state} ${deleteInfo.postcode}`}</p>
+            <p className="account-modal-content" style={{ marginBottom: "20px" }}>
+              {formatCountryName(deleteInfo.country)}
             </p>
           </>
         ) : (
           <>
-            <p className="account-modal-content" style={{ margin: "5px" }}>
+            <p className="account-modal-content" style={{ margin: "10px 0" }}>
               {`${t("The following")} ${t(deleteTitle)} ${t("has been deleted from your account")}`}
               :
             </p>
+            <p className="account-modal-content">{deleteInfo.name}</p>
+            <p className="account-modal-content">{deleteInfo.address_1}</p>
+            <p className="account-modal-content">{`${deleteInfo.city}, ${deleteInfo.state} ${deleteInfo.postcode}`}</p>
+            <p className="account-modal-content">{formatCountryName(deleteInfo.country)}</p>
           </>
         )}
         {!deleted && (

@@ -101,7 +101,7 @@ const MyDetails = () => {
                 id="first_name"
                 name="first_name"
                 InputLabelProps={{ required: false }}
-                value={values.first_name}
+                value={values.first_name || ""}
                 error={!!(errors.first_name && touched.first_name)}
                 className="form-control"
                 onChange={(e) => {
@@ -115,6 +115,7 @@ const MyDetails = () => {
                 margin="dense"
                 helperText={errors.first_name && touched.first_name && errors.first_name}
                 disabled={isSubmitting}
+                required
               />
             </FormGroup>
 
@@ -126,7 +127,7 @@ const MyDetails = () => {
                 id="last_name"
                 name="last_name"
                 InputLabelProps={{ required: false }}
-                value={values.last_name}
+                value={values.last_name || ""}
                 error={!!(errors.last_name && touched.last_name)}
                 className="form-control"
                 onChange={(e) => {
@@ -140,6 +141,7 @@ const MyDetails = () => {
                 margin="dense"
                 helperText={errors.last_name && touched.last_name && errors.last_name}
                 disabled={isSubmitting}
+                required
               />
             </FormGroup>
 
@@ -151,7 +153,7 @@ const MyDetails = () => {
                 id="email"
                 name="email"
                 InputLabelProps={{ required: false }}
-                value={values.email}
+                value={values.email || ""}
                 error={!!(errors.email && touched.email)}
                 className="form-control"
                 onChange={(e) => {
@@ -176,7 +178,7 @@ const MyDetails = () => {
                 id="phone"
                 name="phone"
                 InputLabelProps={{ required: false }}
-                value={values.phone}
+                value={values.phone || ""}
                 error={!!(errors.phone && touched.phone)}
                 className="form-control"
                 onChange={(e) => {

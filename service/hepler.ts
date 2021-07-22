@@ -211,3 +211,13 @@ function compareTimes(time1: string, time2: string) {
     return false
   }
 }
+
+export function formatCountryName(countryCode: string) {
+  if (countryCode === "CA") {
+    return "Canada"
+  } else if (countryCode === "US") {
+    return "United States"
+  } else {
+    return ""
+  }
+}

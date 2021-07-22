@@ -206,6 +206,10 @@
         }
       }
     }
+    .MuiSelect-root {
+      display: flex;
+      align-items: center;
+    }
 
     input {
       height: 10px;

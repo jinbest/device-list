@@ -198,5 +198,13 @@
   "Are you sure you want to delete the following": "Êtes-vous sûr de vouloir supprimer les éléments suivants",
   "The following": "Ce qui suit",
   "has been deleted from your account": "a été supprimé de votre compte",
-  "Yes, Delete": "Oui, supprimer"
+  "Yes, Delete": "Oui, supprimer",
+  "Street Address": "Adresse de rue",
+  "Enter your street address": "Entrez votre adresse",
+  "Second Address": "Deuxième adresse",
+  "optional": "optionnel",
+  "City": "Ville",
+  "Province": "Province",
+  "Country": "Pays",
+  "Postal Code": "code postal"
 }

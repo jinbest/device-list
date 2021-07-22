@@ -898,7 +898,7 @@ const accountData = {
           city: "Winnipeg",
           state: "MB",
           postcode: "R1R1R1",
-          country: "Canada",
+          country: "CA",
         },
       },
       {
@@ -911,7 +911,7 @@ const accountData = {
           city: "Winnipeg",
           state: "MB",
           postcode: "R1R1R1",
-          country: "Canada",
+          country: "CA",
         },
       },
     ],
