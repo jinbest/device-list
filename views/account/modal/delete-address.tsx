@@ -8,7 +8,7 @@ import { authStore } from "../../../store"
 import Loading from "../../../components/Loading"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import _ from "lodash"
-import { formatCountryName } from "../../../service/hepler"
+import { formatCountryName, formatAddress } from "../../../service/hepler"
 
 type Props = {
   open: boolean
@@ -67,7 +67,9 @@ const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle, deleteInfo }: 
               {`${t("Are you sure you want to delete the following")} ${t(deleteTitle)}?`}
             </p>
             <p className="account-modal-content">{deleteInfo.name}</p>
-            <p className="account-modal-content">{deleteInfo.address_1}</p>
+            <p className="account-modal-content">
+              {formatAddress(deleteInfo.address_1, deleteInfo.address_2)}
+            </p>
             <p className="account-modal-content">{`${deleteInfo.city}, ${deleteInfo.state} ${deleteInfo.postcode}`}</p>
             <p className="account-modal-content" style={{ marginBottom: "20px" }}>
               {formatCountryName(deleteInfo.country)}
@@ -80,7 +82,9 @@ const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle, deleteInfo }: 
               :
             </p>
             <p className="account-modal-content">{deleteInfo.name}</p>
-            <p className="account-modal-content">{deleteInfo.address_1}</p>
+            <p className="account-modal-content">
+              {formatAddress(deleteInfo.address_1, deleteInfo.address_2)}
+            </p>
             <p className="account-modal-content">{`${deleteInfo.city}, ${deleteInfo.state} ${deleteInfo.postcode}`}</p>
             <p className="account-modal-content">{formatCountryName(deleteInfo.country)}</p>
           </>

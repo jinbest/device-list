@@ -221,3 +221,33 @@ export function formatCountryName(countryCode: string) {
     return ""
   }
 }
+
+export function formatAddress(address_1: string, address_2: string) {
+  if (!address_2) {
+    return address_1
+  } else {
+    return `${address_1}, ${address_2}`
+  }
+}
+
+export function formatWarranty(warranty: number | null, warranty_unit: string | null) {
+  let unit = "month"
+  if (warranty_unit === "MONTH") {
+    unit = "month"
+  } else if (warranty_unit === "DAY") {
+    unit = "day"
+  } else if (warranty_unit === "YEAR") {
+    unit = "year"
+  } else {
+    unit = "lifetime"
+  }
+
+  if (!warranty || !warranty_unit) {
+    return ""
+  } else {
+    if (unit !== "lifetime" && warranty > 1) {
+      unit += "s"
+    }
+    return `${warranty} ${unit}`
+  }
+}

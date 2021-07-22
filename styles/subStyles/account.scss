@@ -5,12 +5,12 @@
     max-width: 1200px;
     margin: auto;
     display: flex;
-    padding-top: 35px;
+    padding-top: 25px;
     justify-content: space-between;
     align-items: center;
     & > div {
       height: auto;
-      min-height: calc(100vh - 310px);
+      min-height: calc(100vh - 290px);
       box-shadow: -14.0556px -14.0556px 42.1667px #ffffff,
         14.0556px 14.0556px 42.1667px rgba(174, 174, 192, 0.4);
       border-radius: 10px;
@@ -87,6 +87,25 @@
         line-height: 24px;
         background: transparent;
       }
+      .account-details-viewer {
+        height: fit-content;
+        max-height: 600px;
+        max-width: 470px;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          width: 3px;
+          cursor: pointer;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #cbbbfa;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+          background: #cbbbfa;
+        }
+      }
       .account-address {
         margin: 10px 0;
         max-width: 400px;
@@ -123,6 +142,77 @@
           font-size: 18px;
           font-weight: normal;
           font-family: "Montserrat";
+        }
+      }
+      .my-orders-row-data {
+        display: flex;
+        padding: 15px 0;
+        border-bottom: 2px solid #d4dffc;
+        justify-content: space-between;
+        width: 100%;
+        .order-date {
+          width: 120px;
+        }
+        .order-no {
+          width: 120px;
+        }
+        .order-status {
+          width: 150px;
+        }
+        .order-items {
+          width: calc(100% - 540px);
+        }
+        .order-buttons {
+          display: block;
+          width: 150px;
+          .my-order-filled-button {
+            background: $main-blue;
+            height: 30px;
+            width: 140px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+            line-height: 12px;
+            font-weight: 600;
+            margin: 5px;
+          }
+          .order-filled-disable {
+            background: #e1e1e1;
+            cursor: inherit;
+            &:hover {
+              opacity: 1;
+            }
+          }
+          .my-order-outline-button {
+            background: transparent;
+            height: 30px;
+            width: 140px;
+            border: 1px solid $main-blue;
+            border-radius: 5px;
+            color: $main-blue;
+            font-size: 14px;
+            line-height: 12px;
+            font-weight: 600;
+            margin: 5px;
+          }
+          .order-outline-disable {
+            border: 1px solid #e1e1e1;
+            color: #e1e1e1;
+            cursor: inherit;
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+        .order-title {
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 28px;
+        }
+        .order-content {
+          font-size: 16px;
+          font-weight: normal;
         }
       }
     }
@@ -291,6 +381,13 @@
       line-height: 16px;
       font-weight: 600;
       margin: 5px;
+    }
+    .cancel-modal-left-content {
+      padding-right: 30px;
+      border-right: 2px solid #d4dffc;
+      & > div {
+        margin-bottom: 10px;
+      }
     }
   }
 }

@@ -1,3 +1,5 @@
+import { AddressParam } from "../models/account-param"
+
 const bannerData = [
   {
     title: "Give your old phone a new home.",
@@ -887,37 +889,68 @@ const accountData = {
   },
   addressBook: {
     title: "Address Book",
-    address: [
-      {
-        title: "Billing Address",
-        type: "billing",
-        info: {
-          name: "John Smith",
-          address_1: "123 Main Street",
-          address_2: "",
-          city: "Winnipeg",
-          state: "MB",
-          postcode: "R1R1R1",
-          country: "CA",
-        },
-      },
-      {
-        title: "Delivery Address",
-        type: "delivery",
-        info: {
-          name: "John Smith",
-          address_1: "123 Main Street",
-          address_2: "",
-          city: "Winnipeg",
-          state: "MB",
-          postcode: "R1R1R1",
-          country: "CA",
-        },
-      },
-    ],
+    address: [] as AddressParam[],
   },
   myOrders: {
     title: "My Orders",
+    orders: [
+      {
+        date: "2021-05-01",
+        order: 99999,
+        status: "IN TRANSIT",
+        data: {
+          name: "iPhone 5c",
+          capacity: "64 GB",
+          color: "Yellow",
+          cost: 300,
+          img_src: "/img/account/iphone-5c.png",
+          warranty: 12,
+          warranty_unit: "MONTH",
+        },
+      },
+      {
+        date: "2020-12-15",
+        order: 99998,
+        status: "DELIVERED",
+        data: {
+          name: "Apple Watch (Series 5)",
+          capacity: "40 mm",
+          color: "Space Gray",
+          cost: 300,
+          img_src: "/img/account/iphone-5c.png",
+          warranty: 12,
+          warranty_unit: "month",
+        },
+      },
+      {
+        date: "2020-06-07",
+        order: 99967,
+        status: "CANCELLED",
+        data: {
+          name: "Apple Watch (Series 5)",
+          capacity: "40 mm",
+          color: "Space Gray",
+          cost: 300,
+          img_src: "/img/account/iphone-5c.png",
+          warranty: 12,
+          warranty_unit: "month",
+        },
+      },
+      {
+        date: "2020-04-15",
+        order: 99754,
+        status: "RETURNED",
+        data: {
+          name: "iPhone 9",
+          capacity: "64 GB",
+          color: "Gray",
+          cost: 300,
+          img_src: "/img/account/iphone-5c.png",
+          warranty: 12,
+          warranty_unit: "month",
+        },
+      },
+    ],
   },
   myReturns: {
     title: "My Returns",
