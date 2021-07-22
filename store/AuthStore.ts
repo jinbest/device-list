@@ -6,6 +6,7 @@ import _ from "lodash"
 configure({ enforceActions: "always" })
 
 export class AuthStore {
+  /*
   @observable authUser = ""
   @observable mockCredential = {
     first_name: "",
@@ -13,6 +14,17 @@ export class AuthStore {
     email: "",
     password: "",
   } as MockCredentialParam
+  */
+
+  /* Auto login for account work: will be removed later */
+  @observable authUser = "johmsmith@gmail.com"
+  @observable mockCredential = {
+    first_name: "John",
+    last_name: "Smith",
+    email: "johmsmith@gmail.com",
+    password: "password",
+  } as MockCredentialParam
+
   @observable accountData = _.cloneDeep(accountData)
 
   constructor() {
