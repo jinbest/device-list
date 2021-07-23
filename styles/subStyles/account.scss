@@ -55,6 +55,7 @@
         line-height: 20px;
         color: $grey-3;
         padding: 5px 0;
+        margin-top: 10px;
       }
       .icon-button {
         position: absolute;
@@ -105,6 +106,39 @@
         &::-webkit-scrollbar-thumb:hover {
           background: #cbbbfa;
         }
+        .MuiFormControlLabel-root {
+          padding: 0 10px;
+          margin-top: 10px;
+          .MuiRadio-colorSecondary.Mui-checked {
+            color: black;
+          }
+          .radio-span {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 430px;
+            p {
+              font-size: 18px;
+              font-weight: 600;
+              font-family: "Montserrat";
+            }
+          }
+        }
+        .horizontal-liner {
+          width: 100%;
+          max-width: 460px;
+          height: 2px;
+          background: #d4dffc;
+        }
+        .connect-paypal {
+          margin-top: 20px;
+          img {
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
       }
       .account-address {
         margin: 10px 0;
@@ -119,6 +153,7 @@
           p {
             font-size: 20px;
             font-weight: 600;
+            cursor: default;
           }
           div {
             cursor: pointer;
@@ -223,7 +258,7 @@
   display: flex;
   flex-direction: column;
   max-width: 400px;
-  margin-top: 30px;
+  margin-top: 15px;
   .MuiFormControlLabel-root {
     width: fit-content;
     height: 30px;
@@ -242,6 +277,15 @@
       &:hover {
         opacity: 0.7;
       }
+    }
+  }
+  .conference-checkbox {
+    padding: 20px 0;
+    span {
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      font-family: "Montserrat";
+      color: black;
     }
   }
   .my-details-label {
@@ -389,5 +433,18 @@
         margin-bottom: 10px;
       }
     }
+  }
+}
+
+.payment-logos {
+  cursor: default;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  img {
+    height: 25px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    margin-right: 4px;
   }
 }

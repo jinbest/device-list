@@ -1,4 +1,4 @@
-import { AddressParam } from "../models/account-param"
+import { AddressParam, PaymentParam } from "../models/account-param"
 
 const bannerData = [
   {
@@ -876,6 +876,38 @@ const locationsData = [
   },
 ]
 
+const PaymentOptions = {
+  credit: "credit",
+  paypal: "paypal",
+}
+
+const PaymentLogos = {
+  credit: [
+    {
+      img_src: "/img/payments/visa.png",
+      alt: "visa",
+    },
+    {
+      img_src: "/img/payments/mc.png",
+      alt: "mc",
+    },
+    {
+      img_src: "/img/payments/amex.png",
+      alt: "amex",
+    },
+    {
+      img_src: "/img/payments/interac.png",
+      alt: "interac",
+    },
+  ],
+  paypal: [
+    {
+      img_src: "/img/payments/paypal.png",
+      alt: "paypal",
+    },
+  ],
+}
+
 const accountData = {
   myDetails: {
     title: "My Details",
@@ -957,13 +989,51 @@ const accountData = {
   },
   paymentMethods: {
     title: "Payment Methods",
+    payments: [
+      {
+        type: PaymentOptions.paypal,
+        name: "Paypal",
+        logos: PaymentLogos.paypal,
+        cardInfo: {},
+      } as PaymentParam,
+      {
+        type: PaymentOptions.credit,
+        name: "Credit Card",
+        logos: PaymentLogos.credit,
+        cardInfo: {
+          name: "123 Main Street",
+          number: "9876543298761234",
+          expiryDate: "02/2035",
+          cvv: "111",
+        },
+      } as PaymentParam,
+    ],
   },
   contantPreferences: {
     title: "Contact Preferences",
+    content: "What would you like to hear about? Choose below and we’ll keep you updated.",
+    info: {
+      discount: {
+        label: "Discound and Sales",
+        value: true,
+      },
+      newStock: {
+        label: "New in Stock",
+        value: true,
+      },
+      rewards: {
+        label: "Rewards and Exclusives",
+        value: true,
+      },
+      newsletter: {
+        label: "Newsletter Subscription",
+        value: true,
+      },
+    },
   },
   needHelp: {
     title: "Need Help?",
   },
 }
 
-export { bannerData, lookingFor, locationsData, accountData }
+export { bannerData, lookingFor, locationsData, accountData, PaymentOptions, PaymentLogos }

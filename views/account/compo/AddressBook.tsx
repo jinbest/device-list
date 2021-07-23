@@ -10,6 +10,7 @@ import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
 import Toast from "../../../components/toast/toast"
 import { formatCountryName, formatAddress } from "../../../service/hepler"
 import AddressBookForm from "./AddressBookForm"
+import { AddressParam } from "../../../models/account-param"
 
 const AddressBook = () => {
   const [t] = useTranslation()
@@ -53,7 +54,7 @@ const AddressBook = () => {
       <div className="account-details-viewer">
         {!addStatus ? (
           <>
-            {authStore.accountData.addressBook.address.map((item, index) => {
+            {authStore.accountData.addressBook.address.map((item: AddressParam, index: number) => {
               return (
                 <div key={index} className="account-address">
                   <div className="account-address-header">
