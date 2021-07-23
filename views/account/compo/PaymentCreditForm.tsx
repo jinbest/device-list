@@ -8,6 +8,7 @@ import { PaymentCardInfoParam, PaymentParam } from "../../../models/account-para
 import { useTranslation } from "react-i18next"
 import _ from "lodash"
 import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
+import { PaymentOptions, PaymentLogos } from "../../../static/mock-data"
 
 const regxCVV = /^[0-9]{0,3}$/,
   regxExpiry = /^[0-9]{0,2}(\/|)[0-9]{0,4}$/,
@@ -72,26 +73,9 @@ const PaymentCreditForm = React.forwardRef(
         cntAccountData.paymentMethods.payments[editIndex].cardInfo = values
       } else if (addStatus) {
         cntAccountData.paymentMethods.payments.push({
-          type: "credit",
+          type: PaymentOptions.credit,
           name: "Credit Card",
-          logos: [
-            {
-              img_src: "/img/payments/visa.png",
-              alt: "visa",
-            },
-            {
-              img_src: "/img/payments/mc.png",
-              alt: "mc",
-            },
-            {
-              img_src: "/img/payments/amex.png",
-              alt: "amex",
-            },
-            {
-              img_src: "/img/payments/interac.png",
-              alt: "interac",
-            },
-          ],
+          logos: PaymentLogos.credit,
           cardInfo: values,
         } as PaymentParam)
       }
@@ -99,7 +83,7 @@ const PaymentCreditForm = React.forwardRef(
       setTimeout(() => {
         authStore.setAccountData(cntAccountData)
         if (editIndex > -1) {
-          msg = `Credit Card ${t("has been updated successfully.")}`
+          msg = `${t("Credit Card")} ${t("has been updated successfully.")}`
         } else if (addStatus) {
           msg = t("New Payment method has been added.")
         }

@@ -876,6 +876,38 @@ const locationsData = [
   },
 ]
 
+const PaymentOptions = {
+  credit: "credit",
+  paypal: "paypal",
+}
+
+const PaymentLogos = {
+  credit: [
+    {
+      img_src: "/img/payments/visa.png",
+      alt: "visa",
+    },
+    {
+      img_src: "/img/payments/mc.png",
+      alt: "mc",
+    },
+    {
+      img_src: "/img/payments/amex.png",
+      alt: "amex",
+    },
+    {
+      img_src: "/img/payments/interac.png",
+      alt: "interac",
+    },
+  ],
+  paypal: [
+    {
+      img_src: "/img/payments/paypal.png",
+      alt: "paypal",
+    },
+  ],
+}
+
 const accountData = {
   myDetails: {
     title: "My Details",
@@ -959,37 +991,15 @@ const accountData = {
     title: "Payment Methods",
     payments: [
       {
-        type: "paypal",
+        type: PaymentOptions.paypal,
         name: "Paypal",
-        logos: [
-          {
-            img_src: "/img/payments/paypal.png",
-            alt: "paypal",
-          },
-        ],
+        logos: PaymentLogos.paypal,
         cardInfo: {},
       } as PaymentParam,
       {
-        type: "credit",
+        type: PaymentOptions.credit,
         name: "Credit Card",
-        logos: [
-          {
-            img_src: "/img/payments/visa.png",
-            alt: "visa",
-          },
-          {
-            img_src: "/img/payments/mc.png",
-            alt: "mc",
-          },
-          {
-            img_src: "/img/payments/amex.png",
-            alt: "amex",
-          },
-          {
-            img_src: "/img/payments/interac.png",
-            alt: "interac",
-          },
-        ],
+        logos: PaymentLogos.credit,
         cardInfo: {
           name: "123 Main Street",
           number: "9876543298761234",
@@ -1001,10 +1011,29 @@ const accountData = {
   },
   contantPreferences: {
     title: "Contact Preferences",
+    content: "What would you like to hear about? Choose below and we’ll keep you updated.",
+    info: {
+      discount: {
+        label: "Discound and Sales",
+        value: true,
+      },
+      newStock: {
+        label: "New in Stock",
+        value: true,
+      },
+      rewards: {
+        label: "Rewards and Exclusives",
+        value: true,
+      },
+      newsletter: {
+        label: "Newsletter Subscription",
+        value: true,
+      },
+    },
   },
   needHelp: {
     title: "Need Help?",
   },
 }
 
-export { bannerData, lookingFor, locationsData, accountData }
+export { bannerData, lookingFor, locationsData, accountData, PaymentOptions, PaymentLogos }

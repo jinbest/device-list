@@ -9,6 +9,8 @@ import Toast from "../../../components/toast/toast"
 import { PaymentParam, ImageDataParam } from "../../../models/account-param"
 import PaymentCreditForm from "./PaymentCreditForm"
 import DeletePayment from "../modal/delete-payment"
+import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core"
+import { PaymentOptions, PaymentLogos } from "../../../static/mock-data"
 
 const PaymentMethods = () => {
   const [t] = useTranslation()
@@ -20,6 +22,11 @@ const PaymentMethods = () => {
   const [deleteModal, setDeleteModal] = useState(false)
   const [deletePayment, setDeletePayment] = useState<PaymentParam>({} as PaymentParam)
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
+  const [paymentOption, setPaymentOption] = useState(PaymentOptions.credit)
+
+  const handlePaymentOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPaymentOption((event.target as HTMLInputElement).value)
+  }
 
   const resetStatuses = () => {
     setToastParams({
@@ -47,7 +54,7 @@ const PaymentMethods = () => {
           </span>
         </button>
       )}
-      <div className="account-details-viewer">
+      <div className="account-details-viewer" style={{ overflow: addStatus ? "visible" : "" }}>
         {!addStatus ? (
           <>
             {authStore.accountData.paymentMethods.payments.map(
@@ -66,7 +73,7 @@ const PaymentMethods = () => {
                       {index !== editIndex && (
                         <div
                           onClick={() => {
-                            if (item.type === "credit") {
+                            if (item.type === PaymentOptions.credit) {
                               setEditIndex(index)
                             }
                           }}
@@ -77,7 +84,18 @@ const PaymentMethods = () => {
                     </div>
                     {editIndex !== index && (
                       <div className="account-address-content">
-                        {item.type === "paypal" && <p>{authStore.mockCredential.email}</p>}
+                        {item.type === PaymentOptions.paypal && (
+                          <p>{authStore.mockCredential.email}</p>
+                        )}
+                        {item.type === PaymentOptions.credit && (
+                          <p>{`${t("Mastercard ending in")} ${item.cardInfo.number.slice(
+                            item.cardInfo.number.length - 4
+                          )}`}</p>
+                        )}
+                        {item.type === PaymentOptions.credit && (
+                          <p>{`${authStore.mockCredential.first_name} ${authStore.mockCredential.last_name}`}</p>
+                        )}
+                        {item.type === PaymentOptions.credit && <p>{item.cardInfo.expiryDate}</p>}
                         {index === 0 && (
                           <p className="small-text" style={{ padding: "10px 0", color: "#505050" }}>
                             {t(
@@ -90,15 +108,6 @@ const PaymentMethods = () => {
                             {t("This is your default payment method")}
                           </p>
                         )}
-                        {item.type === "credit" && (
-                          <p>{`${t("Mastercard ending in")} ${item.cardInfo.number.slice(
-                            item.cardInfo.number.length - 4
-                          )}`}</p>
-                        )}
-                        {item.type === "credit" && (
-                          <p>{`${authStore.mockCredential.first_name} ${authStore.mockCredential.last_name}`}</p>
-                        )}
-                        {item.type === "credit" && <p>{item.cardInfo.expiryDate}</p>}
                       </div>
                     )}
                     {index !== editIndex && (
@@ -113,7 +122,7 @@ const PaymentMethods = () => {
                         {t("Delete address")}
                       </button>
                     )}
-                    {index === editIndex && item.type === "credit" && (
+                    {index === editIndex && item.type === PaymentOptions.credit && (
                       <PaymentCreditForm
                         ref={formikRef}
                         editIndex={editIndex}
@@ -133,14 +142,63 @@ const PaymentMethods = () => {
             <div className="account-address-header">
               <p>{t("New Payment Method")}</p>
             </div>
-            <PaymentCreditForm
-              ref={formikRef}
-              editIndex={editIndex}
-              addStatus={addStatus}
-              setEditIndex={setEditIndex}
-              setAddStatus={setAddStatus}
-              setToastParams={setToastParams}
-            />
+            <RadioGroup
+              aria-label="paymentOption"
+              name="payment-options"
+              value={paymentOption}
+              onChange={handlePaymentOptionChange}
+              style={{ marginLeft: "-10px" }}
+            >
+              <FormControlLabel
+                value={PaymentOptions.credit}
+                control={<Radio />}
+                label={
+                  <span className="radio-span">
+                    <p>{t("Credit or Debit Card")}</p>
+                    <div className="payment-logos">
+                      {PaymentLogos.credit.map((item: ImageDataParam, index: number) => (
+                        <img src={item.img_src} alt={item.alt} key={index} />
+                      ))}
+                    </div>
+                  </span>
+                }
+              />
+              {paymentOption === PaymentOptions.credit && (
+                <div style={{ marginLeft: "10px" }}>
+                  <div className="horizontal-liner" />
+                  <PaymentCreditForm
+                    ref={formikRef}
+                    editIndex={editIndex}
+                    addStatus={addStatus}
+                    setEditIndex={setEditIndex}
+                    setAddStatus={setAddStatus}
+                    setToastParams={setToastParams}
+                  />
+                </div>
+              )}
+              <FormControlLabel
+                value={PaymentOptions.paypal}
+                control={<Radio />}
+                label={
+                  <span className="radio-span">
+                    <p>{t("Paypal")}</p>
+                    <div className="payment-logos">
+                      {PaymentLogos.paypal.map((item: ImageDataParam, index: number) => (
+                        <img src={item.img_src} alt={item.alt} key={index} />
+                      ))}
+                    </div>
+                  </span>
+                }
+              />
+              {paymentOption === PaymentOptions.paypal && (
+                <div style={{ marginLeft: "10px" }}>
+                  <div className="horizontal-liner" />
+                  <div className="connect-paypal">
+                    <img src="/img/payments/connect-paypal.png" alt="connect-paypal" />
+                  </div>
+                </div>
+              )}
+            </RadioGroup>
           </div>
         )}
       </div>

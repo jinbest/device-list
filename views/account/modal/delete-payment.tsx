@@ -9,6 +9,7 @@ import Loading from "../../../components/Loading"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import _ from "lodash"
 import { PaymentParam } from "../../../models/account-param"
+import { PaymentOptions } from "../../../static/mock-data"
 
 type Props = {
   open: boolean
@@ -64,7 +65,7 @@ const DeletePayment = ({ open, setOpen, paymentIndex, paymentData }: Props) => {
             <p className="account-modal-content" style={{ margin: "25px 0" }}>
               {t("Are you sure you want to delete the following payment method?")}
             </p>
-            {paymentData.type === "credit" && (
+            {paymentData.type === PaymentOptions.credit && (
               <>
                 <p className="account-modal-content">{`${t(
                   "Mastercard ending in"
@@ -86,7 +87,7 @@ const DeletePayment = ({ open, setOpen, paymentIndex, paymentData }: Props) => {
             <p className="account-modal-content" style={{ margin: "20px 0" }}>
               {t("The following payment method has been deleted from your account")}:
             </p>
-            {paymentData.type === "credit" && (
+            {paymentData.type === PaymentOptions.credit && (
               <>
                 <p className="account-modal-content">{`${t(
                   "Mastercard ending in"

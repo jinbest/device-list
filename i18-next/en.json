@@ -238,5 +238,15 @@
   "Delete Payment Method": "Delete Payment Method",
   "Are you sure you want to delete the following payment method?": "Are you sure you want to delete the following payment method?",
   "The following payment method has been deleted from your account": "The following payment method has been deleted from your account",
-  "has been updated successfully.": "has been updated successfully."
+  "has been updated successfully.": "has been updated successfully.",
+  "Credit or Debit Card": "Credit or Debit Card",
+  "Paypal": "Paypal",
+  "Credit Card": "Credit Card",
+  "What would you like to hear about? Choose below and we’ll keep you updated.": "What would you like to hear about? Choose below and we’ll keep you updated.",
+  "Contact Preferences has been updated successfully.": "Contact Preferences has been updated successfully.",
+  "Discound and Sales": "Discound and Sales",
+  "New in Stock": "New in Stock",
+  "Rewards and Exclusives": "Rewards and Exclusives",
+  "Newsletter Subscription": "Newsletter Subscription",
+  "My Account": "My Account"
 }
