@@ -46,3 +46,22 @@ export interface MyOrdersChildParam {
   warranty: number | null
   warranty_unit: string | null
 }
+
+export interface PaymentParam {
+  type: string
+  name: string
+  logos: ImageDataParam[]
+  cardInfo: PaymentCardInfoParam
+}
+
+export interface PaymentCardInfoParam {
+  name: string
+  number: string
+  expiryDate: string
+  cvv: string
+}
+
+export interface ImageDataParam {
+  img_src: string
+  alt: string
+}

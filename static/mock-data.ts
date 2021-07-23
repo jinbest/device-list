@@ -1,4 +1,4 @@
-import { AddressParam } from "../models/account-param"
+import { AddressParam, PaymentParam } from "../models/account-param"
 
 const bannerData = [
   {
@@ -957,6 +957,47 @@ const accountData = {
   },
   paymentMethods: {
     title: "Payment Methods",
+    payments: [
+      {
+        type: "paypal",
+        name: "Paypal",
+        logos: [
+          {
+            img_src: "/img/payments/paypal.png",
+            alt: "paypal",
+          },
+        ],
+        cardInfo: {},
+      } as PaymentParam,
+      {
+        type: "credit",
+        name: "Credit Card",
+        logos: [
+          {
+            img_src: "/img/payments/visa.png",
+            alt: "visa",
+          },
+          {
+            img_src: "/img/payments/mc.png",
+            alt: "mc",
+          },
+          {
+            img_src: "/img/payments/amex.png",
+            alt: "amex",
+          },
+          {
+            img_src: "/img/payments/interac.png",
+            alt: "interac",
+          },
+        ],
+        cardInfo: {
+          name: "123 Main Street",
+          number: "9876543298761234",
+          expiryDate: "02/2035",
+          cvv: "111",
+        },
+      } as PaymentParam,
+    ],
   },
   contantPreferences: {
     title: "Contact Preferences",

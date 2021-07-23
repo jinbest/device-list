@@ -71,7 +71,7 @@ h3 {
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: bold !important;
 }
 
 .custom-scroll-bar {
@@ -135,8 +135,8 @@ button {
 }
 
 .small-text {
-  font-size: 12px;
-  line-height: 15px;
+  font-size: 12px !important;
+  line-height: 15px !important;
 }
 /* Customize library Class */
 .leaflet-marker-icon {

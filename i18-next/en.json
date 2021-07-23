@@ -225,5 +225,18 @@
   "It may take several minutes for the order to disappear from the list on your order history page.": "It may take several minutes for the order to disappear from the list on your order history page.",
   "Items in Order": "Items in Order",
   "Warranty": "Warranty",
-  "Order Again": "Order Again"
+  "Order Again": "Order Again",
+  "you'll need to enter your login details when you place your order.": "you'll need to enter your login details when you place your order.",
+  "This is your default payment method": "This is your default payment method",
+  "Mastercard ending in": "Mastercard ending in",
+  "New Payment method has been added.": "New Payment method has been added.",
+  "Name on Card": "Name on Card",
+  "Enter your Credit Card name": "Enter your Credit Card name",
+  "Card Number": "Card Number",
+  "Expiry Date": "Expiry Date",
+  "New Payment Method": "New Payment Method",
+  "Delete Payment Method": "Delete Payment Method",
+  "Are you sure you want to delete the following payment method?": "Are you sure you want to delete the following payment method?",
+  "The following payment method has been deleted from your account": "The following payment method has been deleted from your account",
+  "has been updated successfully.": "has been updated successfully."
 }
