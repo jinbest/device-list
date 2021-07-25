@@ -164,7 +164,7 @@ const PaymentMethods = () => {
                 }
               />
               {paymentOption === PaymentOptions.credit && (
-                <div style={{ marginLeft: "10px" }}>
+                <div style={{ marginLeft: "5px", width: "100%" }}>
                   <div className="horizontal-liner" />
                   <PaymentCreditForm
                     ref={formikRef}
@@ -191,7 +191,7 @@ const PaymentMethods = () => {
                 }
               />
               {paymentOption === PaymentOptions.paypal && (
-                <div style={{ marginLeft: "10px" }}>
+                <div style={{ marginLeft: "5px", width: "100%" }}>
                   <div className="horizontal-liner" />
                   <div className="connect-paypal">
                     <img src="/img/payments/connect-paypal.png" alt="connect-paypal" />

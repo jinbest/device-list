@@ -251,3 +251,10 @@ export function formatWarranty(warranty: number | null, warranty_unit: string | 
     return `${warranty} ${unit}`
   }
 }
+
+export function getWidth() {
+  if (typeof window !== "undefined") {
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+  }
+  return 0
+}

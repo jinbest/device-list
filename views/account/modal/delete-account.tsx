@@ -81,7 +81,7 @@ const DeleteAccount = ({ open, setOpen }: Props) => {
           </>
         )}
         {!deleted && (
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap justify-center">
             <button className="filled-modal-button" onClick={handleDelete}>
               {isDeleting ? (
                 <span>

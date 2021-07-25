@@ -11,6 +11,9 @@ import MyReturns from "./compo/MyReturns"
 import PaymentMethods from "./compo/PaymentMethods"
 import ContactPreferences from "./compo/ContactPreferences"
 import NeedHelp from "./compo/NeedHelp"
+import { getWidth } from "../../service/hepler"
+import LeftArrow from "../../components/svg/LeftArrow"
+import RightArrow from "../../components/svg/RightArrow"
 
 const MyAccount = () => {
   const router = useRouter()
@@ -18,6 +21,27 @@ const MyAccount = () => {
   const keys = Object.keys(authStore.accountData)
 
   const [tab, setTab] = useState(0)
+
+  const [viewMenu, setViewMenu] = useState(true)
+  const [mobile, setMobile] = useState(false)
+
+  const handleResize = () => {
+    if (getWidth() < 625) {
+      setMobile(true)
+    } else {
+      setMobile(false)
+    }
+  }
+
+  useEffect(() => {
+    handleResize()
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize)
+      return () => {
+        window.removeEventListener("resize", handleResize)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (!authStore.authUser) {
@@ -36,38 +60,67 @@ const MyAccount = () => {
   return (
     <div className="my-account">
       <div className="container">
-        <div className="account-menu-bar">
-          <div>
-            {!isEmpty(authStore.accountData) && (
-              <>
-                {keys.map((item: string, index: number) => (
-                  <p
-                    key={index}
-                    style={{ color: index === tab ? "#4360FA" : "" }}
-                    onClick={() => {
-                      setTab(index)
-                    }}
-                  >
-                    {t(_getTitle_(item, authStore.accountData))}
-                  </p>
-                ))}
-              </>
+        {(!mobile || (mobile && viewMenu)) && (
+          <div className="account-menu-bar">
+            <div>
+              {!isEmpty(authStore.accountData) && (
+                <>
+                  {keys.map((item: string, index: number) => (
+                    <p
+                      key={index}
+                      style={{ color: index === tab ? "#4360FA" : "" }}
+                      onClick={() => {
+                        setTab(index)
+                        setViewMenu(false)
+                      }}
+                    >
+                      {t(_getTitle_(item, authStore.accountData))}
+                    </p>
+                  ))}
+                </>
+              )}
+            </div>
+            <div>
+              <p className="underline" onClick={handleSignOut}>
+                {t("Sign Out")}
+              </p>
+            </div>
+            {mobile && (
+              <div
+                className="mobile-switcher-view"
+                style={{ position: "absolute", right: "-33px", top: 0 }}
+                onClick={() => {
+                  setViewMenu(false)
+                }}
+              >
+                <LeftArrow color="#323232" />
+              </div>
             )}
           </div>
-          <div>
-            <p className="underline" onClick={handleSignOut}>
-              {t("Sign Out")}
-            </p>
-          </div>
-        </div>
-        {tab === 0 && <MyDetails />}
-        {tab === 1 && <AddressBook />}
-        {tab === 2 && <MyOrders />}
-        {tab === 3 && <MyReturns />}
-        {tab === 4 && <PaymentMethods />}
-        {tab === 5 && <ContactPreferences />}
-        {tab === 6 && <NeedHelp />}
+        )}
+        {(!mobile || (mobile && !viewMenu)) && (
+          <>
+            {tab === 0 && <MyDetails />}
+            {tab === 1 && <AddressBook />}
+            {tab === 2 && <MyOrders />}
+            {tab === 3 && <MyReturns />}
+            {tab === 4 && <PaymentMethods />}
+            {tab === 5 && <ContactPreferences />}
+            {tab === 6 && <NeedHelp />}
+          </>
+        )}
       </div>
+      {mobile && !viewMenu && (
+        <div
+          className="mobile-switcher-view"
+          onClick={() => {
+            setViewMenu(true)
+          }}
+          style={{ left: 0, position: "fixed", top: "210px" }}
+        >
+          <RightArrow color="#323232" />
+        </div>
+      )}
     </div>
   )
 }

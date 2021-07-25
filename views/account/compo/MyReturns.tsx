@@ -1,13 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import { observer } from "mobx-react"
 import { authStore } from "../../../store"
 import { useTranslation } from "react-i18next"
 import { MyOrdersParam } from "../../../models/account-param"
 import moment from "moment-timezone"
 import _ from "lodash"
+import UpArrow from "../../../components/svg/UpArrow"
+import DownArrow from "../../../components/svg/DownArrow"
 
 const MyReturns = () => {
   const [t] = useTranslation()
+
+  const [expand, setExpand] = useState(-1)
 
   const _getFilledButtonClassName_ = (val: string) => {
     if (val === "IN TRANSIT" || val === "DELIVERED") {
@@ -42,42 +46,81 @@ const MyReturns = () => {
           {_.filter(authStore.accountData.myOrders.orders, (o) => o.status === "RETURNED").map(
             (item: MyOrdersParam, index: number) => {
               return (
-                <div className="my-orders-row-data" key={index}>
-                  <div className="order-date">
-                    <p className="order-title">{t("Order Date")}</p>
-                    <p className="order-content">{moment(item.date).format("MM/DD/YYYY")}</p>
+                <div key={index} className="my-orders-row-data">
+                  <div
+                    onClick={() => {
+                      if (expand === index) {
+                        setExpand(-1)
+                      } else {
+                        setExpand(index)
+                      }
+                    }}
+                  >
+                    <div className="order-date">
+                      <p className="order-title">{t("Order Date")}</p>
+                      <p className="order-content">{moment(item.date).format("MM/DD/YYYY")}</p>
+                    </div>
+                    <div className="order-no">
+                      <p className="order-title">{t("Order No.")}</p>
+                      <p className="order-content">{item.order}</p>
+                    </div>
+                    <div className="order-status">
+                      <p className="order-title">{t("Order Status")}</p>
+                      <p className="order-content">{"IN TRANSIT"}</p>
+                    </div>
+                    <div className="order-arrow">
+                      {expand === index ? <UpArrow color="black" /> : <DownArrow color="black" />}
+                    </div>
+                    <div className="order-items">
+                      <p className="order-title">{t("Items")}</p>
+                      <p className="order-content">{item.data.name}</p>
+                      <p className="order-content">{`${item.data.capacity} | ${item.data.color}`}</p>
+                    </div>
+                    <div className="order-buttons">
+                      <button
+                        className={_getFilledButtonClassName_("IN TRANSIT")}
+                        onClick={() => {
+                          handleOrder(item, "IN TRANSIT")
+                        }}
+                      >
+                        {t("Track Parcel")}
+                      </button>
+                      <button
+                        className={_getOutlinedButtonClassName_("IN TRANSIT")}
+                        onClick={() => {
+                          handleOrder(item, "DELIVERED")
+                        }}
+                      >
+                        {t("Order Again")}
+                      </button>
+                    </div>
                   </div>
-                  <div className="order-no">
-                    <p className="order-title">{t("Order No.")}</p>
-                    <p className="order-content">{item.order}</p>
-                  </div>
-                  <div className="order-status">
-                    <p className="order-title">{t("Order Status")}</p>
-                    <p className="order-content">{"IN TRANSIT"}</p>
-                  </div>
-                  <div className="order-items">
-                    <p className="order-title">{t("Items")}</p>
-                    <p className="order-content">{item.data.name}</p>
-                    <p className="order-content">{`${item.data.capacity} | ${item.data.color}`}</p>
-                  </div>
-                  <div className="order-buttons">
-                    <button
-                      className={_getFilledButtonClassName_("IN TRANSIT")}
-                      onClick={() => {
-                        handleOrder(item, "IN TRANSIT")
-                      }}
-                    >
-                      {t("Track Parcel")}
-                    </button>
-                    <button
-                      className={_getOutlinedButtonClassName_("IN TRANSIT")}
-                      onClick={() => {
-                        handleOrder(item, "DELIVERED")
-                      }}
-                    >
-                      {t("Order Again")}
-                    </button>
-                  </div>
+                  {expand === index && (
+                    <div className="mobile-orders-row">
+                      <div className="order-items-mobile">
+                        <p className="order-title">{t("Items")}</p>
+                        <p className="order-content">{`${item.data.name} | ${item.data.capacity} | ${item.data.color}`}</p>
+                      </div>
+                      <div className="order-buttons-mobile">
+                        <button
+                          className={_getFilledButtonClassName_("IN TRANSIT")}
+                          onClick={() => {
+                            handleOrder(item, "IN TRANSIT")
+                          }}
+                        >
+                          {t("Track Parcel")}
+                        </button>
+                        <button
+                          className={_getOutlinedButtonClassName_("IN TRANSIT")}
+                          onClick={() => {
+                            handleOrder(item, "DELIVERED")
+                          }}
+                        >
+                          {t("Order Again")}
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )
             }
