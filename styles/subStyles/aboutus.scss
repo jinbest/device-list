@@ -20,6 +20,30 @@
         font-weight: normal;
         line-height: 40px;
       }
+      @media (max-width: 960px) {
+        h1 {
+          font-size: 34px;
+          line-height: 40px;
+        }
+        p {
+          font-size: 18px;
+          line-height: 27px;
+        }
+        img {
+          width: 90%;
+        }
+      }
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 28px;
+          line-height: 32px;
+        }
+        p {
+          font-size: 16px;
+          line-height: 20px;
+          padding-top: 10px;
+        }
+      }
     }
   }
   .aboutus-section2 {
@@ -33,20 +57,49 @@
       border-radius: 20px;
       padding: 20px 40px;
       text-align: center;
+      @media (max-width: 1000px) {
+        box-shadow: none;
+        padding: 20px 0;
+      }
       h1 {
         font-size: 45px;
         font-family: "Montserrat Bold";
         line-height: 67px;
+        @media (max-width: 1200px) {
+          font-size: 32px;
+          line-height: 40px;
+        }
+        @media (max-width: 600px) {
+          font-size: 28px;
+          line-height: 30px;
+        }
+        @media (max-width: 500px) {
+          font-size: 24px;
+        }
       }
       .data-viewer {
         display: flex;
         justify-content: space-between;
         padding-top: 30px;
+        @media (max-width: 1000px) {
+          flex-direction: column;
+        }
         & > div {
           width: calc(33% - 15px);
           display: flex;
           flex-direction: column;
           align-items: center;
+          @media (max-width: 1440px) {
+            width: calc(33% - 8px);
+          }
+          @media (max-width: 1000px) {
+            width: 100%;
+            max-width: 500px;
+            margin: 10px auto;
+            box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+            border-radius: 18px;
+            padding: 20px;
+          }
           .round-viewer {
             width: 250px;
             height: 250px;
@@ -59,12 +112,28 @@
             img {
               width: 160px;
             }
+            @media (max-width: 1200px) {
+              width: 200px;
+              height: 200px;
+              img {
+                width: 130px;
+              }
+            }
           }
           h2 {
             color: $main-blue;
             font-family: "Montserrat Bold";
             padding: 25px 0;
             font-size: 30px;
+            @media (max-width: 1200px) {
+              font-size: 24px;
+            }
+            @media (max-width: 1000px) {
+              padding: 10px 0;
+            }
+            @media (max-width: 500px) {
+              font-size: 20px;
+            }
           }
           .child-data {
             border-radius: 20px;
@@ -73,7 +142,7 @@
             margin: 10px 0;
             border: 1px solid #bdbfc3;
             text-align: left;
-            height: 165px;
+            height: 180px;
             h3 {
               font-family: "Montserrat";
               font-size: 22px;
@@ -87,6 +156,35 @@
             ul {
               margin: 5px 0;
               padding: 0 0 0 20px;
+              li {
+                font-size: 18px;
+              }
+            }
+            @media (max-width: 1440px) {
+              padding: 10px 15px;
+              h3 {
+                font-size: 18px;
+                line-height: 24px;
+              }
+              p,
+              ul > li {
+                font-size: 14px;
+              }
+            }
+            @media (max-width: 1000px) {
+              height: auto;
+              border-radius: 15px;
+            }
+            @media (max-width: 500px) {
+              border-radius: 10px;
+              h3 {
+                font-size: 16px;
+                line-height: 20px;
+              }
+              p,
+              ul > li {
+                font-size: 12px;
+              }
             }
           }
         }
@@ -112,10 +210,34 @@
         text-align: center;
       }
     }
+    @media (max-width: 1000px) {
+      margin: 50px 0;
+      padding: 50px 0;
+      .container p {
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
+    @media (max-width: 900px) {
+      margin-top: 0;
+    }
+    @media (max-width: 600px) {
+      padding: 30px 0;
+      .container p {
+        font-size: 16px;
+        line-height: 22px;
+      }
+    }
   }
   .aboutus-section4 {
     width: 100%;
     padding: 0 0 50px;
+    @media (max-width: 1000px) {
+      padding: 0 0 20px;
+    }
+    @media (max-width: 768px) {
+      padding: 0;
+    }
     .container {
       width: calc(100% - 50px);
       max-width: 1440px;
@@ -125,12 +247,26 @@
         font-size: 45px;
         line-height: 60px;
         text-align: center;
+        @media (max-width: 1000px) {
+          font-size: 32px;
+          line-height: 40px;
+        }
+        @media (max-width: 600px) {
+          font-size: 28px;
+          line-height: 30px;
+        }
+        @media (max-width: 500px) {
+          font-size: 24px;
+        }
       }
       .data-viewer {
         display: flex;
         width: 100%;
         justify-content: space-between;
         margin-top: 30px;
+        @media (max-width: 960px) {
+          flex-direction: column;
+        }
         & > div {
           width: calc(50% - 10px);
           height: auto;
@@ -165,6 +301,45 @@
             cursor: pointer;
             &:hover {
               opacity: 0.7;
+            }
+          }
+          @media (max-width: 1440px) {
+            h2 {
+              font-size: 24px;
+              line-height: 32px;
+            }
+            p,
+            button {
+              font-size: 20px;
+            }
+          }
+          @media (max-width: 1000px) {
+            h2 {
+              font-size: 22px;
+              line-height: 28px;
+            }
+            p,
+            button {
+              font-size: 18px;
+            }
+            button {
+              width: 200px;
+              height: 30px;
+            }
+          }
+          @media (max-width: 960px) {
+            width: 100%;
+            max-width: 500px;
+            margin: 10px auto;
+          }
+          @media (max-width: 600px) {
+            h2 {
+              font-size: 18px;
+              line-height: 24px;
+            }
+            p,
+            button {
+              font-size: 14px;
             }
           }
         }
