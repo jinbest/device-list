@@ -46,7 +46,7 @@ const SignModal = ({ open, setOpen, setToastParams }: Props) => {
   const [signKey, setSignKey] = useState<SignParam>("login")
   const [tabValue, setTabValue] = useState(0)
 
-  const handleTabChange = (newValue: number) => {
+  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setTabValue(newValue)
   }
 
@@ -79,7 +79,7 @@ const SignModal = ({ open, setOpen, setToastParams }: Props) => {
         <AppBar position="static" color="default">
           <Tabs
             value={tabValue}
-            onChange={(e, value) => handleTabChange(value)}
+            onChange={handleTabChange}
             indicatorColor="primary"
             textColor="primary"
             variant="fullWidth"

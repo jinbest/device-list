@@ -21,6 +21,8 @@ module.exports = {
     "@typescript-eslint/prefer-regexp-exec": "off",
     "@typescript-eslint/no-unsafe-return": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
+    // "no-unused-vars": ["warn", { varsIgnorePattern: "^_" }],
+    // "@typescript-eslint/no-unused-vars": ["warn", { varsIgnorePattern: "^_" }],
   },
   parserOptions: {
     project: "./tsconfig.json",
