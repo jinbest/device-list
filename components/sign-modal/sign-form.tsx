@@ -83,32 +83,35 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
 
     actions.setSubmitting(true)
 
-    handleSign(
-      {
-        first_name: values.first_name,
-        last_name: values.last_name,
-        email: values.email,
-        password: values.password,
-      },
-      actions
-    )
+    if (signKey === "login") {
+      handleSignIn(
+        {
+          first_name: values.first_name,
+          last_name: values.last_name,
+          email: values.email,
+          password: values.password,
+        },
+        actions
+      )
+    } else {
+      handleSignUp(
+        {
+          first_name: values.first_name,
+          last_name: values.last_name,
+          email: values.email,
+          password: values.password,
+        },
+        actions
+      )
+    }
   }
 
-  const handleSign = (val: MockCredentialParam, actions: FormikHelpers<any>) => {
+  const handleSignIn = (val: MockCredentialParam, actions: FormikHelpers<any>) => {
     const authCrendential = authStore.mockCredential
-    let msg =
-        signKey === "signup"
-          ? t("You have been registered successfully.")
-          : t("You've logged in successfully."),
+    let msg = t("You've logged in successfully."),
       isWarning = false
 
-    if (signKey === "signup" && val.email === authCrendential.email) {
-      msg = t("This user has been registered already.")
-      isWarning = true
-    } else if (
-      signKey === "login" &&
-      (val.email !== authCrendential.email || val.password !== authCrendential.password)
-    ) {
+    if (val.email !== authCrendential.email || val.password !== authCrendential.password) {
       msg = t("Email or Password does not matched.")
       isWarning = true
     }
@@ -124,10 +127,40 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
     }
 
     setTimeout(() => {
-      if (signKey === "signup") {
-        authStore.setMockCredential(val)
-        handleUpdateAccountData(val)
-      }
+      authStore.setAuthUser(val.email)
+      setToastParams({
+        msg,
+        isSuccess: !isWarning,
+        isWarning: isWarning,
+      })
+      router.push("/account")
+      onCloseModal()
+    }, delayTime)
+  }
+
+  const handleSignUp = (val: MockCredentialParam, actions: FormikHelpers<any>) => {
+    const authCrendential = authStore.mockCredential
+    let msg = t("You have been registered successfully."),
+      isWarning = false
+
+    if (val.email === authCrendential.email) {
+      msg = t("This user has been registered already.")
+      isWarning = true
+    }
+
+    if (isWarning) {
+      setToastParams({
+        msg,
+        isSuccess: !isWarning,
+        isWarning: isWarning,
+      })
+      actions.setSubmitting(false)
+      return
+    }
+
+    setTimeout(() => {
+      authStore.setMockCredential(val)
+      handleUpdateAccountData(val)
       authStore.setAuthUser(val.email)
       setToastParams({
         msg,
@@ -196,7 +229,7 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
       validationSchema={loginSchema}
       innerRef={formikRef}
     >
-      {({ values, handleChange, setFieldValue, errors, touched, isSubmitting }) => (
+      {({ values, setFieldValue, errors, touched, isSubmitting }) => (
         <Form className="sign-form">
           <label className="sign-label" htmlFor="email">
             {t("Email Address")}
@@ -212,7 +245,6 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
               className="form-control"
               onChange={(e) => {
                 setFieldValue("email", e.target.value)
-                handleChange(e)
               }}
               placeholder={t("Enter your email address...")}
               type="email"
@@ -244,7 +276,6 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
                     className="form-control"
                     onChange={(e) => {
                       setFieldValue("first_name", e.target.value)
-                      handleChange(e)
                     }}
                     placeholder={t("Enter your first name...")}
                     variant="outlined"
@@ -269,7 +300,6 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
                     className="form-control"
                     onChange={(e) => {
                       setFieldValue("last_name", e.target.value)
-                      handleChange(e)
                     }}
                     placeholder={t("Enter your last name...")}
                     variant="outlined"
@@ -296,7 +326,6 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
               className="form-control"
               onChange={(e) => {
                 setFieldValue("password", e.target.value)
-                handleChange(e)
               }}
               placeholder={t("Enter your password...")}
               type={passType ? "password" : "text"}
@@ -349,7 +378,6 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
                   className="form-control"
                   onChange={(e) => {
                     setFieldValue("confPass", e.target.value)
-                    handleChange(e)
                   }}
                   placeholder={t("Re-enter your password...")}
                   type={confPassType ? "password" : "text"}
@@ -386,7 +414,6 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
                       checked={values.receive_email || false}
                       onChange={(e) => {
                         setFieldValue("receive_email", e.target.checked)
-                        handleChange(e)
                       }}
                       name="receive_email"
                       color="primary"
@@ -402,7 +429,6 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
                       checked={values.agree_policy || false}
                       onChange={(e) => {
                         setFieldValue("agree_policy", e.target.checked)
-                        handleChange(e)
                       }}
                       name="agree_policy"
                       color="primary"

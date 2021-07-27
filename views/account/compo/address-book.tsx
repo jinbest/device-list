@@ -9,7 +9,7 @@ import statesData from "../../../const/statesData"
 import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
 import Toast from "../../../components/toast/toast"
 import { formatCountryName, formatAddress } from "../../../service/hepler"
-import AddressBookForm from "./AddressBookForm"
+import AddressBookForm from "./address-book-form"
 import { AddressParam } from "../../../models/account-param"
 
 const AddressBook = () => {

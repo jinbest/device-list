@@ -91,7 +91,7 @@ const MyDetails = () => {
         }}
         validationSchema={formSchema}
       >
-        {({ values, handleChange, setFieldValue, errors, touched, isSubmitting }) => (
+        {({ values, setFieldValue, errors, touched, isSubmitting }) => (
           <Form className="my-details-form">
             <label className="my-details-label" htmlFor="first_name">
               {t("First Name")}:
@@ -107,7 +107,6 @@ const MyDetails = () => {
                 onChange={(e) => {
                   setFieldValue("first_name", e.target.value)
                   setIsEditing(true)
-                  handleChange(e)
                 }}
                 placeholder={`${t("Enter your first name")}...`}
                 type="text"
@@ -133,7 +132,6 @@ const MyDetails = () => {
                 onChange={(e) => {
                   setFieldValue("last_name", e.target.value)
                   setIsEditing(true)
-                  handleChange(e)
                 }}
                 placeholder={`${t("Enter your last name")}...`}
                 type="text"
@@ -159,7 +157,6 @@ const MyDetails = () => {
                 onChange={(e) => {
                   setFieldValue("email", e.target.value)
                   setIsEditing(true)
-                  handleChange(e)
                 }}
                 placeholder={`${t("Enter your email")}...`}
                 type="email"
@@ -184,7 +181,6 @@ const MyDetails = () => {
                 onChange={(e) => {
                   setFieldValue("phone", e.target.value)
                   setIsEditing(true)
-                  handleChange(e)
                 }}
                 placeholder={`${t("Enter your phone number")}...`}
                 type="text"

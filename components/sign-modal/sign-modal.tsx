@@ -6,7 +6,7 @@ import { Tabs, Tab, AppBar, Box, IconButton } from "@material-ui/core"
 import { SignParam } from "../../models/sign-params"
 import SwipeableViews from "react-swipeable-views"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
-import SignForm from "./SignForm"
+import SignForm from "./sign-form"
 import CloseIcon from "@material-ui/icons/Close"
 import { ToastMsgParams } from "../toast/toast-msg-params"
 

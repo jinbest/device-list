@@ -6,8 +6,8 @@ import { MyOrdersParam } from "../../../models/account-param"
 import moment from "moment-timezone"
 import _, { isEmpty } from "lodash"
 import CancelOrder from "../modal/cancel-order"
-import UpArrow from "../../../components/svg/UpArrow"
-import DownArrow from "../../../components/svg/DownArrow"
+import UpArrow from "../../../components/svg/up-arrow"
+import DownArrow from "../../../components/svg/down-arrow"
 
 const MyOrders = () => {
   const [t] = useTranslation()

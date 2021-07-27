@@ -179,7 +179,7 @@ const AddressBookForm = React.forwardRef(
         validationSchema={formSchema}
         innerRef={ref}
       >
-        {({ values, handleChange, setFieldValue, errors, touched, isSubmitting }) => (
+        {({ values, setFieldValue, errors, touched, isSubmitting }) => (
           <Form className="my-details-form">
             <label className="my-details-label" htmlFor="address_1">
               {t("Street Address")}
@@ -195,7 +195,6 @@ const AddressBookForm = React.forwardRef(
                 className="form-control"
                 onChange={(e) => {
                   setFieldValue("address_1", e.target.value)
-                  handleChange(e)
                 }}
                 placeholder={`${t("Enter your street address")}...`}
                 type="text"
@@ -220,7 +219,6 @@ const AddressBookForm = React.forwardRef(
                 className="form-control"
                 onChange={(e) => {
                   setFieldValue("address_2", e.target.value)
-                  handleChange(e)
                 }}
                 type="text"
                 variant="outlined"
@@ -246,7 +244,6 @@ const AddressBookForm = React.forwardRef(
                     className="form-control"
                     onChange={(e) => {
                       setFieldValue("city", e.target.value)
-                      handleChange(e)
                     }}
                     type="text"
                     variant="outlined"
@@ -272,7 +269,6 @@ const AddressBookForm = React.forwardRef(
                     className="form-control"
                     onChange={(e) => {
                       setFieldValue("state", e.target.value)
-                      handleChange(e)
                     }}
                     type="text"
                     variant="outlined"
@@ -311,7 +307,6 @@ const AddressBookForm = React.forwardRef(
                       setFieldValue("country", e.target.value)
                       setFieldValue("state", statesData[e.target.value][0].code)
                       loadStates(e.target.value)
-                      handleChange(e)
                     }}
                     type="text"
                     variant="outlined"
@@ -344,7 +339,6 @@ const AddressBookForm = React.forwardRef(
                     className="form-control"
                     onChange={(e) => {
                       setFieldValue("postcode", e.target.value)
-                      handleChange(e)
                     }}
                     type="text"
                     variant="outlined"
@@ -365,7 +359,6 @@ const AddressBookForm = React.forwardRef(
                         checked={values.billing || false}
                         onChange={(e) => {
                           setFieldValue("billing", e.target.checked)
-                          handleChange(e)
                         }}
                         name="billing"
                         color="primary"
@@ -379,7 +372,6 @@ const AddressBookForm = React.forwardRef(
                         checked={values.delivery || false}
                         onChange={(e) => {
                           setFieldValue("delivery", e.target.checked)
-                          handleChange(e)
                         }}
                         name="delivery"
                         color="primary"

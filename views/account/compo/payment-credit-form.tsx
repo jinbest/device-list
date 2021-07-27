@@ -106,7 +106,7 @@ const PaymentCreditForm = React.forwardRef(
         validationSchema={formSchema}
         innerRef={ref}
       >
-        {({ values, handleChange, setFieldValue, errors, touched, isSubmitting }) => (
+        {({ values, setFieldValue, errors, touched, isSubmitting }) => (
           <Form className="my-details-form">
             <label className="my-details-label" htmlFor="name">
               {t("Name on Card")}
@@ -122,7 +122,6 @@ const PaymentCreditForm = React.forwardRef(
                 className="form-control"
                 onChange={(e) => {
                   setFieldValue("name", e.target.value)
-                  handleChange(e)
                 }}
                 placeholder={`${t("Enter your Credit Card name")}...`}
                 type="text"
@@ -149,7 +148,6 @@ const PaymentCreditForm = React.forwardRef(
                 onChange={(e) => {
                   if (regxCardNumber.test(e.target.value)) {
                     setFieldValue("number", e.target.value)
-                    handleChange(e)
                   } else {
                     return
                   }
@@ -179,7 +177,6 @@ const PaymentCreditForm = React.forwardRef(
                     onChange={(e) => {
                       if (regxExpiry.test(e.target.value)) {
                         setFieldValue("expiryDate", e.target.value)
-                        handleChange(e)
                       } else {
                         return
                       }
@@ -209,7 +206,6 @@ const PaymentCreditForm = React.forwardRef(
                     onChange={(e) => {
                       if (regxCVV.test(e.target.value)) {
                         setFieldValue("cvv", e.target.value)
-                        handleChange(e)
                       } else {
                         return
                       }

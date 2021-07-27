@@ -1,6 +1,6 @@
 import React from "react"
-import { withStyles, makeStyles } from "@material-ui/core/styles"
-import Menu, { MenuProps } from "@material-ui/core/Menu"
+import { makeStyles } from "@material-ui/core/styles"
+import Modal from "@material-ui/core/Modal"
 import { useTranslation } from "react-i18next"
 import { Form, Formik, FormikHelpers, yupToFormErrors } from "formik"
 import { Checkbox, FormControlLabel, FormGroup, FormControl } from "@material-ui/core"
@@ -14,37 +14,14 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-const StyledMenu = withStyles({
-  paper: {
-    borderRadius: "5px",
-    boxShadow: "0 8px 15px 5px rgba(0,0,0,0.25)",
-    overflow: "inherit !important",
-    marginTop: "5px",
-    border: "1px solid #C4C4C4",
-    background: "#EFEFEF",
-    top: "35px !important",
-    width: 400,
-  },
-})((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    {...props}
-  />
-))
+type Props = {
+  open: boolean
+  setOpen: (val: boolean) => void
+}
 
-const FindStoreMenu = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
-  const [t] = useTranslation()
+const FindStoreModal = ({ open, setOpen }: Props) => {
   const classes = useStyles()
+  const [t] = useTranslation()
 
   const initialValues = {
     code: "",
@@ -55,12 +32,8 @@ const FindStoreMenu = () => {
     authorized: false,
   }
 
-  const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-
   const handleClose = () => {
-    setAnchorEl(null)
+    setOpen(false)
   }
 
   const onSave = (values: any, actions: FormikHelpers<any>) => {
@@ -72,18 +45,14 @@ const FindStoreMenu = () => {
   }
 
   return (
-    <div className="find-a-store-menu">
-      <button aria-controls="find-store-menu" aria-haspopup="true" onClick={handleOpen}>
-        {t("Find a Store")}
-      </button>
-      <StyledMenu
-        id="find-store-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <div className="triangle" style={{ right: "40px" }}></div>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      className="find-store-modal"
+    >
+      <div>
         <Formik
           initialValues={initialValues}
           onSubmit={(values, actions) => {
@@ -98,7 +67,7 @@ const FindStoreMenu = () => {
             return {}
           }}
         >
-          {({ values, handleChange, setFieldValue }) => (
+          {({ values, setFieldValue }) => (
             <Form className="find-store-menu-container">
               <p className="store-menu-title" style={{ marginBottom: "20px" }}>
                 {t("Find a Store")}
@@ -113,7 +82,6 @@ const FindStoreMenu = () => {
                 onChange={(e) => {
                   if (e.target.value.length >= 0) {
                     setFieldValue("code", e.target.value)
-                    handleChange(e)
                   }
                 }}
               />
@@ -126,7 +94,6 @@ const FindStoreMenu = () => {
                         checked={values.appointment || false}
                         onChange={(e) => {
                           setFieldValue("appointment", e.target.checked)
-                          handleChange(e)
                         }}
                         name="appointment"
                         color="primary"
@@ -140,7 +107,6 @@ const FindStoreMenu = () => {
                         checked={values.booking || false}
                         onChange={(e) => {
                           setFieldValue("booking", e.target.checked)
-                          handleChange(e)
                         }}
                         name="booking"
                         color="primary"
@@ -154,7 +120,6 @@ const FindStoreMenu = () => {
                         checked={values.financing || false}
                         onChange={(e) => {
                           setFieldValue("financing", e.target.checked)
-                          handleChange(e)
                         }}
                         name="financing"
                         color="primary"
@@ -168,7 +133,6 @@ const FindStoreMenu = () => {
                         checked={values.curbside}
                         onChange={(e) => {
                           setFieldValue("curbside", e.target.checked)
-                          handleChange(e)
                         }}
                         name="curbside"
                         color="primary"
@@ -182,7 +146,6 @@ const FindStoreMenu = () => {
                         checked={values.authorized}
                         onChange={(e) => {
                           setFieldValue("authorized", e.target.checked)
-                          handleChange(e)
                         }}
                         name="authorized"
                         color="primary"
@@ -198,9 +161,9 @@ const FindStoreMenu = () => {
             </Form>
           )}
         </Formik>
-      </StyledMenu>
-    </div>
+      </div>
+    </Modal>
   )
 }
 
-export default FindStoreMenu
+export default FindStoreModal

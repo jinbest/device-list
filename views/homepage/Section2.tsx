@@ -1,7 +1,7 @@
 import React from "react"
 import { LookingForCardParam } from "../../models/looking-for-card-param"
 import _ from "lodash"
-import LookingForCard from "../../components/LookingForCard"
+import LookingForCard from "../../components/looking-for-card"
 import { useTranslation } from "react-i18next"
 import { lookingFor } from "../../static/mock-data"
 

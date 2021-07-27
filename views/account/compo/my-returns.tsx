@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next"
 import { MyOrdersParam } from "../../../models/account-param"
 import moment from "moment-timezone"
 import _ from "lodash"
-import UpArrow from "../../../components/svg/UpArrow"
-import DownArrow from "../../../components/svg/DownArrow"
+import UpArrow from "../../../components/svg/up-arrow"
+import DownArrow from "../../../components/svg/down-arrow"
 
 const MyReturns = () => {
   const [t] = useTranslation()

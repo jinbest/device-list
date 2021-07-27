@@ -71,7 +71,7 @@ const ContactPreferences = () => {
           onSave(values, actions)
         }}
       >
-        {({ values, handleChange, setFieldValue, isSubmitting }) => (
+        {({ values, setFieldValue, isSubmitting }) => (
           <Form className="my-details-form">
             <FormControl component="fieldset" style={{ margin: 0, padding: "0 10px" }}>
               <FormGroup>
@@ -83,7 +83,6 @@ const ContactPreferences = () => {
                       onChange={(e) => {
                         setFieldValue("discount", e.target.checked)
                         setIsEditing(true)
-                        handleChange(e)
                       }}
                       name="discount"
                       color="primary"
@@ -99,7 +98,6 @@ const ContactPreferences = () => {
                       onChange={(e) => {
                         setFieldValue("newStock", e.target.checked)
                         setIsEditing(true)
-                        handleChange(e)
                       }}
                       name="newStock"
                       color="primary"
@@ -115,7 +113,6 @@ const ContactPreferences = () => {
                       onChange={(e) => {
                         setFieldValue("rewards", e.target.checked)
                         setIsEditing(true)
-                        handleChange(e)
                       }}
                       name="rewards"
                       color="primary"
@@ -131,7 +128,6 @@ const ContactPreferences = () => {
                       onChange={(e) => {
                         setFieldValue("newsletter", e.target.checked)
                         setIsEditing(true)
-                        handleChange(e)
                       }}
                       name="newsletter"
                       color="primary"

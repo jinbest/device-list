@@ -15,10 +15,10 @@ import {
 } from "../../service/hepler"
 import { locationsData } from "../../static/mock-data"
 import _ from "lodash"
-import LeftArrow from "../../components/svg/LeftArrow"
-import RightArrow from "../../components/svg/RightArrow"
+import LeftArrow from "../../components/svg/left-arrow"
+import RightArrow from "../../components/svg/right-arrow"
 import { LocationParam } from "../../models/location-param"
-import HoursViewer from "./HoursViewer"
+import HoursViewer from "./hours-viewer"
 
 type Props = {
   location_id: number
