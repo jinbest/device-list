@@ -46,7 +46,7 @@ const SignModal = ({ open, setOpen, setToastParams }: Props) => {
   const [signKey, setSignKey] = useState<SignParam>("login")
   const [tabValue, setTabValue] = useState(0)
 
-  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleTabChange = (event: any, newValue: number) => {
     setTabValue(newValue)
   }
 
