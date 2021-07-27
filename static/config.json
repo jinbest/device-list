@@ -800,5 +800,138 @@
         ]
       }
     }
+  },
+  "aboutus": {
+    "section1": {
+      "title": "We are DeviceList",
+      "content": "Canada's Verified Mobile Device Marketplace",
+      "img_src": "/img/aboutus/mobile-devices.png"
+    },
+    "section2": {
+      "title": "Meeting All Your Device Needs in One Place",
+      "data": [
+        {
+          "title": "Buy and Sell",
+          "order": 1,
+          "visible": true,
+          "img": {
+            "img_src": "/img/aboutus/buy_sell.svg",
+            "alt": "buy-sell"
+          },
+          "child": [
+            {
+              "title": "550+ Device Listings",
+              "content": "Browse over 550+ device listings from Apple, Samsung, LG, and more. We have the largest variety.",
+              "listData": [],
+              "order": 1,
+              "visible": true
+            },
+            {
+              "title": "DeviceList Verified",
+              "content": "We run a diagnostic test on each device. We then give it a grading based on the condition.",
+              "listData": [],
+              "order": 2,
+              "visible": true
+            },
+            {
+              "title": "12 Month Guarantee",
+              "content": "Every device is backed by our  year warranty coverage. Plus an option to extend warranty and support for up to 2 years.",
+              "listData": [],
+              "order": 3,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "title": "Trade In",
+          "order": 2,
+          "visible": true,
+          "img": {
+            "img_src": "/img/aboutus/trade_in.svg",
+            "alt": "trade-in"
+          },
+          "child": [
+            {
+              "title": "Quick And Easy Process",
+              "content": "Take our 15 second quiz to determine the value and condition of your phone. Ship it to us for review. Once your device gets verified by us, release payment.",
+              "listData": [],
+              "order": 1,
+              "visible": true
+            },
+            {
+              "title": "Simple Payout",
+              "content": "Get paid cash. Sign up to get paid through Paypal or have the cash sent straight to your bank acount.",
+              "listData": [],
+              "order": 2,
+              "visible": true
+            },
+            {
+              "title": "Trade-In Credit",
+              "content": "Use the trade-in code we provide at checkout on any DeviceList purchase. This code doesn’t expire!",
+              "listData": [],
+              "order": 3,
+              "visible": true
+            }
+          ]
+        },
+        {
+          "title": "Repair",
+          "order": 3,
+          "visible": true,
+          "img": {
+            "img_src": "/img/aboutus/repair.svg",
+            "alt": "repair"
+          },
+          "child": [
+            {
+              "title": "Repair Online",
+              "content": "Complete our online quiz. Ship your device to our trusted repair centre. Your repaired device will be delivered straight to your door!",
+              "listData": [],
+              "order": 1,
+              "visible": true
+            },
+            {
+              "title": "Repair In-Store",
+              "content": "We have repair stores located all across Canada. Walk-in with no appointment necessary. Same day phone/tablet repair (iPhones repaired in under 60 minutes)",
+              "listData": [],
+              "order": 2,
+              "visible": true
+            },
+            {
+              "title": "Experts In Repairing",
+              "content": "",
+              "listData": ["Apple products", "Smartphones", "Tablets", "PCs & Laptops"],
+              "order": 3,
+              "visible": true
+            }
+          ]
+        }
+      ]
+    },
+    "section3": {
+      "content1": "DeviceList was built to fill a need of used devices for consumers and businesses across Canada. We are a B2B and B2C online marketplace dedicated to mobile devices such as phones and tablets. We’ve built a trusted network of certified retail partners that have been in the industry for over 25 years. Our team has over 10 Years of dedicated experience in the mobile device retail and repair industry.",
+      "content2": "DeviceList is for everyone. From consumers looking for a quality used device, or a business looking to sell or purchase used mobile devices in bulk. We are the most trusted and simple way to get a secondary phone. Search our inventory and find the phone you want, make your purchase, then pick your delivery date."
+    },
+    "section4": {
+      "title": "Start Buying and Selling with us Today!",
+      "data": [
+        {
+          "title": "Buyers",
+          "type": "buyers",
+          "content": [
+            "Search and find the perfect device for consumers and businesses. Browse thousands of device listings from our verified seller network.",
+            "We back all devices with a 12 month warranty and all devices we sell are DeviceList tested and certified with flexibile financing options for consumers."
+          ]
+        },
+        {
+          "title": "Sellers",
+          "type": "sellers",
+          "content": [
+            "Join the verified seller netork and start listing with us today. Increase your turnover with our marketing tools plus take advantage of our automated marketplace seller portal.",
+            "We provide all the tools and resources to get your device business selling with us. Contact us for more information on becoming a verified seller."
+          ]
+        }
+      ]
+    }
   }
 }

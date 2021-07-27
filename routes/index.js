@@ -6,6 +6,7 @@ import Plans from "../views/plans"
 import Service from "../views/service"
 import MyAccount from "../views/account"
 import FindStore from "../views/find-store"
+import AboutUs from "../views/aboutus"
 
 const pageRoutes = [
   {
@@ -54,6 +55,12 @@ const pageRoutes = [
     path: "/find-store",
     name: "Find Store",
     component: () => <FindStore />,
+    visible: false,
+  },
+  {
+    path: "/about",
+    name: "About Us",
+    component: () => <AboutUs />,
     visible: false,
   },
 ]

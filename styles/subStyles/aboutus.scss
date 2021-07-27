@@ -1,0 +1,174 @@
+.aboutus {
+  width: 100%;
+  .aboutus-section1 {
+    width: 100%;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      text-align: center;
+      padding-top: 50px;
+      h1 {
+        font-family: "Montserrat Bold";
+        font-size: 60px;
+        font-weight: 800;
+        line-height: 80px;
+      }
+      p {
+        font-family: "Montserrat";
+        font-size: 30px;
+        font-weight: normal;
+        line-height: 40px;
+      }
+    }
+  }
+  .aboutus-section2 {
+    width: 100%;
+    padding-bottom: 30px;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+      border-radius: 20px;
+      padding: 20px 40px;
+      text-align: center;
+      h1 {
+        font-size: 45px;
+        font-family: "Montserrat Bold";
+        line-height: 67px;
+      }
+      .data-viewer {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 30px;
+        & > div {
+          width: calc(33% - 15px);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .round-viewer {
+            width: 250px;
+            height: 250px;
+            border-radius: 150px;
+            background: white;
+            box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+              width: 160px;
+            }
+          }
+          h2 {
+            color: $main-blue;
+            font-family: "Montserrat Bold";
+            padding: 25px 0;
+            font-size: 30px;
+          }
+          .child-data {
+            border-radius: 20px;
+            width: 100%;
+            padding: 20px;
+            margin: 10px 0;
+            border: 1px solid #bdbfc3;
+            text-align: left;
+            height: 165px;
+            h3 {
+              font-family: "Montserrat";
+              font-size: 22px;
+              line-height: 33px;
+              font-weight: 600;
+            }
+            p {
+              font-size: 18px;
+              line-height: 22px;
+            }
+            ul {
+              margin: 5px 0;
+              padding: 0 0 0 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .aboutus-section3 {
+    width: 100%;
+    padding: 100px 0;
+    margin: 100px 0;
+    background: $main-blue;
+    transform: skewY(5deg);
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      color: white;
+      transform: skewY(-5deg);
+      p {
+        font-size: 30px;
+        line-height: 40px;
+        padding: 15px 0;
+        text-align: center;
+      }
+    }
+  }
+  .aboutus-section4 {
+    width: 100%;
+    padding: 0 0 50px;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      h1 {
+        font-family: "Montserrat Bold";
+        font-size: 45px;
+        line-height: 60px;
+        text-align: center;
+      }
+      .data-viewer {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 30px;
+        & > div {
+          width: calc(50% - 10px);
+          height: auto;
+          text-align: left;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+          border-radius: 20px;
+          h2 {
+            font-size: 30px;
+            font-weight: 600;
+            font-family: "Montserrat";
+            line-height: 40px;
+          }
+          p {
+            font-size: 24px;
+            font-weight: 30px;
+            padding: 5px 0;
+          }
+          button {
+            background: $main-blue;
+            border-radius: 50px;
+            height: 38px;
+            width: 250px;
+            font-size: 24px;
+            font-family: "Montserrat";
+            color: white;
+            outline: none;
+            border: none;
+            margin-top: auto;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+    }
+  }
+}

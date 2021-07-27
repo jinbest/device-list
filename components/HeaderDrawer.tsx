@@ -132,6 +132,15 @@ const HeaderDrawer = () => {
                   <div
                     className="drawer-nav-item"
                     onClick={() => {
+                      router.push("/about")
+                      setState({ right: false })
+                    }}
+                  >
+                    <p>{t("About Us")}</p>
+                  </div>
+                  <div
+                    className="drawer-nav-item"
+                    onClick={() => {
                       setMenuStep(1)
                       setItemType("services")
                     }}
