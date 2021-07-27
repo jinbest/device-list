@@ -2,14 +2,14 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import _ from "lodash"
 import config from "../../static/config.json"
-import { AboutUsSec4Param } from "../../models/aboutus-param"
+import { AboutUsSec4Param } from "../../models/about-us-param"
 
 const Section4 = () => {
   const [t] = useTranslation()
   const thisData = _.cloneDeep(config.aboutus.section4)
 
   return (
-    <div className="aboutus-section4">
+    <div className="about-us-section4">
       <div className="container">
         <h1>{t(thisData.title)}</h1>
         <div className="data-viewer">

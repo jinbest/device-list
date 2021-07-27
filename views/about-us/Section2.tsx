@@ -2,7 +2,7 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 import _ from "lodash"
 import config from "../../static/config.json"
-import { AboutUsSec2DataParam, AboutUsSec2DataChildParam } from "../../models/aboutus-param"
+import { AboutUsSec2DataParam, AboutUsSec2DataChildParam } from "../../models/about-us-param"
 
 const Section2 = () => {
   const [t] = useTranslation()
@@ -13,7 +13,7 @@ const Section2 = () => {
     )
 
   return (
-    <div className="aboutus-section2">
+    <div className="about-us-section2">
       <div className="container">
         <h1>{t(thisData.title)}</h1>
         <div className="data-viewer">

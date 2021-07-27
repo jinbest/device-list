@@ -6,7 +6,7 @@ import Plans from "../views/plans"
 import Service from "../views/service"
 import MyAccount from "../views/account"
 import FindStore from "../views/find-store"
-import AboutUs from "../views/aboutus"
+import AboutUs from "../views/about-us"
 
 const pageRoutes = [
   {

@@ -8,7 +8,7 @@ const Section3 = () => {
   const thisData = _.cloneDeep(config.aboutus.section3)
 
   return (
-    <div className="aboutus-section3">
+    <div className="about-us-section3">
       <div className="container">
         <p>{t(thisData.content1)}</p>
         <p>{t(thisData.content2)}</p>
