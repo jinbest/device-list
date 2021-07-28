@@ -1061,7 +1061,7 @@ const venderData = {
     shop: [
       {
         name: "iPhone SE 2020",
-        img_src: "/img/vender-profile/shop/iphone-SE-white.png",
+        img_src: "/img/vender-profile/shop/iPhone-SE-white.png",
         capacity: "64 GB",
         color: "White",
         cost: 500,
@@ -1149,7 +1149,7 @@ const venderData = {
       },
       {
         name: "iPhone SE 2020",
-        img_src: "/img/vender-profile/shop/iphone-SE-white.png",
+        img_src: "/img/vender-profile/shop/iPhone-SE-white.png",
         capacity: "64 GB",
         color: "White",
         cost: 500,
@@ -1204,7 +1204,7 @@ const venderData = {
       },
       {
         name: "iPhone SE 2020",
-        img_src: "/img/vender-profile/shop/iphone-SE-white.png",
+        img_src: "/img/vender-profile/shop/iPhone-SE-white.png",
         capacity: "64 GB",
         color: "White",
         cost: 500,
@@ -1259,7 +1259,7 @@ const venderData = {
       },
       {
         name: "iPhone SE 2020",
-        img_src: "/img/vender-profile/shop/iphone-SE-white.png",
+        img_src: "/img/vender-profile/shop/iPhone-SE-white.png",
         capacity: "64 GB",
         color: "White",
         cost: 500,
@@ -1292,7 +1292,7 @@ const venderData = {
       },
       {
         name: "iPhone SE 2020",
-        img_src: "/img/vender-profile/shop/iphone-SE-white.png",
+        img_src: "/img/vender-profile/shop/iPhone-SE-white.png",
         capacity: "64 GB",
         color: "White",
         cost: 500,
@@ -1325,7 +1325,7 @@ const venderData = {
       },
       {
         name: "iPhone SE 2020",
-        img_src: "/img/vender-profile/shop/iphone-SE-white.png",
+        img_src: "/img/vender-profile/shop/iPhone-SE-white.png",
         capacity: "64 GB",
         color: "White",
         cost: 500,
