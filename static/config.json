@@ -5,7 +5,7 @@
     "favicon": "/img/head/favicon.ico",
     "navData": {
       "primary": {
-        "logo": "img/head/logo.svg",
+        "logo": "/img/head/logo.svg",
         "nav": [
           {
             "name": "Service",
@@ -183,57 +183,57 @@
     ],
     "payments": [
       {
-        "img_src": "img/payments/flexiti.png",
+        "img_src": "/img/payments/flexiti.png",
         "visible": true,
         "order": 1
       },
       {
-        "img_src": "img/payments/visa.png",
+        "img_src": "/img/payments/visa.png",
         "visible": true,
         "order": 2
       },
       {
-        "img_src": "img/payments/paypal.png",
+        "img_src": "/img/payments/paypal.png",
         "visible": true,
         "order": 3
       },
       {
-        "img_src": "img/payments/mc.png",
+        "img_src": "/img/payments/mc.png",
         "visible": true,
         "order": 4
       },
       {
-        "img_src": "img/payments/amex.png",
+        "img_src": "/img/payments/amex.png",
         "visible": true,
         "order": 5
       },
       {
-        "img_src": "img/payments/interac.png",
+        "img_src": "/img/payments/interac.png",
         "visible": true,
         "order": 6
       }
     ],
     "socials": [
       {
-        "img_src": "img/socials/instagram.png",
+        "img_src": "/img/socials/instagram.png",
         "link": "#",
         "order": 1,
         "visible": true
       },
       {
-        "img_src": "img/socials/twitter.png",
+        "img_src": "/img/socials/twitter.png",
         "link": "#",
         "order": 2,
         "visible": true
       },
       {
-        "img_src": "img/socials/linkedin.png",
+        "img_src": "/img/socials/linkedin.png",
         "link": "#",
         "order": 3,
         "visible": true
       },
       {
-        "img_src": "img/socials/facebook.png",
+        "img_src": "/img/socials/facebook.png",
         "link": "#",
         "order": 4,
         "visible": true
@@ -261,7 +261,7 @@
         "banner": {
           "title": "Cellphones",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/phones.png",
+          "logo": "/img/mega/phones.png",
           "bgCol": "#CBBBFA"
         },
         "child": [
@@ -369,7 +369,7 @@
         "banner": {
           "title": "Computers",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/computers.png",
+          "logo": "/img/mega/computers.png",
           "bgCol": "#A0E744"
         },
         "child": [
@@ -442,7 +442,7 @@
         "banner": {
           "title": "Tablets",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/tablets.png",
+          "logo": "/img/mega/tablets.png",
           "bgCol": "#4360FA"
         },
         "child": [
@@ -520,7 +520,7 @@
         "banner": {
           "title": "Gaming",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/gaming.png",
+          "logo": "/img/mega/gaming.png",
           "bgCol": "#FC6530"
         },
         "child": [
@@ -536,7 +536,7 @@
         "banner": {
           "title": "Wearables",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/wearables.png",
+          "logo": "/img/mega/wearables.png",
           "bgCol": "#CBBBFA"
         },
         "child": [
@@ -577,7 +577,7 @@
         "banner": {
           "title": "Audio",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/audio.png",
+          "logo": "/img/mega/audio.png",
           "bgCol": "#A0E744"
         },
         "child": [
@@ -622,7 +622,7 @@
         "banner": {
           "title": "Smart Home",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/smart-home.png",
+          "logo": "/img/mega/smart-home.png",
           "bgCol": "#4360FA"
         },
         "child": [
@@ -666,7 +666,7 @@
         "banner": {
           "title": "Accessories",
           "content": "New or refurbished, you'll find your fit.",
-          "logo": "img/mega/accessories.png",
+          "logo": "/img/mega/accessories.png",
           "bgCol": "#FC6530"
         },
         "child": [
@@ -805,7 +805,7 @@
     "section1": {
       "title": "We are DeviceList",
       "content": "Canada's Verified Mobile Device Marketplace",
-      "img_src": "/img/aboutus/mobile-devices.png"
+      "img_src": "/img/about-us/mobile-devices.png"
     },
     "section2": {
       "title": "Meeting All Your Device Needs in One Place",
@@ -815,7 +815,7 @@
           "order": 1,
           "visible": true,
           "img": {
-            "img_src": "/img/aboutus/buy_sell.svg",
+            "img_src": "/img/about-us/buy_sell.svg",
             "alt": "buy-sell"
           },
           "child": [
@@ -847,7 +847,7 @@
           "order": 2,
           "visible": true,
           "img": {
-            "img_src": "/img/aboutus/trade_in.svg",
+            "img_src": "/img/about-us/trade_in.svg",
             "alt": "trade-in"
           },
           "child": [
@@ -879,7 +879,7 @@
           "order": 3,
           "visible": true,
           "img": {
-            "img_src": "/img/aboutus/repair.svg",
+            "img_src": "/img/about-us/repair.svg",
             "alt": "repair"
           },
           "child": [

@@ -1036,4 +1036,31 @@ const accountData = {
   },
 }
 
-export { bannerData, lookingFor, locationsData, accountData, PaymentOptions, PaymentLogos }
+const venderData = {
+  locInfo: {
+    name: "Mobile Tech Lab",
+    address_1: "2020 Corydon Ave",
+    address_2: "",
+    slug: "corydon",
+    city: "winnipeg",
+    state: "MB",
+    country: "CA",
+  },
+  locAvailability: ["Financing Available", "Apple Authorized", "Online Booking", "Curbside PickUp"],
+  score: 3.8,
+  reviewers: 10,
+  logo: {
+    img_src: "/img/vender-profile/logo.png",
+    alt: "corydon-logo",
+  },
+}
+
+export {
+  bannerData,
+  lookingFor,
+  locationsData,
+  accountData,
+  PaymentOptions,
+  PaymentLogos,
+  venderData,
+}

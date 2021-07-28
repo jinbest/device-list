@@ -24,7 +24,7 @@ const Banner1 = ({ data }: Props) => {
         )}
       </div>
       <div className="slider-banner-img">
-        <img className="banner-1-img" src="img/home/banners/banner1.png" alt="banner-1" />
+        <img className="banner-1-img" src="/img/home/banners/banner1.png" alt="banner-1" />
       </div>
     </div>
   )

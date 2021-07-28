@@ -1,0 +1,122 @@
+.vender-profile {
+  width: 100%;
+  .vender-profile-section1 {
+    width: 100%;
+    .container {
+      width: calc(100% - 50px);
+      max-width: 1440px;
+      margin: auto;
+      padding: 50px 0;
+      .bread-crumbs {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        p {
+          font-size: 16px;
+          line-height: 20px;
+          color: $main-blue;
+          font-family: "Montserrat";
+          font-weight: normal;
+        }
+        svg {
+          margin: 0 8px;
+        }
+      }
+      .vender-profile-info {
+        margin-top: 50px;
+        width: 100%;
+        padding: 20px 50px;
+        border-radius: 10px;
+        background: white;
+        box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+        display: flex;
+        position: relative;
+        .profile-info-logo {
+          width: 150px;
+          height: 150px;
+          border-radius: 80px;
+          background: black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 30px;
+          img {
+            width: 90px;
+          }
+        }
+        .profile-info-details {
+          .profile-info-locaions {
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            h2 {
+              font-size: 21px;
+              line-height: 26px;
+              font-family: "Montserrat";
+              font-weight: 600;
+              margin-right: 100px;
+            }
+            p {
+              font-size: 16px;
+              line-height: 20px;
+              font-family: "Montserrat";
+            }
+            button {
+              margin-right: 15px;
+              font-size: 14px;
+              color: $main-blue;
+              font-family: "Montserrat";
+              font-weight: 600;
+              height: 36px;
+              border: 1px solid $main-blue;
+              border-radius: 5px;
+              cursor: pointer;
+              outline: none;
+              background: transparent;
+              padding: 0 20px;
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+          }
+          .location-availability {
+            display: flex;
+            flex-wrap: wrap;
+            p {
+              padding: 0 15px;
+              height: 36px;
+              font-size: 14px;
+              line-height: 20px;
+              color: black;
+              background: #d4dffc;
+              font-family: "Montserrat";
+              width: fit-content;
+              margin: 0 15px 5px 0;
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+        .profile-favorite {
+          margin-left: auto;
+          width: 42px;
+          height: 42px;
+          border-radius: 21px;
+          box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            width: 30px;
+          }
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+}

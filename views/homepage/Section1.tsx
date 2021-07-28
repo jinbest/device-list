@@ -75,7 +75,7 @@ const Section1 = () => {
       )}
       <button className="slider-button" onClick={goPrev}>
         <span>
-          <img src="img/icons/arrow-left.png" alt="arrow-left" />
+          <img src="/img/icons/arrow-left.png" alt="arrow-left" />
         </span>
       </button>
       <Swiper ref={ref} {...swiperParams}>
@@ -91,7 +91,7 @@ const Section1 = () => {
       </Swiper>
       <button className="slider-button" onClick={goNext}>
         <span>
-          <img src="img/icons/arrow-right.png" alt="arrow-right" />
+          <img src="/img/icons/arrow-right.png" alt="arrow-right" />
         </span>
       </button>
     </div>

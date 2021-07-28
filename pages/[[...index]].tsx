@@ -6,7 +6,18 @@ import _ from "lodash"
 
 export default function Index() {
   const router = useRouter()
-  const pathIndex = Math.max(_.findIndex(pageRoutes, { path: router.asPath.split("#")[0] }), 0)
+  let slug = ""
 
-  return <MainLayout>{pageRoutes[pathIndex].component()}</MainLayout>
+  const path = router.asPath.split("#")[0].split("/")
+
+  if (path.length === 3 && path[1] === "vender") {
+    slug = path[2]
+    path[2] = "vender-name"
+  }
+
+  const pathString = path.join("/")
+
+  const pathIndex = Math.max(_.findIndex(pageRoutes(slug), { path: pathString }), 0)
+
+  return <MainLayout>{pageRoutes(slug)[pathIndex].component()}</MainLayout>
 }

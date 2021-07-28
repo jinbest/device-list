@@ -41,11 +41,11 @@ const MegaMenu = () => {
         {t("Shop")}
         {!state.right ? (
           <span>
-            <img src="img/icons/scale-up.png" alt="mega-scale-up" />
+            <img src="/img/icons/scale-up.png" alt="mega-scale-up" />
           </span>
         ) : (
           <span>
-            <img src="img/icons/scale-down.png" alt="mega-scale-down" />
+            <img src="/img/icons/scale-down.png" alt="mega-scale-down" />
           </span>
         )}
       </p>

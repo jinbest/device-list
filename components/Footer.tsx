@@ -32,9 +32,9 @@ const Footer = () => {
             className="expand-icon"
           >
             {!expand ? (
-              <img src="img/icons/scale-up.png" alt="scale-up" />
+              <img src="/img/icons/scale-up.png" alt="scale-up" />
             ) : (
-              <img src="img/icons/scale-down.png" alt="scale-down" />
+              <img src="/img/icons/scale-down.png" alt="scale-down" />
             )}
           </div>
         </div>

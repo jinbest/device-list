@@ -27,10 +27,10 @@ const Banner2 = ({ data }: Props) => {
       </div>
       <div className="slider-banner-img">
         <div className="banner-2-tending-card" id="banner-2-tending-card">
-          <img className="tending-img" src="img/home/banners/tending.png" alt="banner-2-tending" />
+          <img className="tending-img" src="/img/home/banners/tending.png" alt="banner-2-tending" />
           <img
             className="banner-2-laptop"
-            src="img/home/banners/laptop.png"
+            src="/img/home/banners/laptop.png"
             alt="banner-2-laptop"
           />
           <p className="banner-2-card-title">{t("Microsoft Surface 3")}</p>

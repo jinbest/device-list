@@ -26,12 +26,12 @@ const Banner3 = ({ data }: Props) => {
       <div className="slider-banner-img banner-dell-container">
         <img
           className="banner-dell-img comb-dell-img"
-          src="img/home/banners/comb-dell.png"
+          src="/img/home/banners/comb-dell.png"
           alt="banner-dell"
         />
         <img
           className="banner-dell-img individual-dell"
-          src="img/home/banners/dell.png"
+          src="/img/home/banners/dell.png"
           alt="banner-dell"
         />
       </div>

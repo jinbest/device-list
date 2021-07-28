@@ -100,9 +100,9 @@ const HeaderDrawer = () => {
                   >
                     <p>{t("Popular Devices")}</p>
                     {itemType === "popular" ? (
-                      <img src="img/icons/arrow-blue-right.png" alt="arrow-blue-right" />
+                      <img src="/img/icons/arrow-blue-right.png" alt="arrow-blue-right" />
                     ) : (
-                      <img src="img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
+                      <img src="/img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
                     )}
                   </div>
                   <div
@@ -115,9 +115,9 @@ const HeaderDrawer = () => {
                   >
                     <p>{t("Shop")}</p>
                     {itemType === "shop" ? (
-                      <img src="img/icons/arrow-blue-right.png" alt="arrow-blue-right" />
+                      <img src="/img/icons/arrow-blue-right.png" alt="arrow-blue-right" />
                     ) : (
-                      <img src="img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
+                      <img src="/img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
                     )}
                   </div>
                   <div
@@ -148,9 +148,9 @@ const HeaderDrawer = () => {
                   >
                     <p>{t("Services")}</p>
                     {itemType === "services" ? (
-                      <img src="img/icons/arrow-blue-right.png" alt="arrow-blue-right" />
+                      <img src="/img/icons/arrow-blue-right.png" alt="arrow-blue-right" />
                     ) : (
-                      <img src="img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
+                      <img src="/img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
                     )}
                   </div>
                   {authStore.authUser && (
@@ -176,7 +176,7 @@ const HeaderDrawer = () => {
                     }}
                     style={{ justifyContent: "inherit" }}
                   >
-                    <img src="img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
+                    <img src="/img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
                     <p style={{ marginLeft: "10px" }}>{t("Back")}</p>
                   </div>
                   {secondaryNav.map((item: string, index: number) => {
@@ -198,7 +198,7 @@ const HeaderDrawer = () => {
                     }}
                     style={{ justifyContent: "inherit" }}
                   >
-                    <img src="img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
+                    <img src="/img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
                     <p style={{ marginLeft: "10px" }}>{t("Back")}</p>
                   </div>
                   {navData.nav.map((item: NavParams, index: number) => {
@@ -227,7 +227,7 @@ const HeaderDrawer = () => {
                     }}
                     style={{ justifyContent: "inherit" }}
                   >
-                    <img src="img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
+                    <img src="/img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
                     <p style={{ marginLeft: "10px" }}>{t("Back")}</p>
                   </div>
                   {shopData.map((item: MegaDataParam, index: number) => {
@@ -241,7 +241,7 @@ const HeaderDrawer = () => {
                         key={index}
                       >
                         <p>{t(item.name)}</p>
-                        <img src="img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
+                        <img src="/img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
                       </div>
                     )
                   })}
@@ -257,7 +257,7 @@ const HeaderDrawer = () => {
                     }}
                     style={{ justifyContent: "inherit" }}
                   >
-                    <img src="img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
+                    <img src="/img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
                     <p style={{ marginLeft: "10px" }}>{t("Back")}</p>
                   </div>
                   {shopData[shopIndex].child.map((item: MegaDataChildParam, index: number) => {
@@ -271,7 +271,7 @@ const HeaderDrawer = () => {
                         key={index}
                       >
                         <p>{t(item.name)}</p>
-                        <img src="img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
+                        <img src="/img/icons/arrow-dark-right.png" alt="arrow-dark-right" />
                       </div>
                     )
                   })}
@@ -287,7 +287,7 @@ const HeaderDrawer = () => {
                     }}
                     style={{ justifyContent: "inherit" }}
                   >
-                    <img src="img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
+                    <img src="/img/icons/arrow-dark-left.png" alt="arrow-dark-left" />
                     <p style={{ marginLeft: "10px" }}>{t("Back")}</p>
                   </div>
                   {shopData[shopIndex].child[shopChildIndex].data.map(

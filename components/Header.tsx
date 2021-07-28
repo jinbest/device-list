@@ -102,8 +102,8 @@ const Header = () => {
             <ServiceMenu />
           </div>
           <div className="nav-buttons">
-            <img src="img/icons/heart.png" alt="heart-icon" />
-            <img src="img/icons/shop.png" alt="shop-icon" />
+            <img src="/img/icons/heart.png" alt="heart-icon" />
+            <img src="/img/icons/shop.png" alt="shop-icon" />
             <HeaderDrawer />
           </div>
         </div>
