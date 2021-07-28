@@ -66,7 +66,7 @@ const HeaderDrawer = () => {
 
   return (
     <div id="menu">
-      <img onClick={toggleDrawer("right", true)} src="img/icons/menu.png" alt="shop-icon" />
+      <img onClick={toggleDrawer("right", true)} src="/img/icons/menu.png" alt="shop-icon" />
       <Drawer
         className="header-drawer"
         anchor={"right"}

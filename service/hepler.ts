@@ -1,6 +1,7 @@
 import { CheckPassParam } from "../models/check-pass-params"
 import { LocationParam, LocationHoursParam } from "../models/location-param"
 import moment from "moment-timezone"
+import { VenderProfileReviewsParam } from "../models/vender-profile-param"
 
 export function ValidateEmail(e: string) {
   const re =
@@ -257,4 +258,15 @@ export function getWidth() {
     return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
   }
   return 0
+}
+
+export function getScore(data: VenderProfileReviewsParam[]) {
+  let score = 0
+  if (data.length) {
+    data.forEach((item: VenderProfileReviewsParam) => {
+      score += item.score
+    })
+    score = score / data.length
+  }
+  return score
 }

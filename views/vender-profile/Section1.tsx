@@ -7,18 +7,18 @@ import { useTranslation } from "react-i18next"
 import Rating from "@material-ui/lab/Rating"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import Favorite from "../../components/svg/favorite"
+import { getScore } from "../../service/hepler"
 
-type Props = {
-  slug: string
-}
+// type Props = {
+//   slug: string
+// }
 
-const Section1 = ({ slug }: Props) => {
-  console.log("slug", slug) // it will be used to fetch the matched data later.
-
+const Section1 = () => {
   const [t] = useTranslation()
   const thisData = _.cloneDeep(venderData)
   const state = _.find(statesData[thisData.locInfo.country], { code: thisData.locInfo.state }),
     stateName = !isEmpty(state) ? state.name : thisData.locInfo.state
+  const score = getScore(thisData.data.reviews)
 
   const [favorite, setFavorite] = useState(false)
 
@@ -52,18 +52,18 @@ const Section1 = ({ slug }: Props) => {
                   style={{ padding: "5px 0" }}
                 >{`Unit F - ${thisData.locInfo.address_1}`}</p>
                 <div className="flex align-center">
-                  <p className="bold">{thisData.score}</p>
+                  <p className="bold">{score}</p>
                   <Rating
                     style={{ margin: "0 10px", color: "#FC6530" }}
                     name="read-only"
-                    value={Math.round(thisData.score)}
+                    value={Math.round(score)}
                     max={5}
                     readOnly
                   />
-                  <p className="bold">{`(${thisData.reviewers})`}</p>
+                  <p className="bold">{`(${thisData.data.reviews.length})`}</p>
                 </div>
               </div>
-              <div className="flex flex-wrap">
+              <div className="flex flex-wrap" style={{ marginTop: "10px" }}>
                 <button>{t("About")}</button>
                 <button>{t("Directions")}</button>
                 <button>{t("Call")}</button>
