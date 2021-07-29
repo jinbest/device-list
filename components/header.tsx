@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import Search from "./Search"
+import Search from "./search"
 import config from "../static/config.json"
 import _ from "lodash"
 import LangDropdown from "./lang-drop-down"
