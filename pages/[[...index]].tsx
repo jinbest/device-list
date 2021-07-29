@@ -10,9 +10,9 @@ export default function Index() {
 
   const path = router.asPath.split("#")[0].split("/")
 
-  if (path.length === 3 && path[1] === "vender") {
+  if (path.length === 3 && path[1] === "vendor") {
     slug = path[2]
-    path[2] = "vender-name"
+    path[2] = "vendor-name"
   }
 
   const pathString = path.join("/")

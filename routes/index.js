@@ -66,8 +66,8 @@ const pageRoutes = (slug) => {
       visible: false,
     },
     {
-      path: "/vender/vender-name",
-      name: "Vender Profile",
+      path: "/vendor/vendor-name",
+      name: "Vendor Profile",
       component: () => <VenderProfile slug={slug} />,
       visible: false,
     },
