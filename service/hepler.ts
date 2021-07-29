@@ -1,6 +1,7 @@
 import { CheckPassParam } from "../models/check-pass-params"
 import { LocationParam, LocationHoursParam } from "../models/location-param"
 import moment from "moment-timezone"
+import { VendorProfileReviewsParam } from "../models/vendor-profile-param"
 
 export function ValidateEmail(e: string) {
   const re =
@@ -250,4 +251,22 @@ export function formatWarranty(warranty: number | null, warranty_unit: string | 
     }
     return `${warranty} ${unit}`
   }
+}
+
+export function getWidth() {
+  if (typeof window !== "undefined") {
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+  }
+  return 0
+}
+
+export function getScore(data: VendorProfileReviewsParam[]) {
+  let score = 0
+  if (data.length) {
+    data.forEach((item: VendorProfileReviewsParam) => {
+      score += item.score
+    })
+    score = score / data.length
+  }
+  return score
 }

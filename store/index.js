@@ -1,1 +1,1 @@
-export { default as authStore } from "./AuthStore"
+export { default as authStore } from "./auth-store"

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import Search from "./Search"
+import Search from "./search"
 import config from "../static/config.json"
 import _ from "lodash"
-import LangDropdown from "./LangDropdown"
+import LangDropdown from "./lang-drop-down"
 import { useTranslation } from "react-i18next"
-import FindStoreMenu from "./FindStoreMenu"
-import HeaderDrawer from "./HeaderDrawer"
-import MegaMenu from "./MegaMenu"
-import ServiceMenu from "./ServiceMenu"
-import SignModal from "./sign-modal/SignModal"
+import FindStoreMenu from "./find-store-menu"
+import HeaderDrawer from "./header-drawer"
+import MegaMenu from "./mega-menu"
+import ServiceMenu from "./service-menu"
+import SignModal from "./sign-modal/sign-modal"
 import { observer } from "mobx-react"
 import { authStore } from "../store"
 import { ToastMsgParams } from "./toast/toast-msg-params"
@@ -102,8 +102,8 @@ const Header = () => {
             <ServiceMenu />
           </div>
           <div className="nav-buttons">
-            <img src="img/icons/heart.png" alt="heart-icon" />
-            <img src="img/icons/shop.png" alt="shop-icon" />
+            <img src="/img/icons/heart.png" alt="heart-icon" />
+            <img src="/img/icons/shop.png" alt="shop-icon" />
             <HeaderDrawer />
           </div>
         </div>

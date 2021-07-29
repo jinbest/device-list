@@ -1,8 +1,8 @@
 import React, { useRef, useState, useCallback, useEffect } from "react"
 import Swiper from "react-id-swiper"
-import Banner1 from "../../components/slider-banners/Banner1"
-import Banner2 from "../../components/slider-banners/Banner2"
-import Banner3 from "../../components/slider-banners/Banner3"
+import Banner1 from "../../components/slider-banners/banner-1"
+import Banner2 from "../../components/slider-banners/banner-2"
+import Banner3 from "../../components/slider-banners/banner-3"
 import _ from "lodash"
 import { bannerData } from "../../static/mock-data"
 
@@ -75,7 +75,7 @@ const Section1 = () => {
       )}
       <button className="slider-button" onClick={goPrev}>
         <span>
-          <img src="img/icons/arrow-left.png" alt="arrow-left" />
+          <img src="/img/icons/arrow-left.png" alt="arrow-left" />
         </span>
       </button>
       <Swiper ref={ref} {...swiperParams}>
@@ -91,7 +91,7 @@ const Section1 = () => {
       </Swiper>
       <button className="slider-button" onClick={goNext}>
         <span>
-          <img src="img/icons/arrow-right.png" alt="arrow-right" />
+          <img src="/img/icons/arrow-right.png" alt="arrow-right" />
         </span>
       </button>
     </div>
