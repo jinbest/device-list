@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { venderData, venderStatus } from "../../static/mock-data"
+import { vendorData, vendorStatus } from "../../static/mock-data"
 import _ from "lodash"
 import SearchIcon from "../../components/svg/search-icon"
 import {
-  VenderProfileShopParam,
-  VenderProfileReviewsParam,
-} from "../../models/vender-profile-param"
+  VendorProfileShopParam,
+  VendorProfileReviewsParam,
+} from "../../models/vendor-profile-param"
 import { formatWarranty, getWidth } from "../../service/hepler"
 import Rating from "@material-ui/lab/Rating"
 
@@ -17,7 +17,7 @@ type ColsParam = {
 
 const Section2 = () => {
   const [t] = useTranslation()
-  const thisData = _.cloneDeep(venderData),
+  const thisData = _.cloneDeep(vendorData),
     shops = _.cloneDeep(thisData.data.shop),
     shopLen = shops.length,
     reviews = _.cloneDeep(thisData.data.reviews)
@@ -69,29 +69,29 @@ const Section2 = () => {
     }
   }, [device])
 
-  const _getVenderStatus_ = (status: string) => {
+  const _getVendorStatus_ = (status: string) => {
     let result = {
       bgCol: "#4360FA",
-      img_src: "/img/vender-profile/icons/trending.png",
+      img_src: "/img/vendor-profile/icons/trending.png",
     }
-    if (status === venderStatus.promo) {
+    if (status === vendorStatus.promo) {
       result = {
         bgCol: "#FC6530",
-        img_src: "/img/vender-profile/icons/promo.png",
+        img_src: "/img/vendor-profile/icons/promo.png",
       }
-    } else if (status === venderStatus.favorite) {
+    } else if (status === vendorStatus.favorite) {
       result = {
         bgCol: "#CBBBFA",
-        img_src: "/img/vender-profile/icons/favorite.png",
+        img_src: "/img/vendor-profile/icons/favorite.png",
       }
     }
     return result
   }
 
   return (
-    <div className="vender-profile-section2">
+    <div className="vendor-profile-section2">
       <div className="container">
-        <div className="vender-tabs">
+        <div className="vendor-tabs">
           <div className="flex" style={{ marginBottom: "-3px" }}>
             <p
               style={{
@@ -133,12 +133,12 @@ const Section2 = () => {
         {tab === "shop" && (
           <div className="shop-data-container">
             {cols.map((item: ColsParam, index: number) => (
-              <div className="vender-shop-data-viewer" key={index}>
+              <div className="vendor-shop-data-viewer" key={index}>
                 {shops
                   .slice(item.start, item.end)
-                  .map((it: VenderProfileShopParam, idx: number) => {
+                  .map((it: VendorProfileShopParam, idx: number) => {
                     return (
-                      <div key={`${index}-${idx}`} className="vender-shop">
+                      <div key={`${index}-${idx}`} className="vendor-shop">
                         <img src={it.img_src} alt={it.name} />
                         <div>
                           <h2>{it.name}</h2>
@@ -152,10 +152,10 @@ const Section2 = () => {
                         </div>
                         {it.status && (
                           <div
-                            className="vender-shop-spinner"
-                            style={{ background: _getVenderStatus_(it.status).bgCol }}
+                            className="vendor-shop-spinner"
+                            style={{ background: _getVendorStatus_(it.status).bgCol }}
                           >
-                            <img src={_getVenderStatus_(it.status).img_src} alt={it.status} />
+                            <img src={_getVendorStatus_(it.status).img_src} alt={it.status} />
                           </div>
                         )}
                       </div>
@@ -168,7 +168,7 @@ const Section2 = () => {
 
         {tab === "reviews" && (
           <div className="reviews-data-container">
-            {reviews.slice(0, subReviews).map((item: VenderProfileReviewsParam, index: number) => {
+            {reviews.slice(0, subReviews).map((item: VendorProfileReviewsParam, index: number) => {
               return (
                 <div key={index}>
                   <p className="reviewer-name">{item.name}</p>

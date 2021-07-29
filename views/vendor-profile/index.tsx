@@ -3,18 +3,18 @@ import Section1 from "./Section1"
 import Section2 from "./Section2"
 
 type Props = {
-  slug: string
+  slug: string | string[]
 }
 
-const VenderProfile = ({ slug }: Props) => {
+const VendorProfile = ({ slug }: Props) => {
   console.log("slug", slug) // it will be used later.
 
   return (
-    <div className="vender-profile">
+    <div className="vendor-profile">
       <Section1 />
       <Section2 />
     </div>
   )
 }
 
-export default VenderProfile
+export default VendorProfile

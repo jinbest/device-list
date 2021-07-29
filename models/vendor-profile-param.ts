@@ -1,4 +1,4 @@
-export interface VenderProfileShopParam {
+export interface VendorProfileShopParam {
   name: string
   img_src: string
   capacity: string
@@ -10,7 +10,7 @@ export interface VenderProfileShopParam {
   status: string
 }
 
-export interface VenderProfileReviewsParam {
+export interface VendorProfileReviewsParam {
   name: string
   comments: string
   day: string
