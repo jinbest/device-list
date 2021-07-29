@@ -1,0 +1,111 @@
+.shop {
+  width: 100%;
+  .container {
+    width: calc(100% - 50px);
+    max-width: 1440px;
+    margin: auto;
+    text-align: center;
+    padding: 50px 0;
+    .shop-contents {
+      margin-top: 50px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .shop-filter-container {
+        width: 250px;
+        text-align: left;
+      }
+      .shop-data-viewer {
+        width: calc(100% - 250px);
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+.price-slider {
+  width: 210px;
+  .MuiTypography-root {
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    font-family: "Montserrat";
+  }
+  .MuiSlider-rail {
+    height: 8px;
+    background: #d4dffc;
+    border-radius: 4px;
+  }
+  .MuiSlider-track {
+    height: 8px;
+    background: $main-blue;
+  }
+  .MuiSlider-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 12px;
+    background: $main-blue;
+    margin-top: -8px;
+  }
+  .MuiSlider-valueLabel {
+    display: none;
+  }
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    & > div {
+      width: 69px;
+      height: 50px;
+      border-radius: 3px;
+      border: 1px solid $main-blue;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      p {
+        font-size: 12px;
+        line-height: 15px;
+        color: $main-blue;
+        font-weight: normal;
+      }
+    }
+  }
+}
+
+.shop-filter-accordion {
+  margin-top: 20px;
+  width: 230px;
+  .MuiAccordion-root {
+    border: none;
+    box-shadow: none;
+  }
+  .accordion-summary {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 22px;
+    font-family: "Montserrat";
+  }
+  .MuiAccordionSummary-root {
+    padding: 0;
+    min-height: 40px;
+    height: 40px;
+  }
+  .MuiAccordionSummary-root.Mui-expanded {
+    min-height: 40px;
+  }
+  .MuiAccordionSummary-content,
+  .MuiAccordion-root.Mui-expanded,
+  .MuiAccordionSummary-content.Mui-expanded {
+    margin: 0;
+  }
+  .MuiSvgIcon-root {
+    color: black;
+  }
+  .MuiAccordion-root:before {
+    background-color: transparent;
+  }
+}

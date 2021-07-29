@@ -10,21 +10,6 @@
       @media (max-width: 600px) {
         padding: 30px 0;
       }
-      .bread-crumbs {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        p {
-          font-size: 16px;
-          line-height: 20px;
-          color: $main-blue;
-          font-family: "Montserrat";
-          font-weight: normal;
-        }
-        svg {
-          margin: 0 8px;
-        }
-      }
       .vendor-profile-info {
         margin-top: 50px;
         width: 100%;
