@@ -9,7 +9,7 @@ import Loading from "../../../components/Loading"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import _ from "lodash"
 import { PaymentParam } from "../../../models/account-param"
-import { PaymentOptions } from "../../../static/mock-data"
+import { PaymentOptions } from "../../../static/mock/mock-data"
 
 type Props = {
   open: boolean

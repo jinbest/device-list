@@ -3,7 +3,7 @@ import { LookingForCardParam } from "../../models/looking-for-card-param"
 import _ from "lodash"
 import LookingForCard from "../../components/looking-for-card"
 import { useTranslation } from "react-i18next"
-import { lookingFor } from "../../static/mock-data"
+import { lookingFor } from "../../static/mock/mock-data"
 
 const Section2 = () => {
   const [t] = useTranslation()

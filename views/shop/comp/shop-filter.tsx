@@ -7,12 +7,18 @@ import AccordionDetails from "@material-ui/core/AccordionDetails"
 import Typography from "@material-ui/core/Typography"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
-const ShopFilter = () => {
+type Props = {
+  priceValue: number[]
+  setPriceValue: (val: number[]) => void
+}
+
+const ShopFilter = ({ priceValue, setPriceValue }: Props) => {
   const [t] = useTranslation()
 
   return (
     <div className="shop-filter-container">
-      <PriceSlider />
+      <PriceSlider value={priceValue} setValue={setPriceValue} />
+
       <div className="shop-filter-accordion">
         <Accordion>
           <AccordionSummary

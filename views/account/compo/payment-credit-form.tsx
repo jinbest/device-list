@@ -8,7 +8,7 @@ import { PaymentCardInfoParam, PaymentParam } from "../../../models/account-para
 import { useTranslation } from "react-i18next"
 import _ from "lodash"
 import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
-import { PaymentOptions, PaymentLogos } from "../../../static/mock-data"
+import { PaymentOptions, PaymentLogos } from "../../../static/mock/mock-data"
 
 const regxCVV = /^[0-9]{0,3}$/,
   regxExpiry = /^[0-9]{0,2}(\/|)[0-9]{0,4}$/,

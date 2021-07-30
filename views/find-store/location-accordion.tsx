@@ -13,7 +13,7 @@ import {
   isPassedTime,
   getCloseTime,
 } from "../../service/hepler"
-import { locationsData } from "../../static/mock-data"
+import { locationsData } from "../../static/mock/mock-data"
 import _ from "lodash"
 import LeftArrow from "../../components/svg/left-arrow"
 import RightArrow from "../../components/svg/right-arrow"

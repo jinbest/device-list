@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
-import { vendorData, vendorStatus } from "../../static/mock-data"
+import { vendorData, vendorStatus } from "../../static/mock/mock-data"
 import _ from "lodash"
 import SearchIcon from "../../components/svg/search-icon"
 import {

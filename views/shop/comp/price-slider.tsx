@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import Typography from "@material-ui/core/Typography"
 import Slider from "@material-ui/core/Slider"
 import { useTranslation } from "react-i18next"
@@ -7,14 +7,13 @@ function valuetext(value: number) {
   return `$${value}`
 }
 
-const PriceSlider = () => {
+type Props = {
+  value: number[]
+  setValue: (val: number[]) => void
+}
+
+const PriceSlider = ({ value, setValue }: Props) => {
   const [t] = useTranslation()
-
-  const [value, setValue] = useState<number[]>([50, 800])
-
-  const handleChange = (event: any, newValue: number | number[]) => {
-    setValue(newValue as number[])
-  }
 
   return (
     <div className="price-slider">
@@ -23,7 +22,9 @@ const PriceSlider = () => {
       </Typography>
       <Slider
         value={value}
-        onChange={handleChange}
+        onChange={(e, newValue) => {
+          setValue(newValue as number[])
+        }}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
