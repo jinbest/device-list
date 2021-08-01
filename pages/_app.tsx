@@ -16,4 +16,18 @@ function MyApp({ Component, pageProps }: AppProps) {
     </Provider>
   )
 }
+
+MyApp.getInitialProps = ({ ctx }: Record<string, any>) => {
+  if (ctx && ctx.res && ctx.res.statusCode === 404) {
+    ctx.res.writeHead(302, {
+      Location: "/",
+      "Content-Type": "text/html; charset=utf-8",
+    })
+    ctx.res.end()
+  }
+  return {
+    notFound: true,
+  }
+}
+
 export default MyApp

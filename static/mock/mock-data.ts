@@ -1,4 +1,4 @@
-import { AddressParam, PaymentParam } from "../models/account-param"
+import { AddressParam, PaymentParam } from "../../models/account-param"
 
 const bannerData = [
   {

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { locationsData } from "../../static/mock-data"
+import { locationsData } from "../../static/mock/mock-data"
 import { LocationParam } from "../../models/location-param"
 import { findIndex, isEmpty } from "lodash"
 import dynamic from "next/dynamic"

@@ -1,6 +1,6 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import { MockCredentialParam } from "../models/sign-params"
-import { accountData } from "../static/mock-data"
+import { accountData } from "../static/mock/mock-data"
 import _ from "lodash"
 
 configure({ enforceActions: "always" })

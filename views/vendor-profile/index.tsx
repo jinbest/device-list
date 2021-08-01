@@ -1,6 +1,8 @@
 import React from "react"
 import Section1 from "./Section1"
-import Section2 from "./Section2"
+import dynamic from "next/dynamic"
+
+const DynamicSection2 = dynamic(() => import("./Section2"), { ssr: false })
 
 type Props = {
   slug: string | string[]
@@ -12,7 +14,7 @@ const VendorProfile = ({ slug }: Props) => {
   return (
     <div className="vendor-profile">
       <Section1 />
-      <Section2 />
+      <DynamicSection2 />
     </div>
   )
 }

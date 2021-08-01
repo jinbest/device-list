@@ -4,7 +4,7 @@ import Banner1 from "../../components/slider-banners/banner-1"
 import Banner2 from "../../components/slider-banners/banner-2"
 import Banner3 from "../../components/slider-banners/banner-3"
 import _ from "lodash"
-import { bannerData } from "../../static/mock-data"
+import { bannerData } from "../../static/mock/mock-data"
 
 const sliderBG = ["#cbbbfa", "#4360fa", "#fc6530"]
 

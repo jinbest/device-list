@@ -10,7 +10,7 @@ import { PaymentParam, ImageDataParam } from "../../../models/account-param"
 import PaymentCreditForm from "./payment-credit-form"
 import DeletePayment from "../modal/delete-payment"
 import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core"
-import { PaymentOptions, PaymentLogos } from "../../../static/mock-data"
+import { PaymentOptions, PaymentLogos } from "../../../static/mock/mock-data"
 
 const PaymentMethods = () => {
   const [t] = useTranslation()
