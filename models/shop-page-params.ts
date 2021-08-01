@@ -96,48 +96,56 @@ export interface ProductParam {
   id: number
   store_id: number
   brand_id: number
-  brand: BrandParam
-  product_internal_type: string
+  brand?: BrandParam
+  product_internal_type?: string
   name: string
-  sku: string
-  short_description: string
-  description: string
-  net_weight: number
-  gross_weight: number
-  package_length: number
-  package_height: number
-  package_width: number
-  dimension_unit: string
-  tax_class: string
-  product_type: string
-  visibility: string
-  product_views: number
-  average_rating: number
-  is_enabled: boolean
-  display_in_search: boolean
-  sold_separately: boolean
-  sold_with_main_product_only: boolean
-  ship_with_main_product: boolean
-  is_default_product: boolean
-  shipping_required: boolean
+  img_src: string
+  sku?: string
+  short_description?: string
+  description?: string
+  net_weight?: number
+  gross_weight?: number
+  package_length?: number
+  package_height?: number
+  package_width?: number
+  dimension_unit?: string
+  tax_class?: string
+  product_type?: string
+  visibility?: string
+  product_views?: number
+  average_rating?: number
+  is_enabled?: boolean
+  display_in_search?: boolean
+  sold_separately?: boolean
+  sold_with_main_product_only?: boolean
+  ship_with_main_product?: boolean
+  is_default_product?: boolean
+  shipping_required?: boolean
   require_stock: boolean
-  require_stock_serial_number: boolean
-  cost_include_warranty: boolean
+  require_stock_serial_number?: boolean
+  cost_include_warranty?: boolean
   included_warranty_duration_month: number
   sort_order: number
-  variants_available: boolean
-  in_the_box: string
+  variants_available?: boolean
+  in_the_box?: string
   available_in_store: boolean
   available_online: boolean
-  sync: number
-  category: ProductCategoryParam[] // product_category[]
-  media: ProductMediaParam[] // product_media[]
-  attributes: ProductAttributesParam[] // product_attributes[]
-  faq: ProductFaqParam[] // product_faq[]
-  review: ProductReviewsParam[] // product_reviews[]
-  promotion_product: RelatedProductPromotionParam[] // related_product_promotion[]
-  inventory: ProductInventoryParam[] // product_inventory[]
-  inventory_transaction: ProductInventoryTransactionParam[] // product_inventory_transaction[]
+  sync?: number
+  category?: ProductCategoryParam[] // product_category[]
+  media?: ProductMediaParam[] // product_media[]
+  attributes?: ProductAttributesParam[] // product_attributes[]
+  faq?: ProductFaqParam[] // product_faq[]
+  review?: ProductReviewsParam[] // product_reviews[]
+  promotion_product?: RelatedProductPromotionParam[] // related_product_promotion[]
+  inventory?: ProductInventoryParam[] // product_inventory[]
+  inventory_transaction?: ProductInventoryTransactionParam[] // product_inventory_transaction[]
+  supplier_id: number // my-self
+  esthetic_id: number // my-self
+  carrier_id: number // my-self
+  color_id: number // my-self
+  storage: number // my-self
+  storage_unit: string // my-self
+  cost: number // my-self
 }
 
 export interface ProductGroupParam {
@@ -164,9 +172,9 @@ export interface ProductFaqParam {
 }
 
 export interface ProductCategoryParam {
-  product_id: number
+  product_id?: number
   category_id: number
-  category: CategoryParam
+  category?: CategoryParam
 }
 
 export interface ProductAttributesParam {
@@ -326,4 +334,11 @@ export interface StoreDiscountCustomerGroupParam {
   store_discount_price_id: number
   customer_group_id: number
   excluded: boolean
+}
+
+export interface FilterCheckItemParam {
+  label: string
+  value: string | number
+  id: number
+  order: number
 }
