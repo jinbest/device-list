@@ -136,8 +136,8 @@ export interface ProductParam {
   faq: ProductFaqParam[] // product_faq[]
   review: ProductReviewsParam[] // product_reviews[]
   promotion_product: RelatedProductPromotionParam[] // related_product_promotion[]
-  inventory: any[] // product_inventory[]
-  inventory_transaction: any[] // product_inventory_transaction[]
+  inventory: ProductInventoryParam[] // product_inventory[]
+  inventory_transaction: ProductInventoryTransactionParam[] // product_inventory_transaction[]
 }
 
 export interface ProductGroupParam {
@@ -277,4 +277,53 @@ export interface ProductInventorySerialNumberParam {
 
 export interface StoreDiscountPriceParam {
   id: number
+  store_id: number
+  location_id: number
+  discount_price_from: string
+  discount_price_till: string
+  description: string
+  discount_type: string
+  status: string
+  rules: StoreDiscountPriceRulesParam[] // store_discount_price_rules[]
+  discount_products: StoreDiscountPriceProductsParam[] // store_discount_price_products[]
+  product_group: StoreDiscountPriceProductGroupParam[] // store_discount_price_product_group[]
+  customer_group: StoreDiscountCustomerGroupParam[] // store_discount_customer_group[]
+}
+
+export interface StoreDiscountPriceRulesParam {
+  id: number
+  store_discount_price_id: number
+  condition_on: string
+  condition_field: string
+  operator: string
+  condition_value: string
+  apply_offer: boolean
+}
+
+export interface StoreDiscountPriceProductsParam {
+  store_discount_price_id: number
+  product_id: number
+  discount_mode: string
+  amount: number
+  max_quantity: number
+  sold_quantity: number
+  min_quantity_per_cart: number
+  max_quantity_per_cart: number
+}
+
+export interface StoreDiscountPriceProductGroupParam {
+  store_discount_price_id: number
+  product_group_id: number
+  discount_percentage: number
+  cap_amount: number
+  max_quantity: number
+  sold_quantity: number
+  min_quantity_per_cart: number
+  max_quantity_per_cart: number
+}
+
+export interface StoreDiscountCustomerGroupParam {
+  store_discount_price_id: number
+  customer_group_id: number
+  excluded: boolean
 }

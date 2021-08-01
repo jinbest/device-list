@@ -518,7 +518,10 @@ const AVAILABILITIES = [
 
 const PRODUCTS = [
   {
-    label: "iPhone SE 2020",
+    id: 1,
+    store_id: 1,
+    brand_id: 1,
+    name: "iPhone SE 2020",
     img_src: "/img/vendor-profile/shop/iPhone-SE-white.png",
     storage: 64,
     storage_unit: STORAGE_UNIT.gByte,
@@ -526,7 +529,6 @@ const PRODUCTS = [
     asLowas: "$50/mo",
     warranty: 12,
     warranty_unit: "MONTH",
-    brand_id: 1,
     vendor_id: 1,
     category_id: 1,
     esthetic_id: 1,
