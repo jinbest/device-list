@@ -132,9 +132,26 @@ const ShopFilter = ({
 
   return (
     <div className="shop-filter-container">
-      <PriceSlider value={priceValue} setValue={setPriceValue} />
+      <div className="shop-filter-price-desktop">
+        <PriceSlider value={priceValue} setValue={setPriceValue} />
+      </div>
 
       <div className="shop-filter-accordion">
+        <div className="shop-filter-price-mobile">
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="device-type-content"
+              id="device-type"
+            >
+              <Typography className="accordion-summary">{t("Price")}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <PriceSlider value={priceValue} setValue={setPriceValue} />
+            </AccordionDetails>
+          </Accordion>
+        </div>
+
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -164,7 +181,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.name}
+                      label={t(item.name)}
                     />
                   )
                 }
@@ -202,7 +219,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -237,7 +254,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.name}
+                      label={t(item.name)}
                     />
                   )
                 })}
@@ -283,7 +300,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.name}
+                      label={t(item.name)}
                     />
                   )
                 })}
@@ -328,7 +345,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -362,7 +379,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -396,7 +413,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -429,7 +446,7 @@ const ShopFilter = ({
                         color="primary"
                       />
                     }
-                    label={item.name}
+                    label={t(item.name)}
                   />
                 )
               })}
@@ -466,7 +483,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
