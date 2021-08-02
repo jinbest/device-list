@@ -164,7 +164,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.name}
+                      label={t(item.name)}
                     />
                   )
                 }
@@ -202,7 +202,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -237,7 +237,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.name}
+                      label={t(item.name)}
                     />
                   )
                 })}
@@ -283,7 +283,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.name}
+                      label={t(item.name)}
                     />
                   )
                 })}
@@ -328,7 +328,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -362,7 +362,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -396,7 +396,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }
@@ -429,7 +429,7 @@ const ShopFilter = ({
                         color="primary"
                       />
                     }
-                    label={item.name}
+                    label={t(item.name)}
                   />
                 )
               })}
@@ -466,7 +466,7 @@ const ShopFilter = ({
                           color="primary"
                         />
                       }
-                      label={item.label}
+                      label={t(item.label)}
                     />
                   )
                 }

@@ -1,0 +1,44 @@
+.custom-selector {
+  position: relative;
+  height: 35px;
+  width: 100%;
+  z-index: 1;
+  p {
+    font-size: 16px;
+    color: black;
+    font-family: "Montserrat";
+  }
+  .selector-header {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    cursor: pointer;
+    box-shadow: -10.5143px -10.5143px 31.5429px #ffffff,
+      10.5143px 10.5143px 31.5429px rgba(174, 174, 192, 0.4);
+  }
+  .selector-options {
+    position: absolute;
+    width: 100%;
+    min-width: 150px;
+    top: 35px;
+    right: 0;
+    padding: 20px 0;
+    background: white;
+    z-index: 10;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px rgba(174, 174, 192, 0.4);
+    border-radius: 0 0 4px 4px;
+    p {
+      padding: 5px 15px;
+      cursor: pointer;
+      &:hover {
+        background: #d4dffc60;
+      }
+    }
+  }
+}

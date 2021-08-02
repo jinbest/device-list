@@ -5,6 +5,7 @@ import {
   ProductParam,
   FilterCheckItemParam,
 } from "../../models/shop-page-params"
+import { SelectorParam } from "../../models/custom-selector-param"
 
 const DEVICE_COLOR = {
   black: "black",
@@ -750,6 +751,25 @@ const PRODUCTS = [
   },
 ] as ProductParam[]
 
+const SORT_OPTIONS = [
+  {
+    name: "Most Popular",
+    code: 1,
+  },
+  {
+    name: "Newest",
+    code: 2,
+  },
+  {
+    name: "Lowest Price",
+    code: 3,
+  },
+  {
+    name: "Highest Price",
+    code: 4,
+  },
+] as SelectorParam[]
+
 export {
   DEVICE_COLOR,
   STORAGE_UNIT,
@@ -762,4 +782,5 @@ export {
   SUPPLIERS,
   AVAILABILITIES,
   PRODUCTS,
+  SORT_OPTIONS,
 }

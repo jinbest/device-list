@@ -19,7 +19,43 @@
         width: calc(100% - 250px);
         display: flex;
         flex-direction: column;
+        .sort-by-selector {
+          width: 110px;
+          margin-left: 15px;
+          min-width: 110px;
+        }
+        .shop-filtered-tip {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          & > div {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            height: 25px;
+            padding: 0 10px;
+            justify-content: center;
+            background: #d4dffc;
+            border-radius: 15px;
+            margin: 3px;
+            p {
+              font-size: 12px;
+              margin-left: 5px;
+              font-weight: 500;
+              font-family: "Montserrat";
+            }
+            svg {
+              width: 15px;
+              height: 15px;
+              cursor: pointer;
+              &:hover {
+                opacity: 0.7;
+              }
+            }
+          }
+        }
         .shop-product-container {
+          margin-top: 20px;
           display: flex;
           justify-content: space-between;
           width: 100%;
@@ -178,5 +214,21 @@
     &:hover {
       opacity: 0.7;
     }
+  }
+}
+
+.shop-switch {
+  .MuiSwitch-switchBase {
+    height: 100%;
+  }
+  .MuiSwitch-track {
+    background: #d4dffc;
+    opacity: 1;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked + .MuiSwitch-track {
+    background: $main-blue;
+  }
+  .MuiSwitch-colorPrimary.Mui-checked {
+    color: $main-blue;
   }
 }
