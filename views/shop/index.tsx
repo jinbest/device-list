@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import BreadCrumbs from "../../components/bread-crumbs"
 import ShopFilter from "./comp/shop-filter"
@@ -7,12 +7,14 @@ import { formatWarranty } from "../../service/hepler"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import CustomSelector from "../../components/custom-selector"
 import { SelectorParam } from "../../models/custom-selector-param"
-import { SORT_OPTIONS } from "../../static/mock/shop"
+import { AVAILABILITIES, DEVICE_STORAGES, SORT_OPTIONS } from "../../static/mock/shop"
 import dynamic from "next/dynamic"
 import { PRODUCTS } from "../../static/mock/shop"
 import ShopFilterTip from "./comp/shop-filter-tip"
 import Setting from "../../components/svg/setting"
 import FilterDrawer from "./comp/filter-drawer"
+import { findCommonElement, RangeOfStorage, CheckAvailable } from "../../service/hepler"
+import _, { isEmpty } from "lodash"
 
 const DynamicSwitch = dynamic(() => import("@material-ui/core/Switch"), { ssr: false })
 
@@ -33,6 +35,97 @@ const Shop = () => {
   const [switchChecked, setSwitchChecked] = useState(false)
   const [sortBy, setSortBy] = useState<SelectorParam>({} as SelectorParam)
   const [filterDrawerView, setFilterDrawerView] = useState(false)
+
+  const [filteredProducts, setFilteredProducts] = useState<ProductParam[]>(PRODUCTS)
+
+  const _filteringProducts_ = () => {
+    const result = [] as ProductParam[]
+    PRODUCTS.forEach((item: ProductParam) => {
+      let status = true
+      if (item.cost < priceValue[0] || item.cost > priceValue[1]) {
+        status = false
+        return
+      }
+      if (checkedCategories.length && !findCommonElement(checkedCategories, item.category)) {
+        status = false
+        return
+      }
+      if (checkedEsthetics.length && !checkedEsthetics.includes(item.esthetic_id)) {
+        status = false
+        return
+      }
+      if (checkedBrands.length && !checkedBrands.includes(item.brand_id)) {
+        status = false
+        return
+      }
+      if (checkedProducts.length && !checkedProducts.includes(item.id)) {
+        status = false
+        return
+      }
+      if (
+        checkedStorages.length &&
+        !RangeOfStorage(item.storage, DEVICE_STORAGES, checkedStorages)
+      ) {
+        status = false
+        return
+      }
+      if (checkedColours.length && !checkedColours.includes(item.color_id)) {
+        status = false
+        return
+      }
+      if (checkedCarriers.length && !checkedCarriers.includes(item.carrier_id)) {
+        status = false
+        return
+      }
+      if (checkedVendors.length && !checkedVendors.includes(item.supplier_id)) {
+        status = false
+        return
+      }
+      if (
+        checkedAvailabilities.length &&
+        !CheckAvailable(checkedAvailabilities, AVAILABILITIES, item)
+      ) {
+        status = false
+        return
+      }
+      if (switchChecked && !item.require_stock) {
+        status = false
+        return
+      }
+
+      if (status) {
+        result.push(item)
+      }
+    })
+
+    if (!isEmpty(sortBy)) {
+      if (sortBy.code === 3) {
+        return _.sortBy(result, (o) => o.cost)
+      } else if (sortBy.code === 4) {
+        return _.sortBy(result, (o) => o.cost).reverse()
+      }
+    }
+
+    return result
+  }
+
+  useEffect(() => {
+    const newFiltered = _filteringProducts_()
+    setFilteredProducts(newFiltered)
+  }, [
+    priceValue,
+    checkedCategories,
+    checkedEsthetics,
+    checkedBrands,
+    checkedProducts,
+    checkedStorages,
+    checkedColours,
+    checkedCarriers,
+    checkedVendors,
+    checkedAvailabilities,
+    switchChecked,
+    sortBy,
+  ])
 
   return (
     <div className="shop">
@@ -126,7 +219,7 @@ const Shop = () => {
               </div>
             </div>
             <div className="shop-product-container">
-              {PRODUCTS.map((item: ProductParam, index: number) => {
+              {filteredProducts.map((item: ProductParam, index: number) => {
                 return (
                   <div key={index}>
                     <img src={item.img_src} alt={item.name} />

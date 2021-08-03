@@ -2,6 +2,12 @@ import { CheckPassParam } from "../models/check-pass-params"
 import { LocationParam, LocationHoursParam } from "../models/location-param"
 import moment from "moment-timezone"
 import { VendorProfileReviewsParam } from "../models/vendor-profile-param"
+import {
+  ProductCategoryParam,
+  FilterCheckItemParam,
+  ProductParam,
+} from "../models/shop-page-params"
+import _ from "lodash"
 
 export function ValidateEmail(e: string) {
   const re =
@@ -269,4 +275,55 @@ export function getScore(data: VendorProfileReviewsParam[]) {
     score = score / data.length
   }
   return score
+}
+
+export function findCommonElement(array1: number[], array2: ProductCategoryParam[] | undefined) {
+  if (typeof array2 === "undefined") return false
+  for (let i = 0; i < array1.length; i++) {
+    for (let j = 0; j < array2.length; j++) {
+      if (array1[i] === array2[j].category_id) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
+export function RangeOfStorage(
+  storage: number,
+  storage_list: FilterCheckItemParam[],
+  checkedStorage: number[]
+) {
+  let result = false
+  checkedStorage.forEach((item) => {
+    const itIndex = _.findIndex(storage_list, { id: item })
+    if (itIndex > -1) {
+      if (storage_list[itIndex].value <= storage) {
+        result = true
+        return
+      }
+    }
+  })
+  return result
+}
+
+export function CheckAvailable(
+  checkedAvailabilities: number[],
+  AVAILABILITIES: FilterCheckItemParam[],
+  item: ProductParam
+) {
+  let result = false
+  checkedAvailabilities.forEach((it) => {
+    const itIndex = _.findIndex(AVAILABILITIES, { id: it })
+    if (itIndex > -1) {
+      if (AVAILABILITIES[itIndex].id === 1 && item.available_online) {
+        result = true
+        return
+      } else if (AVAILABILITIES[itIndex].id === 2 && item.available_in_store) {
+        result = true
+        return
+      }
+    }
+  })
+  return result
 }
