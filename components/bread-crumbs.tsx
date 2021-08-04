@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next"
 
 type Props = {
   data: string[]
+  color?: string
 }
 
-const BreadCrumbs = ({ data }: Props) => {
+const BreadCrumbs = ({ data, color }: Props) => {
   const [t] = useTranslation()
 
   return (
@@ -14,8 +15,8 @@ const BreadCrumbs = ({ data }: Props) => {
       {data.map((item: string, index: number) => {
         return (
           <React.Fragment key={index}>
-            <p>{t(item)}</p>
-            {index < data.length - 1 && <RightArrow color="#4360FA" />}
+            <p style={{ color: color ? color : "" }}>{t(item)}</p>
+            {index < data.length - 1 && <RightArrow color={color ? color : "#4360FA"} />}
           </React.Fragment>
         )
       })}

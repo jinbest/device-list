@@ -157,6 +157,10 @@
             padding: 20px;
             text-align: center;
             float: left;
+            cursor: pointer;
+            &:hover {
+              transform: scale(1.03);
+            }
             img {
               max-width: 100%;
               margin-bottom: 20px;

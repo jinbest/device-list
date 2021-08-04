@@ -15,6 +15,7 @@ import Setting from "../../components/svg/setting"
 import FilterDrawer from "./comp/filter-drawer"
 import { findCommonElement, RangeOfStorage, CheckAvailable } from "../../service/hepler"
 import _, { isEmpty } from "lodash"
+import router from "next/router"
 
 const DynamicSwitch = dynamic(() => import("@material-ui/core/Switch"), { ssr: false })
 
@@ -221,7 +222,12 @@ const Shop = () => {
             <div className="shop-product-container">
               {filteredProducts.map((item: ProductParam, index: number) => {
                 return (
-                  <div key={index}>
+                  <div
+                    key={index}
+                    onClick={() => {
+                      router.push(`/product/${item.id}`)
+                    }}
+                  >
                     <img src={item.img_src} alt={item.name} />
                     <div>
                       <h2>{item.name}</h2>
