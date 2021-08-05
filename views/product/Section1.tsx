@@ -9,6 +9,10 @@ import {
   ProductStorageParam,
   ProductConditionParam,
   ProductSelectParam,
+  QualityGradingParam,
+  QualityGradingDataParam,
+  ProductFaqParam,
+  ProductFaqAnswerParam,
 } from "../../models/product-details-param"
 import {
   WORKS_WITH,
@@ -17,10 +21,15 @@ import {
   PRODUCT_CONDITIONS,
   PRODUCT_WARRANTY_OPTIONS,
   SIMILAR_PRODUCTS,
+  QUALITY_GRADINGS,
+  GRADING_PREVIEW,
+  PRODUCT_FAQS,
 } from "../../static/mock/product"
 import { Checkbox, FormControlLabel, FormGroup, FormControl } from "@material-ui/core"
 import useOnclickOutside from "react-cool-onclickoutside"
 import { formatWarranty } from "../../service/hepler"
+import BlockOutlinedIcon from "@material-ui/icons/BlockOutlined"
+import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined"
 
 type Props = {
   product: ProductParam
@@ -41,6 +50,8 @@ const Section1 = ({ product }: Props) => {
     PRODUCT_WARRANTY_OPTIONS[0]
   )
   const [showSelectWarranty, setShowSelectWarranty] = useState(false)
+  const [selectedGrading, setSelectedGrading] = useState<QualityGradingParam>(QUALITY_GRADINGS[0])
+  const [gradingPreview, setGradingPreview] = useState(GRADING_PREVIEW.front)
 
   const refOption = useOnclickOutside(() => {
     setShowSelectWarranty(false)
@@ -107,7 +118,7 @@ const Section1 = ({ product }: Props) => {
                         {item.img_src ? (
                           <img src={item.img_src} alt={item.name} />
                         ) : (
-                          <p>{t(item.name)}</p>
+                          <p>{item.name}</p>
                         )}
                       </div>
                     )
@@ -178,7 +189,7 @@ const Section1 = ({ product }: Props) => {
                           style={{ background: selectedCondition.id === item.id ? "#28bc83" : "" }}
                         >
                           <p style={{ color: selectedCondition.id === item.id ? "white" : "" }}>
-                            {t(item.name.toUpperCase())}
+                            {t(item.name).toUpperCase()}
                           </p>
                         </div>
                         <div className="condition-body">
@@ -303,17 +314,36 @@ const Section1 = ({ product }: Props) => {
                           <h2>{item.name}</h2>
                           <h2>{`${item.storage} GB`}</h2>
                         </div>
-                        <p>{item.color}</p>
-                        <p>
+                        <div>
+                          <span>
+                            <div style={{ background: "#3E4A44" }} />
+                          </span>
+                          {item.color}
+                        </div>
+                        <div>
+                          <span>
+                            {item.available_in_store ? (
+                              <CheckOutlinedIcon style={{ color: "#54BA71" }} />
+                            ) : (
+                              <BlockOutlinedIcon />
+                            )}
+                          </span>
                           {item.available_in_store
                             ? t("Available in Store")
                             : t("Not available in Store")}
-                        </p>
-                        <p>
+                        </div>
+                        <div>
+                          <span>
+                            {item.available_online ? (
+                              <CheckOutlinedIcon style={{ color: "#54BA71" }} />
+                            ) : (
+                              <BlockOutlinedIcon />
+                            )}
+                          </span>
                           {item.available_online
                             ? t("Available Online")
                             : t("Not available Online")}
-                        </p>
+                        </div>
                         <p
                           style={{ color: "#4360fa", marginTop: "10px", fontSize: "18px" }}
                         >{`$${item.cost}`}</p>
@@ -330,7 +360,105 @@ const Section1 = ({ product }: Props) => {
             </div>
 
             <div className="quality-grading">
-              <h2>{t("QUALITY GRADING")}</h2>
+              <div className="quality-grading-header">
+                <h2>{t("QUALITY GRADING")}</h2>
+                <div>
+                  {QUALITY_GRADINGS.map((item: QualityGradingParam, index: number) => {
+                    return (
+                      <div
+                        key={index}
+                        style={{
+                          border: item.id === selectedGrading.id ? "3px solid #4360fa" : "",
+                        }}
+                        onClick={() => {
+                          setSelectedGrading(item)
+                        }}
+                      >
+                        <h3>{t(item.name)}</h3>
+                        <p>{t(item.abstract)}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className="quality-grading-body">
+                <div className="quality-grading-description">
+                  <h3>{t(selectedGrading.name)}</h3>
+                  <p>{t(selectedGrading.description)}</p>
+                  <div>
+                    {selectedGrading.data.map((item: QualityGradingDataParam, index: number) => (
+                      <div key={index}>
+                        <img src={item.img_src} alt={item.name} />
+                        <p>{t(item.name)}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="quality-grading-preview">
+                  <img src={selectedGrading.preview.front} alt={selectedGrading.name} />
+                  <div>
+                    <button
+                      style={{
+                        background: gradingPreview === GRADING_PREVIEW.front ? "#4360FA" : "",
+                        color: gradingPreview === GRADING_PREVIEW.front ? "white" : "",
+                      }}
+                      onClick={() => {
+                        setGradingPreview(GRADING_PREVIEW.front)
+                      }}
+                    >
+                      {t("front")}
+                    </button>
+                    <button
+                      style={{
+                        background: gradingPreview === GRADING_PREVIEW.back ? "#4360FA" : "",
+                        color: gradingPreview === GRADING_PREVIEW.back ? "white" : "",
+                      }}
+                      onClick={() => {
+                        setGradingPreview(GRADING_PREVIEW.back)
+                      }}
+                    >
+                      {t("back")}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="quality-grading-footer">
+                <img src="/img/product/quality-grading/device-kit.png" alt="device-kit" />
+                <p>
+                  {t(
+                    "We offer a DeviceKit add on for all our devices, this includes a compatible charger & sim extractor."
+                  )}
+                </p>
+              </div>
+            </div>
+
+            <div className="product-faqs">
+              <div className="product-faqs-header">
+                <h2>FAQ</h2>
+              </div>
+
+              <div className="product-faqs-body">
+                {PRODUCT_FAQS.map((item: ProductFaqParam, index: number) => {
+                  return (
+                    <div key={index}>
+                      <h3>{t(item.question)}</h3>
+                      {item.answers.map((it: ProductFaqAnswerParam, idx: number) => (
+                        <p key={`${index}-${idx}`}>
+                          {t(it.text)}
+                          {it.link && (
+                            <span>
+                              <a href={it.link.href}>{t(it.link.text)}</a>
+                            </span>
+                          )}
+                        </p>
+                      ))}
+                    </div>
+                  )
+                })}
+              </div>
             </div>
           </div>
 
