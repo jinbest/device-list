@@ -21,3 +21,8 @@ export interface ProductConditionParam {
   availability: boolean
   cost: number
 }
+
+export interface ProductSelectParam {
+  label: string
+  value: number | string
+}

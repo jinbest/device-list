@@ -17,11 +17,6 @@ const DEVICE_COLOR = {
   yellow: "yellow",
 }
 
-const STORAGE_UNIT = {
-  gByte: "GB",
-  mByte: "MB",
-}
-
 const DEVICE_CATEGORIES = [
   {
     id: 1,
@@ -492,7 +487,6 @@ const PRODUCTS = [
     short_description: "$50/mo",
     description: "64 GB | White",
     storage: 64,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 1,
     esthetic_id: 1,
     carrier_id: 1,
@@ -532,7 +526,6 @@ const PRODUCTS = [
     short_description: "$60/mo",
     description: "32 GB | Silver",
     storage: 32,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 1,
     esthetic_id: 1,
     carrier_id: 1,
@@ -572,7 +565,6 @@ const PRODUCTS = [
     short_description: "$50/mo",
     description: "40 GB | Yellow",
     storage: 40,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 1,
     esthetic_id: 1,
     carrier_id: 1,
@@ -612,7 +604,6 @@ const PRODUCTS = [
     short_description: "$50/mo",
     description: "40mm | GPS Only | Space Gray",
     storage: 20,
-    storage_unit: STORAGE_UNIT.mByte,
     supplier_id: 1,
     esthetic_id: 1,
     carrier_id: 1,
@@ -655,7 +646,6 @@ const PRODUCTS = [
     short_description: "$60/mo",
     description: "128 GB | Violet",
     storage: 128,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 2,
     esthetic_id: 2,
     carrier_id: 2,
@@ -695,7 +685,6 @@ const PRODUCTS = [
     short_description: "$60/mo",
     description: "60 GB | Glacial Green",
     storage: 60,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 2,
     esthetic_id: 2,
     carrier_id: 2,
@@ -735,7 +724,6 @@ const PRODUCTS = [
     short_description: "$50/mo",
     description: "64 GB | Yellow",
     storage: 64,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 1,
     esthetic_id: 1,
     carrier_id: 1,
@@ -775,7 +763,6 @@ const PRODUCTS = [
     short_description: "$50/mo",
     description: "40mm | GPS Only | Space Gray",
     storage: 40,
-    storage_unit: STORAGE_UNIT.mByte,
     supplier_id: 1,
     esthetic_id: 1,
     carrier_id: 1,
@@ -818,7 +805,6 @@ const PRODUCTS = [
     short_description: "$60/mo",
     description: "128 GB | Glacial Green",
     storage: 128,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 2,
     esthetic_id: 2,
     carrier_id: 2,
@@ -858,7 +844,6 @@ const PRODUCTS = [
     short_description: "$50/mo",
     description: "64 GB | Yellow",
     storage: 64,
-    storage_unit: STORAGE_UNIT.gByte,
     supplier_id: 1,
     esthetic_id: 1,
     carrier_id: 1,
@@ -912,7 +897,6 @@ const SORT_OPTIONS = [
 
 export {
   DEVICE_COLOR,
-  STORAGE_UNIT,
   DEVICE_CATEGORIES,
   BRANDS,
   ESTHETIC_CONDITIONS,

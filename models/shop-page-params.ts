@@ -100,6 +100,7 @@ export interface ProductParam {
   product_internal_type?: string
   name: string
   img_src: string
+  img_alt?: string
   sku?: string
   short_description?: string
   description?: string
@@ -143,8 +144,8 @@ export interface ProductParam {
   esthetic_id: number // my-self
   carrier_id: number // my-self
   color_id: number // my-self
+  color?: string // my-self
   storage: number // my-self
-  storage_unit: string // my-self
   cost: number // my-self
 }
 
