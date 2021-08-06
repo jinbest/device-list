@@ -197,6 +197,7 @@ const QUALITY_GRADINGS = [
     ],
     preview: {
       front: "/img/product/quality-grading/front.png",
+      back: "/img/product/quality-grading/back.png",
     },
   },
   {
@@ -221,6 +222,7 @@ const QUALITY_GRADINGS = [
     ],
     preview: {
       front: "/img/product/quality-grading/front.png",
+      back: "/img/product/quality-grading/back.png",
     },
   },
   {
@@ -246,6 +248,7 @@ const QUALITY_GRADINGS = [
     ],
     preview: {
       front: "/img/product/quality-grading/front.png",
+      back: "/img/product/quality-grading/back.png",
     },
   },
 ]

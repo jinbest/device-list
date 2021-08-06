@@ -43,6 +43,7 @@ export interface QualityGradingDataParam {
 
 export interface QualityGradingPreviewParam {
   front: string
+  back: string
 }
 
 export interface ProductFaqParam {

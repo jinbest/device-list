@@ -30,6 +30,9 @@ import useOnclickOutside from "react-cool-onclickoutside"
 import { formatWarranty } from "../../service/hepler"
 import BlockOutlinedIcon from "@material-ui/icons/BlockOutlined"
 import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined"
+import ProductTowardsCertified from "./comp/product-towards-certified"
+import ProductTowardsDrawer from "./comp/product-towards-drawer"
+import LeftArrow from "../../components/svg/left-arrow"
 
 type Props = {
   product: ProductParam
@@ -52,6 +55,7 @@ const Section1 = ({ product }: Props) => {
   const [showSelectWarranty, setShowSelectWarranty] = useState(false)
   const [selectedGrading, setSelectedGrading] = useState<QualityGradingParam>(QUALITY_GRADINGS[0])
   const [gradingPreview, setGradingPreview] = useState(GRADING_PREVIEW.front)
+  const [towardsDrawer, setTowardsDrawer] = useState(false)
 
   const refOption = useOnclickOutside(() => {
     setShowSelectWarranty(false)
@@ -397,7 +401,14 @@ const Section1 = ({ product }: Props) => {
                 </div>
 
                 <div className="quality-grading-preview">
-                  <img src={selectedGrading.preview.front} alt={selectedGrading.name} />
+                  {gradingPreview === GRADING_PREVIEW.front ? (
+                    <img
+                      src={selectedGrading.preview.front}
+                      alt={`${selectedGrading.name}-front`}
+                    />
+                  ) : (
+                    <img src={selectedGrading.preview.back} alt={`${selectedGrading.name}-back`} />
+                  )}
                   <div>
                     <button
                       style={{
@@ -462,9 +473,24 @@ const Section1 = ({ product }: Props) => {
             </div>
           </div>
 
-          <div className="product-towards-certified">product-towards-certified</div>
+          <div className="product-towards-certified-desktop">
+            <ProductTowardsCertified product={product} />
+          </div>
+
+          <div
+            className="product-towards-drawer-switcher"
+            onClick={() => {
+              setTowardsDrawer(true)
+            }}
+          >
+            <LeftArrow color="#BDBFC3" />
+          </div>
         </div>
       </div>
+
+      <ProductTowardsDrawer setOpen={setTowardsDrawer} open={towardsDrawer}>
+        <ProductTowardsCertified product={product} />
+      </ProductTowardsDrawer>
     </div>
   )
 }
