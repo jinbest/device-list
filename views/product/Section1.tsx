@@ -108,6 +108,10 @@ const Section1 = ({ product }: Props) => {
               <div className="product-abstract">
                 <h1>{product.name}</h1>
 
+                <div className="product-front-screen-mobile">
+                  <img src={product.img_src} alt={product.name} />
+                </div>
+
                 <h2>{t("Works with")}</h2>
                 <div className="works-with">
                   {WORKS_WITH.map((item: WorkWithParam, index: number) => {
