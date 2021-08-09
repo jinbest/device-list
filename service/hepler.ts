@@ -278,15 +278,8 @@ export function getScore(data: VendorProfileReviewsParam[]) {
 }
 
 export function findCommonElement(array1: number[], array2: ProductCategoryParam[] | undefined) {
-  if (typeof array2 === "undefined") return false
-  for (let i = 0; i < array1.length; i++) {
-    for (let j = 0; j < array2.length; j++) {
-      if (array1[i] === array2[j].category_id) {
-        return true
-      }
-    }
-  }
-  return false
+  if (!array2) return false
+  return array2.some((item) => array1.includes(item.category_id))
 }
 
 export function RangeOfStorage(

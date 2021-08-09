@@ -174,12 +174,15 @@ button {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  p {
+  a {
     font-size: 16px;
     line-height: 20px;
     color: $main-blue;
     font-family: "Montserrat";
     font-weight: normal;
+    &:hover {
+      opacity: 0.7;
+    }
   }
   svg {
     margin: 0 8px;

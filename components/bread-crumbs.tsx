@@ -1,9 +1,11 @@
 import React from "react"
 import RightArrow from "./svg/right-arrow"
 import { useTranslation } from "react-i18next"
+import { NavParams } from "../models/nav-params"
+import Link from "next/link"
 
 type Props = {
-  data: string[]
+  data: NavParams[]
   color?: string
 }
 
@@ -12,10 +14,12 @@ const BreadCrumbs = ({ data, color }: Props) => {
 
   return (
     <div className="bread-crumbs">
-      {data.map((item: string, index: number) => {
+      {data.map((item: NavParams, index: number) => {
         return (
           <React.Fragment key={index}>
-            <p style={{ color: color ? color : "" }}>{t(item)}</p>
+            <Link href={item.link}>
+              <a style={{ color: color ? color : "" }}>{t(item.name)}</a>
+            </Link>
             {index < data.length - 1 && <RightArrow color={color ? color : "#4360FA"} />}
           </React.Fragment>
         )

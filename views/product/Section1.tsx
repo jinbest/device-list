@@ -33,6 +33,7 @@ import CheckOutlinedIcon from "@material-ui/icons/CheckOutlined"
 import ProductTowardsCertified from "./comp/product-towards-certified"
 import ProductTowardsDrawer from "./comp/product-towards-drawer"
 import LeftArrow from "../../components/svg/left-arrow"
+import { NavParams } from "../../models/nav-params"
 
 type Props = {
   product: ProductParam
@@ -56,6 +57,7 @@ const Section1 = ({ product }: Props) => {
   const [selectedGrading, setSelectedGrading] = useState<QualityGradingParam>(QUALITY_GRADINGS[0])
   const [gradingPreview, setGradingPreview] = useState(GRADING_PREVIEW.front)
   const [towardsDrawer, setTowardsDrawer] = useState(false)
+  const [breadData, setBreadData] = useState<NavParams[]>([] as NavParams[])
 
   const refOption = useOnclickOutside(() => {
     setShowSelectWarranty(false)
@@ -67,6 +69,26 @@ const Section1 = ({ product }: Props) => {
       setSelectedCondition(filtered[0])
     }
   }, [PRODUCT_CONDITIONS])
+
+  useEffect(() => {
+    const tmpBreadData = [
+      {
+        name: "Buy",
+        link: "/shop",
+      },
+    ]
+    if (product.brand && !isEmpty(product.brand)) {
+      tmpBreadData.push({
+        name: product.brand.name,
+        link: `/shop?brand=${product.brand.name}`,
+      })
+    }
+    tmpBreadData.push({
+      name: product.name,
+      link: `/product/${product.id}`,
+    })
+    setBreadData(tmpBreadData)
+  }, [product])
 
   const _getWorkTheme_ = (item: WorkWithParam) => {
     if (work.id !== item.id) {
@@ -83,9 +105,7 @@ const Section1 = ({ product }: Props) => {
   return (
     <div className="product-section1">
       <div className="container">
-        {product.brand && !isEmpty(product.brand) && (
-          <BreadCrumbs data={["Buy", product.brand.name, product.name]} color="black" />
-        )}
+        {!isEmpty(breadData) && <BreadCrumbs data={breadData} color="black" />}
 
         <div className="product-contents">
           <div className="product-explanation">

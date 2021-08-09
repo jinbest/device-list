@@ -9,18 +9,20 @@ import CustomSelector from "../../components/custom-selector"
 import { SelectorParam } from "../../models/custom-selector-param"
 import { AVAILABILITIES, DEVICE_STORAGES, SORT_OPTIONS } from "../../static/mock/shop"
 import dynamic from "next/dynamic"
-import { PRODUCTS } from "../../static/mock/shop"
+import { PRODUCTS, BRANDS } from "../../static/mock/shop"
 import ShopFilterTip from "./comp/shop-filter-tip"
 import Setting from "../../components/svg/setting"
 import FilterDrawer from "./comp/filter-drawer"
 import { findCommonElement, RangeOfStorage, CheckAvailable } from "../../service/hepler"
 import _, { isEmpty } from "lodash"
-import router from "next/router"
+import { NavParams } from "../../models/nav-params"
+import { useRouter } from "next/router"
 
 const DynamicSwitch = dynamic(() => import("@material-ui/core/Switch"), { ssr: false })
 
 const Shop = () => {
   const [t] = useTranslation()
+  const router = useRouter()
 
   const [priceValue, setPriceValue] = useState<number[]>([50, 800])
   const [checkedCategories, setCheckedCategories] = useState<number[]>([] as number[])
@@ -38,6 +40,41 @@ const Shop = () => {
   const [filterDrawerView, setFilterDrawerView] = useState(false)
 
   const [filteredProducts, setFilteredProducts] = useState<ProductParam[]>(PRODUCTS)
+  const [breadData, setBreadData] = useState<NavParams[]>([] as NavParams[])
+
+  useEffect(() => {
+    const tmpBreadData = [
+      {
+        name: "Home",
+        link: "/",
+      },
+      {
+        name: "Shop",
+        link: "/shop",
+      },
+    ]
+    if (!isEmpty(router.query)) {
+      if (router.query.brand) {
+        const brandName = router.query.brand as string
+        const brand = _.find(BRANDS, { name: brandName })
+        if (brand && !isEmpty(brand)) {
+          tmpBreadData.push({
+            name: brandName,
+            link: `/shop?brand=${brandName}`,
+          })
+          const cntCheckBreads = [brand.id]
+          setCheckedBrands(cntCheckBreads)
+        }
+      }
+    } else {
+      tmpBreadData.push({
+        name: "All Devices",
+        link: "/shop",
+      })
+      setCheckedBrands([])
+    }
+    setBreadData(tmpBreadData)
+  }, [router])
 
   const _filteringProducts_ = () => {
     const result = [] as ProductParam[]
@@ -131,7 +168,7 @@ const Shop = () => {
   return (
     <div className="shop">
       <div className="container">
-        <BreadCrumbs data={["Home", "Shop", "All Devices"]} />
+        {!isEmpty(breadData) && <BreadCrumbs data={breadData} />}
 
         <div className="shop-contents">
           <div className="shop-filter-desktop">
