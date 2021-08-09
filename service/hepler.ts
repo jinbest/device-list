@@ -320,3 +320,11 @@ export function CheckAvailable(
   })
   return result
 }
+
+export function formatAsMoney(val: number | undefined) {
+  if (!val) return "$0.00"
+  return val.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  })
+}

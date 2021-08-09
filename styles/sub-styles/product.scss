@@ -704,41 +704,6 @@
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      & > div {
-        height: 30px;
-        width: 115px;
-        border-radius: 15px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        display: flex;
-        & > div {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 35px;
-          height: 100%;
-          cursor: pointer;
-          svg {
-            width: 15px;
-            height: 15px;
-            color: #bdbfc3;
-          }
-          &:hover {
-            svg {
-              color: black;
-              width: 18px;
-              height: 18px;
-            }
-          }
-        }
-        p {
-          background: #bdbfc3;
-          width: 45px;
-          height: 100%;
-          text-align: center;
-          font-size: 16px;
-          line-height: 28px;
-        }
-      }
       button {
         width: 145px;
         height: 30px;

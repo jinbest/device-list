@@ -4,11 +4,16 @@ import Radio, { RadioProps } from "@material-ui/core/Radio"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import clsx from "clsx"
 import { makeStyles } from "@material-ui/core/styles"
-import AddIcon from "@material-ui/icons/Add"
-import RemoveIcon from "@material-ui/icons/Remove"
 import { useTranslation } from "react-i18next"
 import { ProductParam } from "../../../models/shop-page-params"
 import { FormControlLabel, FormControl } from "@material-ui/core"
+import CalculatorButton from "../../../components/calculator-button"
+import { shopStore } from "../../../store"
+import { observer } from "mobx-react"
+import _ from "lodash"
+import { ShopCartParam } from "../../../models/shop-cart"
+import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
+import Toast from "../../../components/toast/toast"
 
 type Props = {
   product: ProductParam
@@ -16,8 +21,42 @@ type Props = {
 
 const ProductTowardsCertified = ({ product }: Props) => {
   const [t] = useTranslation()
+  const delayTime = 2000
 
   const [addCarts, setAddCarts] = useState(1)
+  const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
+  const [adding, setAdding] = useState(false)
+
+  const handleAddShopCart = () => {
+    const cntCarts = _.cloneDeep(shopStore.shopCarts)
+    const newCart = _.cloneDeep(product) as ShopCartParam
+    newCart.device_kit_cost = 1.99
+    newCart.locked = false
+    newCart.warranty_cost = 0
+    newCart.cost_include_warranty = true
+    newCart.total = addCarts
+    cntCarts.push(newCart)
+    setAdding(true)
+
+    setTimeout(() => {
+      shopStore.setShopCarts(cntCarts)
+      setToastParams({
+        msg: t("Product has been added in shop cart."),
+        isSuccess: true,
+      })
+      setAdding(false)
+    }, delayTime)
+  }
+
+  const resetStatuses = () => {
+    setToastParams({
+      msg: "",
+      isError: false,
+      isWarning: false,
+      isInfo: false,
+      isSuccess: false,
+    })
+  }
 
   return (
     <div className="product-towards-certified">
@@ -98,28 +137,15 @@ const ProductTowardsCertified = ({ product }: Props) => {
         </div>
         <div className="add-to-cart">
           <div style={{ marginRight: "10px" }}>
-            <div
-              onClick={() => {
-                setAddCarts(Math.max(addCarts - 1, 0))
-              }}
-            >
-              <RemoveIcon />
-            </div>
-            <p>{addCarts}</p>
-            <div
-              onClick={() => {
-                setAddCarts(addCarts + 1)
-              }}
-            >
-              <AddIcon />
-            </div>
+            <CalculatorButton addCarts={addCarts} setAddCarts={setAddCarts} />
           </div>
           <button
             style={{
-              opacity: addCarts === 0 ? 0.7 : "",
-              cursor: addCarts === 0 ? "inherit" : "",
+              opacity: addCarts === 0 || adding ? 0.7 : "",
+              cursor: addCarts === 0 || adding ? "inherit" : "",
             }}
-            disabled={addCarts === 0}
+            disabled={addCarts === 0 || adding}
+            onClick={handleAddShopCart}
           >
             {t("Add to Cart")}
           </button>
@@ -131,11 +157,13 @@ const ProductTowardsCertified = ({ product }: Props) => {
           <img src="/img/product/certified-logo.svg" alt="certified-logo" />
         </div>
       </div>
+
+      <Toast params={toastParams} resetStatuses={resetStatuses} />
     </div>
   )
 }
 
-export default ProductTowardsCertified
+export default observer(ProductTowardsCertified)
 
 function StyledRadio(props: RadioProps) {
   const classes = useStyles()

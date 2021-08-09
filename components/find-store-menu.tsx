@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { withStyles, makeStyles } from "@material-ui/core/styles"
 import Menu, { MenuProps } from "@material-ui/core/Menu"
 import { useTranslation } from "react-i18next"
@@ -42,7 +42,7 @@ const StyledMenu = withStyles({
 ))
 
 const FindStoreMenu = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [t] = useTranslation()
   const classes = useStyles()
 

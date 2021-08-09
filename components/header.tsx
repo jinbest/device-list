@@ -7,6 +7,7 @@ import _ from "lodash"
 import LangDropdown from "./lang-drop-down"
 import { useTranslation } from "react-i18next"
 import FindStoreMenu from "./find-store-menu"
+import ShopCart from "./shop-cart"
 import HeaderDrawer from "./header-drawer"
 import MegaMenu from "./mega-menu"
 import ServiceMenu from "./service-menu"
@@ -103,7 +104,7 @@ const Header = () => {
           </div>
           <div className="nav-buttons">
             <img src="/img/icons/heart.png" alt="heart-icon" />
-            <img src="/img/icons/shop.png" alt="shop-icon" />
+            <ShopCart />
             <HeaderDrawer />
           </div>
         </div>
