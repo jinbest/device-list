@@ -7,7 +7,6 @@ import _ from "lodash"
 import LangDropdown from "./lang-drop-down"
 import { useTranslation } from "react-i18next"
 import FindStoreMenu from "./find-store-menu"
-import ShopCart from "./shop-cart"
 import HeaderDrawer from "./header-drawer"
 import MegaMenu from "./mega-menu"
 import ServiceMenu from "./service-menu"
@@ -16,6 +15,9 @@ import { observer } from "mobx-react"
 import { authStore } from "../store"
 import { ToastMsgParams } from "./toast/toast-msg-params"
 import Toast from "./toast/toast"
+import dynamic from "next/dynamic"
+
+const DynamicShopCart = dynamic(() => import("./shop-cart"), { ssr: false })
 
 const Header = () => {
   const [t] = useTranslation()
@@ -104,7 +106,7 @@ const Header = () => {
           </div>
           <div className="nav-buttons">
             <img src="/img/icons/heart.png" alt="heart-icon" />
-            <ShopCart />
+            <DynamicShopCart />
             <HeaderDrawer />
           </div>
         </div>

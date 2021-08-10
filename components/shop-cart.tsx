@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { shopStore } from "../store"
+import { shopStore, authStore } from "../store"
 import { observer } from "mobx-react"
 import { withStyles } from "@material-ui/core/styles"
 import Menu, { MenuProps } from "@material-ui/core/Menu"
@@ -9,6 +9,9 @@ import { ShopCartParam } from "../models/shop-cart"
 import { formatAsMoney } from "../service/hepler"
 import CalculatorButton from "./calculator-button"
 import _ from "lodash"
+import SignModal from "./sign-modal/sign-modal"
+import { ToastMsgParams } from "./toast/toast-msg-params"
+import Toast from "./toast/toast"
 
 const StyledMenu = withStyles({
   paper: {
@@ -43,6 +46,8 @@ const ShopCart = () => {
   const [shopCarts, setShopCarts] = useState<ShopCartParam[]>(_.cloneDeep(shopStore.shopCarts))
   const [addCarts, setAddCarts] = useState(_.cloneDeep(shopCarts.map((v) => v.total)))
   const [totalCost, setTotalCost] = useState(0)
+  const [openSignModal, setOpenSignModal] = useState(false)
+  const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -71,6 +76,16 @@ const ShopCart = () => {
     })
     setTotalCost(cost)
   }, [addCarts, shopStore.shopCarts])
+
+  const resetStatuses = () => {
+    setToastParams({
+      msg: "",
+      isError: false,
+      isWarning: false,
+      isInfo: false,
+      isSuccess: false,
+    })
+  }
 
   return (
     <React.Fragment>
@@ -139,7 +154,7 @@ const ShopCart = () => {
                               setShopCarts([...shopCarts])
                             }}
                           >
-                            Remove
+                            {t("Remove")}
                           </p>
                           <CalculatorButton
                             addCarts={addCarts[index]}
@@ -166,7 +181,7 @@ const ShopCart = () => {
                                 setShopCarts([...shopCarts])
                               }}
                             >
-                              Remove
+                              {t("Remove")}
                             </p>
                           </div>
                         )}
@@ -187,7 +202,7 @@ const ShopCart = () => {
                                 setShopCarts([...shopCarts])
                               }}
                             >
-                              Remove
+                              {t("Remove")}
                             </p>
                           </div>
                         )}
@@ -207,6 +222,12 @@ const ShopCart = () => {
                   onClick={() => {
                     shopStore.setShopCarts(shopCarts)
                     handleClose()
+                    if (authStore.authUser || authStore.progressForCheckout) {
+                      router.push("/checkout")
+                    } else {
+                      authStore.setProgressForCheckout(true)
+                      setOpenSignModal(true)
+                    }
                   }}
                 >
                   {t("Checkout")}
@@ -216,6 +237,9 @@ const ShopCart = () => {
           )}
         </div>
       </StyledMenu>
+
+      <SignModal open={openSignModal} setOpen={setOpenSignModal} setToastParams={setToastParams} />
+      <Toast params={toastParams} resetStatuses={resetStatuses} />
     </React.Fragment>
   )
 }

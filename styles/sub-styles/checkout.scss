@@ -1,0 +1,35 @@
+.checkout {
+  width: 100%;
+  .container {
+    width: calc(100% - 50px);
+    max-width: 1440px;
+    margin: auto;
+    padding: 50px 0;
+  }
+  .empty-checkout-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    p {
+      padding: 25px 0;
+      font-size: 18px;
+      font-family: "Montserrat Bold";
+      line-height: 27px;
+      text-align: center;
+    }
+    button {
+      width: 127px;
+      height: 59px;
+      background: $main-blue;
+      outline: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      font-family: "Montserrat";
+      line-height: 27px;
+      border-radius: 30px;
+    }
+  }
+}

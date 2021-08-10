@@ -380,5 +380,10 @@
   "Unlocked": "Unlocked",
   "Subtotal": "Subtotal",
   "As Low as": "As Low as",
-  "Add to Cart": "Add to Cart"
+  "Add to Cart": "Add to Cart",
+  "Your cart is empty": "Your cart is empty",
+  "Your cart": "Your cart",
+  "Remove": "Remove",
+  "Checkout": "Checkout",
+  "You have no products in your cart!": "You have no products in your cart!"
 }

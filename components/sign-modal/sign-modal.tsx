@@ -9,6 +9,8 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import SignForm from "./sign-form"
 import CloseIcon from "@material-ui/icons/Close"
 import { ToastMsgParams } from "../toast/toast-msg-params"
+import { observer } from "mobx-react"
+import { authStore } from "../../store"
 
 interface TabPanelProps {
   children?: React.ReactNode
@@ -55,6 +57,7 @@ const SignModal = ({ open, setOpen, setToastParams }: Props) => {
   }
 
   const handleClose = () => {
+    authStore.setProgressForCheckout(false)
     setOpen(false)
     setSignKey("login")
   }
@@ -128,4 +131,4 @@ const SignModal = ({ open, setOpen, setToastParams }: Props) => {
   )
 }
 
-export default SignModal
+export default observer(SignModal)

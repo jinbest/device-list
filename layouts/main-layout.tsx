@@ -8,11 +8,11 @@ type Props = {
 
 const MainLayout = ({ children }: Props) => {
   return (
-    <div>
+    <React.Fragment>
       <Header />
       <div className="main-layout-child">{children}</div>
       <Footer />
-    </div>
+    </React.Fragment>
   )
 }
 

@@ -133,7 +133,12 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
         isSuccess: !isWarning,
         isWarning: isWarning,
       })
-      router.push("/account")
+      if (authStore.progressForCheckout) {
+        router.push("/checkout")
+        authStore.setProgressForCheckout(false)
+      } else {
+        router.push("/account")
+      }
       onCloseModal()
     }, delayTime)
   }
@@ -167,7 +172,12 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
         isSuccess: !isWarning,
         isWarning: isWarning,
       })
-      router.push("/account")
+      if (authStore.progressForCheckout) {
+        router.push("/checkout")
+        authStore.setProgressForCheckout(false)
+      } else {
+        router.push("/account")
+      }
       onCloseModal()
     }, delayTime)
   }

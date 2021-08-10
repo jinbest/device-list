@@ -14,6 +14,7 @@ export class AuthStore {
     password: "",
   } as MockCredentialParam
   @observable accountData = _.cloneDeep(accountData)
+  @observable progressForCheckout = false
 
   constructor() {
     this.load()
@@ -29,6 +30,7 @@ export class AuthStore {
           authUser: this.authUser,
           mockCredential: this.mockCredential,
           accountData: this.accountData,
+          progressForCheckout: this.progressForCheckout,
         })
       )
     }
@@ -69,6 +71,12 @@ export class AuthStore {
   }
 
   @action
+  setProgressForCheckout = (val: boolean) => {
+    this.progressForCheckout = val
+    this.save()
+  }
+
+  @action
   init = () => {
     this.setAuthUser("")
     this.setMockCredential({
@@ -78,6 +86,7 @@ export class AuthStore {
       password: "",
     })
     this.setAccountData(accountData)
+    this.progressForCheckout = false
     this.save()
   }
 }

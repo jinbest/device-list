@@ -380,5 +380,10 @@
   "Unlocked": "Débloqué",
   "Subtotal": "Total",
   "As Low as": "Aussi bas que",
-  "Add to Cart": "Ajouter au chariot"
+  "Add to Cart": "Ajouter au chariot",
+  "Your cart is empty": "Votre panier est vide",
+  "Your cart": "Votre panier",
+  "Remove": "Supprimer",
+  "Checkout": "Vérifier",
+  "You have no products in your cart!": "Vous n'avez aucun produit dans votre panier !"
 }
