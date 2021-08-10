@@ -5,8 +5,7 @@ import ShopFilter from "./comp/shop-filter"
 import { ProductParam } from "../../models/shop-page-params"
 import { formatWarranty } from "../../service/hepler"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
-import CustomSelector from "../../components/custom-selector"
-import { SelectorParam } from "../../models/custom-selector-param"
+import { SelectorParam } from "../../models/selector-param"
 import { AVAILABILITIES, DEVICE_STORAGES, SORT_OPTIONS } from "../../static/mock/shop"
 import dynamic from "next/dynamic"
 import { PRODUCTS, BRANDS } from "../../static/mock/shop"
@@ -17,6 +16,7 @@ import { findCommonElement, RangeOfStorage, CheckAvailable } from "../../service
 import _, { isEmpty } from "lodash"
 import { NavParams } from "../../models/nav-params"
 import { useRouter } from "next/router"
+import SortbySelector from "./comp/sortby-selector"
 
 const DynamicSwitch = dynamic(() => import("@material-ui/core/Switch"), { ssr: false })
 
@@ -238,7 +238,7 @@ const Shop = () => {
                   labelPlacement="start"
                 />
                 <div className="sort-by-selector">
-                  <CustomSelector
+                  <SortbySelector
                     title="Sort By"
                     options={SORT_OPTIONS}
                     selected={sortBy}

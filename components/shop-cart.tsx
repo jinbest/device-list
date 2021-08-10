@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { shopStore, authStore } from "../store"
+import { shopStore } from "../store"
 import { observer } from "mobx-react"
 import { withStyles } from "@material-ui/core/styles"
 import Menu, { MenuProps } from "@material-ui/core/Menu"
@@ -9,9 +9,7 @@ import { ShopCartParam } from "../models/shop-cart"
 import { formatAsMoney } from "../service/hepler"
 import CalculatorButton from "./calculator-button"
 import _ from "lodash"
-import SignModal from "./sign-modal/sign-modal"
-import { ToastMsgParams } from "./toast/toast-msg-params"
-import Toast from "./toast/toast"
+import { CHECKOUT_PROGRESS_STATUS } from "../const/_variables"
 
 const StyledMenu = withStyles({
   paper: {
@@ -46,8 +44,6 @@ const ShopCart = () => {
   const [shopCarts, setShopCarts] = useState<ShopCartParam[]>(_.cloneDeep(shopStore.shopCarts))
   const [addCarts, setAddCarts] = useState(_.cloneDeep(shopCarts.map((v) => v.total)))
   const [totalCost, setTotalCost] = useState(0)
-  const [openSignModal, setOpenSignModal] = useState(false)
-  const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -68,24 +64,17 @@ const ShopCart = () => {
     shopStore.shopCarts.forEach((item: ShopCartParam, index: number) => {
       cost += item.cost * addCarts[index]
       if (item.device_kit_cost) {
-        cost += item.device_kit_cost
+        cost += item.device_kit_cost * addCarts[index]
+      }
+      if (item.screen_protector && item.screen_protector_cost) {
+        cost += item.screen_protector_cost * addCarts[index]
       }
       if (item.cost_include_warranty && item.warranty_cost) {
-        cost += item.warranty_cost
+        cost += item.warranty_cost * addCarts[index]
       }
     })
     setTotalCost(cost)
   }, [addCarts, shopStore.shopCarts])
-
-  const resetStatuses = () => {
-    setToastParams({
-      msg: "",
-      isError: false,
-      isWarning: false,
-      isInfo: false,
-      isSuccess: false,
-    })
-  }
 
   return (
     <React.Fragment>
@@ -166,18 +155,18 @@ const ShopCart = () => {
                             }}
                           />
                         </div>
-                        {item.device_kit_cost && (
+                        {item.device_kit && item.device_kit_cost && (
                           <div>
                             <p className="bold">{t("DeviceKit")}</p>
                             <p className="bold">{formatAsMoney(item.device_kit_cost)}</p>
                           </div>
                         )}
-                        {item.device_kit_cost && (
+                        {item.device_kit && (
                           <div style={{ margin: "5px 0" }}>
                             <p
                               className="shop-cart-remove-btn"
                               onClick={() => {
-                                shopCarts[index].device_kit_cost = undefined
+                                shopCarts[index].device_kit = undefined
                                 setShopCarts([...shopCarts])
                               }}
                             >
@@ -221,13 +210,9 @@ const ShopCart = () => {
                 <button
                   onClick={() => {
                     shopStore.setShopCarts(shopCarts)
+                    shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.cart)
                     handleClose()
-                    if (authStore.authUser || authStore.progressForCheckout) {
-                      router.push("/checkout")
-                    } else {
-                      authStore.setProgressForCheckout(true)
-                      setOpenSignModal(true)
-                    }
+                    router.push("/checkout")
                   }}
                 >
                   {t("Checkout")}
@@ -237,9 +222,6 @@ const ShopCart = () => {
           )}
         </div>
       </StyledMenu>
-
-      <SignModal open={openSignModal} setOpen={setOpenSignModal} setToastParams={setToastParams} />
-      <Toast params={toastParams} resetStatuses={resetStatuses} />
     </React.Fragment>
   )
 }

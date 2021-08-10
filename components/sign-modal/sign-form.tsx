@@ -14,7 +14,8 @@ import * as Yup from "yup"
 import Loading from "../Loading"
 import { CheckConfPass } from "../../service/hepler"
 import { observer } from "mobx-react"
-import { authStore } from "../../store"
+import { authStore, shopStore } from "../../store"
+import { CHECKOUT_PROGRESS_STATUS } from "../../const/_variables"
 import { ToastMsgParams } from "../toast/toast-msg-params"
 import { useRouter } from "next/router"
 import _ from "lodash"
@@ -134,8 +135,8 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
         isWarning: isWarning,
       })
       if (authStore.progressForCheckout) {
-        router.push("/checkout")
         authStore.setProgressForCheckout(false)
+        shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
       } else {
         router.push("/account")
       }
@@ -173,8 +174,8 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
         isWarning: isWarning,
       })
       if (authStore.progressForCheckout) {
-        router.push("/checkout")
         authStore.setProgressForCheckout(false)
+        shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
       } else {
         router.push("/account")
       }

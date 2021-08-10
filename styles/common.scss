@@ -224,3 +224,21 @@ button {
     line-height: 28px;
   }
 }
+
+.back-to-top {
+  position: fixed;
+  left: 30px;
+  top: 500px;
+  width: 35px;
+  cursor: pointer;
+  z-index: 999;
+  &:hover {
+    opacity: 0.7;
+  }
+  @media (max-width: 960px) {
+    left: 10px !important;
+  }
+  @media (max-width: 425px) {
+    top: 350px;
+  }
+}

@@ -14,6 +14,7 @@ import _ from "lodash"
 import { ShopCartParam } from "../../../models/shop-cart"
 import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
 import Toast from "../../../components/toast/toast"
+import { formatAsMoney } from "../../../service/hepler"
 
 type Props = {
   product: ProductParam
@@ -30,11 +31,14 @@ const ProductTowardsCertified = ({ product }: Props) => {
   const handleAddShopCart = () => {
     const cntCarts = _.cloneDeep(shopStore.shopCarts)
     const newCart = _.cloneDeep(product) as ShopCartParam
+    newCart.device_kit = true
     newCart.device_kit_cost = 1.99
     newCart.locked = false
     newCart.warranty_cost = 0
     newCart.cost_include_warranty = true
     newCart.total = addCarts
+    newCart.screen_protector = false
+    newCart.screen_protector_cost = 7.99
     cntCarts.push(newCart)
     setAdding(true)
 
@@ -115,21 +119,21 @@ const ProductTowardsCertified = ({ product }: Props) => {
       <div className="shadow-card">
         <div className="product-total-cost">
           <p className="bold">{product.name}</p>
-          <p className="bold">$529.00</p>
+          <p className="bold">{formatAsMoney(product.cost)}</p>
         </div>
-        <p>64GB | Red | Good Condition</p>
+        <p>{product.description}</p>
         <p>{t("Unlocked")}</p>
         <div className="product-total-cost">
           <p className="bold">{t("DeviceKit")}</p>
-          <p className="bold">$1.99</p>
+          <p className="bold">{formatAsMoney(1.99)}</p>
         </div>
         <div className="product-total-cost underlined">
           <p className="bold">{t("12 Month Warranty")}</p>
-          <p className="bold">$0.00</p>
+          <p className="bold">{formatAsMoney(0)}</p>
         </div>
         <div className="product-total-cost" style={{ paddingTop: "20px" }}>
           <p className="bold">{t("Subtotal")}</p>
-          <p className="bold">$530.99</p>
+          <p className="bold">{formatAsMoney(product.cost * addCarts + 1.99)}</p>
         </div>
         <div className="product-total-cost blue-text">
           <p className="bold">{t("As Low as")}</p>

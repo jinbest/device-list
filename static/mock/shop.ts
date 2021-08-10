@@ -5,7 +5,7 @@ import {
   ProductParam,
   FilterCheckItemParam,
 } from "../../models/shop-page-params"
-import { SelectorParam } from "../../models/custom-selector-param"
+import { SelectorParam } from "../../models/selector-param"
 
 const DEVICE_COLOR = {
   black: "black",

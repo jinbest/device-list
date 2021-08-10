@@ -2,11 +2,14 @@ import { action, autorun, configure, observable, makeAutoObservable } from "mobx
 import _ from "lodash"
 import { mockShopCarts } from "../static/mock/shop-cart"
 import { ShopCartParam } from "../models/shop-cart"
+import { CheckoutProgressStatusParam } from "../models/checkout-params"
+import { CHECKOUT_PROGRESS_STATUS } from "../const/_variables"
 
 configure({ enforceActions: "always" })
 
 export class ShopStore {
   @observable shopCarts = _.cloneDeep(mockShopCarts)
+  @observable progressStatus = CHECKOUT_PROGRESS_STATUS.cart
 
   constructor() {
     this.load()
@@ -20,6 +23,7 @@ export class ShopStore {
         ShopStore.name,
         JSON.stringify({
           shopCarts: this.shopCarts,
+          progressStatus: this.progressStatus,
         })
       )
     }
@@ -43,8 +47,15 @@ export class ShopStore {
   }
 
   @action
+  setProgressStatus = (progressStatus: CheckoutProgressStatusParam) => {
+    this.progressStatus = progressStatus
+    this.save()
+  }
+
+  @action
   init = () => {
     this.setShopCarts([])
+    this.progressStatus = CHECKOUT_PROGRESS_STATUS.cart
     this.save()
   }
 }

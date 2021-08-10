@@ -385,5 +385,20 @@
   "Your cart": "Your cart",
   "Remove": "Remove",
   "Checkout": "Checkout",
-  "You have no products in your cart!": "You have no products in your cart!"
+  "You have no products in your cart!": "You have no products in your cart!",
+  "included": "included",
+  "Payment": "Payment",
+  "Confirmation": "Confirmation",
+  "First Name*": "First Name*",
+  "Last Name*": "Last Name*",
+  "Company - optional": "Company - optional",
+  "Address (number and name)": "Address (number and name)",
+  "Next": "Next",
+  "or press ENTER": "or press ENTER",
+  "Address_1 is required.": "Address_1 is required.",
+  "City is required.": "City is required.",
+  "Post Code is required.": "Post Code is required.",
+  "Country is required.": "Country is required.",
+  "State is required.": "State is required.",
+  "Phone Number is required.": "Phone Number is required."
 }

@@ -4,14 +4,14 @@
     width: calc(100% - 50px);
     max-width: 1440px;
     margin: auto;
-    padding: 50px 0;
+    padding: 30px 0;
   }
   .empty-checkout-page {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 150px;
+    padding-top: 130px;
     p {
       padding: 25px 0;
       font-size: 18px;
@@ -31,5 +31,192 @@
       line-height: 27px;
       border-radius: 30px;
     }
+  }
+  .checkout-main-container {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 25px;
+    display: flex;
+    .box-cart {
+      background: #ffffff;
+      box-shadow: -10px -10px 30px #ffffff, 10px 10px 30px rgba(174, 174, 192, 0.4);
+      border-radius: 10px;
+      width: 100%;
+      height: fit-content;
+    }
+    .left-side {
+      width: calc(100% - 420px);
+      .left-product-container {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        .product-profile {
+          display: flex;
+          width: 100%;
+          padding: 20px 0;
+          img {
+            width: 70px;
+            height: fit-content;
+          }
+          & > div {
+            width: calc(100% - 75px);
+            padding-left: 10px;
+            & > div {
+              display: flex;
+              justify-content: space-between;
+              p {
+                font-size: 16px;
+                line-height: 24px;
+              }
+              .shop-cart-remove-btn {
+                font-size: 10px;
+                text-decoration: underline;
+                line-height: 22px;
+                cursor: pointer;
+                &:hover {
+                  opacity: 0.7;
+                }
+              }
+            }
+          }
+        }
+        .add-ons {
+          h3 {
+            font-size: 16px;
+            font-family: "Montserrat Bold";
+            line-height: 20px;
+          }
+          & > div {
+            margin: 8px 0;
+            width: 100%;
+            border: 2px solid #bdbfc3;
+            height: 39px;
+            width: 100%;
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+            p {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .left-side-shipping {
+        width: 100%;
+        padding: 15px;
+        .shipping-form-submit {
+          margin-top: 15px;
+          display: flex;
+          align-items: center;
+          button {
+            width: 120px;
+            height: 28px;
+            background: $main-blue;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 14px;
+            font-family: "Montserrat";
+            border-radius: 20px;
+            margin-right: 20px;
+            span > div {
+              margin-top: -22px;
+            }
+          }
+          p {
+            font-size: 14px;
+            color: #bdbfc3;
+          }
+        }
+        .MuiGrid-container {
+          padding: 8px 0;
+        }
+        .MuiGrid-item {
+          padding: 0 6px;
+        }
+      }
+    }
+    .right-side {
+      width: 400px;
+      padding: 15px;
+      & > div {
+        width: 100%;
+        padding: 10px 0;
+        border-bottom: 1px solid #bdbfc3;
+        & > div {
+          display: flex;
+          justify-content: space-between;
+          p {
+            font-size: 16px;
+            line-height: 24px;
+          }
+          .shop-cart-remove-btn {
+            font-size: 10px;
+            text-decoration: underline;
+            line-height: 22px;
+            cursor: pointer;
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+      .check-button {
+        text-align: center;
+        button {
+          background: $main-blue;
+          border: none;
+          outline: none;
+          height: 30px;
+          width: 270px;
+          color: white;
+          font-size: 18px;
+          border-radius: 15px;
+        }
+      }
+    }
+  }
+}
+
+.checkout-progress-bar {
+  width: calc(100% - 50px);
+  max-width: 1386px;
+  margin: auto;
+  padding: 10px;
+  .progress-label {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px 5px 50px;
+    p {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 600;
+    }
+  }
+}
+
+.shipping-form-control {
+  .MuiInputBase-root {
+    font-size: 13px;
+    fieldset {
+      border: none;
+    }
+  }
+  .MuiOutlinedInput-inputMarginDense {
+    padding: 0 20px;
+    height: 100%;
+  }
+  .MuiOutlinedInput-root {
+    border-radius: 20px;
+    border: 1px solid #bdbfc3;
+    height: 40px;
   }
 }

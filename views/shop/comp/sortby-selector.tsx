@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import useOnclickOutside from "react-cool-onclickoutside"
-import UpArrow from "./svg/up-arrow"
-import DownArrow from "./svg/down-arrow"
-import { SelectorParam } from "../models/custom-selector-param"
+import UpArrow from "../../../components/svg/up-arrow"
+import DownArrow from "../../../components/svg/down-arrow"
+import { SelectorParam } from "../../../models/selector-param"
 import { useTranslation } from "react-i18next"
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
   setSelected: (val: SelectorParam) => void
 }
 
-const CustomSelector = ({ title, options, selected, setSelected }: Props) => {
+const SortbySelector = ({ title, options, selected, setSelected }: Props) => {
   const [t] = useTranslation()
 
   const [optionView, setOptionView] = useState(false)
@@ -22,7 +22,7 @@ const CustomSelector = ({ title, options, selected, setSelected }: Props) => {
   })
 
   return (
-    <div className="custom-selector" ref={refOption}>
+    <div className="sortby-selector" ref={refOption}>
       <div
         className="selector-header"
         onClick={() => {
@@ -56,4 +56,4 @@ const CustomSelector = ({ title, options, selected, setSelected }: Props) => {
   )
 }
 
-export default CustomSelector
+export default SortbySelector

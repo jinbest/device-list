@@ -385,5 +385,20 @@
   "Your cart": "Votre panier",
   "Remove": "Supprimer",
   "Checkout": "Vérifier",
-  "You have no products in your cart!": "Vous n'avez aucun produit dans votre panier !"
+  "You have no products in your cart!": "Vous n'avez aucun produit dans votre panier !",
+  "included": "inclus",
+  "Payment": "Paiement",
+  "Confirmation": "Confirmation",
+  "First Name*": "Prénom*",
+  "Last Name*": "Nom de famille*",
+  "Company - optional": "Société (optionel",
+  "Address (number and name)": "Adresse (numéro et nom)",
+  "Next": "Prochain",
+  "or press ENTER": "ou appuyez sur ENTER",
+  "Address_1 is required.": "Adresse_1 est requis.",
+  "City is required.": "La ville est obligatoire.",
+  "Post Code is required.": "Le code postal est requis.",
+  "Country is required.": "Le pays est requis.",
+  "State is required.": "L'état est requis.",
+  "Phone Number is required.": "Le numéro de téléphone est requis."
 }
