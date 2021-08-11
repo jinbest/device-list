@@ -4,7 +4,7 @@ import { shopStore, authStore } from "../../store"
 import EmptyCheckout from "./compo/empty-checkout"
 import ProgressBar from "./compo/progress-bar"
 import { CheckoutProgressStatusParam } from "../../models/checkout-params"
-import { CHECKOUT_PROGRESS_STATUS } from "../../const/_variables"
+import { CHECKOUT_PROGRESS_STATUS, SHIPPING_STEP_STATUS } from "../../const/_variables"
 import _ from "lodash"
 import { ShopCartParam } from "../../models/shop-cart"
 import Toast from "../../components/toast/toast"
@@ -25,6 +25,7 @@ const Checkout = () => {
   const [totalCost, setTotalCost] = useState(0)
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
   const [openSignModal, setOpenSignModal] = useState(false)
+  const [shippingStepStatus, setShippingStepStatus] = useState(SHIPPING_STEP_STATUS.order_address)
 
   useEffect(() => {
     setShopCarts(_.cloneDeep(shopStore.shopCarts))
@@ -52,6 +53,8 @@ const Checkout = () => {
   useEffect(() => {
     if (progressStatus === CHECKOUT_PROGRESS_STATUS.cart) {
       setProVal(10)
+      shopStore.setInitialOrderAddress()
+      shopStore.setInitialBillingAddress()
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.account) {
       setProVal(37)
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.shipping) {
@@ -88,7 +91,7 @@ const Checkout = () => {
     })
   }
 
-  const _back_button_ = () => {
+  const _back_button_visible_ = () => {
     return (
       progressStatus !== CHECKOUT_PROGRESS_STATUS.cart &&
       progressStatus !== CHECKOUT_PROGRESS_STATUS.confirmation
@@ -99,9 +102,18 @@ const Checkout = () => {
     if (progressStatus === CHECKOUT_PROGRESS_STATUS.account) {
       shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.cart)
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.shipping) {
-      shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.account)
+      if (shippingStepStatus === SHIPPING_STEP_STATUS.order_address) {
+        shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.account)
+      } else if (shippingStepStatus === SHIPPING_STEP_STATUS.billing_address) {
+        setShippingStepStatus(SHIPPING_STEP_STATUS.order_address)
+      } else if (shippingStepStatus === SHIPPING_STEP_STATUS.confirm_order_address) {
+        setShippingStepStatus(SHIPPING_STEP_STATUS.billing_address)
+      } else if (shippingStepStatus === SHIPPING_STEP_STATUS.confirm_billing_address) {
+        setShippingStepStatus(SHIPPING_STEP_STATUS.confirm_order_address)
+      }
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.payment) {
       shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
+      setShippingStepStatus(SHIPPING_STEP_STATUS.order_address)
     }
   }
 
@@ -110,7 +122,7 @@ const Checkout = () => {
       <div className="container">
         <ProgressBar value={proVal} />
 
-        {_back_button_() && (
+        {_back_button_visible_() && (
           <div className="back-to-top" onClick={handleBack}>
             <BackSVG color="#BDBFC3" />
           </div>
@@ -126,15 +138,22 @@ const Checkout = () => {
                 <ProgressCart shopCarts={shopCarts} setShopCarts={setShopCarts} />
               )}
 
-              {progressStatus === CHECKOUT_PROGRESS_STATUS.shipping && <ProgressShipping />}
+              {progressStatus === CHECKOUT_PROGRESS_STATUS.shipping && (
+                <ProgressShipping
+                  shippingStepStatus={shippingStepStatus}
+                  setShippingStepStatus={setShippingStepStatus}
+                />
+              )}
             </div>
 
-            <CheckoutComponent
-              shopCarts={shopCarts}
-              handleCheckout={handleCheckout}
-              progressStatus={progressStatus}
-              totalCost={totalCost}
-            />
+            <div className="right-side">
+              <CheckoutComponent
+                shopCarts={shopCarts}
+                handleCheckout={handleCheckout}
+                progressStatus={progressStatus}
+                totalCost={totalCost}
+              />
+            </div>
           </div>
         )}
       </div>

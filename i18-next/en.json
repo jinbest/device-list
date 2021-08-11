@@ -400,5 +400,17 @@
   "Post Code is required.": "Post Code is required.",
   "Country is required.": "Country is required.",
   "State is required.": "State is required.",
-  "Phone Number is required.": "Phone Number is required."
+  "Phone Number is required.": "Phone Number is required.",
+  "Where do you want your order sent?": "Where do you want your order sent?",
+  "What's your billing address?": "What's your billing address?",
+  "Confirm your delivery address": "Confirm your delivery address",
+  "Confirm your billing address": "Confirm your billing address",
+  "Here's the last address registered on DeviceList": "Here's the last address registered on DeviceList",
+  "Address 2 (building, code ...) - optional": "Address 2 (building, code ...) - optional",
+  "State / Province / Region": "State / Province / Region",
+  "Phone Number": "Phone Number",
+  "We need it for the delivery, just in case we need to reach you.": "We need it for the delivery, just in case we need to reach you.",
+  "Same as billing address": "Same as billing address",
+
+  "Change Address": "Change Address"
 }

@@ -400,5 +400,15 @@
   "Post Code is required.": "Le code postal est requis.",
   "Country is required.": "Le pays est requis.",
   "State is required.": "L'état est requis.",
-  "Phone Number is required.": "Le numéro de téléphone est requis."
+  "Phone Number is required.": "Le numéro de téléphone est requis.",
+  "Where do you want your order sent?": "Où voulez-vous que votre commande soit envoyée ?",
+  "What's your billing address?": "Quelle est votre adresse de facturation ?",
+  "Confirm your delivery address": "Confirmez votre adresse de livraison",
+  "Confirm your billing address": "Confirmez votre adresse de facturation",
+  "Here's the last address registered on DeviceList": "Voici la dernière adresse enregistrée sur DeviceList",
+  "Address 2 (building, code ...) - optional": "Adresse 2 (bâtiment, code...) - facultatif",
+  "State / Province / Region": "état / province / région",
+  "Phone Number": "Numéro de téléphone",
+  "We need it for the delivery, just in case we need to reach you.": "Nous en avons besoin pour la livraison, juste au cas où nous aurions besoin de vous joindre.",
+  "Same as billing address": "Identique à l'adresse de facturation"
 }

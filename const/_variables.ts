@@ -18,4 +18,18 @@ const CHECKOUT_PROGRESS_STATUS = {
   confirmation: "confirmation" as CheckoutProgressStatusParam,
 }
 
-export { DAYS_OF_THE_WEEK, CHECKOUT_PROGRESS_STATUS }
+const SHIPPING_STEP_STATUS = {
+  order_address: "order_address",
+  billing_address: "billing_address",
+  confirm_order_address: "confirm_order_address",
+  confirm_billing_address: "confirm_billing_address",
+}
+
+const SHIPPING_FORM_TITLE = {
+  order_address: "Where do you want your order sent?",
+  billing_address: "What's your billing address?",
+  confirm_order_address: "Confirm your delivery address",
+  confirm_billing_address: "Confirm your billing address",
+}
+
+export { DAYS_OF_THE_WEEK, CHECKOUT_PROGRESS_STATUS, SHIPPING_STEP_STATUS, SHIPPING_FORM_TITLE }

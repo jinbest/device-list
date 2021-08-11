@@ -16,7 +16,7 @@ const CheckoutComponent = ({ shopCarts, handleCheckout, progressStatus, totalCos
   const [t] = useTranslation()
 
   return (
-    <div className="right-side box-cart">
+    <div className="checkout-component box-cart">
       {shopCarts.map((item: ShopCartParam, index: number) => {
         return (
           <div key={index} className="product-profile">

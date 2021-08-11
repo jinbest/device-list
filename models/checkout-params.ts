@@ -16,4 +16,5 @@ export interface ProgressShippingFormParam {
   country: string
   state: string
   phone: string
+  billing_address: boolean
 }
