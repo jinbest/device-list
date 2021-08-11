@@ -1,4 +1,5 @@
 import { AddressParam, PaymentParam } from "../../models/account-param"
+import { PaymentOptionParam } from "../../models/checkout-params"
 
 const bannerData = [
   {
@@ -877,8 +878,8 @@ const locationsData = [
 ]
 
 const PaymentOptions = {
-  credit: "credit",
-  paypal: "paypal",
+  credit: "credit_debit" as PaymentOptionParam,
+  paypal: "paypal" as PaymentOptionParam,
 }
 
 const PaymentLogos = {
@@ -990,12 +991,12 @@ const accountData = {
   paymentMethods: {
     title: "Payment Methods",
     payments: [
-      {
-        type: PaymentOptions.paypal,
-        name: "Paypal",
-        logos: PaymentLogos.paypal,
-        cardInfo: {},
-      } as PaymentParam,
+      // {
+      //   type: PaymentOptions.paypal,
+      //   name: "Paypal",
+      //   logos: PaymentLogos.paypal,
+      //   cardInfo: {},
+      // } as PaymentParam,
       {
         type: PaymentOptions.credit,
         name: "Credit Card",

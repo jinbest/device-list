@@ -411,6 +411,20 @@
   "Phone Number": "Phone Number",
   "We need it for the delivery, just in case we need to reach you.": "We need it for the delivery, just in case we need to reach you.",
   "Same as billing address": "Same as billing address",
-
-  "Change Address": "Change Address"
+  "Change Address": "Change Address",
+  "Delivery Options": "Delivery Options",
+  "Ship to": "Ship to",
+  "Bill to": "Bill to",
+  "Ground Shipping: 1-5 Business Days": "Ground Shipping: 1-5 Business Days",
+  "Express Shipping: 1-3 Business Days": "Express Shipping: 1-3 Business Days",
+  "Pick up in Store": "Pick up in Store",
+  "Free": "Free",
+  "Confirm and Pay": "Confirm and Pay",
+  "Enter your promo code": "Enter your promo code",
+  "Enter your Card Number": "Enter your Card Number",
+  "Expiration Date": "Expiration Date",
+  "Check this code": "Check this code",
+  "Promo Code": "Promo Code",
+  "Buy Now Pay Later": "Buy Now Pay Later",
+  "Verified and Secure Transactions": "Verified and Secure Transactions"
 }

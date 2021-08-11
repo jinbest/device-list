@@ -18,3 +18,13 @@ export interface ProgressShippingFormParam {
   phone: string
   billing_address: boolean
 }
+
+export interface SelectedLocationParam {
+  id: number
+  name: string
+  address: string
+}
+
+export type DeliveryOptionParam = "ground_shipping" | "express_shipping" | "pick_up"
+
+export type PaymentOptionParam = "credit_debit" | "paypal"

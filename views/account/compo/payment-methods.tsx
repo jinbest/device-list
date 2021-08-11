@@ -7,6 +7,7 @@ import { isEmpty } from "lodash"
 import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
 import Toast from "../../../components/toast/toast"
 import { PaymentParam, ImageDataParam } from "../../../models/account-param"
+import { PaymentOptionParam } from "../../../models/checkout-params"
 import PaymentCreditForm from "./payment-credit-form"
 import DeletePayment from "../modal/delete-payment"
 import { Radio, RadioGroup, FormControlLabel } from "@material-ui/core"
@@ -25,7 +26,7 @@ const PaymentMethods = () => {
   const [paymentOption, setPaymentOption] = useState(PaymentOptions.credit)
 
   const handlePaymentOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPaymentOption((event.target as HTMLInputElement).value)
+    setPaymentOption((event.target as HTMLInputElement).value as PaymentOptionParam)
   }
 
   const resetStatuses = () => {

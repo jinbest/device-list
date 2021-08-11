@@ -12,8 +12,10 @@ import { ToastMsgParams } from "../../components/toast/toast-msg-params"
 import SignModal from "../../components/sign-modal/sign-modal"
 import BackSVG from "../../components/svg/back-svg"
 import CheckoutComponent from "./compo/checkout-component"
+import CheckoutConfirmAddress from "./compo/checkout-confirm-address"
 import ProgressCart from "./compo/progress-cart"
 import ProgressShipping from "./compo/progress-shipping"
+import ProgressPayment from "./compo/progress-payment"
 
 const Checkout = () => {
   const [progressStatus, setProgressStatus] = useState<CheckoutProgressStatusParam>(
@@ -53,8 +55,6 @@ const Checkout = () => {
   useEffect(() => {
     if (progressStatus === CHECKOUT_PROGRESS_STATUS.cart) {
       setProVal(10)
-      shopStore.setInitialOrderAddress()
-      shopStore.setInitialBillingAddress()
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.account) {
       setProVal(37)
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.shipping) {
@@ -92,10 +92,7 @@ const Checkout = () => {
   }
 
   const _back_button_visible_ = () => {
-    return (
-      progressStatus !== CHECKOUT_PROGRESS_STATUS.cart &&
-      progressStatus !== CHECKOUT_PROGRESS_STATUS.confirmation
-    )
+    return progressStatus !== CHECKOUT_PROGRESS_STATUS.cart
   }
 
   const handleBack = () => {
@@ -110,10 +107,14 @@ const Checkout = () => {
         setShippingStepStatus(SHIPPING_STEP_STATUS.billing_address)
       } else if (shippingStepStatus === SHIPPING_STEP_STATUS.confirm_billing_address) {
         setShippingStepStatus(SHIPPING_STEP_STATUS.confirm_order_address)
+      } else if (shippingStepStatus === SHIPPING_STEP_STATUS.delivery_options) {
+        setShippingStepStatus(SHIPPING_STEP_STATUS.confirm_billing_address)
       }
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.payment) {
       shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
       setShippingStepStatus(SHIPPING_STEP_STATUS.order_address)
+    } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.confirmation) {
+      shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.payment)
     }
   }
 
@@ -144,6 +145,8 @@ const Checkout = () => {
                   setShippingStepStatus={setShippingStepStatus}
                 />
               )}
+
+              {progressStatus === CHECKOUT_PROGRESS_STATUS.payment && <ProgressPayment />}
             </div>
 
             <div className="right-side">
@@ -153,6 +156,12 @@ const Checkout = () => {
                 progressStatus={progressStatus}
                 totalCost={totalCost}
               />
+
+              {(progressStatus === CHECKOUT_PROGRESS_STATUS.payment ||
+                (progressStatus === CHECKOUT_PROGRESS_STATUS.shipping &&
+                  shippingStepStatus === SHIPPING_STEP_STATUS.delivery_options)) && (
+                <CheckoutConfirmAddress setShippingStepStatus={setShippingStepStatus} />
+              )}
             </div>
           </div>
         )}

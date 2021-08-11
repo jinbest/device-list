@@ -10,17 +10,26 @@ import {
   FormControl,
   FormControlLabel,
   Checkbox,
+  Radio,
+  RadioGroup,
 } from "@material-ui/core"
 import countriesData from "../../../const/countriesData"
 import statesData from "../../../const/statesData"
 import _, { isEmpty } from "lodash"
 import PhoneInput from "../../../components/phone-input"
-import { SHIPPING_STEP_STATUS, SHIPPING_FORM_TITLE } from "../../../const/_variables"
+import {
+  SHIPPING_STEP_STATUS,
+  SHIPPING_FORM_TITLE,
+  DELIVERY_OPTIONS,
+  SELECT_LOCATIONS,
+  CHECKOUT_PROGRESS_STATUS,
+} from "../../../const/_variables"
 import { observer } from "mobx-react"
 import { shopStore } from "../../../store"
-import { formatCountryName, phoneFormatString } from "../../../service/hepler"
+import { formatCountryName, phoneFormatString, formatAsMoney } from "../../../service/hepler"
 import EditIcon from "../../../components/svg/edit-svg"
 import PhoneOutlinedIcon from "@material-ui/icons/PhoneOutlined"
+import { SelectedLocationParam, DeliveryOptionParam } from "../../../models/checkout-params"
 
 type Props = {
   shippingStepStatus: string
@@ -35,6 +44,24 @@ const ProgressShipping = ({ shippingStepStatus, setShippingStepStatus }: Props) 
   const [states, setStates] = useState<any[]>(statesData["CA"])
   const [phone, setPhone] = useState("")
   const [formTitle, setFormTitle] = useState(SHIPPING_FORM_TITLE.order_address)
+  const [deliveryOption, setDeliveryOption] = useState<DeliveryOptionParam>(
+    DELIVERY_OPTIONS.ground.code
+  )
+  const [selectedLocation, setSelectedLocation] = useState<SelectedLocationParam>(
+    SELECT_LOCATIONS[0]
+  )
+
+  const handleDeliveryOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDeliveryOption((event.target as HTMLInputElement).value as DeliveryOptionParam)
+  }
+
+  const handleChangeSelectedLocation = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const locID = Number((event.target as HTMLInputElement).value)
+    const locIndex = _.findIndex(SELECT_LOCATIONS, { id: locID })
+    if (locIndex > -1) {
+      setSelectedLocation(SELECT_LOCATIONS[locIndex])
+    }
+  }
 
   useEffect(() => {
     if (formikRef.current) {
@@ -50,12 +77,16 @@ const ProgressShipping = ({ shippingStepStatus, setShippingStepStatus }: Props) 
     }
     if (shippingStepStatus === SHIPPING_STEP_STATUS.order_address) {
       setFormTitle(SHIPPING_FORM_TITLE.order_address)
+      setPhone(shopStore.orderAddress.phone)
     } else if (shippingStepStatus === SHIPPING_STEP_STATUS.billing_address) {
       setFormTitle(SHIPPING_FORM_TITLE.billing_address)
+      setPhone(shopStore.billingAddress.phone)
     } else if (shippingStepStatus === SHIPPING_STEP_STATUS.confirm_order_address) {
       setFormTitle(SHIPPING_FORM_TITLE.confirm_order_address)
     } else if (shippingStepStatus === SHIPPING_STEP_STATUS.confirm_billing_address) {
       setFormTitle(SHIPPING_FORM_TITLE.confirm_billing_address)
+    } else if (shippingStepStatus === SHIPPING_STEP_STATUS.delivery_options) {
+      setFormTitle(SHIPPING_FORM_TITLE.delivery_options)
     } else {
       setFormTitle("")
     }
@@ -76,7 +107,6 @@ const ProgressShipping = ({ shippingStepStatus, setShippingStepStatus }: Props) 
       shopStore.setOrderAddress(values)
       shopStore.setBillingAddress(values)
       setShippingStepStatus(SHIPPING_STEP_STATUS.confirm_order_address)
-      // shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.payment)
     } else if (shippingStepStatus === SHIPPING_STEP_STATUS.order_address) {
       shopStore.setOrderAddress(values)
       setShippingStepStatus(SHIPPING_STEP_STATUS.billing_address)
@@ -89,6 +119,12 @@ const ProgressShipping = ({ shippingStepStatus, setShippingStepStatus }: Props) 
   const handleNext = () => {
     if (shippingStepStatus === SHIPPING_STEP_STATUS.confirm_order_address) {
       setShippingStepStatus(SHIPPING_STEP_STATUS.confirm_billing_address)
+    } else if (shippingStepStatus === SHIPPING_STEP_STATUS.confirm_billing_address) {
+      setShippingStepStatus(SHIPPING_STEP_STATUS.delivery_options)
+    } else if (shippingStepStatus === SHIPPING_STEP_STATUS.delivery_options) {
+      shopStore.setDeliveryOption(deliveryOption)
+      shopStore.setSelectedLocation(selectedLocation)
+      shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.payment)
     }
   }
 
@@ -319,19 +355,17 @@ const ProgressShipping = ({ shippingStepStatus, setShippingStepStatus }: Props) 
                 </TextField>
               </FormGroup>
 
-              {shippingStepStatus === SHIPPING_STEP_STATUS.order_address && (
-                <FormGroup className="form-group">
-                  <PhoneInput
-                    handleSetPhone={(val) => {
-                      setFieldValue("phone", val)
-                      setPhone(val)
-                    }}
-                    val={phone}
-                    placeholder={t("Phone Number")}
-                    label={t("We need it for the delivery, just in case we need to reach you.")}
-                  />
-                </FormGroup>
-              )}
+              <FormGroup className="form-group">
+                <PhoneInput
+                  handleSetPhone={(val) => {
+                    setFieldValue("phone", val)
+                    setPhone(val)
+                  }}
+                  val={phone}
+                  placeholder={t("Phone Number")}
+                  label={t("We need it for the delivery, just in case we need to reach you.")}
+                />
+              </FormGroup>
 
               {shippingStepStatus === SHIPPING_STEP_STATUS.order_address && (
                 <FormControl className="custom-form-control" component="fieldset">
@@ -424,6 +458,87 @@ const ProgressShipping = ({ shippingStepStatus, setShippingStepStatus }: Props) 
                   {phoneFormatString(shopStore.billingAddress.phone)}
                 </p>
               )}
+            </div>
+          )}
+
+          <div className="shipping-form-submit">
+            <button type="button" onClick={handleNext}>
+              {t("Next")}
+            </button>
+            <p>{t("or press ENTER")}</p>
+          </div>
+        </>
+      )}
+
+      {shippingStepStatus === SHIPPING_STEP_STATUS.delivery_options && (
+        <>
+          <RadioGroup
+            aria-label="delivery-options"
+            name="delivery-options"
+            value={deliveryOption}
+            onChange={handleDeliveryOptionChange}
+            className="customize-radio-group"
+          >
+            <div>
+              <FormControlLabel
+                value={DELIVERY_OPTIONS.ground.code}
+                control={<Radio />}
+                label={
+                  <span className="radio-span">
+                    <img src="/img/icons/purolator.png" alt="purolator" />
+                    <p>{t(DELIVERY_OPTIONS.ground.text)}</p>
+                  </span>
+                }
+              />
+              <p>{formatAsMoney(DELIVERY_OPTIONS.ground.cost)}</p>
+            </div>
+
+            <div>
+              <FormControlLabel
+                value={DELIVERY_OPTIONS.express.code}
+                control={<Radio />}
+                label={
+                  <span className="radio-span">
+                    <img src="/img/icons/purolator.png" alt="purolator" />
+                    <p>{t(DELIVERY_OPTIONS.express.text)}</p>
+                  </span>
+                }
+              />
+              <p>{formatAsMoney(DELIVERY_OPTIONS.express.cost)}</p>
+            </div>
+
+            <div style={{ paddingBottom: "8px" }}>
+              <FormControlLabel
+                value={DELIVERY_OPTIONS.pick_up.code}
+                control={<Radio />}
+                label={t(DELIVERY_OPTIONS.pick_up.text)}
+              />
+              <p>{t(DELIVERY_OPTIONS.pick_up.cost)}</p>
+            </div>
+          </RadioGroup>
+
+          {deliveryOption === DELIVERY_OPTIONS.pick_up.code && (
+            <div className="radio-select-location">
+              <p>{t("Select Location")}</p>
+              <RadioGroup
+                aria-label="select-locations"
+                name="select-locations"
+                value={selectedLocation.id}
+                onChange={handleChangeSelectedLocation}
+                className="customize-radio-group"
+                style={{ marginTop: "5px" }}
+              >
+                {SELECT_LOCATIONS.map((item: SelectedLocationParam, index: number) => {
+                  return (
+                    <FormControlLabel
+                      key={index}
+                      value={item.id}
+                      control={<Radio />}
+                      label={item.address}
+                    />
+                  )
+                })}
+              </RadioGroup>
             </div>
           )}
 

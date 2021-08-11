@@ -2,8 +2,12 @@ import { action, autorun, configure, observable, makeAutoObservable } from "mobx
 import _ from "lodash"
 import { mockShopCarts } from "../static/mock/shop-cart"
 import { ShopCartParam } from "../models/shop-cart"
-import { CheckoutProgressStatusParam } from "../models/checkout-params"
-import { CHECKOUT_PROGRESS_STATUS } from "../const/_variables"
+import {
+  CheckoutProgressStatusParam,
+  DeliveryOptionParam,
+  SelectedLocationParam,
+} from "../models/checkout-params"
+import { CHECKOUT_PROGRESS_STATUS, DELIVERY_OPTIONS } from "../const/_variables"
 import { ProgressShippingFormParam } from "../models/checkout-params"
 import statesData from "../const/statesData"
 
@@ -14,6 +18,8 @@ export class ShopStore {
   @observable progressStatus = CHECKOUT_PROGRESS_STATUS.cart
   @observable orderAddress = {} as ProgressShippingFormParam
   @observable billingAddress = {} as ProgressShippingFormParam
+  @observable deliveryOption = DELIVERY_OPTIONS.ground.code
+  @observable selectedLocation = {} as SelectedLocationParam
 
   constructor() {
     this.load()
@@ -30,6 +36,8 @@ export class ShopStore {
           progressStatus: this.progressStatus,
           orderAddress: this.orderAddress,
           billingAddress: this.billingAddress,
+          deliveryOption: this.deliveryOption,
+          selectedLocation: this.selectedLocation,
         })
       )
     }
@@ -107,11 +115,25 @@ export class ShopStore {
   }
 
   @action
+  setDeliveryOption = (val: DeliveryOptionParam) => {
+    this.deliveryOption = val
+    this.save()
+  }
+
+  @action
+  setSelectedLocation = (val: SelectedLocationParam) => {
+    this.selectedLocation = val
+    this.save()
+  }
+
+  @action
   init = () => {
     this.setShopCarts([])
     this.progressStatus = CHECKOUT_PROGRESS_STATUS.cart
     this.orderAddress = {} as ProgressShippingFormParam
     this.billingAddress = {} as ProgressShippingFormParam
+    this.deliveryOption = DELIVERY_OPTIONS.ground.code
+    this.selectedLocation = {} as SelectedLocationParam
     this.save()
   }
 }

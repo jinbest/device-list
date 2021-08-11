@@ -328,3 +328,23 @@ export function formatAsMoney(val: number | undefined) {
     currency: "USD",
   })
 }
+
+export const formatCardNumber = (value: string) => {
+  if (!value) return value
+  const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g
+  const onlyNumbers = value.replace(/[^\d]/g, "")
+
+  return onlyNumbers.replace(regex, (regex, $1, $2, $3, $4) =>
+    [$1, $2, $3, $4].filter((group) => !!group).join(" ")
+  )
+}
+
+export const formatExpiryDate = (value: string) => {
+  if (!value) return value
+  const regex = /^(\d{0,2})(\d{0,2})$/g
+  const onlyNumbers = value.replace(/[^\d.-]/g, "")
+
+  return onlyNumbers.replace(regex, (regex, $1, $2) =>
+    [$1, $2].filter((group) => !!group).join("/")
+  )
+}

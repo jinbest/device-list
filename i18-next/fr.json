@@ -410,5 +410,21 @@
   "State / Province / Region": "état / province / région",
   "Phone Number": "Numéro de téléphone",
   "We need it for the delivery, just in case we need to reach you.": "Nous en avons besoin pour la livraison, juste au cas où nous aurions besoin de vous joindre.",
-  "Same as billing address": "Identique à l'adresse de facturation"
+  "Same as billing address": "Identique à l'adresse de facturation",
+  "Change Address": "Changement d'adresse",
+  "Delivery Options": "Options de livraison",
+  "Ship to": "Envoyez à",
+  "Bill to": "facturer",
+  "Ground Shipping: 1-5 Business Days": "Expédition terrestre : 1-5 jours ouvrables",
+  "Express Shipping: 1-3 Business Days": "Expédition express : 1-3 jours ouvrables",
+  "Pick up in Store": "Retrait en magasin",
+  "Free": "Libre",
+  "Confirm and Pay": "Confirmer et payer",
+  "Enter your promo code": "Entrez votre code promo",
+  "Enter your Card Number": "Entrez votre numéro de carte",
+  "Expiration Date": "Date d'expiration",
+  "Check this code": "Vérifiez ce code",
+  "Promo Code": "Code promo",
+  "Buy Now Pay Later": "Achetez maintenant Payez plus tard",
+  "Verified and Secure Transactions": "Transactions vérifiées et sécurisées"
 }

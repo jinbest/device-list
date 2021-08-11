@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import ReactPhoneInput from "react-phone-input-2"
 import "react-phone-input-2/lib/style.css"
 
@@ -10,18 +10,13 @@ type Props = {
   label?: string
 }
 
-const PhoneInput = ({ placeholder, handleSetPhone, errorText, label }: Props) => {
-  const [phone, setPhone] = useState("1")
-
+const PhoneInput = ({ placeholder, handleSetPhone, errorText, label, val }: Props) => {
   const handleOnChange = (value: string) => {
     if (value.length < 1) {
-      setPhone("1")
       handleSetPhone("1")
     } else if (value.substring(0, 1) !== "1") {
-      setPhone(`1${value}`)
       handleSetPhone(`1${value}`)
     } else {
-      setPhone(value)
       handleSetPhone(value)
     }
   }
@@ -37,7 +32,7 @@ const PhoneInput = ({ placeholder, handleSetPhone, errorText, label }: Props) =>
         onlyCountries={["ca", "us"]}
         // enableAreaCodes={true}
         placeholder={placeholder}
-        value={phone}
+        value={val}
         onChange={handleOnChange}
         inputClass={errorText ? "error-phone-input" : ""}
         buttonClass={errorText ? "error-phone-input" : ""}
