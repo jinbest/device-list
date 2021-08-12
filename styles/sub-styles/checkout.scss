@@ -330,11 +330,18 @@
         }
       }
       .checkout-confirm-address {
-        margin-top: 15px;
+        margin: 15px 0;
         padding: 15px;
         & > div {
           padding: 10px 0;
           position: relative;
+          h2 {
+            font-size: 18px;
+            font-family: "Montserrat Bold";
+            line-height: 28px;
+            text-align: center;
+            padding-bottom: 15px;
+          }
           p {
             font-size: 16px;
             line-height: 24px;
@@ -360,6 +367,57 @@
         }
         .bottom-bordered {
           border-bottom: 1px solid #bdbfc3;
+        }
+      }
+      .review-payment-method {
+        margin: 15px 0;
+        padding: 15px;
+        h2 {
+          font-size: 16px;
+          font-family: "Montserrat Bold";
+          line-height: 28px;
+          padding-bottom: 10px;
+        }
+        & > div {
+          display: flex;
+          flex-wrap: wrap;
+          p {
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+      }
+      .place-order {
+        width: 100%;
+        height: 45px;
+        background: $main-blue;
+        border-radius: 25px;
+        color: white;
+        outline: none;
+        border: none;
+        font-size: 16px;
+      }
+    }
+    .checkout-confirmation {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 50px;
+      p {
+        font-size: 18px;
+        line-height: 27px;
+        font-family: "Montserrat Bold";
+        text-align: center;
+        span > a {
+          margin-left: 5px;
+          color: $main-blue;
+          text-decoration: underline;
+          font-family: "Montserrat Bold";
+          cursor: pointer;
         }
       }
     }

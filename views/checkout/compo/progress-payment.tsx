@@ -3,16 +3,22 @@ import { useTranslation } from "react-i18next"
 import { Grid, FormGroup, TextField, FormControlLabel, Radio, RadioGroup } from "@material-ui/core"
 import * as Yup from "yup"
 import { Form, Formik, FormikHelpers } from "formik"
-import { PAYMENT_OPTIONS, regxCVV } from "../../../const/_variables"
+import { PAYMENT_OPTIONS, PAYMENT_STEP_STATUS, regxCVV } from "../../../const/_variables"
 import { PaymentOptionParam } from "../../../models/checkout-params"
 import { PaymentLogos } from "../../../static/mock/mock-data"
 import { ImageDataParam, PaymentCardInfoParam } from "../../../models/account-param"
 import { observer } from "mobx-react"
-// import { shopStore, authStore } from "../../../store"
 import { formatCardNumber, formatExpiryDate } from "../../../service/hepler"
 import CustomInput from "../../../components/custom-input"
+import { shopStore } from "../../../store"
+import { isEmpty } from "lodash"
+// import * as CheckoutSDK from "@bambora/checkout-sdk-web";
 
-const ProgressPayment = () => {
+type Props = {
+  setPaymentStepStatus: (val: string) => void
+}
+
+const ProgressPayment = ({ setPaymentStepStatus }: Props) => {
   const [t] = useTranslation()
   const formikRef = useRef<any>()
   const initialValues = {} as PaymentCardInfoParam
@@ -36,7 +42,11 @@ const ProgressPayment = () => {
   const onSave = (values: PaymentCardInfoParam, actions: FormikHelpers<any>) => {
     actions.setSubmitting(false)
     console.log("values", values)
-    // shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.confirmation)
+    shopStore.setPaymentMethod(paymentOption)
+    if (paymentOption === PAYMENT_OPTIONS.credit_debit.code && !isEmpty(values)) {
+      shopStore.setCreditCardInfo(values)
+    }
+    setPaymentStepStatus(PAYMENT_STEP_STATUS.review_order)
   }
 
   const handleCheckPromoCode = () => {

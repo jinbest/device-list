@@ -9,23 +9,27 @@ import { CHECKOUT_PROGRESS_STATUS, SHIPPING_STEP_STATUS } from "../../../const/_
 
 type Props = {
   setShippingStepStatus: (val: string) => void
+  review?: boolean
 }
 
-const CheckoutConfirmAddress = ({ setShippingStepStatus }: Props) => {
+const CheckoutConfirmAddress = ({ setShippingStepStatus, review }: Props) => {
   const [t] = useTranslation()
 
   return (
     <div className="checkout-confirm-address box-cart">
       <div className="bottom-bordered">
-        <div
-          className="change-address-button"
-          onClick={() => {
-            shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
-            setShippingStepStatus(SHIPPING_STEP_STATUS.order_address)
-          }}
-        >
-          <EditIcon />
-        </div>
+        {review && <h2>{t("Review your order")}</h2>}
+        {!review && (
+          <div
+            className="change-address-button"
+            onClick={() => {
+              shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
+              setShippingStepStatus(SHIPPING_STEP_STATUS.order_address)
+            }}
+          >
+            <EditIcon />
+          </div>
+        )}
         <p className="bold">{`${t("Ship to")} ${shopStore.orderAddress.firstName} ${
           shopStore.orderAddress.lastName
         }`}</p>
@@ -44,15 +48,17 @@ const CheckoutConfirmAddress = ({ setShippingStepStatus }: Props) => {
       </div>
 
       <div>
-        <div
-          className="change-address-button"
-          onClick={() => {
-            shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
-            setShippingStepStatus(SHIPPING_STEP_STATUS.billing_address)
-          }}
-        >
-          <EditIcon />
-        </div>
+        {!review && (
+          <div
+            className="change-address-button"
+            onClick={() => {
+              shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
+              setShippingStepStatus(SHIPPING_STEP_STATUS.billing_address)
+            }}
+          >
+            <EditIcon />
+          </div>
+        )}
         <p className="bold">{`${t("Bill to")} ${shopStore.billingAddress.firstName} ${
           shopStore.billingAddress.lastName
         }`}</p>

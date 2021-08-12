@@ -4,7 +4,12 @@ import { shopStore, authStore } from "../../store"
 import EmptyCheckout from "./compo/empty-checkout"
 import ProgressBar from "./compo/progress-bar"
 import { CheckoutProgressStatusParam } from "../../models/checkout-params"
-import { CHECKOUT_PROGRESS_STATUS, SHIPPING_STEP_STATUS } from "../../const/_variables"
+import {
+  CHECKOUT_PROGRESS_STATUS,
+  SHIPPING_STEP_STATUS,
+  PAYMENT_STEP_STATUS,
+  PAYMENT_OPTIONS,
+} from "../../const/_variables"
 import _ from "lodash"
 import { ShopCartParam } from "../../models/shop-cart"
 import Toast from "../../components/toast/toast"
@@ -16,8 +21,11 @@ import CheckoutConfirmAddress from "./compo/checkout-confirm-address"
 import ProgressCart from "./compo/progress-cart"
 import ProgressShipping from "./compo/progress-shipping"
 import ProgressPayment from "./compo/progress-payment"
+import { useTranslation } from "react-i18next"
 
 const Checkout = () => {
+  const [t] = useTranslation()
+
   const [progressStatus, setProgressStatus] = useState<CheckoutProgressStatusParam>(
     CHECKOUT_PROGRESS_STATUS.cart
   )
@@ -28,6 +36,8 @@ const Checkout = () => {
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
   const [openSignModal, setOpenSignModal] = useState(false)
   const [shippingStepStatus, setShippingStepStatus] = useState(SHIPPING_STEP_STATUS.order_address)
+  const [paymentStepStatus, setPaymentStepStatus] = useState(PAYMENT_STEP_STATUS.confirm_and_pay)
+  const [tradeIn, setTradeIn] = useState(false)
 
   useEffect(() => {
     setShopCarts(_.cloneDeep(shopStore.shopCarts))
@@ -92,7 +102,10 @@ const Checkout = () => {
   }
 
   const _back_button_visible_ = () => {
-    return progressStatus !== CHECKOUT_PROGRESS_STATUS.cart
+    return (
+      progressStatus !== CHECKOUT_PROGRESS_STATUS.cart &&
+      progressStatus !== CHECKOUT_PROGRESS_STATUS.confirmation
+    )
   }
 
   const handleBack = () => {
@@ -111,11 +124,23 @@ const Checkout = () => {
         setShippingStepStatus(SHIPPING_STEP_STATUS.confirm_billing_address)
       }
     } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.payment) {
-      shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
-      setShippingStepStatus(SHIPPING_STEP_STATUS.order_address)
-    } else if (progressStatus === CHECKOUT_PROGRESS_STATUS.confirmation) {
-      shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.payment)
+      if (paymentStepStatus === PAYMENT_STEP_STATUS.confirm_and_pay) {
+        shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
+        setShippingStepStatus(SHIPPING_STEP_STATUS.delivery_options)
+      } else if (paymentStepStatus === PAYMENT_STEP_STATUS.review_order) {
+        setPaymentStepStatus(PAYMENT_STEP_STATUS.confirm_and_pay)
+      }
     }
+  }
+
+  const handlePlaceOrder = () => {
+    _trade_in_()
+    shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.confirmation)
+  }
+
+  const _trade_in_ = () => {
+    // here will be functionality to check if it's trade-in or not later.
+    setTradeIn(false)
   }
 
   return (
@@ -133,36 +158,110 @@ const Checkout = () => {
           <EmptyCheckout />
         ) : (
           <div className="checkout-main-container">
-            <div className="left-side">
-              {(progressStatus === CHECKOUT_PROGRESS_STATUS.cart ||
-                progressStatus === CHECKOUT_PROGRESS_STATUS.account) && (
-                <ProgressCart shopCarts={shopCarts} setShopCarts={setShopCarts} />
+            {paymentStepStatus !== PAYMENT_STEP_STATUS.review_order &&
+              progressStatus !== CHECKOUT_PROGRESS_STATUS.confirmation && (
+                <div className="left-side">
+                  {(progressStatus === CHECKOUT_PROGRESS_STATUS.cart ||
+                    progressStatus === CHECKOUT_PROGRESS_STATUS.account) && (
+                    <ProgressCart shopCarts={shopCarts} setShopCarts={setShopCarts} />
+                  )}
+
+                  {progressStatus === CHECKOUT_PROGRESS_STATUS.shipping && (
+                    <ProgressShipping
+                      shippingStepStatus={shippingStepStatus}
+                      setShippingStepStatus={setShippingStepStatus}
+                    />
+                  )}
+
+                  {progressStatus === CHECKOUT_PROGRESS_STATUS.payment &&
+                    paymentStepStatus === PAYMENT_STEP_STATUS.confirm_and_pay && (
+                      <ProgressPayment setPaymentStepStatus={setPaymentStepStatus} />
+                    )}
+                </div>
               )}
 
-              {progressStatus === CHECKOUT_PROGRESS_STATUS.shipping && (
-                <ProgressShipping
-                  shippingStepStatus={shippingStepStatus}
-                  setShippingStepStatus={setShippingStepStatus}
-                />
+            {paymentStepStatus !== PAYMENT_STEP_STATUS.review_order &&
+              progressStatus !== CHECKOUT_PROGRESS_STATUS.confirmation && (
+                <div className="right-side">
+                  <CheckoutComponent
+                    shopCarts={shopCarts}
+                    handleCheckout={handleCheckout}
+                    progressStatus={progressStatus}
+                    totalCost={totalCost}
+                  />
+
+                  {(progressStatus === CHECKOUT_PROGRESS_STATUS.payment ||
+                    (progressStatus === CHECKOUT_PROGRESS_STATUS.shipping &&
+                      shippingStepStatus === SHIPPING_STEP_STATUS.delivery_options)) && (
+                    <CheckoutConfirmAddress setShippingStepStatus={setShippingStepStatus} />
+                  )}
+                </div>
               )}
 
-              {progressStatus === CHECKOUT_PROGRESS_STATUS.payment && <ProgressPayment />}
-            </div>
+            {progressStatus === CHECKOUT_PROGRESS_STATUS.payment &&
+              paymentStepStatus === PAYMENT_STEP_STATUS.review_order && (
+                <div className="right-side" style={{ margin: "auto" }}>
+                  <CheckoutConfirmAddress setShippingStepStatus={setShippingStepStatus} review />
 
-            <div className="right-side">
-              <CheckoutComponent
-                shopCarts={shopCarts}
-                handleCheckout={handleCheckout}
-                progressStatus={progressStatus}
-                totalCost={totalCost}
-              />
+                  <CheckoutComponent
+                    shopCarts={shopCarts}
+                    handleCheckout={handleCheckout}
+                    progressStatus={progressStatus}
+                    totalCost={totalCost}
+                  />
 
-              {(progressStatus === CHECKOUT_PROGRESS_STATUS.payment ||
-                (progressStatus === CHECKOUT_PROGRESS_STATUS.shipping &&
-                  shippingStepStatus === SHIPPING_STEP_STATUS.delivery_options)) && (
-                <CheckoutConfirmAddress setShippingStepStatus={setShippingStepStatus} />
+                  <div className="review-payment-method box-cart">
+                    <h2>{t("Payment Method")}</h2>
+                    <div>
+                      <p style={{ marginRight: "15px" }}>
+                        {shopStore.paymentMethod === PAYMENT_OPTIONS.credit_debit.code
+                          ? t("Credit")
+                          : t("Paypal")}
+                        :
+                      </p>
+                      <p>
+                        {shopStore.paymentMethod === PAYMENT_OPTIONS.credit_debit.code
+                          ? shopStore.creditCardInfo.number
+                          : "member@devicelist.ca"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <button className="place-order" onClick={handlePlaceOrder}>
+                    {t("Place Order")}
+                  </button>
+                </div>
               )}
-            </div>
+
+            {progressStatus === CHECKOUT_PROGRESS_STATUS.confirmation && (
+              <div className="checkout-confirmation">
+                {tradeIn ? (
+                  <img src="/img/checkout/trade-in.png" alt="checkout-trade-in" />
+                ) : (
+                  <img src="/img/checkout/shopping.png" alt="checkout-shopping" />
+                )}
+                <p style={{ color: "#4360FA", padding: "20px 0" }}>
+                  {tradeIn
+                    ? t("Trade-In Request Complete!")
+                    : t("Thank you for shopping with DeviceList!")}
+                </p>
+                <p>
+                  {tradeIn
+                    ? t("You will receieve an email with details about your trade-in.")
+                    : t("Your order has been placed!")}
+                </p>
+                {tradeIn ? (
+                  <p>
+                    {t("You can also track your trade-in approval")}
+                    <span>
+                      <a href="#">{t("here")}</a>
+                    </span>
+                  </p>
+                ) : (
+                  <p>{t("Keep an eye out for an email with your tracking information.")}</p>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>

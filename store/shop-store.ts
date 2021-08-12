@@ -7,8 +7,9 @@ import {
   DeliveryOptionParam,
   SelectedLocationParam,
 } from "../models/checkout-params"
-import { CHECKOUT_PROGRESS_STATUS, DELIVERY_OPTIONS } from "../const/_variables"
-import { ProgressShippingFormParam } from "../models/checkout-params"
+import { CHECKOUT_PROGRESS_STATUS, DELIVERY_OPTIONS, PAYMENT_OPTIONS } from "../const/_variables"
+import { ProgressShippingFormParam, PaymentOptionParam } from "../models/checkout-params"
+import { PaymentCardInfoParam } from "../models/account-param"
 import statesData from "../const/statesData"
 
 configure({ enforceActions: "always" })
@@ -20,6 +21,8 @@ export class ShopStore {
   @observable billingAddress = {} as ProgressShippingFormParam
   @observable deliveryOption = DELIVERY_OPTIONS.ground.code
   @observable selectedLocation = {} as SelectedLocationParam
+  @observable paymentMethod = PAYMENT_OPTIONS.credit_debit.code
+  @observable creditCardInfo = {} as PaymentCardInfoParam
 
   constructor() {
     this.load()
@@ -38,6 +41,8 @@ export class ShopStore {
           billingAddress: this.billingAddress,
           deliveryOption: this.deliveryOption,
           selectedLocation: this.selectedLocation,
+          paymentMethod: this.paymentMethod,
+          creditCardInfo: this.creditCardInfo,
         })
       )
     }
@@ -127,6 +132,18 @@ export class ShopStore {
   }
 
   @action
+  setPaymentMethod = (val: PaymentOptionParam) => {
+    this.paymentMethod = val
+    this.save()
+  }
+
+  @action
+  setCreditCardInfo = (val: PaymentCardInfoParam) => {
+    this.creditCardInfo = val
+    this.save()
+  }
+
+  @action
   init = () => {
     this.setShopCarts([])
     this.progressStatus = CHECKOUT_PROGRESS_STATUS.cart
@@ -134,6 +151,8 @@ export class ShopStore {
     this.billingAddress = {} as ProgressShippingFormParam
     this.deliveryOption = DELIVERY_OPTIONS.ground.code
     this.selectedLocation = {} as SelectedLocationParam
+    this.paymentMethod = PAYMENT_OPTIONS.credit_debit.code
+    this.creditCardInfo = {} as PaymentCardInfoParam
     this.save()
   }
 }

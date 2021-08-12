@@ -426,5 +426,16 @@
   "Check this code": "Vérifiez ce code",
   "Promo Code": "Code promo",
   "Buy Now Pay Later": "Achetez maintenant Payez plus tard",
-  "Verified and Secure Transactions": "Transactions vérifiées et sécurisées"
+  "Verified and Secure Transactions": "Transactions vérifiées et sécurisées",
+  "Review your order": "Vérifiez votre commande",
+  "Place Order": "Passer la commande",
+  "Payment Method": "Mode de paiement",
+  "Credit": "Crédit",
+  "Thank you for shopping with DeviceList!": "Merci d'avoir acheté avec DeviceList !",
+  "Your order has been placed!": "Votre commande a bien été reçue!",
+  "Keep an eye out for an email with your tracking information.": "Gardez un œil sur un e-mail contenant vos informations de suivi.",
+  "Trade-In Request Complete!": "Demande d'échange terminée !",
+  "You will receieve an email with details about your trade-in.": "Vous recevrez un e-mail avec les détails de votre échange.",
+  "You can also track your trade-in approval": "Vous pouvez également suivre votre approbation de reprise",
+  "here": "ici"
 }

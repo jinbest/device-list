@@ -32,6 +32,11 @@ const SHIPPING_STEP_STATUS = {
   delivery_options: "delivery_options",
 }
 
+const PAYMENT_STEP_STATUS = {
+  confirm_and_pay: "confirm_and_pay",
+  review_order: "review_order",
+}
+
 const SHIPPING_FORM_TITLE = {
   order_address: "Where do you want your order sent?",
   billing_address: "What's your billing address?",
@@ -74,7 +79,6 @@ const PAYMENT_OPTIONS = {
 const regxCVV = /^[0-9]{0,3}$/,
   regxExpiry = /^[0-9]{0,2}(\/|)[0-9]{0,2}$/,
   regxCardNumber = /^[0-9]{0,16}$/
-// regxCardNumber = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g
 
 export {
   DAYS_OF_THE_WEEK,
@@ -84,6 +88,7 @@ export {
   DELIVERY_OPTIONS,
   SELECT_LOCATIONS,
   PAYMENT_OPTIONS,
+  PAYMENT_STEP_STATUS,
   regxCVV,
   regxExpiry,
   regxCardNumber,
