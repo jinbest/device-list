@@ -229,7 +229,7 @@ export function formatCountryName(countryCode: string) {
   }
 }
 
-export function formatAddress(address_1: string, address_2: string) {
+export function formatAddress(address_1: string, address_2: string | null) {
   if (!address_2) {
     return address_1
   } else {

@@ -209,7 +209,7 @@ const ShopCart = () => {
               <div className="check-button">
                 <button
                   onClick={() => {
-                    shopStore.setShopCarts(shopCarts)
+                    shopStore.setShopCarts(_.filter(shopCarts, (o) => o.total > 0))
                     shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.cart)
                     handleClose()
                     router.push("/checkout")

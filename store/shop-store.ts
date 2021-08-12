@@ -8,21 +8,26 @@ import {
   SelectedLocationParam,
 } from "../models/checkout-params"
 import { CHECKOUT_PROGRESS_STATUS, DELIVERY_OPTIONS, PAYMENT_OPTIONS } from "../const/_variables"
-import { ProgressShippingFormParam, PaymentOptionParam } from "../models/checkout-params"
+import { PaymentOptionParam } from "../models/checkout-params"
 import { PaymentCardInfoParam } from "../models/account-param"
-import statesData from "../const/statesData"
+import { AddressParam } from "../models/customer-data-params"
+import { AddressLists } from "../static/mock/address-data"
 
 configure({ enforceActions: "always" })
+
+const orderAddresses = _.filter(AddressLists, (o) => o.address_type === "SHIPPING"),
+  billingAddresses = _.filter(AddressLists, (o) => o.address_type === "BILLING")
 
 export class ShopStore {
   @observable shopCarts = _.cloneDeep(mockShopCarts)
   @observable progressStatus = CHECKOUT_PROGRESS_STATUS.cart
-  @observable orderAddress = {} as ProgressShippingFormParam
-  @observable billingAddress = {} as ProgressShippingFormParam
+  @observable orderAddress = orderAddresses.length ? orderAddresses[0] : ({} as AddressParam)
+  @observable billingAddress = billingAddresses.length ? billingAddresses[0] : ({} as AddressParam)
   @observable deliveryOption = DELIVERY_OPTIONS.ground.code
   @observable selectedLocation = {} as SelectedLocationParam
   @observable paymentMethod = PAYMENT_OPTIONS.credit_debit.code
   @observable creditCardInfo = {} as PaymentCardInfoParam
+  @observable address_list = _.cloneDeep(AddressLists)
 
   constructor() {
     this.load()
@@ -43,6 +48,7 @@ export class ShopStore {
           selectedLocation: this.selectedLocation,
           paymentMethod: this.paymentMethod,
           creditCardInfo: this.creditCardInfo,
+          address_list: this.address_list,
         })
       )
     }
@@ -72,49 +78,13 @@ export class ShopStore {
   }
 
   @action
-  setOrderAddress = (val: ProgressShippingFormParam) => {
+  setOrderAddress = (val: AddressParam) => {
     this.orderAddress = val
     this.save()
   }
 
   @action
-  setInitialOrderAddress = () => {
-    this.orderAddress = {
-      firstName: "",
-      lastName: "",
-      companyName: "",
-      address_1: "",
-      address_2: "",
-      city: "",
-      postcode: "",
-      country: "CA",
-      state: statesData["CA"][0].code,
-      phone: "",
-      billing_address: false,
-    } as ProgressShippingFormParam
-    this.save()
-  }
-
-  @action
-  setInitialBillingAddress = () => {
-    this.billingAddress = {
-      firstName: "",
-      lastName: "",
-      companyName: "",
-      address_1: "",
-      address_2: "",
-      city: "",
-      postcode: "",
-      country: "CA",
-      state: statesData["CA"][0].code,
-      phone: "",
-      billing_address: false,
-    } as ProgressShippingFormParam
-    this.save()
-  }
-
-  @action
-  setBillingAddress = (val: ProgressShippingFormParam) => {
+  setBillingAddress = (val: AddressParam) => {
     this.billingAddress = val
     this.save()
   }
@@ -144,15 +114,22 @@ export class ShopStore {
   }
 
   @action
+  setAddressLists = (val: AddressParam[]) => {
+    this.address_list = val
+    this.save()
+  }
+
+  @action
   init = () => {
     this.setShopCarts([])
     this.progressStatus = CHECKOUT_PROGRESS_STATUS.cart
-    this.orderAddress = {} as ProgressShippingFormParam
-    this.billingAddress = {} as ProgressShippingFormParam
+    this.orderAddress = orderAddresses.length ? orderAddresses[0] : ({} as AddressParam)
+    this.billingAddress = billingAddresses.length ? billingAddresses[0] : ({} as AddressParam)
     this.deliveryOption = DELIVERY_OPTIONS.ground.code
     this.selectedLocation = {} as SelectedLocationParam
     this.paymentMethod = PAYMENT_OPTIONS.credit_debit.code
     this.creditCardInfo = {} as PaymentCardInfoParam
+    this.address_list = [] as AddressParam[]
     this.save()
   }
 }

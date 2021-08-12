@@ -1,3 +1,5 @@
+import { AddressTypeParam, AddressParam } from "./customer-data-params"
+
 export interface AddressBookFormParam {
   address_1: string
   address_2: string
@@ -14,21 +16,21 @@ export interface SelectParam {
   code: string
 }
 
-export interface AddressParam {
+export interface AddressBookParam {
   title: string
-  type: "billing" | "delivery"
-  info: AddressInfoParam
+  type: AddressTypeParam
+  info: AddressParam
 }
 
-export interface AddressInfoParam {
-  name: string
-  address_1: string
-  address_2: string
-  city: string
-  state: string
-  postcode: string
-  country: string
-}
+// export interface AddressInfoParam {
+//   name: string
+//   address_1: string
+//   address_2: string
+//   city: string
+//   state: string
+//   postcode: string
+//   country: string
+// }
 
 export interface MyOrdersParam {
   date: string

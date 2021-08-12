@@ -10,7 +10,8 @@ import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
 import Toast from "../../../components/toast/toast"
 import { formatCountryName, formatAddress } from "../../../service/hepler"
 import AddressBookForm from "./address-book-form"
-import { AddressParam } from "../../../models/account-param"
+import { AddressBookParam } from "../../../models/account-param"
+import { FormGroup, FormControl, FormControlLabel, Checkbox } from "@material-ui/core"
 
 const AddressBook = () => {
   const [t] = useTranslation()
@@ -24,6 +25,7 @@ const AddressBook = () => {
   const [deleteInfo, setDeleteInfo] = useState<any>({} as any)
   const [toastParams, setToastParams] = useState<ToastMsgParams>({} as ToastMsgParams)
   const [states, setStates] = useState<any[]>(statesData["CA"])
+  const [inputAddressStatus, setInputAddressStatus] = useState(false)
 
   const resetStatuses = () => {
     setToastParams({
@@ -54,63 +56,87 @@ const AddressBook = () => {
       <div className="account-details-viewer">
         {!addStatus ? (
           <>
-            {authStore.accountData.addressBook.address.map((item: AddressParam, index: number) => {
-              return (
-                <div key={index} className="account-address">
-                  <div className="account-address-header">
-                    <p>{t(item.title)}</p>
+            {authStore.accountData.addressBook.address.map(
+              (item: AddressBookParam, index: number) => {
+                return (
+                  <div key={index} className="account-address">
+                    <div className="account-address-header">
+                      <p>{t(item.title)}</p>
+                      {index !== editIndex && (
+                        <div
+                          onClick={() => {
+                            setEditIndex(index)
+                          }}
+                        >
+                          <EditOutlinedIcon style={{ color: "#CBBBFA" }} />
+                        </div>
+                      )}
+                    </div>
                     {index !== editIndex && (
-                      <div
-                        onClick={() => {
-                          setEditIndex(index)
-                        }}
-                      >
-                        <EditOutlinedIcon style={{ color: "#CBBBFA" }} />
+                      <div className="account-address-content">
+                        <p>{`${item.info.first_name} ${item.info.last_name}`}</p>
+                        <p>{formatAddress(item.info.address_1, item.info.address_2)}</p>
+                        <p>{`${item.info.city}, ${item.info.state} ${item.info.postcode}`}</p>
+                        <p>{formatCountryName(item.info.country)}</p>
                       </div>
                     )}
+                    {index !== editIndex && (
+                      <button
+                        className="delete-address"
+                        onClick={() => {
+                          setDeleteTitle(item.title)
+                          setDeleteInfo(item.info)
+                          setDeleteIndex(index)
+                          setDeleteModal(true)
+                        }}
+                      >
+                        {t("Delete address")}
+                      </button>
+                    )}
+                    {index === editIndex && (
+                      <AddressBookForm
+                        ref={formikRef}
+                        states={states}
+                        editIndex={editIndex}
+                        addStatus={addStatus}
+                        setStates={setStates}
+                        setEditIndex={setEditIndex}
+                        setAddStatus={setAddStatus}
+                        setToastParams={setToastParams}
+                      />
+                    )}
                   </div>
-                  {index !== editIndex && (
-                    <div className="account-address-content">
-                      <p>{item.info.name}</p>
-                      <p>{formatAddress(item.info.address_1, item.info.address_2)}</p>
-                      <p>{`${item.info.city}, ${item.info.state} ${item.info.postcode}`}</p>
-                      <p>{formatCountryName(item.info.country)}</p>
-                    </div>
-                  )}
-                  {index !== editIndex && (
-                    <button
-                      className="delete-address"
-                      onClick={() => {
-                        setDeleteTitle(item.title)
-                        setDeleteInfo(item.info)
-                        setDeleteIndex(index)
-                        setDeleteModal(true)
-                      }}
-                    >
-                      {t("Delete address")}
-                    </button>
-                  )}
-                  {index === editIndex && (
-                    <AddressBookForm
-                      ref={formikRef}
-                      states={states}
-                      editIndex={editIndex}
-                      addStatus={addStatus}
-                      setStates={setStates}
-                      setEditIndex={setEditIndex}
-                      setAddStatus={setAddStatus}
-                      setToastParams={setToastParams}
-                    />
-                  )}
-                </div>
-              )
-            })}
+                )
+              }
+            )}
           </>
         ) : (
           <div className="account-address">
             <div className="account-address-header">
               <p>{t("New Address")}</p>
+              <FormControl
+                className="custom-form-control"
+                component="fieldset"
+                style={{ padding: 0 }}
+              >
+                <FormGroup className="form-group">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={inputAddressStatus}
+                        onChange={(e) => {
+                          setInputAddressStatus(e.target.checked)
+                        }}
+                        name="inputAddressStatus"
+                        color="primary"
+                      />
+                    }
+                    label={t("Input New Address")}
+                  />
+                </FormGroup>
+              </FormControl>
             </div>
+
             <AddressBookForm
               ref={formikRef}
               states={states}
@@ -120,6 +146,7 @@ const AddressBook = () => {
               setEditIndex={setEditIndex}
               setAddStatus={setAddStatus}
               setToastParams={setToastParams}
+              inputAddressStatus={inputAddressStatus}
             />
           </div>
         )}

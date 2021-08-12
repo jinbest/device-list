@@ -1,4 +1,4 @@
-import { AddressParam, PaymentParam } from "../../models/account-param"
+import { AddressBookParam, PaymentParam } from "../../models/account-param"
 import { PaymentOptionParam } from "../../models/checkout-params"
 
 const bannerData = [
@@ -922,7 +922,7 @@ const accountData = {
   },
   addressBook: {
     title: "Address Book",
-    address: [] as AddressParam[],
+    address: [] as AddressBookParam[],
   },
   myOrders: {
     title: "My Orders",

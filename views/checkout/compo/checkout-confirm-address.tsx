@@ -30,8 +30,8 @@ const CheckoutConfirmAddress = ({ setShippingStepStatus, review }: Props) => {
             <EditIcon />
           </div>
         )}
-        <p className="bold">{`${t("Ship to")} ${shopStore.orderAddress.firstName} ${
-          shopStore.orderAddress.lastName
+        <p className="bold">{`${t("Ship to")} ${shopStore.orderAddress.first_name} ${
+          shopStore.orderAddress.last_name
         }`}</p>
         <p>{shopStore.orderAddress.address_1}</p>
         {shopStore.orderAddress.address_2 && <p>{shopStore.orderAddress.address_2}</p>}
@@ -59,8 +59,8 @@ const CheckoutConfirmAddress = ({ setShippingStepStatus, review }: Props) => {
             <EditIcon />
           </div>
         )}
-        <p className="bold">{`${t("Bill to")} ${shopStore.billingAddress.firstName} ${
-          shopStore.billingAddress.lastName
+        <p className="bold">{`${t("Bill to")} ${shopStore.billingAddress.first_name} ${
+          shopStore.billingAddress.last_name
         }`}</p>
         <p>{shopStore.billingAddress.address_1}</p>
         {shopStore.billingAddress.address_2 && <p>{shopStore.billingAddress.address_2}</p>}
