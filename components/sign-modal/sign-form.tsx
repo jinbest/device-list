@@ -191,9 +191,9 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
       email: val.email,
       phone: "",
     }
-    cntAccountData.addressBook.address.forEach((item) => {
-      item.info.name = `${val.first_name} ${val.last_name}`
-    })
+    // cntAccountData.addressBook.address.forEach((item) => {
+    //   item.info.name = `${val.first_name} ${val.last_name}`
+    // })
     authStore.setAccountData(cntAccountData)
   }
 
