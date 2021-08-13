@@ -439,5 +439,9 @@
   "You can also track your trade-in approval": "You can also track your trade-in approval",
   "here": "here",
   "Input Address": "Input New Address",
-  "Email*": "Email*"
+  "Email*": "Email*",
+  "Card Name is required.": "Card Name is required.",
+  "Card Number is invalid.": "Card Number is invalid.",
+  "Expiry Date is incorrect.": "Expiry Date is incorrect.",
+  "CVV is not correct.": "CVV is not correct."
 }

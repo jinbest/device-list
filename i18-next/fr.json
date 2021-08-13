@@ -439,5 +439,9 @@
   "You can also track your trade-in approval": "Vous pouvez également suivre votre approbation de reprise",
   "here": "ici",
   "Input Address": "Saisir une nouvelle adresse",
-  "Email*": "E-mail*"
+  "Email*": "E-mail*",
+  "Card Name is required.": "Le nom de la carte est requis.",
+  "Card Number is invalid.": "Le numéro de carte n'est pas valide.",
+  "Expiry Date is incorrect.": "La date d'expiration est incorrecte.",
+  "CVV is not correct.": "CVV n'est pas correct."
 }

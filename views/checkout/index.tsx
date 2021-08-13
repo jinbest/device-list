@@ -153,7 +153,6 @@ const Checkout = () => {
             <BackSVG color="#BDBFC3" />
           </div>
         )}
-
         {emptyCheckout ? (
           <EmptyCheckout />
         ) : (

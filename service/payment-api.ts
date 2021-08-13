@@ -21,28 +21,15 @@ export default class PaymentClient {
     body?: Record<string, any>,
     options?: Record<string, any>
   ): Promise<T> {
-    const passcode = this.getPassCode()
-
     return (
       await axios.post(url, body, {
         headers: {
-          Authorization: passcode,
-          // Passcode: Config.PAYMENT_ACCESS_CODE,
-          // "Sub-Merchant-Id": Config.MERCHANT_ID,
+          Authorization: Config.ENCODE_PASSCODE,
         },
         params: {
           ...(options != null ? options : {}),
         },
       })
     ).data as T
-  }
-
-  getPassCode() {
-    // const encodedString = Buffer.from(Config.MERCHANT_ID).toString("base64")
-    return `Passcode MzgzNjEwMDYyOjlmZEQwOEZBNWY0RjQ4ZTE4NzUwQWZjMTgwRDEyMjMx`
-  }
-
-  getMerchantID() {
-    return Config.MERCHANT_ID
   }
 }

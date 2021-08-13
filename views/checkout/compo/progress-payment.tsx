@@ -12,6 +12,11 @@ import { formatCardNumber, formatExpiryDate } from "../../../service/hepler"
 import CustomInput from "../../../components/custom-input"
 import { shopStore } from "../../../store"
 import { isEmpty } from "lodash"
+import Loading from "../../../components/Loading"
+import Config from "../../../config/config"
+// import PaymentClient from "../../../service/payment-api"
+
+// const paymentClient = PaymentClient.getInstance()
 
 type Props = {
   setPaymentStepStatus: (val: string) => void
@@ -21,6 +26,7 @@ const ProgressPayment = ({ setPaymentStepStatus }: Props) => {
   const [t] = useTranslation()
   const formikRef = useRef<any>()
   const initialValues = {} as PaymentCardInfoParam
+  const delayTime = 2000
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionParam>(
     PAYMENT_OPTIONS.credit_debit.code
@@ -32,20 +38,54 @@ const ProgressPayment = ({ setPaymentStepStatus }: Props) => {
   }
 
   const formSchema = Yup.object().shape({
-    name: Yup.string().required(t("required")).min(1, t("required")),
-    number: Yup.string().required(t("required")).min(16, t("required")),
-    expiryDate: Yup.string().required(t("required")).min(1, t("required")),
-    cvv: Yup.string().required(t("required")).min(3, t("required")),
+    name: Yup.string().required(t("required")).min(1, t("Card Name is required.")),
+    number: Yup.string().required(t("required")).min(16, t("Card Number is invalid.")),
+    expiryDate: Yup.string().required(t("required")).min(4, t("Expiry Date is incorrect.")),
+    cvv: Yup.string().required(t("required")).min(3, t("CVV is not correct.")),
   })
 
   const onSave = (values: PaymentCardInfoParam, actions: FormikHelpers<any>) => {
-    actions.setSubmitting(false)
-    console.log("values", values)
+    actions.setSubmitting(true)
     shopStore.setPaymentMethod(paymentOption)
     if (paymentOption === PAYMENT_OPTIONS.credit_debit.code && !isEmpty(values)) {
       shopStore.setCreditCardInfo(values)
     }
-    setPaymentStepStatus(PAYMENT_STEP_STATUS.review_order)
+    handleTokenize(values, actions)
+  }
+
+  const handleTokenize = (values: PaymentCardInfoParam, actions: FormikHelpers<any>) => {
+    const url = `${Config.BASE_URL}${Config.TOKENIZE}`,
+      data = {
+        number: values.number,
+        expiry_month: values.expiryDate.substring(0, 2),
+        expiry_year: values.expiryDate.substring(2, 4),
+        cvd: values.cvv,
+      }
+
+    // try {
+    //   const result = await paymentClient.post(url, data)
+    //   console.log("result", result)
+    // } catch (error) {
+    //   console.log("Something went wrong.", JSON.stringify(error))
+    // } finally {
+    //   actions.setSubmitting(false)
+    //   setPaymentStepStatus(PAYMENT_STEP_STATUS.review_order)
+    // }
+
+    setTimeout(() => {
+      /* API will be excuted with URL and CARD_DATA later */
+
+      const result = {
+        token: "cg3-fb6f1477-4caf-45fa-9a70-ed2d82be4cec",
+        code: 1,
+        version: 1,
+        message: "",
+      }
+      console.log("url, data", url, data, result)
+
+      actions.setSubmitting(false)
+      setPaymentStepStatus(PAYMENT_STEP_STATUS.review_order)
+    }, delayTime)
   }
 
   const handleCheckPromoCode = () => {
@@ -72,7 +112,7 @@ const ProgressPayment = ({ setPaymentStepStatus }: Props) => {
               control={<Radio />}
               label={t(PAYMENT_OPTIONS.credit_debit.text)}
             />
-            <div className="payment-logos">
+            <div className="payment-logos progree-payment-logos">
               {PaymentLogos.credit.map((item: ImageDataParam, index: number) => (
                 <img src={item.img_src} alt={item.alt} key={index} />
               ))}
@@ -190,7 +230,15 @@ const ProgressPayment = ({ setPaymentStepStatus }: Props) => {
                   </Grid>
 
                   <div className="shipping-form-submit">
-                    <button type="submit">{t("Confirm and Pay")}</button>
+                    <button type="submit">
+                      {isSubmitting ? (
+                        <span>
+                          <Loading />
+                        </span>
+                      ) : (
+                        t("Confirm and Pay")
+                      )}
+                    </button>
                     <p>{t("or press ENTER")}</p>
                   </div>
                 </Form>
