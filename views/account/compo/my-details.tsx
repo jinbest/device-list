@@ -44,9 +44,9 @@ const MyDetails = () => {
       email: values.email,
       phone: values.phone,
     }
-    cntAccountData.addressBook.address.forEach((item) => {
-      item.info.name = `${values.first_name} ${values.last_name}`
-    })
+    // cntAccountData.addressBook.address.forEach((item) => {
+    //   item.info.name = `${values.first_name} ${values.last_name}`
+    // })
     authStore.setAccountData(cntAccountData)
 
     cntMockCredential.first_name = values.first_name
