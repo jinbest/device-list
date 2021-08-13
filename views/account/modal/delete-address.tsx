@@ -4,21 +4,21 @@ import { useTranslation } from "react-i18next"
 import CloseIcon from "@material-ui/icons/Close"
 import { IconButton } from "@material-ui/core"
 import { observer } from "mobx-react"
-import { authStore } from "../../../store"
+import { shopStore } from "../../../store"
 import Loading from "../../../components/Loading"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
-import _ from "lodash"
 import { formatCountryName, formatAddress } from "../../../service/hepler"
+import { AddressParam, AddressTypeParam } from "../../../models/customer-data-params"
 
 type Props = {
   open: boolean
   setOpen: (val: boolean) => void
-  deleteIndex: number
+  deleteAddressType: number | AddressTypeParam
   deleteTitle: string
-  deleteInfo: any
+  deleteInfo: AddressParam
 }
 
-const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle, deleteInfo }: Props) => {
+const DeleteAddress = ({ open, setOpen, deleteAddressType, deleteTitle, deleteInfo }: Props) => {
   const [t] = useTranslation()
   const delayTime = 2000
 
@@ -34,11 +34,11 @@ const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle, deleteInfo }: 
     setIsDeleting(true)
     setTimeout(() => {
       setDeleted(true)
-      const accountData = _.cloneDeep(authStore.accountData),
-        address = accountData.addressBook.address
-      address.splice(deleteIndex, 1)
-      accountData.addressBook.address = address
-      authStore.setAccountData(accountData)
+      if (deleteAddressType === "BILLING") {
+        shopStore.setBillingAddress({} as AddressParam)
+      } else if (deleteAddressType === "SHIPPING") {
+        shopStore.setOrderAddress({} as AddressParam)
+      }
       setIsDeleting(false)
     }, delayTime)
   }
@@ -66,7 +66,7 @@ const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle, deleteInfo }: 
             <p className="account-modal-content" style={{ margin: "25px 0" }}>
               {`${t("Are you sure you want to delete the following")} ${t(deleteTitle)}?`}
             </p>
-            <p className="account-modal-content">{deleteInfo.name}</p>
+            <p className="account-modal-content">{`${deleteInfo.first_name} ${deleteInfo.last_name}`}</p>
             <p className="account-modal-content">
               {formatAddress(deleteInfo.address_1, deleteInfo.address_2)}
             </p>
@@ -81,7 +81,7 @@ const DeleteAddress = ({ open, setOpen, deleteIndex, deleteTitle, deleteInfo }: 
               {`${t("The following")} ${t(deleteTitle)} ${t("has been deleted from your account")}`}
               :
             </p>
-            <p className="account-modal-content">{deleteInfo.name}</p>
+            <p className="account-modal-content">{`${deleteInfo.first_name} ${deleteInfo.last_name}`}</p>
             <p className="account-modal-content">
               {formatAddress(deleteInfo.address_1, deleteInfo.address_2)}
             </p>

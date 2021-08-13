@@ -437,5 +437,7 @@
   "Trade-In Request Complete!": "Demande d'échange terminée !",
   "You will receieve an email with details about your trade-in.": "Vous recevrez un e-mail avec les détails de votre échange.",
   "You can also track your trade-in approval": "Vous pouvez également suivre votre approbation de reprise",
-  "here": "ici"
+  "here": "ici",
+  "Input Address": "Saisir une nouvelle adresse",
+  "Email*": "E-mail*"
 }

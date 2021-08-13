@@ -11,9 +11,12 @@ import {
 } from "@material-ui/core"
 import * as Yup from "yup"
 import { observer } from "mobx-react"
-import { authStore, shopStore } from "../../../store"
-import { AddressBookFormParam, AddressBookParam } from "../../../models/account-param"
-import { AddressParam, AddressKeyParam } from "../../../models/customer-data-params"
+import { shopStore } from "../../../store"
+import {
+  AddressParam,
+  AddressKeyParam,
+  AddressTypeParam,
+} from "../../../models/customer-data-params"
 import countriesData from "../../../const/countriesData"
 import statesData from "../../../const/statesData"
 import { useTranslation } from "react-i18next"
@@ -22,32 +25,34 @@ import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
 
 type Props = {
   states: any[]
-  editIndex: number
+  editAddressType: number | AddressTypeParam
   addStatus: boolean
   setStates: (val: any[]) => void
-  setEditIndex: (val: number) => void
+  setEditAddressType: (val: number | AddressTypeParam) => void
   setAddStatus: (val: boolean) => void
   setToastParams: (val: ToastMsgParams) => void
   inputAddressStatus?: boolean
+  editAddress: AddressParam
 }
 
 const AddressBookForm = React.forwardRef(
   (
     {
       states,
-      editIndex,
+      editAddressType,
       addStatus,
       setStates,
-      setEditIndex,
+      setEditAddressType,
       setToastParams,
       setAddStatus,
       inputAddressStatus,
+      editAddress,
     }: Props,
     ref: any
   ) => {
     const [t] = useTranslation()
     const delayTime = 2000
-    const initialValues = {} as AddressBookFormParam
+    const initialValues = {} as AddressParam
 
     const [selectedAddress, setSelectedAddress] = useState<AddressParam>({} as AddressParam)
     const [billing, setBilling] = useState(false)
@@ -71,18 +76,55 @@ const AddressBookForm = React.forwardRef(
       setFilteredAddresses(newFiltered)
     }, [billing, shipping])
 
+    const addingAddressList = (address: AddressParam) => {
+      const cntAddressList = _.cloneDeep(shopStore.address_list)
+      const checkIndex = _.findIndex(
+        cntAddressList,
+        (o) => o.id === address.id && o.address_type === address.address_type
+      )
+      if (checkIndex < 0) {
+        cntAddressList.push(address)
+      }
+      shopStore.setAddressLists(cntAddressList)
+    }
+
     const handleSaveNewAddress = () => {
       setIsSubmitting(true)
-      console.log("selectedAddress", selectedAddress, billing, shipping)
-      setIsSubmitting(false)
+      setTimeout(() => {
+        const cntSelAddress = _.cloneDeep(selectedAddress)
+
+        if (billing) {
+          cntSelAddress.address_type = "BILLING"
+          shopStore.setBillingAddress(_.cloneDeep(cntSelAddress))
+          addingAddressList(_.cloneDeep(cntSelAddress))
+        }
+
+        if (shipping) {
+          cntSelAddress.address_type = "SHIPPING"
+          shopStore.setOrderAddress(_.cloneDeep(cntSelAddress))
+          addingAddressList(_.cloneDeep(cntSelAddress))
+        }
+
+        setIsSubmitting(false)
+        setToastParams({
+          msg: t("New Address has been added."),
+          isSuccess: true,
+        })
+
+        setAddStatus(false)
+        setEditAddressType(-1)
+      }, delayTime)
     }
 
     useEffect(() => {
-      if (editIndex > -1) {
-        const info = _.cloneDeep(authStore.accountData.addressBook.address[editIndex].info)
+      if (editAddressType !== -1) {
+        const info = _.cloneDeep(editAddress)
         if (ref.current) {
           ref.current.resetForm({
             values: {
+              first_name: info.first_name,
+              last_name: info.last_name,
+              email: info.email,
               address_1: info.address_1,
               address_2: info.address_2,
               city: info.city,
@@ -112,88 +154,100 @@ const AddressBookForm = React.forwardRef(
           setStates(statesData["CA"])
         }
       }
-    }, [editIndex, addStatus])
+    }, [editAddressType, addStatus])
 
     const formSchema = Yup.object().shape({
-      address_1: Yup.string().required(t("required")).min(1, t("required")),
-      city: Yup.string().required(t("required")).min(1, t("required")),
-      state: Yup.string().required(t("required")).min(1, t("required")),
-      country: Yup.string().required(t("required")).min(1, t("required")),
-      postcode: Yup.string().required(t("required")).min(1, t("required")),
+      first_name: Yup.string().required(t("First Name is required.")),
+      last_name: Yup.string().required(t("Last Name is required.")),
+      email: Yup.string().email(t("Invalid email.")).required(t("Email is required.")),
+      address_1: Yup.string().required(t("Address_1 is required.")),
+      city: Yup.string().required(t("City is required.")),
+      postcode: Yup.string().required(t("Post Code is required.")),
+      country: Yup.string().required(t("Country is required.")),
+      state: Yup.string().required(t("State is required.")),
     })
 
-    const onSave = (values: AddressBookFormParam, actions: FormikHelpers<any>) => {
+    const onSave = (values: AddressParam, actions: FormikHelpers<any>) => {
       actions.setSubmitting(true)
-      let msg = "",
-        isWarning = false
+      let msg = ""
+      const isWarning = false
 
-      const cntAccountData = _.cloneDeep(authStore.accountData)
-      if (editIndex > -1) {
-        let updateInfo = cntAccountData.addressBook.address[editIndex].info
-        updateInfo = {
-          first_name: updateInfo.first_name,
-          last_name: updateInfo.last_name,
-          address_1: values.address_1,
-          address_2: values.address_2,
-          city: values.city,
-          state: values.state,
-          postcode: values.postcode,
-          country: values.country,
-        } as AddressParam
-        cntAccountData.addressBook.address[editIndex].info = updateInfo
+      console.log("values", values)
+
+      const updateAddress = _.cloneDeep(editAddress)
+      if (editAddressType !== -1) {
+        updateAddress.first_name = values.first_name
+        updateAddress.last_name = values.last_name
+        updateAddress.email = values.email
+        updateAddress.address_1 = values.address_1
+        updateAddress.address_2 = values.address_2
+        updateAddress.city = values.city
+        updateAddress.state = values.state
+        updateAddress.postcode = values.postcode
+        updateAddress.country = values.country
       } else if (addStatus) {
-        if (!values.billing && !values.delivery) {
-          msg = t("You have to check Billing Address or Delivery Address.")
-          isWarning = true
-          setToastParams({
-            msg,
-            isSuccess: !isWarning,
-            isWarning: isWarning,
-          })
-          actions.setSubmitting(false)
-          return
+        const newValues = _.cloneDeep(values),
+          cntAddressList = _.cloneDeep(shopStore.address_list)
+
+        const addressIDList = shopStore.address_list.map((item) => item.id)
+        const newAddressID = Math.max(...addressIDList) + 1
+
+        const customerIDList = shopStore.address_list.map((item) => item.customer_id)
+        const newCustomerID = Math.max(...customerIDList) + 1
+
+        const checkIndex = _.findIndex(
+          cntAddressList,
+          (o) =>
+            o.first_name === newValues.first_name &&
+            o.last_name === newValues.last_name &&
+            o.email === newValues.email &&
+            o.company === newValues.company &&
+            o.address_1 === newValues.address_1 &&
+            o.city === newValues.city &&
+            o.state === newValues.state &&
+            o.country === newValues.country &&
+            o.postcode === newValues.postcode
+        )
+
+        if (checkIndex > -1) {
+          newValues.id = cntAddressList[checkIndex].id
+          newValues.customer_id = cntAddressList[checkIndex].customer_id
         } else {
-          if (values.billing) {
-            cntAccountData.addressBook.address.push({
-              title: "Billing Address",
-              type: "BILLING",
-              info: {
-                first_name: authStore.mockCredential.first_name,
-                last_name: authStore.mockCredential.last_name,
-                address_1: values.address_1,
-                address_2: values.address_2,
-                city: values.city,
-                state: values.state,
-                postcode: values.postcode,
-                country: values.country,
-              },
-            } as AddressBookParam)
-          }
-          if (values.delivery) {
-            cntAccountData.addressBook.address.push({
-              title: "Delivery Address",
-              type: "SHIPPING",
-              info: {
-                first_name: authStore.mockCredential.first_name,
-                last_name: authStore.mockCredential.last_name,
-                address_1: values.address_1,
-                address_2: values.address_2,
-                city: values.city,
-                state: values.state,
-                postcode: values.postcode,
-                country: values.country,
-              },
-            } as AddressBookParam)
-          }
+          newValues.id = newAddressID
+          newValues.customer_id = newCustomerID
+        }
+
+        if (billing) {
+          newValues.address_type = "BILLING"
+          shopStore.setBillingAddress(_.cloneDeep(newValues))
+          addingAddressList(_.cloneDeep(newValues))
+        }
+
+        if (shipping) {
+          newValues.address_type = "SHIPPING"
+          shopStore.setOrderAddress(_.cloneDeep(newValues))
+          addingAddressList(_.cloneDeep(newValues))
         }
       }
 
       setTimeout(() => {
-        authStore.setAccountData(cntAccountData)
-        if (editIndex > -1) {
-          msg = `${t(cntAccountData.addressBook.address[editIndex].title)} ${t(
-            "has been updated successfully."
-          )}`
+        if (!addStatus) {
+          if (editAddressType === "BILLING") {
+            shopStore.setBillingAddress(updateAddress)
+            msg = `${"Billing Address"} ${t("has been updated successfully.")}`
+          } else if (editAddressType === "SHIPPING") {
+            shopStore.setOrderAddress(updateAddress)
+            msg = `${"Delivery Address"} ${t("has been updated successfully.")}`
+          }
+          const cntAddressList = _.cloneDeep(shopStore.address_list)
+          const addressIndex = _.findIndex(
+            cntAddressList,
+            (o) => o.id === updateAddress.id && o.address_type === editAddressType
+          )
+          if (addressIndex > -1) {
+            cntAddressList[addressIndex] = updateAddress
+          }
+          shopStore.setAddressLists(cntAddressList)
         } else if (addStatus) {
           msg = t("New Address has been added.")
         }
@@ -203,8 +257,9 @@ const AddressBookForm = React.forwardRef(
           isWarning: isWarning,
         })
         actions.setSubmitting(false)
+
         setAddStatus(false)
-        setEditIndex(-1)
+        setEditAddressType(-1)
       }, delayTime)
     }
 
@@ -232,6 +287,80 @@ const AddressBookForm = React.forwardRef(
           >
             {({ values, setFieldValue, errors, touched, isSubmitting }) => (
               <Form className="my-details-form">
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <label className="my-details-label" htmlFor="first_name">
+                      {t("First Name")}
+                      <span style={{ color: "red" }}>*</span>
+                    </label>
+                    <FormGroup className="form-group">
+                      <TextField
+                        id="first_name"
+                        name="first_name"
+                        InputLabelProps={{ required: false }}
+                        value={values.first_name || ""}
+                        error={!!(errors.first_name && touched.first_name)}
+                        className="form-control"
+                        onChange={(e) => {
+                          setFieldValue("first_name", e.target.value)
+                        }}
+                        type="text"
+                        variant="outlined"
+                        margin="dense"
+                        helperText={errors.first_name && touched.first_name && errors.first_name}
+                        disabled={isSubmitting}
+                      />
+                    </FormGroup>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <label className="my-details-label" htmlFor="last_name">
+                      {t("Last Name")}
+                      <span style={{ color: "red" }}>*</span>
+                    </label>
+                    <FormGroup className="form-group">
+                      <TextField
+                        id="last_name"
+                        name="last_name"
+                        InputLabelProps={{ required: false }}
+                        value={values.last_name || ""}
+                        error={!!(errors.last_name && touched.last_name)}
+                        className="form-control"
+                        onChange={(e) => {
+                          setFieldValue("last_name", e.target.value)
+                        }}
+                        type="text"
+                        variant="outlined"
+                        margin="dense"
+                        helperText={errors.last_name && touched.last_name && errors.last_name}
+                        disabled={isSubmitting}
+                      />
+                    </FormGroup>
+                  </Grid>
+                </Grid>
+
+                <label className="my-details-label" htmlFor="email">
+                  {t("Email")}
+                  <span style={{ color: "red" }}>*</span>
+                </label>
+                <FormGroup className="form-group">
+                  <TextField
+                    id="email"
+                    name="email"
+                    InputLabelProps={{ required: false }}
+                    value={values.email || ""}
+                    error={!!(errors.email && touched.email)}
+                    className="form-control"
+                    onChange={(e) => {
+                      setFieldValue("email", e.target.value)
+                    }}
+                    type="text"
+                    variant="outlined"
+                    margin="dense"
+                    helperText={errors.email && touched.email && errors.email}
+                    disabled={isSubmitting || (editAddressType !== -1 && !addStatus)}
+                  />
+                </FormGroup>
+
                 <label className="my-details-label" htmlFor="address_1">
                   {t("Street Address")}
                   <span style={{ color: "red" }}>*</span>
@@ -404,32 +533,36 @@ const AddressBookForm = React.forwardRef(
                 {addStatus && (
                   <FormControl component="fieldset" style={{ margin: 0, padding: "20px 10px" }}>
                     <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={values.billing || false}
-                            onChange={(e) => {
-                              setFieldValue("billing", e.target.checked)
-                            }}
-                            name="billing"
-                            color="primary"
-                          />
-                        }
-                        label={t("Billing Address")}
-                      />
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={values.delivery || false}
-                            onChange={(e) => {
-                              setFieldValue("delivery", e.target.checked)
-                            }}
-                            name="delivery"
-                            color="primary"
-                          />
-                        }
-                        label={t("Delivery Address")}
-                      />
+                      {isEmpty(shopStore.billingAddress) && (
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={billing}
+                              onChange={(e) => {
+                                setBilling(e.target.checked)
+                              }}
+                              name="billing"
+                              color="primary"
+                            />
+                          }
+                          label={t("Billing Address")}
+                        />
+                      )}
+                      {isEmpty(shopStore.orderAddress) && (
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={shipping}
+                              onChange={(e) => {
+                                setShipping(e.target.checked)
+                              }}
+                              name="delivery"
+                              color="primary"
+                            />
+                          }
+                          label={t("Delivery Address")}
+                        />
+                      )}
                     </FormGroup>
                   </FormControl>
                 )}
@@ -447,6 +580,7 @@ const AddressBookForm = React.forwardRef(
             )}
           </Formik>
         )}
+
         {addStatus && !inputAddressStatus && (
           <>
             <FormGroup className="form-group">
@@ -474,32 +608,36 @@ const AddressBookForm = React.forwardRef(
 
             <FormControl component="fieldset" style={{ margin: 0, padding: "20px 10px" }}>
               <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={billing}
-                      onChange={(e) => {
-                        setBilling(e.target.checked)
-                      }}
-                      name="billing"
-                      color="primary"
-                    />
-                  }
-                  label={t("Billing Address")}
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={shipping}
-                      onChange={(e) => {
-                        setShipping(e.target.checked)
-                      }}
-                      name="shipping"
-                      color="primary"
-                    />
-                  }
-                  label={t("Delivery Address")}
-                />
+                {isEmpty(shopStore.billingAddress) && (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={billing}
+                        onChange={(e) => {
+                          setBilling(e.target.checked)
+                        }}
+                        name="billing"
+                        color="primary"
+                      />
+                    }
+                    label={t("Billing Address")}
+                  />
+                )}
+                {isEmpty(shopStore.orderAddress) && (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={shipping}
+                        onChange={(e) => {
+                          setShipping(e.target.checked)
+                        }}
+                        name="shipping"
+                        color="primary"
+                      />
+                    }
+                    label={t("Delivery Address")}
+                  />
+                )}
               </FormGroup>
             </FormControl>
 

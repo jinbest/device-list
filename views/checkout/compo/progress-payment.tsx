@@ -12,7 +12,6 @@ import { formatCardNumber, formatExpiryDate } from "../../../service/hepler"
 import CustomInput from "../../../components/custom-input"
 import { shopStore } from "../../../store"
 import { isEmpty } from "lodash"
-// import * as CheckoutSDK from "@bambora/checkout-sdk-web";
 
 type Props = {
   setPaymentStepStatus: (val: string) => void
