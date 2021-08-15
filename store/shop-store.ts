@@ -1,6 +1,5 @@
 import { action, autorun, configure, observable, makeAutoObservable } from "mobx"
 import _ from "lodash"
-import { mockShopCarts } from "../static/mock/shop-cart"
 import { ShopCartParam } from "../models/shop-cart"
 import {
   CheckoutProgressStatusParam,
@@ -19,7 +18,7 @@ const orderAddresses = _.filter(AddressLists, (o) => o.address_type === "SHIPPIN
   billingAddresses = _.filter(AddressLists, (o) => o.address_type === "BILLING")
 
 export class ShopStore {
-  @observable shopCarts = _.cloneDeep(mockShopCarts)
+  @observable shopCarts = [] as ShopCartParam[]
   @observable progressStatus = CHECKOUT_PROGRESS_STATUS.cart
   @observable orderAddress = orderAddresses.length ? orderAddresses[0] : ({} as AddressParam)
   @observable billingAddress = billingAddresses.length ? billingAddresses[0] : ({} as AddressParam)
