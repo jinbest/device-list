@@ -80,6 +80,13 @@ const regxCVV = /^[0-9]{0,3}$/,
   regxExpiry = /^[0-9]{0,2}(\/|)[0-9]{0,2}$/,
   regxCardNumber = /^[0-9]{0,16}$/
 
+const ORDER_STATUS_DATA = {
+  in_transit: "IN TRANSIT",
+  delivered: "DELIVERED",
+  cancelled: "CANCELLED",
+  returned: "RETURNED",
+}
+
 export {
   DAYS_OF_THE_WEEK,
   CHECKOUT_PROGRESS_STATUS,
@@ -92,4 +99,5 @@ export {
   regxCVV,
   regxExpiry,
   regxCardNumber,
+  ORDER_STATUS_DATA,
 }

@@ -1,5 +1,5 @@
 import { AddressTypeParam, AddressParam } from "./customer-data-params"
-
+import { ShopCartParam } from "./shop-cart"
 export interface AddressBookFormParam {
   address_1: string
   address_2: string
@@ -22,31 +22,13 @@ export interface AddressBookParam {
   info: AddressParam
 }
 
-// export interface AddressInfoParam {
-//   name: string
-//   address_1: string
-//   address_2: string
-//   city: string
-//   state: string
-//   postcode: string
-//   country: string
-// }
-
 export interface MyOrdersParam {
   date: string
   order: number
   status: string
-  data: MyOrdersChildParam
-}
-
-export interface MyOrdersChildParam {
-  name: string
-  capacity: string
-  color: string
+  paymentToken: string
   cost: number
-  img_src: string
-  warranty: number | null
-  warranty_unit: string | null
+  data: ShopCartParam
 }
 
 export interface PaymentParam {

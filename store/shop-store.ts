@@ -9,7 +9,7 @@ import {
 } from "../models/checkout-params"
 import { CHECKOUT_PROGRESS_STATUS, DELIVERY_OPTIONS, PAYMENT_OPTIONS } from "../const/_variables"
 import { PaymentOptionParam } from "../models/checkout-params"
-import { PaymentCardInfoParam } from "../models/account-param"
+import { PaymentCardInfoParam, MyOrdersParam } from "../models/account-param"
 import { AddressParam } from "../models/customer-data-params"
 import { AddressLists } from "../static/mock/address-data"
 
@@ -28,6 +28,7 @@ export class ShopStore {
   @observable paymentMethod = PAYMENT_OPTIONS.credit_debit.code
   @observable creditCardInfo = {} as PaymentCardInfoParam
   @observable address_list = _.cloneDeep(AddressLists)
+  @observable orderedData = [] as MyOrdersParam[]
 
   constructor() {
     this.load()
@@ -49,6 +50,7 @@ export class ShopStore {
           paymentMethod: this.paymentMethod,
           creditCardInfo: this.creditCardInfo,
           address_list: this.address_list,
+          orderedData: this.orderedData,
         })
       )
     }
@@ -120,8 +122,14 @@ export class ShopStore {
   }
 
   @action
+  setOrderedData = (val: MyOrdersParam[]) => {
+    this.orderedData = val
+    this.save()
+  }
+
+  @action
   init = () => {
-    this.setShopCarts([])
+    this.shopCarts = [] as ShopCartParam[]
     this.progressStatus = CHECKOUT_PROGRESS_STATUS.cart
     this.orderAddress = orderAddresses.length ? orderAddresses[0] : ({} as AddressParam)
     this.billingAddress = billingAddresses.length ? billingAddresses[0] : ({} as AddressParam)
@@ -130,6 +138,7 @@ export class ShopStore {
     this.paymentMethod = PAYMENT_OPTIONS.credit_debit.code
     this.creditCardInfo = {} as PaymentCardInfoParam
     this.address_list = [] as AddressParam[]
+    this.orderedData = [] as MyOrdersParam[]
     this.save()
   }
 }

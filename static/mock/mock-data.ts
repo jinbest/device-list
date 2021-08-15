@@ -1,4 +1,4 @@
-import { AddressBookParam, PaymentParam } from "../../models/account-param"
+import { PaymentParam } from "../../models/account-param"
 import { PaymentOptionParam } from "../../models/checkout-params"
 
 const bannerData = [
@@ -922,68 +922,9 @@ const accountData = {
   },
   addressBook: {
     title: "Address Book",
-    address: [] as AddressBookParam[],
   },
   myOrders: {
     title: "My Orders",
-    orders: [
-      {
-        date: "2021-05-01",
-        order: 99999,
-        status: "IN TRANSIT",
-        data: {
-          name: "iPhone 5c",
-          capacity: "64 GB",
-          color: "Yellow",
-          cost: 300,
-          img_src: "/img/account/iphone-5c.png",
-          warranty: 12,
-          warranty_unit: "MONTH",
-        },
-      },
-      {
-        date: "2020-12-15",
-        order: 99998,
-        status: "DELIVERED",
-        data: {
-          name: "Apple Watch (Series 5)",
-          capacity: "40 mm",
-          color: "Space Gray",
-          cost: 300,
-          img_src: "/img/account/iphone-5c.png",
-          warranty: 12,
-          warranty_unit: "month",
-        },
-      },
-      {
-        date: "2020-06-07",
-        order: 99967,
-        status: "CANCELLED",
-        data: {
-          name: "Apple Watch (Series 5)",
-          capacity: "40 mm",
-          color: "Space Gray",
-          cost: 300,
-          img_src: "/img/account/iphone-5c.png",
-          warranty: 12,
-          warranty_unit: "month",
-        },
-      },
-      {
-        date: "2020-04-15",
-        order: 99754,
-        status: "RETURNED",
-        data: {
-          name: "iPhone 9",
-          capacity: "64 GB",
-          color: "Gray",
-          cost: 300,
-          img_src: "/img/account/iphone-5c.png",
-          warranty: 12,
-          warranty_unit: "month",
-        },
-      },
-    ],
   },
   myReturns: {
     title: "My Returns",
@@ -991,12 +932,6 @@ const accountData = {
   paymentMethods: {
     title: "Payment Methods",
     payments: [
-      // {
-      //   type: PaymentOptions.paypal,
-      //   name: "Paypal",
-      //   logos: PaymentLogos.paypal,
-      //   cardInfo: {},
-      // } as PaymentParam,
       {
         type: PaymentOptions.credit,
         name: "Credit Card",

@@ -20,9 +20,10 @@ import Config from "../../../config/config"
 
 type Props = {
   setPaymentStepStatus: (val: string) => void
+  setPaymentToken: (val: string) => void
 }
 
-const ProgressPayment = ({ setPaymentStepStatus }: Props) => {
+const ProgressPayment = ({ setPaymentStepStatus, setPaymentToken }: Props) => {
   const [t] = useTranslation()
   const formikRef = useRef<any>()
   const initialValues = {} as PaymentCardInfoParam
@@ -85,6 +86,7 @@ const ProgressPayment = ({ setPaymentStepStatus }: Props) => {
 
       actions.setSubmitting(false)
       setPaymentStepStatus(PAYMENT_STEP_STATUS.review_order)
+      setPaymentToken(result.token)
     }, delayTime)
   }
 

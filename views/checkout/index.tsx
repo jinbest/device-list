@@ -9,6 +9,7 @@ import {
   SHIPPING_STEP_STATUS,
   PAYMENT_STEP_STATUS,
   PAYMENT_OPTIONS,
+  ORDER_STATUS_DATA,
 } from "../../const/_variables"
 import _ from "lodash"
 import { ShopCartParam } from "../../models/shop-cart"
@@ -22,6 +23,7 @@ import ProgressCart from "./compo/progress-cart"
 import ProgressShipping from "./compo/progress-shipping"
 import ProgressPayment from "./compo/progress-payment"
 import { useTranslation } from "react-i18next"
+import moment from "moment"
 
 const Checkout = () => {
   const [t] = useTranslation()
@@ -38,6 +40,7 @@ const Checkout = () => {
   const [shippingStepStatus, setShippingStepStatus] = useState(SHIPPING_STEP_STATUS.order_address)
   const [paymentStepStatus, setPaymentStepStatus] = useState(PAYMENT_STEP_STATUS.confirm_and_pay)
   const [tradeIn, setTradeIn] = useState(false)
+  const [paymentToken, setPaymentToken] = useState("")
 
   useEffect(() => {
     setShopCarts(_.cloneDeep(shopStore.shopCarts))
@@ -135,6 +138,40 @@ const Checkout = () => {
 
   const handlePlaceOrder = () => {
     _trade_in_()
+    const cntOrderedData = _.cloneDeep(shopStore.orderedData)
+
+    const orderList = cntOrderedData.map((a) => a.order)
+    let newOrder = 0
+    if (!orderList.length) {
+      newOrder = 1
+    } else {
+      newOrder = Math.max(...orderList) + 1
+    }
+
+    shopStore.shopCarts.forEach((item: ShopCartParam) => {
+      let cost = item.cost * item.total
+      if (item.device_kit && item.device_kit_cost) {
+        cost += item.device_kit_cost * item.total
+      }
+      if (item.screen_protector && item.screen_protector_cost) {
+        cost += item.screen_protector_cost * item.total
+      }
+      if (item.cost_include_warranty && item.warranty_cost) {
+        cost += item.warranty_cost * item.total
+      }
+      cntOrderedData.push({
+        date: moment().format("YYYY-MM-DD"),
+        order: newOrder,
+        status: ORDER_STATUS_DATA.delivered,
+        paymentToken: paymentToken,
+        cost: cost,
+        data: item,
+      })
+      newOrder += 1
+    })
+
+    shopStore.setOrderedData(cntOrderedData)
+    shopStore.setShopCarts([])
     shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.confirmation)
   }
 
@@ -174,7 +211,10 @@ const Checkout = () => {
 
                   {progressStatus === CHECKOUT_PROGRESS_STATUS.payment &&
                     paymentStepStatus === PAYMENT_STEP_STATUS.confirm_and_pay && (
-                      <ProgressPayment setPaymentStepStatus={setPaymentStepStatus} />
+                      <ProgressPayment
+                        setPaymentStepStatus={setPaymentStepStatus}
+                        setPaymentToken={setPaymentToken}
+                      />
                     )}
                 </div>
               )}

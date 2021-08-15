@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { observer } from "mobx-react"
-import { authStore } from "../../../store"
+import { shopStore } from "../../../store"
 import { useTranslation } from "react-i18next"
 import { MyOrdersParam } from "../../../models/account-param"
 import moment from "moment-timezone"
@@ -8,6 +8,7 @@ import _, { isEmpty } from "lodash"
 import CancelOrder from "../modal/cancel-order"
 import UpArrow from "../../../components/svg/up-arrow"
 import DownArrow from "../../../components/svg/down-arrow"
+import { ORDER_STATUS_DATA } from "../../../const/_variables"
 
 const MyOrders = () => {
   const [t] = useTranslation()
@@ -18,7 +19,7 @@ const MyOrders = () => {
   const [expand, setExpand] = useState(-1)
 
   const _getFilledButtonClassName_ = (val: string) => {
-    if (val === "IN TRANSIT" || val === "DELIVERED") {
+    if (val === ORDER_STATUS_DATA.in_transit || val === ORDER_STATUS_DATA.delivered) {
       return "my-order-filled-button"
     } else {
       return "my-order-filled-button order-filled-disable"
@@ -26,7 +27,7 @@ const MyOrders = () => {
   }
 
   const _getOutlinedButtonClassName_ = (val: string) => {
-    if (val === "IN TRANSIT" || val === "DELIVERED") {
+    if (val === ORDER_STATUS_DATA.in_transit || val === ORDER_STATUS_DATA.delivered) {
       return "my-order-outline-button"
     } else {
       return "my-order-outline-button order-outline-disable"
@@ -34,7 +35,7 @@ const MyOrders = () => {
   }
 
   const _getDisabledStatus = (val: string) => {
-    if (val === "IN TRANSIT" || val === "DELIVERED") {
+    if (val === ORDER_STATUS_DATA.in_transit || val === ORDER_STATUS_DATA.delivered) {
       return false
     } else {
       return true
@@ -42,12 +43,12 @@ const MyOrders = () => {
   }
 
   const handleCancel = (item: MyOrdersParam, index: number) => {
-    const cntAccountData = _.cloneDeep(authStore.accountData)
-    if (cntAccountData.myOrders.orders.length > index) {
-      if (item.status === "DELIVERED") {
-        cntAccountData.myOrders.orders[index].status = "RETURNED"
-        authStore.setAccountData(cntAccountData)
-      } else if (item.status === "IN TRANSIT") {
+    const cntOrderedData = _.cloneDeep(shopStore.orderedData)
+    if (cntOrderedData.length > index) {
+      if (item.status === ORDER_STATUS_DATA.delivered) {
+        cntOrderedData[index].status = ORDER_STATUS_DATA.returned
+        shopStore.setOrderedData(cntOrderedData)
+      } else if (item.status === ORDER_STATUS_DATA.in_transit) {
         setCancelIndex(index)
         setCancelOrderData(item)
         setCancelModal(true)
@@ -56,20 +57,20 @@ const MyOrders = () => {
   }
 
   const handleOrder = (item: MyOrdersParam, type: string) => {
-    const cntAccountData = _.cloneDeep(authStore.accountData)
-    const orderIndex = _.findIndex(cntAccountData.myOrders.orders, { order: item.order })
+    const cntOrderedData = _.cloneDeep(shopStore.orderedData)
+    const orderIndex = _.findIndex(cntOrderedData, { order: item.order })
     if (orderIndex > -1) {
-      cntAccountData.myOrders.orders[orderIndex].status = type
-      authStore.setAccountData(cntAccountData)
+      cntOrderedData[orderIndex].status = type
+      shopStore.setOrderedData(cntOrderedData)
     }
   }
 
   return (
     <div className="account-details">
-      <p className="details-title">{t(authStore.accountData.myOrders.title)}</p>
-      {authStore.accountData.myOrders.orders.length && (
+      <p className="details-title">{t("My Orders")}</p>
+      {shopStore.orderedData.length ? (
         <div className="account-details-viewer" style={{ maxWidth: "100%", paddingRight: "10px" }}>
-          {authStore.accountData.myOrders.orders.map((item: MyOrdersParam, index: number) => {
+          {shopStore.orderedData.map((item: MyOrdersParam, index: number) => {
             return (
               <div className="my-orders-row-data" key={index}>
                 <div
@@ -99,14 +100,14 @@ const MyOrders = () => {
                   <div className="order-items">
                     <p className="order-title">{t("Items")}</p>
                     <p className="order-content">{item.data.name}</p>
-                    <p className="order-content">{`${item.data.capacity} | ${item.data.color}`}</p>
+                    <p className="order-content">{`${item.data.storage} | ${item.data.color}`}</p>
                   </div>
                   <div className="order-buttons">
                     <button
                       className={_getFilledButtonClassName_(item.status)}
                       disabled={_getDisabledStatus(item.status)}
                       onClick={() => {
-                        handleOrder(item, "IN TRANSIT")
+                        handleOrder(item, ORDER_STATUS_DATA.in_transit)
                       }}
                     >
                       {t("Track Parcel")}
@@ -118,7 +119,9 @@ const MyOrders = () => {
                         handleCancel(item, index)
                       }}
                     >
-                      {item.status === "IN TRANSIT" ? t("Cancel Order") : t("Return")}
+                      {item.status === ORDER_STATUS_DATA.in_transit
+                        ? t("Cancel Order")
+                        : t("Return")}
                     </button>
                   </div>
                 </div>
@@ -126,14 +129,14 @@ const MyOrders = () => {
                   <div className="mobile-orders-row">
                     <div className="order-items-mobile">
                       <p className="order-title">{t("Items")}</p>
-                      <p className="order-content">{`${item.data.name} | ${item.data.capacity} | ${item.data.color}`}</p>
+                      <p className="order-content">{`${item.data.name} | ${item.data.storage} | ${item.data.color}`}</p>
                     </div>
                     <div className="order-buttons-mobile">
                       <button
                         className={_getFilledButtonClassName_(item.status)}
                         disabled={_getDisabledStatus(item.status)}
                         onClick={() => {
-                          handleOrder(item, "IN TRANSIT")
+                          handleOrder(item, ORDER_STATUS_DATA.in_transit)
                         }}
                       >
                         {t("Track Parcel")}
@@ -145,7 +148,9 @@ const MyOrders = () => {
                           handleCancel(item, index)
                         }}
                       >
-                        {item.status === "IN TRANSIT" ? t("Cancel Order") : t("Return")}
+                        {item.status === ORDER_STATUS_DATA.in_transit
+                          ? t("Cancel Order")
+                          : t("Return")}
                       </button>
                     </div>
                   </div>
@@ -154,6 +159,8 @@ const MyOrders = () => {
             )
           })}
         </div>
+      ) : (
+        <></>
       )}
       {cancelIndex > -1 && !isEmpty(cancelOrderData) && (
         <CancelOrder

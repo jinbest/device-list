@@ -4,13 +4,14 @@ import { useTranslation } from "react-i18next"
 import CloseIcon from "@material-ui/icons/Close"
 import { IconButton } from "@material-ui/core"
 import { observer } from "mobx-react"
-import { authStore } from "../../../store"
+import { shopStore } from "../../../store"
 import Loading from "../../../components/Loading"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import _ from "lodash"
 import { MyOrdersParam } from "../../../models/account-param"
 import moment from "moment-timezone"
 import { formatWarranty } from "../../../service/hepler"
+import { ORDER_STATUS_DATA } from "../../../const/_variables"
 
 type Props = {
   open: boolean
@@ -33,10 +34,10 @@ const CancelOrder = ({ open, setOpen, orderIndex, orderData }: Props) => {
 
   const handleDelete = () => {
     setIsDeleting(true)
-    const cntAccountData = _.cloneDeep(authStore.accountData)
+    const cntOrderedData = _.cloneDeep(shopStore.orderedData)
     setTimeout(() => {
-      cntAccountData.myOrders.orders[orderIndex].status = "CANCELLED"
-      authStore.setAccountData(cntAccountData)
+      cntOrderedData[orderIndex].status = ORDER_STATUS_DATA.cancelled
+      shopStore.setOrderedData(cntOrderedData)
       setDeleted(true)
       setIsDeleting(false)
     }, delayTime)
@@ -83,13 +84,13 @@ const CancelOrder = ({ open, setOpen, orderIndex, orderData }: Props) => {
             </div>
             <div>
               <p className="mid-text bold">{orderData.data.name}</p>
-              <p className="mid-text thin">{`${orderData.data.capacity} | ${orderData.data.color}`}</p>
+              <p className="mid-text thin">{`${orderData.data.storage} | ${orderData.data.color}`}</p>
               <p className="mid-text" style={{ color: "#4360FA" }}>{`$${orderData.data.cost}`}</p>
-              {orderData.data.warranty && (
+              {orderData.data.included_warranty_duration_month && (
                 <p className="small-text" style={{ marginTop: "3px" }}>
                   {`${t("Warranty")}: ${formatWarranty(
-                    orderData.data.warranty,
-                    orderData.data.warranty_unit
+                    orderData.data.included_warranty_duration_month,
+                    "MONTH"
                   )}`}
                 </p>
               )}
