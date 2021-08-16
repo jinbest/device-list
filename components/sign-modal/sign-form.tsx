@@ -129,11 +129,11 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
 
     setTimeout(() => {
       authStore.setAuthUser(val.email)
-      setToastParams({
-        msg,
-        isSuccess: !isWarning,
-        isWarning: isWarning,
-      })
+      // setToastParams({
+      //   msg,
+      //   isSuccess: !isWarning,
+      //   isWarning: isWarning,
+      // })
       if (authStore.progressForCheckout) {
         authStore.setProgressForCheckout(false)
         shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
@@ -168,11 +168,11 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
       authStore.setMockCredential(val)
       handleUpdateAccountData(val)
       authStore.setAuthUser(val.email)
-      setToastParams({
-        msg,
-        isSuccess: !isWarning,
-        isWarning: isWarning,
-      })
+      // setToastParams({
+      //   msg,
+      //   isSuccess: !isWarning,
+      //   isWarning: isWarning,
+      // })
       if (authStore.progressForCheckout) {
         authStore.setProgressForCheckout(false)
         shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.shipping)
@@ -191,9 +191,7 @@ const SignForm = ({ signKey, setSignKey, onCloseModal, setToastParams }: Props) 
       email: val.email,
       phone: "",
     }
-    // cntAccountData.addressBook.address.forEach((item) => {
-    //   item.info.name = `${val.first_name} ${val.last_name}`
-    // })
+
     authStore.setAccountData(cntAccountData)
   }
 

@@ -28,6 +28,7 @@ export class ShopStore {
   @observable creditCardInfo = {} as PaymentCardInfoParam
   @observable address_list = _.cloneDeep(AddressLists)
   @observable orderedData = [] as MyOrdersParam[]
+  @observable cartsUpdated = false
 
   constructor() {
     this.load()
@@ -50,6 +51,7 @@ export class ShopStore {
           creditCardInfo: this.creditCardInfo,
           address_list: this.address_list,
           orderedData: this.orderedData,
+          cartsUpdated: this.cartsUpdated,
         })
       )
     }
@@ -127,6 +129,12 @@ export class ShopStore {
   }
 
   @action
+  setCartsUpdated = (val: boolean) => {
+    this.cartsUpdated = val
+    this.save()
+  }
+
+  @action
   init = () => {
     this.shopCarts = [] as ShopCartParam[]
     this.progressStatus = CHECKOUT_PROGRESS_STATUS.cart
@@ -138,6 +146,7 @@ export class ShopStore {
     this.creditCardInfo = {} as PaymentCardInfoParam
     this.address_list = [] as AddressParam[]
     this.orderedData = [] as MyOrdersParam[]
+    this.cartsUpdated = false
     this.save()
   }
 }

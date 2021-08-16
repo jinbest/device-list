@@ -10,17 +10,26 @@ import { FormControlLabel, FormControl } from "@material-ui/core"
 import CalculatorButton from "../../../components/calculator-button"
 import { shopStore } from "../../../store"
 import { observer } from "mobx-react"
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 import { ShopCartParam } from "../../../models/shop-cart"
 import { ToastMsgParams } from "../../../components/toast/toast-msg-params"
 import Toast from "../../../components/toast/toast"
 import { formatAsMoney } from "../../../service/hepler"
+import { ProductSelectParam } from "../../../models/product-details-param"
 
 type Props = {
   product: ProductParam
+  deviceKit: boolean
+  screenProtector: boolean
+  selectedWarranty: ProductSelectParam
 }
 
-const ProductTowardsCertified = ({ product }: Props) => {
+const ProductTowardsCertified = ({
+  product,
+  deviceKit,
+  screenProtector,
+  selectedWarranty,
+}: Props) => {
   const [t] = useTranslation()
   const delayTime = 2000
 
@@ -31,23 +40,29 @@ const ProductTowardsCertified = ({ product }: Props) => {
   const handleAddShopCart = () => {
     const cntCarts = _.cloneDeep(shopStore.shopCarts)
     const newCart = _.cloneDeep(product) as ShopCartParam
-    newCart.device_kit = true
-    newCart.device_kit_cost = 1.99
+    if (deviceKit) {
+      newCart.device_kit = true
+      newCart.device_kit_cost = 1.99
+    }
     newCart.locked = false
     newCart.warranty_cost = 0
     newCart.cost_include_warranty = true
+    newCart.included_warranty_duration_month = Number(selectedWarranty.value)
     newCart.total = addCarts
-    newCart.screen_protector = false
-    newCart.screen_protector_cost = 7.99
+    if (screenProtector) {
+      newCart.screen_protector = true
+      newCart.screen_protector_cost = 7.99
+    }
     cntCarts.push(newCart)
     setAdding(true)
 
     setTimeout(() => {
       shopStore.setShopCarts(cntCarts)
-      setToastParams({
-        msg: t("Product has been added in shop cart."),
-        isSuccess: true,
-      })
+      shopStore.setCartsUpdated(true)
+      // setToastParams({
+      //   msg: t("Product has been added in shop cart."),
+      //   isSuccess: true,
+      // })
       setAdding(false)
     }, delayTime)
   }
@@ -123,22 +138,38 @@ const ProductTowardsCertified = ({ product }: Props) => {
         </div>
         <p>{product.description}</p>
         <p>{t("Unlocked")}</p>
-        <div className="product-total-cost">
-          <p className="bold">{t("DeviceKit")}</p>
-          <p className="bold">{formatAsMoney(1.99)}</p>
-        </div>
-        <div className="product-total-cost underlined">
-          <p className="bold">{t("12 Month Warranty")}</p>
-          <p className="bold">{formatAsMoney(0)}</p>
-        </div>
+        {deviceKit ? (
+          <div className="product-total-cost">
+            <p className="bold">{t("DeviceKit")}</p>
+            <p className="bold">{formatAsMoney(1.99)}</p>
+          </div>
+        ) : (
+          <></>
+        )}
+        {screenProtector ? (
+          <div className="product-total-cost">
+            <p className="bold">{t("Screen Protector")}</p>
+            <p className="bold">{formatAsMoney(7.99)}</p>
+          </div>
+        ) : (
+          <></>
+        )}
+        {!isEmpty(selectedWarranty) ? (
+          <div className="product-total-cost underlined">
+            <p className="bold">{t(selectedWarranty.label)}</p>
+            <p className="bold">{formatAsMoney(0)}</p>
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="product-total-cost" style={{ paddingTop: "20px" }}>
           <p className="bold">{t("Subtotal")}</p>
           <p className="bold">{formatAsMoney(product.cost * addCarts + 1.99)}</p>
         </div>
-        <div className="product-total-cost blue-text">
+        {/* <div className="product-total-cost blue-text">
           <p className="bold">{t("As Low as")}</p>
           <p className="bold">$21.99/month</p>
-        </div>
+        </div> */}
         <div className="add-to-cart">
           <div style={{ marginRight: "10px" }}>
             <CalculatorButton addCarts={addCarts} setAddCarts={setAddCarts} />

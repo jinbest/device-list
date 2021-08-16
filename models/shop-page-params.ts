@@ -138,7 +138,7 @@ export interface ProductParam {
   faq?: ProductFaqParam[] // product_faq[]
   review?: ProductReviewsParam[] // product_reviews[]
   promotion_product?: RelatedProductPromotionParam[] // related_product_promotion[]
-  inventory?: ProductInventoryParam[] // product_inventory[]
+  inventory?: ProductInventoryParam // product_inventory
   inventory_transaction?: ProductInventoryTransactionParam[] // product_inventory_transaction[]
   supplier_id: number // my-self
   esthetic_id: number // my-self

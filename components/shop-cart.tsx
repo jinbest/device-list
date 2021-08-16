@@ -8,7 +8,7 @@ import router from "next/router"
 import { ShopCartParam } from "../models/shop-cart"
 import { formatAsMoney } from "../service/hepler"
 import CalculatorButton from "./calculator-button"
-import _ from "lodash"
+import _, { isEmpty } from "lodash"
 import { CHECKOUT_PROGRESS_STATUS } from "../const/_variables"
 
 const StyledMenu = withStyles({
@@ -85,7 +85,7 @@ const ShopCart = () => {
           aria-controls="shop-cart-dropdown"
           aria-haspopup="true"
         />
-        {shopCarts.length ? (
+        {shopCarts.length && shopStore.cartsUpdated ? (
           <div className="shop-cart-badge">
             <p>{shopCarts.length}</p>
           </div>
@@ -153,6 +153,11 @@ const ShopCart = () => {
                               shopCarts[index].total = val
                               setShopCarts([...shopCarts])
                             }}
+                            minValue={
+                              item.inventory && !isEmpty(item.inventory)
+                                ? item.inventory.min_quantity_per_cart
+                                : 1
+                            }
                           />
                         </div>
                         {item.device_kit && item.device_kit_cost && (
@@ -211,6 +216,7 @@ const ShopCart = () => {
                   onClick={() => {
                     shopStore.setShopCarts(_.filter(shopCarts, (o) => o.total > 0))
                     shopStore.setProgressStatus(CHECKOUT_PROGRESS_STATUS.cart)
+                    shopStore.setCartsUpdated(false)
                     handleClose()
                     router.push("/checkout")
                   }}

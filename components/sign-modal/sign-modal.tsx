@@ -89,7 +89,7 @@ const SignModal = ({ open, setOpen, setToastParams }: Props) => {
             aria-label="full width tabs example"
           >
             <Tab icon={<AccountCircleIcon />} label={t("Customer")} />
-            <Tab icon={<AccountCircleIcon />} label={t("Merchant")} />
+            {/* <Tab icon={<AccountCircleIcon />} label={t("Merchant")} /> */}
           </Tabs>
         </AppBar>
         <SwipeableViews

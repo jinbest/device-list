@@ -190,7 +190,7 @@ const Checkout = () => {
             <BackSVG color="#BDBFC3" />
           </div>
         )}
-        {emptyCheckout ? (
+        {emptyCheckout && progressStatus !== CHECKOUT_PROGRESS_STATUS.confirmation ? (
           <EmptyCheckout />
         ) : (
           <div className="checkout-main-container">

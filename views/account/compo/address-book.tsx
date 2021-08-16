@@ -59,6 +59,63 @@ const AddressBook = () => {
       <div className="account-details-viewer">
         {!addStatus ? (
           <>
+            {!isEmpty(shopStore.orderAddress) && (
+              <div className="account-address">
+                <div className="account-address-header">
+                  <p>{t("Delivery Address")}</p>
+                  {editAddressType !== "SHIPPING" && (
+                    <div
+                      onClick={() => {
+                        setEditAddressType("SHIPPING")
+                        setEditAddress(shopStore.orderAddress)
+                      }}
+                    >
+                      <EditOutlinedIcon style={{ color: "#CBBBFA" }} />
+                    </div>
+                  )}
+                </div>
+                {editAddressType !== "SHIPPING" && (
+                  <div className="account-address-content">
+                    <p>{`${shopStore.orderAddress.first_name} ${shopStore.orderAddress.last_name}`}</p>
+                    <p>
+                      {formatAddress(
+                        shopStore.orderAddress.address_1,
+                        shopStore.orderAddress.address_2
+                      )}
+                    </p>
+                    <p>{`${shopStore.orderAddress.city}, ${shopStore.orderAddress.state} ${shopStore.orderAddress.postcode}`}</p>
+                    <p>{formatCountryName(shopStore.orderAddress.country)}</p>
+                  </div>
+                )}
+                {editAddressType !== "SHIPPING" && (
+                  <button
+                    className="delete-address"
+                    onClick={() => {
+                      setDeleteTitle("Delivery Address")
+                      setDeleteInfo(shopStore.orderAddress)
+                      setDeleteAddressType("SHIPPING")
+                      setDeleteModal(true)
+                    }}
+                  >
+                    {t("Delete address")}
+                  </button>
+                )}
+                {editAddressType === "SHIPPING" && (
+                  <AddressBookForm
+                    ref={formikRef}
+                    states={states}
+                    editAddressType={editAddressType}
+                    addStatus={addStatus}
+                    setStates={setStates}
+                    setEditAddressType={setEditAddressType}
+                    setAddStatus={setAddStatus}
+                    setToastParams={setToastParams}
+                    editAddress={editAddress}
+                  />
+                )}
+              </div>
+            )}
+
             {!isEmpty(shopStore.billingAddress) && (
               <div className="account-address">
                 <div className="account-address-header">
@@ -102,63 +159,6 @@ const AddressBook = () => {
                   </button>
                 )}
                 {editAddressType === "BILLING" && (
-                  <AddressBookForm
-                    ref={formikRef}
-                    states={states}
-                    editAddressType={editAddressType}
-                    addStatus={addStatus}
-                    setStates={setStates}
-                    setEditAddressType={setEditAddressType}
-                    setAddStatus={setAddStatus}
-                    setToastParams={setToastParams}
-                    editAddress={editAddress}
-                  />
-                )}
-              </div>
-            )}
-
-            {!isEmpty(shopStore.orderAddress) && (
-              <div className="account-address">
-                <div className="account-address-header">
-                  <p>{t("Delivery Address")}</p>
-                  {editAddressType !== "SHIPPING" && (
-                    <div
-                      onClick={() => {
-                        setEditAddressType("SHIPPING")
-                        setEditAddress(shopStore.orderAddress)
-                      }}
-                    >
-                      <EditOutlinedIcon style={{ color: "#CBBBFA" }} />
-                    </div>
-                  )}
-                </div>
-                {editAddressType !== "SHIPPING" && (
-                  <div className="account-address-content">
-                    <p>{`${shopStore.orderAddress.first_name} ${shopStore.orderAddress.last_name}`}</p>
-                    <p>
-                      {formatAddress(
-                        shopStore.orderAddress.address_1,
-                        shopStore.orderAddress.address_2
-                      )}
-                    </p>
-                    <p>{`${shopStore.orderAddress.city}, ${shopStore.orderAddress.state} ${shopStore.orderAddress.postcode}`}</p>
-                    <p>{formatCountryName(shopStore.orderAddress.country)}</p>
-                  </div>
-                )}
-                {editAddressType !== "SHIPPING" && (
-                  <button
-                    className="delete-address"
-                    onClick={() => {
-                      setDeleteTitle("Delivery Address")
-                      setDeleteInfo(shopStore.orderAddress)
-                      setDeleteAddressType("SHIPPING")
-                      setDeleteModal(true)
-                    }}
-                  >
-                    {t("Delete address")}
-                  </button>
-                )}
-                {editAddressType === "SHIPPING" && (
                   <AddressBookForm
                     ref={formikRef}
                     states={states}

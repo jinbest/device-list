@@ -950,7 +950,7 @@ const accountData = {
     content: "What would you like to hear about? Choose below and we’ll keep you updated.",
     info: {
       discount: {
-        label: "Discound and Sales",
+        label: "Discount and Sales",
         value: true,
       },
       newStock: {

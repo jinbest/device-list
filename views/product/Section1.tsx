@@ -375,7 +375,7 @@ const Section1 = ({ product }: Props) => {
                         <p
                           style={{ color: "#4360fa", marginTop: "10px", fontSize: "18px" }}
                         >{`$${item.cost}`}</p>
-                        <p>{`${t("As low as")}: ${item.short_description}`}</p>
+                        {/* <p>{`${t("As low as")}: ${item.short_description}`}</p> */}
                         <p>{`${t("Warranty")}: ${formatWarranty(
                           item.included_warranty_duration_month,
                           "MONTH"
@@ -498,7 +498,12 @@ const Section1 = ({ product }: Props) => {
           </div>
 
           <div className="product-towards-certified-desktop">
-            <ProductTowardsCertified product={product} />
+            <ProductTowardsCertified
+              product={product}
+              deviceKit={deviceKit}
+              screenProtector={screenProtector}
+              selectedWarranty={selectedWarranty}
+            />
           </div>
 
           <div
@@ -513,7 +518,12 @@ const Section1 = ({ product }: Props) => {
       </div>
 
       <ProductTowardsDrawer setOpen={setTowardsDrawer} open={towardsDrawer}>
-        <ProductTowardsCertified product={product} />
+        <ProductTowardsCertified
+          product={product}
+          deviceKit={deviceKit}
+          screenProtector={screenProtector}
+          selectedWarranty={selectedWarranty}
+        />
       </ProductTowardsDrawer>
     </div>
   )

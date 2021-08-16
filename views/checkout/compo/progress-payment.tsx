@@ -9,7 +9,7 @@ import { PaymentLogos } from "../../../static/mock/mock-data"
 import { ImageDataParam, PaymentCardInfoParam } from "../../../models/account-param"
 import { observer } from "mobx-react"
 import { formatCardNumber, formatExpiryDate } from "../../../service/hepler"
-import CustomInput from "../../../components/custom-input"
+// import CustomInput from "../../../components/custom-input"
 import { shopStore } from "../../../store"
 import { isEmpty } from "lodash"
 import Loading from "../../../components/Loading"
@@ -32,7 +32,7 @@ const ProgressPayment = ({ setPaymentStepStatus, setPaymentToken }: Props) => {
   const [paymentOption, setPaymentOption] = useState<PaymentOptionParam>(
     PAYMENT_OPTIONS.credit_debit.code
   )
-  const [promoCode, setPromoCode] = useState("")
+  // const [promoCode, setPromoCode] = useState("")
 
   const handlePaymentOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentOption((event.target as HTMLInputElement).value as PaymentOptionParam)
@@ -90,9 +90,9 @@ const ProgressPayment = ({ setPaymentStepStatus, setPaymentToken }: Props) => {
     }, delayTime)
   }
 
-  const handleCheckPromoCode = () => {
-    console.log("promo-code", promoCode)
-  }
+  // const handleCheckPromoCode = () => {
+  //   console.log("promo-code", promoCode)
+  // }
 
   return (
     <>
@@ -250,7 +250,7 @@ const ProgressPayment = ({ setPaymentStepStatus, setPaymentToken }: Props) => {
         )}
       </div>
 
-      <div className="box-cart left-side-shipping" style={{ marginTop: "15px" }}>
+      {/* <div className="box-cart left-side-shipping" style={{ marginTop: "15px" }}>
         <p className="bold" style={{ fontSize: "16px" }}>
           {t("Enter your promo code")}
         </p>
@@ -264,7 +264,7 @@ const ProgressPayment = ({ setPaymentStepStatus, setPaymentToken }: Props) => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="progress-payment-logos">
         <div>
