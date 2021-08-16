@@ -13,7 +13,6 @@ import { formatCardNumber, formatExpiryDate } from "../../../service/hepler"
 import { shopStore } from "../../../store"
 import { isEmpty } from "lodash"
 import Loading from "../../../components/Loading"
-import Config from "../../../config/config"
 // import PaymentClient from "../../../service/payment-api"
 
 // const paymentClient = PaymentClient.getInstance()
@@ -55,24 +54,6 @@ const ProgressPayment = ({ setPaymentStepStatus, setPaymentToken }: Props) => {
   }
 
   const handleTokenize = (values: PaymentCardInfoParam, actions: FormikHelpers<any>) => {
-    const url = `${Config.BASE_URL}${Config.TOKENIZE}`,
-      data = {
-        number: values.number,
-        expiry_month: values.expiryDate.substring(0, 2),
-        expiry_year: values.expiryDate.substring(2, 4),
-        cvd: values.cvv,
-      }
-
-    // try {
-    //   const result = await paymentClient.post(url, data)
-    //   console.log("result", result)
-    // } catch (error) {
-    //   console.log("Something went wrong.", JSON.stringify(error))
-    // } finally {
-    //   actions.setSubmitting(false)
-    //   setPaymentStepStatus(PAYMENT_STEP_STATUS.review_order)
-    // }
-
     setTimeout(() => {
       /* API will be excuted with URL and CARD_DATA later */
 
@@ -82,7 +63,7 @@ const ProgressPayment = ({ setPaymentStepStatus, setPaymentToken }: Props) => {
         version: 1,
         message: "",
       }
-      console.log("url, data", url, data, result)
+      console.log("url, data", result)
 
       actions.setSubmitting(false)
       setPaymentStepStatus(PAYMENT_STEP_STATUS.review_order)

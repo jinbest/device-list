@@ -1,5 +1,4 @@
 import axios from "axios"
-import Config from "../config/config"
 
 export default class PaymentClient {
   private static instance: PaymentClient
@@ -24,7 +23,7 @@ export default class PaymentClient {
     return (
       await axios.post(url, body, {
         headers: {
-          Authorization: Config.ENCODE_PASSCODE,
+          Authorization: "",
         },
         params: {
           ...(options != null ? options : {}),
